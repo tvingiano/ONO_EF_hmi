@@ -1,0 +1,59 @@
+<!-- <div class="page-wrapper">
+    <div class="order-wrapper">
+
+        <div id="order-card" *ngFor="let order of dataSource"
+            (click)="selectedOrder=order"
+        >
+            <div class="text">
+                <div class="field title" >{{order.OrderName}}</div>
+                <div class="field author">{{order.OrderAuthor}}</div>
+                <div class="field recipe">{{order.Recipe}}</div>
+                <div class="start-time"> startime: {{order.ScheduledStartTime | date}}</div>
+            </div>
+            <div class="action">
+                <button id="valid" (click)="onValidate()">  <mat-icon>done</mat-icon></button>
+                <button id="edit" (click)="onEdit()">       <mat-icon>edit</mat-icon></button>
+                <button id="del" (click)="onDelete()">      <mat-icon>delete</mat-icon></button>
+                <button id="start" (click)="onStart()">     <mat-icon>play_arrow</mat-icon></button>
+            </div>
+            
+        </div>
+
+    </div>
+
+    <div id="details-wrapper">
+        <div id="top">
+            <table id="details-table" *ngIf="selectedOrder">
+                <tr><th></th><th>value</th></tr>
+
+                <tr><td>BatchID</td><td>{{selectedOrder.BatchID}}</td></tr>
+                <tr><td>BookedDrawers</td><td>{{selectedOrder.BookedDrawers}}</td></tr>
+                <tr><td>Client</td><td>{{selectedOrder.Client}}</td></tr>
+                <tr><td>FinalQuantity</td><td>{{selectedOrder.FinalQuantity}}</td></tr>
+                <tr><td>FinalQuantityMeasureUnit</td><td>{{selectedOrder.FinalQuantityMeasureUnit}}</td></tr>
+                <tr><td>FinalWeight</td><td>{{selectedOrder.FinalWeight}}</td></tr>
+                <tr><td>LastUpdate</td><td>{{selectedOrder.LastUpdate}}</td></tr>
+                <tr><td>LoadOperator</td><td>{{selectedOrder.LoadOperator}}</td></tr>
+                <tr><td>OrderAuthor</td><td>{{selectedOrder.OrderAuthor}}</td></tr>
+                <tr><td>OrderName</td><td>{{selectedOrder.OrderName}}</td></tr>
+                <tr><td>OrderNotes</td><td>{{selectedOrder.OrderNotes}}</td></tr>
+                
+                <tr><td>OrderStatus</td><td>{{selectedOrder.OrderStatus}}</td></tr>
+                <tr><td>OrderTags</td><td>{{selectedOrder.OrderTags}}</td></tr>
+                <tr><td>Priority</td><td>{{selectedOrder.Priority}}</td></tr>
+                <tr><td>RealEndTime</td><td>{{selectedOrder.RealEndTime}}</td></tr>
+                <tr><td>RealStartTime</td><td>{{selectedOrder.RealStartTime}}</td></tr>
+                <tr><td>Recipe</td><td>{{selectedOrder.Recipe}}</td></tr>
+                <tr><td>ScheduledEndTime</td><td>{{selectedOrder.ScheduledEndTime}}</td></tr>
+                <tr><td>ScheduledStartTime</td><td>{{selectedOrder.ScheduledStartTime}}</td></tr>
+                <tr><td>Seed</td><td>{{selectedOrder.Seed}}</td></tr>
+                <tr><td>UnloadOperator</td><td>{{selectedOrder.UnloadOperator}}</td></tr>
+            </table>
+        </div>
+        <div id="bottom">ciao</div>
+    </div>
+</div> -->
+
+<div class="page-wrapper" *ngIf="dataSource">
+    <app-order-gantt [data]="dataSource"></app-order-gantt>
+</div>

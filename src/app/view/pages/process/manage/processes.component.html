@@ -1,0 +1,282 @@
+<div class="page-wrapper">
+    <div id="process-wrapper" class="custom-scrollbar">
+        <div class="process" *ngFor="let process of processesData" (click)="setSelectedProcess(process)" 
+        [ngClass]="[
+            process === this.selectedProcess ? 'active' : '',
+            getProgress(process) >= 100 ? 'lint' : ''
+        ]">
+            <div class="info">
+                <div class="title" [ngClass]="getProgress(process) >= 100 ? 'complete-title':'incomplete-title'">{{process.OrderID}}</div>
+                <div class="subtitle">{{process.Recipe ? process.Recipe : 'unknown'}} recipe</div>
+
+                <div class="timeline">
+                    <div class="phase" *ngFor="let phase of process.Phases" [style.flex]="viewPhaseRelativeWidth(phase,process)">
+                        <div class="phase-title">{{phase.Title}}</div>
+                        <div class="bar">
+                            <div class="prog-phase" [ngClass]="viewPhaseProgress(phase, process) >= 1 ? 'complete': 'incomplete'" [style.width]="viewPhaseProgress(phase, process) * 100 + '%'"></div>
+                        </div>
+                    </div>
+                    <div class="dates">
+                        <div class="start" [ngClass]="getProgress(process) >= 100? 'complete-date' : 'incomplete-start-date'">{{formatData(process.StartTime)}}</div>
+                        <div class="end" [ngClass]="getProgress(process) >= 100 ? 'complete-date' : ''">{{formatData(process.EndTime)}}</div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="growth">
+                <div class="weigth">{{process.CvMeasures.length > 0 ? getGrowthPercentage(process) : '-'}} <sub style="color: rgb(175, 175, 175)">Kg/m<sup>2</sup></sub></div>
+                <div class="label">of {{process.ExpectedFinalWeight}} <sub style="color: rgb(175, 175, 175)"> Kg/m<sup>2</sup></sub></div>
+            </div>
+            <div class="chart">
+                <div class="gauge-wrapper">
+                    <app-gauge-progress [data]="process" [colors]="this.colors"></app-gauge-progress>
+                </div>
+                <span class="footnote" [style.color]="colors.date">*time progress</span>
+                <span class="footnote" [style.color]="colors.growth">*weight progress</span>
+                
+            </div>
+        </div>
+    </div>
+
+    <div id="details-wrapper">
+        <ng-container *ngIf="isSelectedProcess()">
+
+            <div class="top">
+
+                <div class="spin" *ngIf="this.loadingImages === true">
+                    <mat-spinner></mat-spinner>
+                </div>
+
+                <div *ngIf="this.imagesFound==true" class="found-img" [ngStyle]="{'background-image' : this.imageUrl}">
+                </div>
+                <div *ngIf="this.imagesFound==true" class="action-img">
+                    <div id="back" class="img-btn" [ngClass]="firstImg() ? 'disabled' : 'enabled'" (click)="!firstImg() ? backImg(): ''">back</div>
+                    <div id="state">
+                        <div class="date">{{this.currentImageMetadata.Images[currentImageIndex].Timestamp | date}}</div>
+                        <div class="index">{{this.currentImageIndex + 1}} / {{this.currentImageMetadata.Images.length}}</div>
+                    </div>
+                    <div id="next" class="img-btn" [ngClass]="lastImg() ? 'disabled' : 'enabled'" (click)="!lastImg() ? nextImg(): ''">next</div>
+                </div>
+
+                <div *ngIf="this.imagesFound === false" class="not-found-img"></div> 
+           
+            </div>
+            
+
+            <div class="bottom custom-scrollbar">
+
+                <!--FIRST ROW-->
+
+                <div class="square">
+                    <div class="content">
+                        <div class="table">
+                            <div class="table-cell">
+                                <div class="strong">{{getPosition(selectedProcess)}}</div>
+                                <div class="square-label">Where am I?</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="square" >
+                    <div class="content">
+                        <div class="table">
+                            <div class="table-cell">
+                                <div class="strong">
+
+                                    <select (change)="updateNewHome($event)" [formControl]="homeForm">
+                                        <option *ngFor="let s of filterSlotList(slotList)"
+                                        [value]="s.Slotname"
+                                        [disabled]="isDisabled(s)"
+                                        [selected]="isSelected(s)"
+                                        >
+                                            {{s.Area}}
+                                        </option>
+                                    </select>
+
+
+                                </div>
+                                <div class="square-label">my Home</div>
+                                <div class="confirm-newhome" 
+                                (click)=" newHome !== undefined ? setNewHome() : ''" 
+                                [ngClass]=" newHome !== undefined ? 'active-home' : 'inactive-home'"
+                                >
+                                    save
+                                </div>
+                                <div class="cancel-newhome" 
+                                (click)="newHome !== undefined ? cancNewHome() : ''" 
+                                [ngClass]="newHome !== undefined ? 'active-home' : 'inactive-home'"
+                                >
+                                    canc
+                                </div>
+                                <div *ngIf="isShadowed(newHome)" class="warn" title="the selected slot might be between light and a tray of an other process">Possible shadowing!</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="square">
+                    <div class="content">
+                        <div class="table">
+                            <div class="table-cell">
+                                <div>{{selectedProcess.DrawerSerial}}</div>
+                                <div class="square-label">Drawer</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="square">
+                    <div class="content">
+                        <div class="table">
+                            <div class="table-cell">
+                                <div>{{viewNextRefillDate()}}</div>
+                                <div>{{viewNextRefillTime()}}</div>
+                                <div class="square-label">Next Refill</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="square">
+                    <div class="content">
+                        <div class="table">
+                            <div class="table-cell">
+                                    <div id="light" [ngClass]="getClass(selectedProcess)"></div>
+                                    <div >{{selectedProcess.LightType}}: {{selectedProcess.LightStatus === false ? 'off' : 'on'}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- SECOND ROW -->
+
+                <div class="square">
+                    <div class="content">
+                        <div class="table">
+                            <div class="table-cell">
+                                    <div >{{viewLastWeight()}} <sub style="color: rgb(175, 175, 175)">Kg</sub></div>
+                                    <div class="square-label" >Weight</div>
+                                    <div class="test-date">{{viewLastCvData()}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="square">
+                    <div class="content">
+                        <div class="table">
+                            <div class="table-cell">
+                                <div class="strong">{{viewLastEc()}}</div>
+                                <div class="square-label">Ec</div>
+                                <div class="test-date">{{viewLastSolData()}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="square">
+                    <div class="content">
+                        <div class="table">
+                            <div class="table-cell">
+                                    <div class="strong">{{viewLastPh()}}</div>
+                                    <div class="square-label">pH</div>
+                                    <div class="test-date">{{viewLastSolData()}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="square">
+                    <div class="content">
+                        <div class="table">
+                            <div class="table-cell">
+                                    <div class="strong">{{viewTemp()}} <sub style="color: rgb(175, 175, 175)">°C</sub></div>
+                                    <div class="square-label">Temperature</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="square">
+                    <div class="content">
+                        <div class="table">
+                            <div class="table-cell">
+                                    <div class="strong">{{viewHum()}} <sub style="color:  rgb(175, 175, 175)">%</sub></div>
+                                    <div class="square-label">Humidity</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- THIRD ROW - BUTTONS -->
+                <div class="square square-btn" [ngClass]="{'dis-btn': this.drawerState()}" (click)="this.drawerState() ? '' : toExternal(selectedProcess)">
+                    <div class="content">
+                        <div class="table">
+                            <div class="table-cell">
+                                    <div class="icon" id="sampling"></div>
+                                    <div class="square-label">to External</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="square square-btn" [ngClass]="{'dis-btn': this.drawerState()}" (click)="this.drawerState() ? '' : window(selectedProcess)">
+                    <div class="content">
+                        <div class="table">
+                            <div class="table-cell">
+                                    <div class="icon" id="window"></div>
+                                    <div class="square-label">to Window</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="square square-btn" [ngClass]="{'dis-btn': this.drawerState()}" (click)="this.drawerState() ? '' : home(selectedProcess)">
+                    <div class="content">
+                        <div class="table">
+                            <div class="table-cell">
+                                    <div class="icon" id="home"></div>
+                                    <div class="square-label"> back Home</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="square square-btn" [ngClass]="{'dis-btn': this.drawerState()}">
+                    <div class="content" (click)="refillMenu = true" *ngIf="refillMenu === false">
+                        <div class="table">
+                            <div class="table-cell">
+                                    <div class="icon" id="refill"></div>
+                                    <div class="square-label">Refill</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content" *ngIf="refillMenu === true">
+                        <div class="table">
+                            <div class="table-cell">
+                                <div class="close-x" (click)="refillMenu = false"></div>
+                                <div class="square-label"  (click)="this.drawerState() ? '' : refill(selectedProcess)"><u>Edit</u></div>
+                                <div class="square-label"  (click)="this.drawerState() ? '' : deleterefill({DrawerID: this.selectedProcess.ProcessID})"><u>Remove</u></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="square square-btn" [ngClass]="{'dis-btn': this.drawerState()}" (click)="this.drawerState() ? '' : onClose(selectedProcess)">
+                    <div class="content">
+                        <div class="table">
+                            <div class="table-cell">
+                                    <div class="icon" id="abort"></div>
+                                    <div class="square-label">Close</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+        </ng-container>
+    </div>
+
+</div>

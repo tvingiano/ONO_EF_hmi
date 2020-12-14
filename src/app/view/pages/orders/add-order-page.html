@@ -1,0 +1,27 @@
+
+<h1 mat-dialog-title>Add order</h1>
+
+<div mat-dialog-content>
+
+  <p>Order name</p>
+  <mat-form-field >
+    <input matInput [(ngModel)]="data.ordername" >
+  </mat-form-field>
+  <p>Recipe</p>
+  <mat-form-field>
+    <mat-select [(ngModel)]="data.recipe">
+      <mat-option *ngFor="let recipe of recipes" [(value)]="recipe">
+        {{recipe}} 
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <p>Quantity [kg]</p>
+  <mat-form-field >
+    <input matInput [(ngModel)]="data.quantity" >
+  </mat-form-field>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Exit</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Add order</button>
+
+</div>

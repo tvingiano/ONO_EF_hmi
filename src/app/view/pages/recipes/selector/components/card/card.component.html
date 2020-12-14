@@ -1,0 +1,207 @@
+<div class="seed-card"> 
+    <div class="wrapper">
+        <div class="title">
+            {{seed.SeedType}}
+        </div>
+    
+        <div class="menu">
+            <div id = "quality" class="btn" [ngClass]="{'active-button' : getActive(seed.ID) === 'quality'}" (click)="activateCard(seed.ID, 'quality')">Quality</div>
+            <div id = "cost" class="btn" [ngClass]="{'active-button' : getActive(seed.ID) === 'cost'}" (click)="activateCard(seed.ID, 'cost')">Info</div>
+            <div id = "growth" class="btn" [ngClass]="{'active-button' : getActive(seed.ID) === 'growth'}" (click)="activateCard(seed.ID, 'growth')">Growth</div>
+        </div>
+
+        <div class="menu">
+            <div id = "prop" class="btn" [ngClass]="{'active-button' : getActive(seed.ID) === 'prop'}" (click)="activateCard(seed.ID, 'prop')">Nutritionals</div>
+            <div id = "desc" class="btn" [ngClass]="{'active-button' : getActive(seed.ID) === 'desc'}" (click)="activateCard(seed.ID, 'desc')">Description</div>
+        </div>
+    
+    
+        <div class="content">
+        
+            <!-- DEFAULT -->
+            <div [style.display]="getActive(seed.ID) === 'none' ? '' : 'none'">
+                <div class=""></div>
+            </div>
+    
+            <!-- PROPERTIES -->
+            <div [style.display]="getActive(seed.ID) === 'prop' ? '' : 'none'">
+            <table>
+                <tr>
+                    <th>protein</th>
+                    <td>{{seed.NutritionalFact.Protein}}g</td>
+                </tr>
+                <tr class="even">
+                    <th>fat</th>
+                    <td >{{seed.NutritionalFact.Fat}}g</td>
+                </tr>
+                <tr>
+                    <th>carbohydrate</th>
+                    <td>{{seed.NutritionalFact.Carbohydrate}}g</td>
+                </tr>
+                <tr class="even">
+                    <th>calories</th>
+                    <td  >{{seed.NutritionalFact.Calories}}kcal</td>
+                </tr>
+                <div style="font-size: 10px; margin-top: 20px; float: right;">*Nutritional Properties in 100g of final product</div>
+            </table>
+    
+            </div>
+            
+    
+            <!-- COSTS -->
+            <div [style.display]="getActive(seed.ID) === 'cost' ? '' : 'none'">
+            <table>
+                <tr>
+                    <th>quantity for drawer</th>
+                    <td>{{seed.Cost.QuantityForDrawer}}</td>
+                </tr>
+                <tr  class="even">
+                    <th>one-seed weight</th>
+                    <td  >{{seed.Cost.SingleSeedWeight}}g</td>
+                </tr>
+                <tr>
+                    <th>germination rate</th>
+                    <td>{{seed.Cost.GerminatedPercentage}}%</td>
+                </tr>
+                <tr class="even">
+                    <th>final drawer weight</th>
+                    <td  >{{seed.Cost.WeightForDrawer}}g</td>
+                </tr>
+                <tr>
+                    <th>water used for refill</th>
+                    <td>{{seed.Cost.WaterForRefill}}l</td>
+                </tr>
+                <tr class="even">
+                    <th>hourly energy use</th>
+                    <td  >{{seed.Cost.EnergyForLightHour}}Kw/h</td>
+                </tr>
+                <tr>
+                    <th>seed cost</th>
+                    <td>{{seed.Cost.SeedCost}} USD</td>
+                </tr>
+            </table>
+            </div>
+    
+    
+            <!-- QUALITY -->
+            <div [style.display]="getActive(seed.ID) === 'quality' ? '' : 'none'">
+            <table>
+                <tr>
+                    <th>taste</th>
+                    <td>
+                        <div class="rating" title="taste: {{seed.Quality.Taste}}/10">
+                        <div class="star" [ngClass]="getStarClass(seed.Quality.Taste, 1)"></div>
+                        <div class="star" [ngClass]="getStarClass(seed.Quality.Taste, 2)"></div>
+                        <div class="star" [ngClass]="getStarClass(seed.Quality.Taste, 3)"></div>
+                        <div class="star" [ngClass]="getStarClass(seed.Quality.Taste, 4)"></div>
+                        <div class="star" [ngClass]="getStarClass(seed.Quality.Taste, 5)"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="even">
+                    <th>color</th>
+                    <td  >
+                        <div class="rating" title="color: {{seed.Quality.Color}}/10">
+                        <div class="star" [ngClass]="getStarClass(seed.Quality.Color, 1)"></div>
+                        <div class="star" [ngClass]="getStarClass(seed.Quality.Color, 2)"></div>
+                        <div class="star" [ngClass]="getStarClass(seed.Quality.Color, 3)"></div>
+                        <div class="star" [ngClass]="getStarClass(seed.Quality.Color, 4)"></div>
+                        <div class="star" [ngClass]="getStarClass(seed.Quality.Color, 5)"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>fragrance</th>
+                    <td>
+                        <div class="rating" title="fragrance: {{seed.Quality.Fragrance}}/10">
+                        <div class="star" [ngClass]="getStarClass(seed.Quality.Fragrance, 1)"></div>
+                        <div class="star" [ngClass]="getStarClass(seed.Quality.Fragrance, 2)"></div>
+                        <div class="star" [ngClass]="getStarClass(seed.Quality.Fragrance, 3)"></div>
+                        <div class="star" [ngClass]="getStarClass(seed.Quality.Fragrance, 4)"></div>
+                        <div class="star" [ngClass]="getStarClass(seed.Quality.Fragrance, 5)"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="even">
+                    <th>crunchiness</th>
+                    <td  >
+                        <div class="rating" title="crunchiness: {{seed.Quality.Crunchiness}}/10">
+                        <div class="star" [ngClass]="getStarClass(seed.Quality.Crunchiness, 1)"></div>
+                        <div class="star" [ngClass]="getStarClass(seed.Quality.Crunchiness, 2)"></div>
+                        <div class="star" [ngClass]="getStarClass(seed.Quality.Crunchiness, 3)"></div>
+                        <div class="star" [ngClass]="getStarClass(seed.Quality.Crunchiness, 4)"></div>
+                        <div class="star" [ngClass]="getStarClass(seed.Quality.Crunchiness, 5)"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>aesthetic</th>
+                    <td>
+                        <div class="rating" title="aesthetic: {{seed.Quality.Aesthetics}}/10">
+                        <div class="star" [ngClass]="getStarClass(seed.Quality.Aesthetics, 1)"></div>
+                        <div class="star" [ngClass]="getStarClass(seed.Quality.Aesthetics, 2)"></div>
+                        <div class="star" [ngClass]="getStarClass(seed.Quality.Aesthetics, 3)"></div>
+                        <div class="star" [ngClass]="getStarClass(seed.Quality.Aesthetics, 4)"></div>
+                        <div class="star" [ngClass]="getStarClass(seed.Quality.Aesthetics, 5)"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="even">
+                    <th>mortality</th>
+                    <td  >
+                        <div class="rating" title="mortality: {{seed.Quality.Mortality}}/10">
+                        <div class="star" [ngClass]="getStarClass(10 - (seed.Quality.Mortality), 1)"></div>
+                        <div class="star" [ngClass]="getStarClass(10 - (seed.Quality.Mortality), 2)"></div>
+                        <div class="star" [ngClass]="getStarClass(10 - (seed.Quality.Mortality), 3)"></div>
+                        <div class="star" [ngClass]="getStarClass(10 - (seed.Quality.Mortality), 4)"></div>
+                        <div class="star" [ngClass]="getStarClass(10 - (seed.Quality.Mortality), 5)"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>growth level</th>
+                    <td>
+                        <div class="rating" title="growth level: {{seed.Quality.GrowthLevel}}/10">
+                        <div class="star" [ngClass]="getStarClass(seed.Quality.GrowthLevel, 1)"></div>
+                        <div class="star" [ngClass]="getStarClass(seed.Quality.GrowthLevel, 2)"></div>
+                        <div class="star" [ngClass]="getStarClass(seed.Quality.GrowthLevel, 3)"></div>
+                        <div class="star" [ngClass]="getStarClass(seed.Quality.GrowthLevel, 4)"></div>
+                        <div class="star" [ngClass]="getStarClass(seed.Quality.GrowthLevel, 5)"></div>
+                    </div>
+                </td>
+                </tr>
+            </table>
+            </div>
+    
+    
+            <!-- GROWTH CHART -->
+            <div [style.display]="getActive(seed.ID) === 'growth' ? '' : 'none'">
+                <div class="chart-wrapper">
+                    <app-growth-chart [seed]="seed"></app-growth-chart>
+                </div>
+            
+            </div>
+    
+            <!-- DESC -->
+            <div [style.display]="getActive(seed.ID) === 'desc' ? '' : 'none'">
+            <div *ngIf="seed.Description !== ''">
+                {{seed.Description}}
+            </div>
+            <div *ngIf="seed.Description === ''">
+                This seed does not have a Description yet
+                Contact {{seed.Owner}} and ask for it :)
+            </div>
+            <i>{{seed.Note}}</i>
+            </div>
+        </div>
+    
+        <!-- CONFIRM BUTTON -->
+        <div class="confirm-button" (click)="goToViewer(seed)">
+            Recipes for this seed
+        </div>
+    </div>
+    
+</div>
+
+
+

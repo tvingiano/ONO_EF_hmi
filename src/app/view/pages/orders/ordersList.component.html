@@ -1,0 +1,91 @@
+<mat-card-title style= "text-align:center; margin-top: 5px;">Orders</mat-card-title>
+
+
+<div>
+
+
+    <!-- <div class="mat-table">
+        <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+    </div> -->
+    <div class="mat-elevation-z8" >
+
+        <table mat-table class="mat-elevation-z8 mat-table" [dataSource]="dataSource" matSort>
+
+            <ng-container matColumnDef="ordername">
+                <th mat-header-cell *matHeaderCellDef> Order name </th>
+                <td mat-cell *matCellDef="let element"> {{element.OrderName}} </td>
+            </ng-container>
+            <ng-container matColumnDef="recipe">
+                <th mat-header-cell *matHeaderCellDef> Recipe </th>
+                <td mat-cell *matCellDef="let element"> {{element.Recipe}} </td>
+            </ng-container>
+            <ng-container matColumnDef="batch">
+                <th mat-header-cell *matHeaderCellDef> Batch ID </th>
+                <td mat-cell *matCellDef="let element"> {{element.BatchID}} </td>
+            </ng-container>
+            <!-- <ng-container matColumnDef="quantity">
+                <th mat-header-cell *matHeaderCellDef> Quantit� </th>
+                <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+            </ng-container> -->
+            <ng-container matColumnDef="drawers">
+                <th mat-header-cell *matHeaderCellDef> Booked drawers </th>
+                <td mat-cell *matCellDef="let element"> {{element.BookedDrawers}} </td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef> Order status </th>
+                <td mat-cell *matCellDef="let element"> {{element.OrderStatus}} </td>
+            </ng-container>
+            <ng-container matColumnDef="startforecast">
+                <th mat-header-cell *matHeaderCellDef> Scheduled start </th>
+                <td mat-cell *matCellDef="let element"> {{element.ScheduledStartTime}} </td>
+            </ng-container>
+            <ng-container matColumnDef="endforecast">
+                <th mat-header-cell *matHeaderCellDef> Expected end </th>
+                <td mat-cell *matCellDef="let element"> {{element.ScheduledEndTime}} </td>
+            </ng-container>
+
+            <div layout="column" flex="30">
+                <ng-container matColumnDef="validate">
+                    <th mat-header-cell *matHeaderCellDef> Validate </th>
+                    <td mat-cell *matCellDef="let element; let i = index;"> <button mat-button color="primary"
+                        [disabled]="isInvalid(element)" (click)="onValidate(element)">
+                            <mat-icon [ngStyle]="isInvalid(element)?{'color':'grey'}:{'color':'black'}">done</mat-icon>
+                        </button> </td>
+                </ng-container>
+            </div>
+
+            <div layout="column" flex="30">
+                <ng-container matColumnDef="edit">
+                    <th mat-header-cell *matHeaderCellDef> Modify </th>
+                    <td mat-cell *matCellDef="let element; let i = index;"> <button mat-button color="primary"
+                        [disabled]="isInvalid(element)" (click)="onEdit(element)">
+                            <mat-icon [ngStyle]="isInvalid(element)?{'color':'grey'}:{'color':'black'}">edit</mat-icon>
+                        </button> </td>
+                </ng-container>
+            </div>
+
+            <div layout="column" flex="30">
+                <ng-container matColumnDef="delete" >
+                    <th mat-header-cell *matHeaderCellDef> Delete </th>
+                    <td mat-cell *matCellDef="let element; let i = index;"> <button mat-button color="primary"
+                        [disabled]="isInvalid(element)" (click)="onDelete(element)" >
+                            <mat-icon [ngStyle]="isInvalid(element)?{'color':'grey'}:{'color':'black'}" >delete</mat-icon>
+                        </button> </td>
+                </ng-container> 
+            </div>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <div class="mat-table">
+            <mat-paginator [pageSize]="50" [pageSizeOptions]="[50,75,100,200]" showFirstLastButtons></mat-paginator>
+        </div>
+    </div>
+
+    <!-- <button mat-button (click)="return()" style="margin-right: 45px;margin-left: 60px;margin-top:30px">E</button> -->
+
+</div>
+    <button mat-button (click)="addOrder()">Add order</button>
+    <button mat-button (click)="ready()">Start next order</button>

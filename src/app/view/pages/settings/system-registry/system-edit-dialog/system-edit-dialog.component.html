@@ -1,0 +1,79 @@
+<ng-container *ngIf="data">
+    <div class="container-fluid">
+        <h2 mat-dialog-title>{{data.title}}</h2>
+        <mat-dialog-content>
+            <form [formGroup]="formGroup">
+                <div class="row flex-column">
+                    <!-- SystemName -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{'label.SystemName' | translate}}</mat-label>
+                        <input matInput type="text"
+                               placeholder="{{'label.SystemName' | translate}}"
+                               formControlName="SystemName"
+                               autocomplete="off">
+                    </mat-form-field>
+                    <!-- AccountHolder -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{'label.AccountHolder' | translate}}</mat-label>
+                        <input matInput type="text"
+                               placeholder="{{'label.AccountHolder' | translate}}"
+                               formControlName="AccountHolder"
+                               autocomplete="off">
+                    </mat-form-field>
+                    <!-- HardwareVersion -->
+                    <!-- <mat-form-field appearance="outline">
+                        <mat-label>{{'label.HardwareVersion' | translate}}</mat-label>
+                        <input matInput type="text"
+                               placeholder="{{'label.HardwareVersion' | translate}}"
+                               formControlName="HardwareVersion"
+                               autocomplete="off">
+                    </mat-form-field> -->
+                    <!-- ProductionDate -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{'label.ProductionDate' | translate}}</mat-label>
+                        <input matInput [matDatepicker]="productionDatePicker"
+                               placeholder="{{'label.ProductionDate' | translate}}"
+                               formControlName="ProductionDate">
+                        <mat-datepicker-toggle matSuffix [for]="productionDatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #productionDatePicker></mat-datepicker>
+                    </mat-form-field>
+                    <!-- InstallationDate -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{'label.InstallationDate' | translate}}</mat-label>
+                        <input matInput [matDatepicker]="installationDatePicker"
+                               placeholder="{{'label.InstallationDate' | translate}}"
+                               formControlName="InstallationDate">
+                        <mat-datepicker-toggle matSuffix [for]="installationDatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #installationDatePicker></mat-datepicker>
+                    </mat-form-field>
+                    <!-- PlcVersion -->
+                    <!-- <mat-form-field appearance="outline">
+                        <mat-label>{{'label.PlcVersion' | translate}}</mat-label>
+                        <input matInput type="text"
+                               placeholder="{{'label.PlcVersion' | translate}}"
+                               formControlName="PlcVersion"
+                               autocomplete="off">
+                    </mat-form-field> -->
+                    <!-- SoftwareVersion -->
+                    <!-- <mat-form-field appearance="outline">
+                        <mat-label>{{'label.SoftwareVersion' | translate}}</mat-label>
+                        <input matInput type="text"
+                               placeholder="{{'label.SoftwareVersion' | translate}}"
+                               formControlName="SoftwareVersion"
+                               autocomplete="off">
+                    </mat-form-field> -->
+                    <!-- Place -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{'label.Place' | translate}}</mat-label>
+                        <textarea matInput placeholder="{{'label.Place' | translate}}"
+                                  formControlName="Place"></textarea>
+                    </mat-form-field>
+                </div>
+            </form>
+        </mat-dialog-content>
+        <mat-dialog-actions align="end">
+            <button mat-button [mat-dialog-close]="null">{{'label.cancel' | translate}}</button>
+            <button mat-button [mat-dialog-close]="formGroup" [disabled]="formGroup.invalid" cdkFocusInitial color="warn">{{'label.save' | translate}}</button>
+        </mat-dialog-actions>
+    </div>
+</ng-container>

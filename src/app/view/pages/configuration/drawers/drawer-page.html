@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Move drawer</h1>
+<div mat-dialog-content>
+
+  <p>Destination:</p>
+  <mat-form-field>
+    <mat-select [(ngModel)]="data.to">
+      <mat-option *ngFor="let val1 of slots" [(value)]="val1">
+        {{val1}} 
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Exit</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Move</button>
+</div>

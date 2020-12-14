@@ -1,0 +1,11 @@
+<button class="btn cancel" type="close" (keydown.esc)="close()" (click)="close()"></button>  
+<h2>Generic settings</h2>
+
+<mat-label>Period duration</mat-label><br>
+<mat-slider #matsliderperiod value ="{{show}}" min="1" max="31" step="1" (input)="setPeriod($event)"></mat-slider>
+<input matInput min="1" max="31" class="span-input" type="number" value="{{show}}" (change)="setPeriod($event)">days<br>
+
+<div class="footer">
+    <button class="btn submit" type="submit" (click)="submit()">Confirm</button> 
+</div>
+

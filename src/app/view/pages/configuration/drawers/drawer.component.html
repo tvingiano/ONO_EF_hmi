@@ -1,0 +1,63 @@
+<!-- <mat-card-title style= "text-align:center; margin-top: 5px;">Tabella processi</mat-card-title> -->
+<mat-card-title style= "text-align:center; margin-top: 5px;">Drawers</mat-card-title>
+
+<div >
+
+
+    <!-- <div class="mat-table">
+        <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+    </div> -->
+    <div class="mat-elevation-z8" >
+
+        <table mat-table class="mat-elevation-z8 mat-table" [dataSource]="dataSource" matSort style="height:100px">
+            <ng-container matColumnDef="serial">
+                <th mat-header-cell *matHeaderCellDef> Drawer ID </th>
+                <td mat-cell *matCellDef="let element"> {{element.serial}} </td>
+            </ng-container>
+             <ng-container matColumnDef="order">
+                <th mat-header-cell *matHeaderCellDef> Order </th>
+                <td mat-cell *matCellDef="let element"> {{element.order}} </td>
+            </ng-container> 
+            <ng-container matColumnDef="slot">
+                <th mat-header-cell *matHeaderCellDef> Current slot </th>
+                <td mat-cell *matCellDef="let element"> {{element.slot}} </td>
+            </ng-container>
+            <ng-container matColumnDef="area">
+                <th mat-header-cell *matHeaderCellDef> Current area </th>
+                <td mat-cell *matCellDef="let element"> {{element.area}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef> Status </th>
+                <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+            </ng-container>
+
+
+            <div layout="column" flex="30">
+                    <ng-container matColumnDef="move">
+                        <th mat-header-cell *matHeaderCellDef> Move </th>
+                        <td mat-cell *matCellDef="let element; let i = index;"> <button mat-button color="secondary" disabled = "{{this.state()}}"
+                                (click)="onMove(element)">
+                                <mat-icon>swap_vert</mat-icon>
+                            </button> </td>
+                    </ng-container>
+                </div>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+        </table>
+        <div class="mat-table">
+            <mat-paginator [pageSize]="50" [pageSizeOptions]="[50,75,100,200]" showFirstLastButtons></mat-paginator>
+        </div>
+    </div>
+    <!-- <button mat-button (click)="onReset()" style="margin-right: 45px;margin-left: 60px;margin-top:30px">Reset
+        PLC</button> -->
+    <button mat-button (click)="onZero()" style="margin-right: 45px;margin-left: 60px;margin-top:30px">Bay
+        position</button>
+    <!-- <button mat-button (click)="return()" style="margin-right: 45px;margin-left: 60px;margin-top:30px">Esci</button> -->
+
+</div>

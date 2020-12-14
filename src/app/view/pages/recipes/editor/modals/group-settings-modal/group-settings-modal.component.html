@@ -1,0 +1,19 @@
+<button class="btn cancel" type="close" (keydown.esc)="close()" (click)="close()"></button>  
+<h2>{{title}} Settings</h2>
+<h4>ID: {{group.gid}}</h4>
+
+<form [formGroup]="groupSettingsForm">
+  <label>Group Title </label><span>{{title}}</span><br>
+  <input type="text"  formControlName="title" placeholder="  3-14 chars"/><br>
+
+  <label>Plant Stage</label><br>
+  <select id="stage" formControlName="stage" value="{{group.stage}}">
+    <option *ngFor="let stage of this.dataService.stages" value="{{stage.name}}">{{stage.name}}</option>
+  </select>
+
+</form>
+
+<div class="footer">
+    <button class="btn submit" type="submit" [disabled]="!groupSettingsForm.valid" (click)="submit()">Confirm</button> 
+    <button class="btn del" (click)="delGroup()" [disabled]="this.dataService.groups.length === 1"></button>
+</div>

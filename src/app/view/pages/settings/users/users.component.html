@@ -1,0 +1,15 @@
+<app-page-wrapper title="Profiles" titleColor="#5E74E4" backgroundColor="#101024" shadow="false">
+    <div appPageActionsButtons>
+        <button mat-button (click)="router.navigate(['settings', 'profiles', 'create'])" color="primary">CREATE</button>
+        <button mat-button (click)="router.navigate(['settings', 'profiles', 'edit'])" color="primary">EDIT</button>
+    </div>
+    <div class="container-fluid card-container">
+        <!-- profiles list -->
+        <app-profiles-list (profileSelect)="onProfileSelected($event)"></app-profiles-list>
+
+        <mat-divider></mat-divider>
+
+        <!-- users list -->
+        <app-users-list [profileInfo]="profileInfo" (userSelect)="onUserSelected($event)"></app-users-list>
+    </div>
+</app-page-wrapper>

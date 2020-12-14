@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Change Setting</h1>
+<div mat-dialog-content>
+
+  <p>Balance Offset(Min) [μA]:</p>
+  <mat-form-field>
+    <input type="number" min="1" max="1000" matInput [(ngModel)]="data.min">
+  </mat-form-field>
+
+  <p>Balance Max Value(Max) [μA]:</p>
+  <mat-form-field>
+    <input type="number" min="1" max="20000" matInput [(ngModel)]="data.max">
+  </mat-form-field>
+
+  <p>Weight variation threshold to switch off the pump(Unc) [μA]:</p>
+  <mat-form-field>
+    <input type="number" min="1" max="20000" matInput [(ngModel)]="data.unc">
+  </mat-form-field>
+
+  <p>Delay to turn off pump and valve when weight variation is within the threshold(Delay) [*100ms]:</p>
+  <mat-form-field>
+    <input type="number" min="1" max="1000" matInput [(ngModel)]="data.dly">
+  </mat-form-field>
+
+  <p>Delay to check the Unc during suction(DelayCheck) [*100ms]:</p>
+  <mat-form-field>
+    <input type="number" min="1" max="1000" matInput [(ngModel)]="data.dlyChk">
+  </mat-form-field>
+  
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Exit</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Start</button>
+</div>

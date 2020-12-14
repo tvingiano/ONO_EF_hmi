@@ -1,0 +1,129 @@
+<app-page-wrapper *ngIf="moduleInfo" title="Module Info">
+    <mat-card *ngIf="moduleFormGroup">
+        <mat-card class="mb-3 no-shadow">
+            <!-- MODULE INFO FORM -->
+            <form [formGroup]="moduleFormGroup">
+                <div class="row">
+                    <div class="col">
+                        <!-- System  -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'label.System' | translate}}</mat-label>
+                            <input matInput type="text"
+                                   placeholder="{{'label.System' | translate}}"
+                                   formControlName="System"
+                                   autocomplete="off" [disableControl]="true">
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <!-- ModuleName -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'label.ModuleName' | translate}}</mat-label>
+                            <input matInput type="number"
+                                   placeholder="{{'label.ModuleName' | translate}}"
+                                   formControlName="Modulename"
+                                   autocomplete="off" [disableControl]="true">
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <!-- Owner -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'label.owner' | translate}}</mat-label>
+                            <input matInput type="text"
+                                   placeholder="{{'label.owner' | translate}}"
+                                   formControlName="Owner"
+                                   autocomplete="off" [disableControl]="state!==states.EDIT">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <!-- RackNumber -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'label.RackNumber' | translate}}</mat-label>
+                            <input matInput type="number"
+                                   placeholder="{{'label.RackNumber' | translate}}"
+                                   formControlName="RackNumber"
+                                   autocomplete="off" [disableControl]="true">
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <!-- LightSlotsNumber -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'label.LightSlotsNumber' | translate}}</mat-label>
+                            <input matInput type="number"
+                                   placeholder="{{'label.LightSlotsNumber' | translate}}"
+                                   formControlName="LightSlotsNumber"
+                                   autocomplete="off" [disableControl]="state!==states.EDIT">
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <!-- GrowthSlotsNumber -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'label.GrowthSlotsNumber' | translate}}</mat-label>
+                            <input matInput type="number"
+                                   placeholder="{{'label.GrowthSlotsNumber' | translate}}"
+                                   formControlName="GrowthSlotsNumber"
+                                   autocomplete="off" [disableControl]="true">
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <!-- SolutionCapacity -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'label.SolutionCapacity' | translate}}</mat-label>
+                            <input matInput type="number"
+                                   placeholder="{{'label.SolutionCapacity' | translate}}"
+                                   formControlName="SolutionCapacity"
+                                   autocomplete="off" [disableControl]="state!==states.EDIT">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <!-- Description -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'label.description' | translate}}</mat-label>
+                            <textarea matInput placeholder="{{'label.description' | translate}}"
+                                      formControlName="Description" [disableControl]="state!==states.EDIT"></textarea>
+                        </mat-form-field>
+                        <!-- Note -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'label.note' | translate}}</mat-label>
+                            <textarea matInput placeholder="{{'label.note' | translate}}"
+                                      formControlName="Note" [disableControl]="true"></textarea>
+                        </mat-form-field>
+                        <!-- Description -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'label.tag' | translate}}</mat-label>
+                            <textarea matInput placeholder="{{'label.tag' | translate}}"
+                                      formControlName="Tag" [disableControl]="true"></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </form>
+            <mat-card-actions align="end">
+                <button mat-button (click)="onEditHandler()"
+                        *ngIf="state === states.VIEW">{{"label.edit" | translate}}</button>
+                <button mat-button color="warn" *ngIf="state === states.EDIT" [disabled]="!dirty"
+                        (click)="onSaveHandler()">{{"label.save" | translate}}</button>
+                <button mat-button color="primary" *ngIf="state === states.EDIT"
+                        (click)="onCancelHandler()">{{"label.cancel" | translate}}</button>
+            </mat-card-actions>
+            <mat-divider></mat-divider>
+        </mat-card>
+
+        <!-- show spinner -->
+        <div class="d-flex justify-content-center" *ngIf="!racksInfoList">
+            <mat-spinner diameter="50"></mat-spinner>
+        </div>
+        <!--MODULE  RACKS LIST -->
+        <app-racks-list *ngIf="racksInfoList" title="{{'label.moduleRacks' | translate }}"
+                        [initialData]="racksInfoList"
+                        [parentModuleID]="moduleInfo.Modulename"
+                        (createClick)="rackCreateHandler()"
+                        (editClick)="rackEditHandler($event)"
+                        (viewClick)="rackViewHandler($event)"
+                        (deleteClick)="rackDeleteHandler($event)"
+        >
+        </app-racks-list>
+    </mat-card>
+</app-page-wrapper>

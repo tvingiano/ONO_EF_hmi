@@ -1,0 +1,100 @@
+$body-color-blue: #000000;
+$body-color-white: #FFFFFF;
+$body-text-color: #fff;
+$body-text-size: 14px;
+
+$border-radius: 4px;
+$mat-card-color-grey: #f4f5f7;
+$mat-card-font-color: #8898aa;
+$button-color: #5e72e4;
+
+$editor-background-color: #08131b;
+$editor-border-color: #193d58;
+$editor-ono-blue: #00aeef;
+$editor-ono-blue-rgb: rgb(0, 174, 239);
+$editor-ono-grey: #959599;
+$editor-ono-grey-rbg: rgb(149, 149, 153);
+$err-color: rgb(255, 98, 98);
+
+$ono-blue: rgb(0, 174, 239);
+$ono_grey: rgb(138,139,147);
+
+$lv-1: #101024;
+$lv0: #3D4754;
+$lv1: #2D343E;
+$lv2: #4D5662;
+$lv3: #646C76;
+
+$blue: #6972C4;
+$lightblue: #c0d8ff;
+$green: #68da6e;
+$date-color:#8ebbff;
+
+$font-color: #f0f1f2;
+$font-color-2: rgb(165, 167, 168);
+
+:host {
+  width: 100%;
+  height: 100%;
+  background-color: $lv2;
+
+  mat-card {
+    margin-bottom: 15px;
+    padding: 7px;
+
+  }
+
+  .left-panel.user {
+    max-width: 200px;
+    background: none;
+  }
+
+  mat-card-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    background: none;
+    cursor: pointer;
+    ngx-avatar {
+      margin-right: 15px;
+    }
+  }
+
+  .active {
+    background-color: $date-color !important;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  .list-group-item {
+    border: 0 !important;
+  }
+
+  mat-label.list-label {
+    color: #848484;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    font-weight: 500;
+  }
+
+  .users-list {
+    margin-top: 15px;
+  }
+
+  .user_info {
+    display: table-column;
+  }
+
+  mat-card-actions.create-delete {
+    width: 200px;
+  }
+
+  .mat-list-base .mat-list-item .mat-list-avatar {
+    height: unset;
+    width: unset;
+  }
+}
+

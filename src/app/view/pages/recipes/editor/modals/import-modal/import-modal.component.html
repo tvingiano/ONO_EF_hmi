@@ -1,0 +1,10 @@
+<button class="btn cancel" type="close" (keydown.esc)="close('')" (click)="close('')"></button>  
+<form [formGroup]="importForm" class="modal" >
+    <label>Copy and paste your JSON in here</label>
+    <textarea formControlName = 'jsonRecipe' style="height:400px"></textarea>
+</form>
+<div *ngIf="!correct()">There is something not working in your input :(</div>
+
+<div class="footer">
+    <button (click)="submit()" class="btn submit" [disabled]="!correct() && importForm.value.jsonRecipe">Upload!</button>
+</div>

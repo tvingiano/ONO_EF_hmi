@@ -1,0 +1,41 @@
+<h1 mat-dialog-title>Drawer stress test</h1>
+<div mat-dialog-content>
+
+  <p>Drawer:</p>
+  <mat-form-field>
+    <mat-select [(ngModel)]="data.DrawerSerial">
+      <mat-option *ngFor="let val1 of drawers" [(value)]="val1">
+        {{val1}} 
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <p>Starting slot:</p>
+  <mat-form-field>
+    <mat-select [(ngModel)]="data.from">
+      <mat-option *ngFor="let val1 of slots" [(value)]="val1">
+        {{val1}} 
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <p>Ending slot:</p>
+  <mat-form-field>
+    <mat-select [(ngModel)]="data.to">
+      <mat-option *ngFor="let val2 of slots" [(value)]="val2">
+        {{val2}} 
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <p>Reps:</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.reps">
+  </mat-form-field>
+
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Exit</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Go</button>
+</div>

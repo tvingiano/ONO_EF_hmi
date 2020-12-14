@@ -1,0 +1,128 @@
+<ng-container>
+    <!-- show spinner -->
+    <div class="d-flex justify-content-center" *ngIf="!formGroup">
+        <mat-spinner diameter="30"></mat-spinner>
+    </div>
+    <div class="container-fluid" *ngIf="formGroup" >
+        <h2 mat-dialog-title>{{data.title}}</h2>
+        <mat-dialog-content >
+            <form [formGroup]="formGroup">
+                <div class="row flex-column">
+                    <div class="row">
+                        <div class="col-md">
+                            <mat-form-field appearance="outline">
+                                <mat-label>{{'label.System' | translate}}</mat-label>
+                                <input matInput type="text"
+                                       placeholder="{{'label.System' | translate}}"
+                                       formControlName="System"
+                                       autocomplete="off"
+                                       disableControl="true"
+                                >
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <mat-form-field appearance="outline">
+                                <mat-label>{{'label.ModuleName' | translate}}</mat-label>
+                                <input matInput type="number"
+                                       placeholder="{{'label.ModuleName' | translate}}"
+                                       formControlName="Module"
+                                       autocomplete="off"
+                                       disableControl="true"
+                                >
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md">
+                            <mat-form-field appearance="outline">
+                                <mat-label>{{'label.Rack' | translate}}</mat-label>
+                                <input matInput type="number"
+                                       placeholder="{{'label.Rack' | translate}}"
+                                       formControlName="Rack"
+                                       autocomplete="off"
+                                       disableControl="true"
+                                >
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <mat-form-field appearance="outline">
+                                <mat-label>{{'label.RackSide' | translate}}</mat-label>
+                                <mat-select formControlName="RackSide" [(ngModel)]="data.slotInfo.RackSide">
+                                    <mat-option *ngFor="let rackSide of rackSides" [value]="rackSide">{{rackSide}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <mat-form-field appearance="outline">
+                                <mat-label>{{'label.Area' | translate}}</mat-label>
+                                <mat-select formControlName="Area" [(ngModel)]="data.slotInfo.Area">
+                                    <mat-option *ngFor="let type of areaTypes" [value]="type">{{type}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <mat-form-field appearance="outline">
+                                <mat-label>{{'label.LightConfiguration' | translate}}</mat-label>
+                                <mat-select formControlName="LightConfiguration" [(ngModel)]="data.slotInfo.LightConfiguration">
+                                    <mat-option *ngFor="let light of lightConfigurations" [value]="light.Code">{{light.Code}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <mat-form-field appearance="outline">
+                                <mat-label>{{'label.Height' | translate}}</mat-label>
+                                <input matInput type="number"
+                                       placeholder="{{'label.Height' | translate}}"
+                                       formControlName="Height"
+                                       autocomplete="off"
+                                >
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md">
+                            <mat-form-field appearance="outline">
+                                <mat-label>{{'label.LampsNumber' | translate}}</mat-label>
+                                <input matInput type="number"
+                                       placeholder="{{'label.LampsNumber' | translate}}"
+                                       formControlName="LampsNumber"
+                                       autocomplete="off"
+                                >
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{'label.description' | translate}}</mat-label>
+                        <textarea matInput placeholder="{{'label.description' | translate}}"
+                                  formControlName="Description"></textarea>
+                    </mat-form-field>
+                    <!-- Note -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{'label.note' | translate}}</mat-label>
+                        <textarea matInput placeholder="{{'label.note' | translate}}"
+                                  formControlName="Note"></textarea>
+                    </mat-form-field>
+                    <!-- Description -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{'label.tag' | translate}}</mat-label>
+                        <textarea matInput placeholder="{{'label.tag' | translate}}"
+                                  formControlName="Tag"></textarea>
+                    </mat-form-field>
+                </div>
+            </form>
+        </mat-dialog-content>
+        <mat-dialog-actions align="end">
+            <button mat-button [mat-dialog-close]="null">{{'label.cancel' | translate}}</button>
+            <button mat-button [mat-dialog-close]="formGroup" [disabled]="formGroup.invalid" cdkFocusInitial>{{'label.save' | translate}}</button>
+        </mat-dialog-actions>
+    </div>
+</ng-container>
+

@@ -1,0 +1,917 @@
+/**
+ * COLOR VAR
+*/
+$editor-background-color: #08131b;
+$editor-border-color: #193d58;
+$editor-ono-blue: #00aeef;
+$editor-ono-blue-rgb: rgb(0, 174, 239);
+$editor-ono-grey: #959599;
+$editor-ono-grey-rbg: rgb(149, 149, 153);
+$editor-ono-error: rgb(255, 98, 98);
+
+
+.limitePeriodi {
+  position: absolute;
+  width: 260px;
+  height: 100vh;
+  background-color: $editor-background-color;
+  display: block;
+}
+
+.logo {
+  background-image: url("../../../../../../../assets/img/logo.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: relative;
+  height: 100px;
+  width: 100%;
+}
+
+
+.image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: relative;
+  width: 20%;
+}
+
+.workarea {
+  background: url("src/assets/img/Subtle-Prism.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  position: absolute;
+
+  padding: 2vh 0 0 1vw;
+
+  width: calc(100% - 250px - 290px);
+  height: calc(100% - 100px);
+
+  top: 100px;
+  left: 255px;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.startpoint {
+  position: absolute;
+  margin: 40px;
+}
+/*#######################  OREDERLIMIT  CSS  ##################################*/
+.orderLimit {
+  padding: 10px;
+
+  background-color:  $editor-background-color;
+  position: absolute;
+
+  width: 285px;
+  height: calc(100% - 100px);
+  top: 100px;
+  left: calc(100% - 285px);
+
+  overflow: scroll;
+  word-wrap: break-word;
+}
+
+#detailTable {
+  background-color: none;
+  width: 245px;
+  box-shadow: inset $editor-ono-blue 0 0 10px 1px;
+
+}
+
+td{
+  padding: 15px;
+  text-align: left;
+  vertical-align:middle;
+  font-weight: 300;
+  font-size: 14px;
+  color: #fff;
+  border-bottom: solid 1px rgba(255,255,255,0.3);
+}
+
+tr{
+  border-bottom: 2px solid white;
+}
+
+.field {
+  padding: 10px 20px;
+  width: min-content;
+}
+/*###########################################################################*/
+.connector {
+  background-color: none;
+  border: solid 1px white;
+  position: fixed;
+  width: 70%;
+  height: 78%;
+  top: 12%;
+  left: 20%;
+}
+
+.generate {
+  background-color: #00aa00;
+  color: white;
+  border: solid 2px green;
+  border-radius: 3px;
+}
+
+.destroy {
+  background-color: #d34646;
+  color: white;
+  border: solid 2px #b60000;
+  border-radius: 3px;
+}
+
+pre {
+  font-family: monospace;
+}
+
+/*#############################*/
+
+.group-list {
+  background: none;
+  border: solid 2px red;
+
+  margin-left: 20px;
+  margin-top: 20px;
+  padding: 10px;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.per-list {
+  background: none;
+  border: solid 1px white;
+
+  padding: 10px;
+
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  border-radius: 4px;
+}
+
+
+.per-box {
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: move;
+  background: none;
+  font-size: 14px;
+}
+
+
+/*############# presets cdk ################*/
+
+.pres-list {
+  margin-left: 20px;
+  margin-top: 20px;
+  width: calc(100% - 110px);
+  max-width: 100%;
+  height: 100px;
+  min-height: 60px;
+  background: none;
+  border-radius: 4px;
+}
+
+.pres-box {
+  color: white;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: move;
+  background: none;
+  font-size: 14px;
+}
+
+#pres{
+  width: calc(100% - 5px);
+  height: 100%;
+  background-color: none;
+
+  box-shadow: 
+    inset 0px 30px 20px -10px $editor-background-color,
+    inset 0px -30px 20px -10px $editor-background-color; 
+}
+
+#presetArea{
+  padding-top: 10px;
+  text-align:center;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+  width: auto;
+  transition: width 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.box:last-child {
+  border: none;
+}
+
+.list.cdk-drop-list-dragging .box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.square.box:not(.cdk-drag-placeholder){
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+
+/*#############################*/
+
+.preview {
+
+  width: 100px;
+  height: 100px;
+
+  box-shadow: none;
+}
+
+#logo {
+  background-image: url("src/assets/img/logo.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 140px;
+
+  width: 100%;
+  height: 100%;
+}
+
+#div {
+  border: 1px dotted  $editor-background-color;
+  position: absolute;
+  background: rebeccapurple;
+  opacity: 0.5;
+}
+
+
+
+input[type=search] {
+
+  position: relative;
+
+  width: calc(100% - 70px);
+  height:20px;
+  float: right;
+  right: 5px;
+  top: 15px;
+
+  background: rgba(0, 174, 239, 0.2);
+  color: white;
+
+  border: 1px dotted white;
+
+}
+
+input[type=search]:hover {
+  background-color: rgba(0, 174, 239, 1);
+}
+
+input[type=search]:focus {
+  background-color: rgba(0, 174, 239, 0.8);
+  border-radius: 0px;
+}
+
+
+/*##### SCROLLBAR #####*/
+.custom-scrollbar{
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px  $editor-background-color;
+    box-shadow: inset 0 0 6px  $editor-background-color;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+  
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgb(116, 116, 119);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: $editor-ono-blue-rgb;
+  }
+
+  &::-webkit-scrollbar-corner{
+    display: none;
+  }
+  
+}
+
+/*############ period areas #################*/
+
+.searchbar {
+  position: absolute;
+  line-height: 50px;
+
+
+  width: 250px;
+  height: 50px;
+
+  top: 110px;
+  left: 5px;
+}
+
+.pres-area {
+  position: absolute;
+
+  width: 250px;
+  height: calc(100% - 320px);
+
+  top: calc(160px + 25px);
+  left: 5px;
+
+  border-top: solid 5px $editor-border-color;
+}
+
+.filter{
+  background: none;
+}
+
+.btn-area {
+  position: absolute;
+  width: 250px;
+  height: 120px;
+  bottom: 5px;
+  
+}
+
+
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+}
+
+.operators {
+  background-color: none;
+
+  position: absolute;
+  left: 260px;
+  top: calc(100% - 150px);
+
+  width: calc(100% - 260px - 280px -100px);
+  height: 125px;
+}
+
+#trashbin{
+  background-image: none;
+  background-position: center;
+
+  position: absolute;
+  
+  right:280px;
+  top: calc(100% - 205px);
+
+  width: 200px;
+  height: 200px;
+}
+#trashbin:hover{
+  background-image: url("src/assets/icons/trashbin.svg");
+  background-repeat: no-repeat;
+  background-size: 80px;
+  background-position: center;
+  transition: all 1s linear;
+}
+
+#tabcontainer{
+  position: absolute;
+  line-height: 50px;
+
+
+  width: 250px;
+  height: 30px;
+
+  top: 160px;
+  left: 5px;
+}
+[id*='tab-']{
+  position: absolute;
+  background-color: $editor-background-color;
+
+  width: 80px;
+  height: 30px;
+
+
+  line-height: 20px;
+  text-align: center;
+  
+  border:5px solid $editor-border-color;
+
+  z-index: 1;
+}
+#tab-2{
+  left: 155px
+}
+#tab-1{
+  left: 80px;
+}
+#tab-0{
+  left: 5px;
+}
+
+.openedTab{
+  background: rgba(8,19,27,1);
+  background: -moz-linear-gradient(165deg, rgba(0,174,255,1) 0%, rgba(8,19,27,1) 56%);
+  background: -webkit-linear-gradient(165deg, rgba(0,174,255,1) 0%, rgba(8,19,27,1) 56%);
+  background: linear-gradient(165deg, rgba(0,174,255,1) 0%, rgba(8,19,27,1) 56%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00aeff",endColorstr="#08131b",GradientType=1);
+
+  top:-10px;
+  height: 40px;
+
+  line-height: 30px;
+  font-size: 16px;
+  z-index: 2;
+
+  border-bottom: 5px solid $editor-background-color;
+
+  text-shadow: 
+    0 0 5px white,
+    0 0 20px blue;
+
+}
+
+.closedTab{
+  transition:box-shadow ease-in 250ms;
+  z-index: 0;
+}
+
+.closedTab:hover{
+  box-shadow: inset 0 17px 10px -14px rgba(255, 255, 255, 1);
+  transition: all cubic-bezier(0.04, 0.79, 1, 1) 250ms;
+}
+
+
+/*legeng classes*/
+
+#legend {
+  text-align: center;
+  width: 100%;
+  opacity: 0.1;
+  background-color: darkslategrey;
+  transition: all 250ms ease-in-out;
+}
+
+#legend:hover {
+  opacity: 0.9
+}
+
+.Red {
+  background-color: rgb(255, 95, 95);
+}
+
+.Blue {
+  background-color: rgb(72, 72, 253);
+}
+
+.White {
+  color: black;
+  background-color: white;
+}
+
+.OFF {
+  background-color: black;
+}
+
+.Purple {
+  background-color: rgb(196, 105, 196);
+}
+
+.RedAndBlue {
+  background: rgb(255, 50, 50);
+  background: linear-gradient(90deg,
+      rgba(255, 50, 50, 1) 0%,
+      rgba(175, 50, 255, 1) 50%,
+      rgba(50, 50, 251, 1) 100%);
+}
+
+.custom {
+
+  background: rgb(255, 0, 0);
+  background:
+    linear-gradient(90deg,
+      rgba(255, 0, 0, 1) 0%,
+      rgba(255, 125, 0, 1) 13%,
+      rgba(255, 255, 0, 1) 26%,
+      rgba(48, 255, 0, 1) 41%,
+      rgba(0, 254, 255, 1) 54%,
+      rgba(0, 0, 250, 1) 70%,
+      rgba(145, 0, 255, 1) 85%,
+      rgba(255, 0, 253, 1) 100%);
+}
+
+.Water {
+  background-color: rgb(97, 206, 243);
+}
+
+.Hoagland {
+  background-color: burlywood;
+}
+
+.Baseplant {
+  background-color: green;
+}
+
+.period {
+  height: 18px;
+  background: rgb(255, 0, 0);
+  background:
+    linear-gradient(90deg,
+      rgba(255, 0, 0, 1) 0%,
+      rgba(255, 125, 0, 1) 13%,
+      rgba(255, 255, 0, 1) 26%,
+      rgba(48, 255, 0, 1) 41%,
+      rgba(0, 254, 255, 1) 54%,
+      rgba(0, 0, 250, 1) 70%,
+      rgba(145, 0, 255, 1) 85%,
+      rgba(255, 0, 253, 1) 100%);
+}
+
+.temp {
+  height: 18px;
+  background: rgb(255, 0, 0);
+  background:
+    linear-gradient(90deg,
+      rgba(255, 0, 253, 1) 0%,
+      rgba(145, 0, 255, 1) 13%,
+      rgba(0, 0, 250, 1) 26%,
+      rgba(0, 254, 255, 1) 41%,
+      rgba(48, 255, 0, 1) 54%,
+      rgba(255, 255, 0, 1) 70%,
+      rgba(255, 125, 0, 1) 85%,
+      rgba(255, 0, 0, 1) 100%);
+}
+
+#recipeEditor{
+  display: flex;
+  position: relative;
+  margin-top: 10%;
+}
+
+.square {
+  background: none;
+
+  width: max-content;
+
+  display: inline-flex;
+  position:relative;
+
+}
+
+.square .cdk-drag-placeholder{
+  max-width: min-content;
+  min-width: 100px;
+}
+
+.period {
+  min-width: 50px;
+  max-width: max-content;
+  height: 120px;
+
+  background: none;
+  display: inline-flex;
+}
+
+.formula {
+  background: none;
+  border: solid 1px red;
+}
+
+.bracket {
+  width: 20px;
+  height: 120px;
+}
+
+.LBracket{
+  margin-left: 40px;
+}
+
+.RBracket{
+ margin-right: 40px;
+}
+
+.brackets {
+  width: 20px;
+  height: 100px;
+  margin-left: 20px;
+}
+
+.plus {
+
+  line-height: 120px;
+  font-size: 30px;
+  font-weight: 700;
+}
+.base{
+  border: none;
+  font-size: 14px;
+  position: absolute;
+  text-align: center;
+  bottom: -10px;
+  left: 22px;
+  background: none;
+}
+
+
+[class*='exponent-']{
+
+  position: absolute;
+
+  top:-10px;  
+  
+  height: 20px;
+  width: 30px;;
+
+}
+
+input[type="number"]{
+  background:none;
+  border: none;
+  color: white;
+}
+
+.hide {
+  display: none;
+}
+
+[id*='collapsed-']{
+  color:rgba(255, 255, 255, 0.589);    
+
+  border:none;
+
+  font-size: 25px;
+
+  position: absolute;
+  text-align: center;
+
+  top: -20px;
+  left: 15px;
+
+  height: 20px;
+  width: 20px;
+
+  background: none;
+} 
+[id*='collapsed-']:focus{
+  outline:none;
+} 
+
+.content{
+  position: relative;
+  height:120px;
+  min-width: 100px;
+  max-width: max-content;
+
+  text-align: center;
+}
+
+.stage{
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  height: 90px;
+  top: 15px;
+  width: 100%;
+}
+
+.isSprout{
+  height: 60px;
+  top: 25px;
+}
+
+.bottom_alignment{
+  position: relative;
+
+  min-width: 60px;
+  max-width: fit-content;
+  height: 20px;
+
+  line-height: 20px;
+
+  top: 105px;
+  margin: 0 10px;
+}
+
+
+
+.empty{
+  color: $editor-ono-grey;
+}
+
+.partial{
+  color: rgb(224, 196, 104);
+}
+
+.full{
+  color: $editor-ono-blue-rgb; 
+  font-weight: 700;
+}
+
+.groupTotalPeriod{
+  position: absolute;
+
+  bottom: -10px;
+  right:0px;
+
+}
+
+/*------------BUTTON STYLING--------------*/
+.btn{
+  background-color: $editor-background-color;
+  color: rgb(126, 126, 126);
+
+  width: calc(50% - 10px);
+
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  
+  margin: 0 3px 3px 3px;
+
+  border: solid rgb(126, 126, 126) 2px;
+  border-radius: 2px;
+
+  padding: 5px;
+}
+.btn:focus{
+  outline: none;
+}
+
+
+.primary{
+  color: $editor-ono-blue-rgb;
+  border:solid 2px $editor-ono-blue-rgb;
+}
+.primary:hover{
+  background-color: $editor-ono-blue-rgb;
+  color: $editor-background-color;
+  filter: drop-shadow( 0 0 5px $editor-ono-blue-rgb);
+}
+
+.error{
+  color: rgb(202, 0, 0);
+  border:solid 2px rgb(202, 0, 0);
+
+}
+.error:hover{
+  background-color: rgb(202, 0, 0);
+  color: $editor-background-color;
+
+  filter: drop-shadow( 0 0 5px rgb(202, 0, 0));
+
+}
+
+.success{
+  color: rgb(4, 161, 17);
+  border:solid 2px rgb(4, 161, 17);
+}
+.success:hover{
+  background-color: rgb(4, 161, 17);
+  color: $editor-background-color;
+
+  filter: drop-shadow( 0 0 5px rgb(4, 161, 17));
+}
+
+.send{
+  color: rgb(255, 180, 0 );
+  border:solid 2px rgb(255, 180, 0 );
+  width: calc(50% - 10px);
+}
+.send:hover{
+  background-color: rgb(255, 180, 0 );
+  color: $editor-background-color;
+
+  filter: drop-shadow( 0 0 5px rgb(255, 180, 0 ));
+}
+
+.download{
+  color: rgb(209, 3, 182);
+  border:solid 2px rgb(209, 3, 182);
+}
+.download:hover{
+
+  background-color: rgb(209, 3, 182);
+  color: $editor-background-color;
+
+  filter: drop-shadow( 0 0 5px rgb(209, 3, 182));
+}
+
+.import{
+  color: rgb(202, 199, 13);
+  border:solid 2px rgb(202, 199, 13);
+}
+.import:hover{
+
+  background-color: rgb(202, 199, 13);
+  color: $editor-background-color;
+
+  filter: drop-shadow( 0 0 5px rgb(202, 199, 13));
+}
+
+.disabled{
+  color: rgb(170, 170, 170);
+  border:solid 2px rgb(170, 170, 170);
+}
+.disabled:hover{
+
+  background-color: rgb(85, 85, 85);
+  color: $editor-background-color;
+
+}
+
+
+
+a{
+  color: rgb(209, 3, 182);
+  text-decoration: none;
+}
+.hovera{
+  color:$editor-background-color;
+}
+
+.scroll-workarea{
+  overflow: scroll;
+}
+.no-scroll-workarea{
+  overflow-wrap: normal;
+}
+
+/*###############RESPONSIVE##############*/
+
+@media all and (orientation: portrait){
+
+  .workarea{
+    width: 80%;
+    left: 20%;
+  }
+
+  .orderLimit
+  {
+    display:none;
+  }
+
+  .limitePeriodi{
+    width: 20%;
+    height: 100vh;
+  }
+
+  .searchbar{
+    width:20%;
+  }
+
+  .pres-area{
+    width: 20%;
+    top: 190px;
+    height: calc(100% - 320px);
+  }
+
+  .btn-area{
+    width: 20%;
+    height: 115px;
+
+  }
+  .btn{
+    font-size: 10px;
+    font-weight: 200;
+    height: 25px;
+    padding: 0;
+  }
+  #tabcontainer{
+    position: absolute;
+    line-height: 50px;
+    width: 20%;
+    height: 30px;
+    top: 165px;
+  }
+}

@@ -1,0 +1,302 @@
+<div class="limitePeriodi noselect">
+  <div class="logo"></div>
+</div>
+
+
+<!--#### search ####-->
+<div class="searchbar">
+  <form>
+    <label for="periodo" id="sLabel" class="noselect">Search:</label>
+    <input #src id="src" type="search" autocomplete="off" (keyup)="updateSearch(src.value)">
+  </form>
+</div>
+
+<!--#### PRESET PERIOD ####-->
+<div id="tabcontainer" class="noselect">
+  <div id="tab-0" (click)="openTab = 0" [ngClass]="openTab === 0 ? 'openedTab':'closedTab'">
+    base
+  </div>
+  <div id="tab-1" (click)="openTab = 1" [ngClass]="openTab === 1 ? 'openedTab':'closedTab'">
+    myPer
+  </div>
+  <!--
+  <div id="tab-2" (click)="openTab = 2" [ngClass]="openTab === 2 ? 'openedTab':'closedTab'">
+    myGroup
+  </div>
+  -->
+</div>
+
+<!--presets-->
+<div class="pres-area noselect">
+  <cdk-virtual-scroll-viewport orientation="vertical" itemSize="20" 
+  cdkDropList 
+  id="pres"
+  class="custom-scrollbar"
+    [cdkDropListConnectedTo]="getConnectedList()" 
+    (cdkDropListDropped)="droppedHere($event)"
+    [cdkDropListData]="this.dataService.presets" 
+    *ngIf="openTab === 0"
+    >
+
+    <div *ngFor="let item of this.dataService.presets" cdkDrag id="presetArea">
+      <ng-container *ngIf="item.name.includes(search)">
+        <app-pres-formula [data]="item"></app-pres-formula>
+        <div *cdkDragPreview class="preview">
+          <app-pres-formula [data]="item"></app-pres-formula>
+        </div>
+      </ng-container>
+    </div>
+
+  </cdk-virtual-scroll-viewport>
+</div>
+
+<!--myPeriods-->
+<cdk-virtual-scroll-viewport orientation="vertical" class="pres-area noselect" itemSize="50" cdkDropList id="saved"
+  [cdkDropListConnectedTo]="getConnectedList()" [cdkDropListData]="this.dataService.presets" *ngIf="openTab === 1">
+
+  <div *ngFor="let item of this.dataService.savedPeriods" [cdkDragData]="item" cdkDrag id="presetArea">
+    <ng-container *ngIf="item.name.includes(search)">
+      <app-pres-formula [data]="item"></app-pres-formula>
+      <div *cdkDragPreview class="preview">
+        <div id="logo"></div>
+      </div>
+    </ng-container>
+  </div>
+
+</cdk-virtual-scroll-viewport>
+
+<!--myGroups-->
+<!--
+<cdk-virtual-scroll-viewport orientation="vertical" class="pres-area noselect" itemSize="50" 
+cdkDropList 
+id="groupSaved"
+[cdkDropListConnectedTo]="getConnectedList()"
+[cdkDropListData]="this.dataService.presets"
+*ngIf="openTab === 2"
+>
+
+  <div *ngFor="let item of this.dataService.savedPeriods" cdkDrag id="presetArea">
+    <ng-container *ngIf="item.name.includes(search)">
+      <app-pres-formula [data]="item"></app-pres-formula>
+      <div *cdkDragPreview class="preview">
+        <div id="logo"></div>
+      </div>
+    </ng-container>
+  </div>
+
+  </cdk-virtual-scroll-viewport>
+  -->
+<!--############ BUTTONS  ############-->
+
+<div class="btn-area noselect">
+  <button class="btn success" (click)="addId()">Add Empty</button>
+  <button class="btn primary" (click)="addGroup()">Add Group</button><br>
+  <button class="btn import" (click)="importRecipe()">Import</button>
+  <button class="btn error" (click)="delAll()">Destroy All</button><br>
+
+    
+    <!-- **
+    This buttons has been used to check correct purge of period/group and to check the state of the variables ondemand
+    ** -->
+
+    
+  
+  <!-- <button class="btn primary" (click)="this.dataService.exportRecipe()">Verify</button>
+  <button class="btn primary" (click)="this.checkDel()">Check Del</button><br>  -->
+ 
+   
+
+  <!-- <button class="btn primary disabled" (click)="scroll = true">scroll {{scroll}}</button> -->
+
+  <button class="btn download" *ngIf="enableSave()" (mouseenter)="inDownload = true" (mouseleave)="inDownload = false">
+    <a id="downloadBtn" (click)="this.dataService.exportRecipe()" [href]="this.dataService.fileUrl"
+      download="{{this.dataService.fileName}}.ONOr" [ngClass]=" inDownload ? 'hovera':''">
+      DOWNLOAD
+    </a>
+  </button>
+  <button class="btn send" (click)="send()" *ngIf="enableSend()">Send</button>
+  
+
+</div>
+
+
+
+<!--############  WORKAREA  ############-->
+
+<div class="limite workarea noselect custom-scrollbar" (click)="disableContextMenu()" oncontextmenu="return false;">
+
+  <div cdkDropList 
+  id="recipeEditor" 
+  [cdkDropListData]="this.dataService.groups"
+  [cdkDropListConnectedTo]="getConnectedList()" 
+  cdkDropListOrientation="horizontal"
+  (cdkDropListDropped)="dropGroup($event)"
+  >
+
+    <div cdkDropListGroup 
+    id="square" 
+    class="square" 
+    *ngFor="let group of this.dataService.groups" 
+    cdkDrag
+    [cdkDragData]="group"
+    >
+
+      <img src="assets/math/lBracket.svg" class="LBracket bracket" (contextmenu)="openGroupSettings(group)">
+
+      <div class="content" *ngIf="group.extended === false" (contextmenu)="openGroupSettings(group)">
+
+        <div class="stage" 
+        [ngStyle]="{
+          'background-image': 'url(assets/plant_stages/' + isGroupCompleted(group) + '_mine.svg)'
+        }" 
+        [ngClass]="group.stage.toLowerCase() === 'sprout' || isGroupCompleted(group) === 'none' ? 'isSprout' : ''">
+        </div>
+
+        <span class="bottom_alignment" [ngClass]="titleClass(group)">{{group.title}}</span>
+      </div>
+
+
+      <div cdkDropList class="period" id={{group.gid}} *ngIf="this.group.extended === true"
+        [cdkDropListData]="group.items" cdkDropListOrientation="horizontal" (cdkDropListDropped)="dropItem($event)"
+        [cdkDropListConnectedTo]="getConnectedList()">
+
+        <div *ngFor="let item of group.items" cdkDrag [cdkDragData]="item">
+
+          <app-formula [data]="item" [group]="group"></app-formula>
+          <div *cdkDragPreview class="preview">
+            <div id="logo"></div>
+          </div>
+
+        </div>
+
+      </div>
+      <img src="assets/math/rBracket.svg" class="RBracket bracket" (contextmenu)="openGroupSettings(group)">
+
+      <button id="collapsed-{{group.gid}}" (click)="toggleGroup($event,group)" *ngIf="group.extended === false">+</button>
+      <button id="collapsed-{{group.gid}}" (click)="toggleGroup($event,group)" *ngIf="group.extended === true">-</button>
+
+      <input 
+        type="number" 
+        min="1" 
+        max="9" 
+        (change)="setExp($event, group)" 
+        value="{{group.exp}}"
+        class="exponent-{{group.gid}}" 
+        placeholder="{{group.exp}}" 
+        [style.right]="expIsHead(0,group)"
+        [style.color]="group.exp === 1 ? '#959599': '#00aeef'">
+
+      <span class="groupTotalPeriod" [style.right]="expIsHead(15,group)"
+        [style.display]="group.items.length === 0 ? 'none': ''">
+        {{group.totalPeriod / 1440}}
+        <!--<i class="material-icons" >schedule</i>-->
+      </span>
+      <span class="base">
+        {{group.items.length}}
+      </span>
+
+      <span class="plus" [style.display]="isHead(group)"> + </span>
+
+      <div *cdkDragPreview>
+        <img src="assets/math/lBracket.svg" class="brackets">
+        <img src="assets/math/rBracket.svg" class="brackets">
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
+
+
+
+
+<!--###################### OPERATORS #######################################-->
+
+
+
+<div id="operators" cdkDropList cdkDropListConnectedTo="recipeEditor" cdkDropListOrientation="horizontal"
+  class="operators">
+  
+</div>
+
+<!-- <div id="trashbin" cdkDropList>
+
+</div> -->
+
+<!--###########  PREVIEW AREA (aka orderLimit)  #############-->
+<div class="orderLimit noselect custom-scrollbar" cdkDropList (cdkDrop)="dropInPreview($event)">
+
+  <table id="detailTable" *ngIf="this.dataService.preview[0]">  
+    <tr>
+      <td colspan="3"><strong>{{this.dataService.preview[0].name}}</strong></td>
+    </tr>
+    <tr>
+      <td class="field">Photoperiod</td>
+      <td>{{this.dataService.preview[0].photoperiod.day / 60}}h</td>
+      <td>{{this.dataService.preview[0].photoperiod.night / 60}}h</td>
+    </tr>
+    <tr>
+      <td class="field">Intensity</td>
+      <td colspan="2">{{this.dataService.preview[0].lightintensity}} µE/m<sup>2</sup>s</td>
+    </tr>
+    <tr>
+      <td class="field">Spectrum</td>
+      <td colspan="2">{{this.dataService.preview[0].lightspectrum}}</td>
+    </tr>
+    <tr>
+      <td class="field">Distance</td>
+      <td colspan="2">{{this.dataService.preview[0].drawerdistance}} cm</td>
+    </tr>
+    <tr>
+      <td class="field">Solution</td>
+      <td colspan="2">{{this.dataService.preview[0].solution}}</td>
+    </tr>
+    <tr>
+      <td class="field">Sol Quantity</td>
+      <td colspan="2">{{this.dataService.preview[0].solutionquantity}} l</td>
+    </tr>
+    <tr>
+      <td class="field">Refill type</td>
+      <td colspan="2" *ngIf="this.dataService.preview[0].refill.refilltype === 0">Measure only</td>
+      <td colspan="2" *ngIf="this.dataService.preview[0].refill.refilltype === 1">Flood w/ recycle</td>
+      <td colspan="2" *ngIf="this.dataService.preview[0].refill.refilltype === 2">Flood w/o recycle</td>
+      <td colspan="2" *ngIf="this.dataService.preview[0].refill.refilltype === 3">Ebb & Flow</td>
+      <td colspan="2" *ngIf="this.dataService.preview[0].refill.refilltype === 4">Spray</td>
+    </tr>
+    <tr>
+      <td class="field">Frequency</td>
+      <td colspan="2">{{this.dataService.preview[0].refill.frequency / 60 }} h</td>
+    </tr>
+    <tr>
+      <td class="field">pH</td>
+      <td>{{this.dataService.preview[0].refill.ph.min}}</td>
+      <td>{{this.dataService.preview[0].refill.ph.max}}</td>
+    </tr>
+    <tr>
+      <td class="field">ec</td>
+      <td>{{this.dataService.preview[0].refill.ec.min}}</td>
+      <td>{{this.dataService.preview[0].refill.ec.max}}</td>
+    </tr>
+    <tr>
+      <td class="field">Temperature</td>
+      <td colspan="2">{{this.dataService.preview[0].temperature}} °C</td>
+    </tr>
+    <tr>
+      <td class="field">Humidity</td>
+      <td colspan="2">{{this.dataService.preview[0].humidity}} %</td>
+    </tr>
+    <tr>
+      <td class="field">Duration</td>
+      <td colspan="2">{{this.dataService.preview[0].periodduration / 1440}} days</td>
+    </tr>
+    <tr>
+      <td rowspan="4" colspan="3">
+        <strong>Note:</strong><br>
+        {{this.dataService.preview[0].note}}
+      </td>
+    </tr>
+
+  </table>
+
+</div>

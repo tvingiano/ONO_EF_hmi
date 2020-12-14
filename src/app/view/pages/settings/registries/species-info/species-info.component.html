@@ -1,0 +1,29 @@
+<app-page-wrapper title="Species Info" shadow="false">
+    <mat-card>
+        <mat-card-content>
+            <div class="row w-100">
+                <div class="col-md-7 no-padding">
+                    <!-- show spinner -->
+                    <div class="d-flex justify-content-center mt-5" *ngIf="!speciesInfos">
+                        <mat-spinner diameter="50"></mat-spinner>
+                    </div>
+                    <app-items-table *ngIf="speciesInfos"
+                                     [title]="'label.SpeciesList' | translate"
+                                     [initialData]="speciesInfos"
+                                     [displayedColumns]="displayedColumns"
+                                     [actionButtons]="actionButtons"
+                                     (createClick)="createClick()"
+                                     (editClick)="speciesInfo=$event"
+                                     (deleteClick)="deleteClick($event)"
+                    ></app-items-table>
+                </div>
+                <div class="col-md-5 no-padding">
+                    <app-species-from [formData]="speciesInfo"
+                                      [initialState]="!speciesInfo ? pageStates.CREATE : pageStates.VIEW"
+                                      (formSubmit)="speciesFormSubmit($event)"
+                    ></app-species-from>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</app-page-wrapper>

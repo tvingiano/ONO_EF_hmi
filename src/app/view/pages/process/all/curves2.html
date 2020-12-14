@@ -1,0 +1,56 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Growth curves</h1>
+
+  <mat-grid-list cols="1" rowHeight="500px">
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <mat-card class="dashboard-card">
+        <div style="height: 100%">
+
+          <mat-card-header>
+            <mat-card-title>
+              Area
+
+            </mat-card-title>
+          </mat-card-header>
+
+
+          <mat-card-content class="dashboard-card-content">
+
+            <div id="chartarea" style="height: 430px; width: 700px; margin-left:auto;margin-right:auto;"></div>
+
+
+          </mat-card-content>
+
+
+        </div>
+
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="2">
+      <mat-card class="dashboard-card">
+        <div style="height: 100%">
+
+          <mat-card-header>
+            <mat-card-title>
+              Height
+
+            </mat-card-title>
+          </mat-card-header>
+
+
+
+          <mat-card-content class="dashboard-card-content">
+            <div id="chartheight" style="height: 430px; width: 700px; margin-left:auto;margin-right:auto;"></div>
+
+          </mat-card-content>
+
+
+        </div>
+
+      </mat-card>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+</div>

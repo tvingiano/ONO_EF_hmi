@@ -1,0 +1,21 @@
+
+
+<div class="page-wrapper custom-scrollbar">
+
+    <div class="btn-container">
+
+        <ng-container *ngFor="let btn of BUTTONLIST">
+            <div 
+            class="conf-btn" 
+            routerLink="{{btn.link}}"
+            >
+            
+                <mat-icon class="icon">{{btn.icon}}</mat-icon>
+                <div class="title">{{btn.title}}</div>
+    
+            </div>
+        </ng-container>
+        
+    </div>
+
+</div>

@@ -1,0 +1,47 @@
+<button class="btn cancel" type="close" (keydown.esc)="close()" (click)="close()"></button>  
+<div>
+  <h2>Solution settings</h2>
+  <form [formGroup]="solutionForm">
+
+    <label>Solution type </label><span>{{this.solution.solution}}</span><br>
+    <input list="solList"  formControlName="solution" require  placeholder="{{this.solution.solution}}" />
+    <datalist id="solList">
+      <option *ngFor="let sol of this.dataService.solutionList" [value]="sol">{{sol}}</option>
+    </datalist>
+  </form>
+
+  <mat-label>Quantity</mat-label><br>
+  <mat-slider #matsliderquantity value ="{{this.solution.solutionquantity}}" min="0" max="25" step="1" (input)="setQuantity($event)"></mat-slider>
+  <input matInput min="0" max="25" class="span-input" type="number" value={{this.solution.solutionquantity}} (change)="setQuantity($event)"> <strong> liters</strong>
+  <br>
+
+
+  <div class="refillArea">
+    <h2>Refill conditions</h2>
+
+
+    <label class="typeTitle">Refill type: </label><br>
+    <select type="number" [(ngModel)]="this.solution.refill.refilltype">
+      <option *ngFor="let t of this.refillTypes" [ngValue]="t.value">{{t.view}}</option>
+    </select>
+
+    <label style="margin-top: 20px">Frequency</label><br>
+    <mat-slider #matsliderfrequency value ="{{show}}" min="0.5" max="{{maxFrequency()}}" step="0.5" (input)="setFrequency(matsliderfrequency.value)"></mat-slider>
+    <input #matInput min="1" max="{{maxFrequency()}}" class="span-input" type="number" value="{{show}}" (change)="setFrequency(matInput.value)"><strong> days</strong><br>
+
+
+    <label>pH</label><br>
+    <ng5-slider [(value)]="solution.refill.ph.min" [(highValue)]="solution.refill.ph.max" [options]="phOptions"></ng5-slider>
+    <br>
+
+    <label>Electric conducibility</label><br>
+    <ng5-slider [(value)]="solution.refill.ec.min" [(highValue)]="solution.refill.ec.max" [options]="ecOptions"></ng5-slider>
+    <br>
+
+
+    <div class="footer">
+      <button class="btn submit" type="submit" (click) = "submit()">Confirm</button> 
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,58 @@
+<div >
+
+
+    <div class="mat-table">
+        <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+    </div>
+    <div class="mat-elevation-z8">
+
+        <table mat-table class="mat-elevation-z8 mat-table" [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="height">
+                <th mat-header-cell *matHeaderCellDef> Height </th>
+                <td mat-cell *matCellDef="let element"> {{element.Height}} </td>
+            </ng-container>
+            <ng-container matColumnDef="ec">
+                <th mat-header-cell *matHeaderCellDef> Ec </th>
+                <td mat-cell *matCellDef="let element"> {{element.Ec}} </td>
+            </ng-container>
+            <ng-container matColumnDef="ph">
+                <th mat-header-cell *matHeaderCellDef> pH </th>
+                <td mat-cell *matCellDef="let element"> {{element.Ph}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="solution">
+                <th mat-header-cell *matHeaderCellDef> Solution </th>
+                <td mat-cell *matCellDef="let element"> {{element.Solution}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="lights">
+                    <th mat-header-cell *matHeaderCellDef> Lights </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Lights}} </td>
+                </ng-container> 
+
+            <ng-container matColumnDef="note">
+                <th mat-header-cell *matHeaderCellDef> Notes </th>
+                <td mat-cell *matCellDef="let element"> {{element.Note}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Timestamp">
+                <th mat-header-cell *matHeaderCellDef> Timestamp </th>
+                <td mat-cell *matCellDef="let element"> {{element.Timestamp}} </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+        </table>
+        <div class="mat-table">
+            <mat-paginator [pageSize]="50" [pageSizeOptions]="[50,75,100,200]" showFirstLastButtons></mat-paginator>
+        </div>
+    </div>
+
+    <button mat-button (click)="return()" style="margin-right: 45px;margin-left: 60px;margin-top:30px">Esci</button>
+
+</div>

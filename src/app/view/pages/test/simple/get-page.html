@@ -1,0 +1,50 @@
+<h1 mat-dialog-title>Get test</h1>
+<div mat-dialog-content>
+
+  <!-- <p>Indirizzo PLC:</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.address">
+  </mat-form-field>
+
+  <p>Deck:</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.register">
+  </mat-form-field> -->
+
+  <p>Rack side:</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.side">
+  </mat-form-field>
+
+  <!-- <p>ID baia:</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.bay">
+  </mat-form-field> -->
+
+  <p>Acceleration:</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.acceleration">
+  </mat-form-field>
+
+  <p>Speed:</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.speed">
+  </mat-form-field>
+
+  <p>Deceleration:</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.deceleration">
+  </mat-form-field>
+
+  <p>Direction:</p>
+  <select [(ngModel)]="data.direction">
+    <option value="north">North</option>
+    <option value="south">South</option>
+  </select>
+
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Exit</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Go</button>
+</div>

@@ -1,0 +1,48 @@
+<div class="mb-3" style="width:100%">
+    <mat-card>
+        <mat-card-header class="mb-3">
+            <mat-card-title class="mb-0" *ngIf="title">
+                {{title}}
+            </mat-card-title>
+            <div fxFlex></div>
+        </mat-card-header>
+        <div class="" style="width:100%">
+            <table mat-table [dataSource]="dataSource" style="width:100%">
+                <ng-container matColumnDef="Address">
+                    <th mat-header-cell *matHeaderCellDef> Address</th>
+                    <td mat-cell *matCellDef="let element">{{element.Address}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Type">
+                    <th mat-header-cell *matHeaderCellDef> Type</th>
+                    <td mat-cell *matCellDef="let element">{{element.Type}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Status">
+                    <th mat-header-cell *matHeaderCellDef> Status</th>
+                    <td mat-cell *matCellDef="let element">{{element.Status}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="On">
+                    <th mat-header-cell *matHeaderCellDef> On</th>
+                    <td mat-cell *matCellDef="let row">
+                        <button mat-button (click)="On.emit(row)">
+                            <mat-icon>visibility</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="Off">
+                    <th mat-header-cell *matHeaderCellDef> Off</th>
+                    <td mat-cell *matCellDef="let row">
+                        <button mat-button (click)="Off.emit(row)">
+                            <mat-icon>visibility_off</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator showFirstLastButtons></mat-paginator>
+        </div>
+    </mat-card>
+
+</div>

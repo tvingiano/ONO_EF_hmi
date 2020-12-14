@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Set Pole</h1>
+<div mat-dialog-content>
+
+  <select name="pole" id="pole" [(ngModel)]="data.pole">
+    <option value="0">DOWN</option>
+    <option value="1">UP</option>
+  </select>
+
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="submit()">confirm</button>
+</div>

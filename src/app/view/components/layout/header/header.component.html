@@ -1,0 +1,15 @@
+<mat-toolbar color="#f2f3ed" fxLayout="row" fxLayoutAlign="center center">
+    <mat-toolbar-row>
+        <div class="logo">
+            <a href="/"><img src="../../../../../assets/logo.png" alt="{{'appName'|translate}}"
+                             title="{{'appName'|translate}}"/></a>
+        </div>
+        <span class="spacer"></span>
+        <button mat-icon-button color="primary" (click)="switchLocalization('it')">
+            <mat-icon svgIcon="flag-it"></mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="switchLocalization('en')">
+            <mat-icon svgIcon="flag-en"></mat-icon>
+        </button>
+    </mat-toolbar-row>
+</mat-toolbar>

@@ -1,0 +1,146 @@
+.limiteIndicatori {
+    color: #daf6ff;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    position: absolute;
+    left:255px;
+
+    height: 105px;
+    width: calc( 100% - 255px);
+
+    background-color:  var(--background-color);
+    }
+
+.icon{
+    display: block;
+    flex: 0.15;
+
+    width: 120px;
+    height:100px;
+}
+#recipeForm{
+    display: block;
+    width: 280px;
+
+    overflow: hidden;
+    
+    padding: 10px 5px;
+    font-family: 'Share Tech Mono', monospace;
+}
+#settings{
+    display: block;
+
+    background-image: url('src/assets/icons/pencil.svg');
+    background-repeat: no-repeat;
+
+    margin-left: 5px;
+    margin-top: 10px;
+    width: 20px;
+    height: 20px;
+    fill: white;
+
+    cursor: pointer;
+}
+
+.label{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;  
+    position:absolute; 
+    top: 10px;
+    height: 60px;
+    width: 120px;
+}
+
+#hum{
+    background-image: url('src/assets/icons/humidity.svg');
+}
+#temp{
+    background-image: url('src/assets/icons/thermometer.svg');
+}
+#luce{
+    background-image: url('src/assets/icons/idea.png');
+
+}
+#tempo{
+    background-image: url('src/assets/icons/clock.png');
+
+}
+
+
+
+
+
+
+#table{
+    display:block;
+}
+
+table, th, td {
+    border: 1px solid blue;
+}
+
+
+#value{
+    position: absolute;
+    top: 70px;
+    width: 120px;
+    text-align:center;
+    line-height: 30px;
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+}
+
+@media screen and (max-width : 800px){
+    *{
+        font-size: 10px;
+    }
+    
+    .icon{
+        width: 80px;
+        height:90px;
+        margin-left:0px;
+    }
+    #acqua, #luce, #tempo {
+        width: 80px;
+        height: 40px;
+    }
+    #value{
+        top: 60px;
+        width: 80px;
+        line-height: 20px;
+        text-align:center;
+    }
+}
+@media (orientation: portrait){
+
+    #recipeForm{
+        position: absolute;
+        display: block;
+        left: calc(2vw);
+        top: calc(100vh - 145px);
+        z-index: 1;
+    }
+    #settings{
+        display: block;
+        position: absolute;
+        z-index: 1;
+        top: calc(100vh - 145px);
+        left: calc(280px + 2vw);
+    }
+    .limiteIndicatori{
+        left: 16vw;
+        width: calc(100% - 16vw);
+    }
+} 

@@ -1,0 +1,76 @@
+<mat-card-title style= "text-align:center; margin-top: 5px;">Light treatment</mat-card-title> 
+
+<div >
+
+
+    <div class="mat-elevation-z8" >
+
+        <table mat-table class="mat-elevation-z8 mat-table" [dataSource]="dataSource" matSort style="height:100px">
+            
+
+<!-- <ng-container matColumnDef="Height">
+                <th mat-header-cell *matHeaderCellDef> Altezza </th>
+                <td mat-cell *matCellDef="let element"> {{element.Height}} </td>
+            </ng-container> -->
+
+             <ng-container matColumnDef="LightDrawerID">
+                <th mat-header-cell *matHeaderCellDef> LightDrawerID </th>
+                <td mat-cell *matCellDef="let element"> {{element.LightDrawerID}} </td>
+            </ng-container> 
+            <ng-container matColumnDef="LightHours">
+                <th mat-header-cell *matHeaderCellDef> LightHours </th>
+                <td mat-cell *matCellDef="let element"> {{element.LightHours}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="LightSpectrum">
+                <th mat-header-cell *matHeaderCellDef> LightSpectrum </th>
+                <td mat-cell *matCellDef="let element"> {{element.LightSpectrum}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Red">
+                <th mat-header-cell *matHeaderCellDef> Red </th>
+                <td mat-cell *matCellDef="let element"> {{element.Red}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Blue">
+                <th mat-header-cell *matHeaderCellDef> Blue </th>
+                <td mat-cell *matCellDef="let element"> {{element.Blue}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="White">
+                <th mat-header-cell *matHeaderCellDef> White </th>
+                <td mat-cell *matCellDef="let element"> {{element.White}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Purple">
+                <th mat-header-cell *matHeaderCellDef> Purple </th>
+                <td mat-cell *matCellDef="let element"> {{element.Purple}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="LedDrawerDistance">
+                <th mat-header-cell *matHeaderCellDef> LedDrawerDistance </th>
+                <td mat-cell *matCellDef="let element"> {{element.LedDrawerDistance}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="TreatmentStart">
+                <th mat-header-cell *matHeaderCellDef> TreatmentStart </th>
+                <td mat-cell *matCellDef="let element"> {{element.TreatmentStart}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Notes">
+                <th mat-header-cell *matHeaderCellDef> Notes </th>
+                <td mat-cell *matCellDef="let element"> {{element.Notes}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+        </table>
+        <div class="mat-table">
+            <mat-paginator [pageSize]="50" [pageSizeOptions]="[50,75,100,200]" showFirstLastButtons></mat-paginator>
+        </div>
+    </div>
+
+    <button mat-button (click)="return()" style="margin-right: 45px;margin-left: 60px;margin-top:30px">Exit</button> 
+
+</div>

@@ -1,0 +1,113 @@
+@import "../../../../assets/styles/variables";
+
+$ono-blue: rgb(0, 174, 239);
+$ono_grey: rgb(138,139,147);
+
+$lv-1: #101024;
+$lv0: #3D4754;
+$lv1: #2D343E;
+$lv2: #4D5662;
+$lv3: #646C76;
+
+$blue: #6972C4;
+$lightblue: #c0d8ff;
+
+$font-color: #f0f1f2;
+
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+input{
+  background-color: none !important;
+  color: white !important;
+}
+
+
+// .authorization-block{
+//   color: darkgrey;
+// }
+
+// .mat-form-field {
+//   width: 100%;
+//   min-width: 200px;
+// }
+// mat-card-title{
+//   margin-bottom: 30px;
+// }
+// mat-card-title,
+// mat-card-content {
+//   display: flex;
+//   justify-content: center;
+// }
+
+// mat-card {
+//   max-width: 450px;
+//   background: $mat-card-color-grey;
+//   color: $mat-card-font-color;
+//   padding: 40px;
+// }
+// mat-card-actions{
+//   text-align: center;
+
+//   & button{
+//     background: $button-color!important;
+//     color: $body-text-color!important;
+//     padding: 3px 25px;
+//   }
+// }
+
+// ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+//   background-color: white !important;
+//   border-radius: 4px;
+// }
+//   .danger {
+//     background-color: crimson;
+//   }
+// .forget-pass-row{
+//   margin-top: 80px;
+
+//   .forget-pwd{
+//     display: inline-block
+//   }
+//   .create-acc{
+//     display: inline-block;
+//     float: right;
+//   }
+// }
+
+::ng-deep{
+  .mat-card{
+    background: $lv0;
+    color: $font-color;
+    border-radius: 0 !important;
+  }
+
+  .mat-stroked-button{
+    background-color: green;
+    color: $font-color;
+    border-radius: 0 !important;
+
+    &:disabled{
+      background-color: $lv0;
+      color: $lv1;
+    }
+  }
+
+  .mat-form-field-appearance-outline {
+    .mat-form-field-outline-start {
+      border-radius: 0px 0px 0px 0px !important;
+      border-right-style: none;
+    }
+
+    .mat-form-field-outline-end {
+      border-radius: 0px 0px 0px 0px !important;
+      border-right-style: none;
+    }
+  }
+
+}

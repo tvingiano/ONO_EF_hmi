@@ -1,0 +1,15 @@
+<button class="btn cancel" type="close" (keydown.esc)="close()" (click)="close()"></button>
+<h2>Period Settings</h2>
+
+<form [formGroup]="settingsForm">
+  <label>Period Name </label><span>{{this.settings.name }}</span><br>
+  <input type="text"  formControlName="name" placeholder="  3-14 chars"/><br>
+  <label>Description</label><br>
+  <textarea formControlName="note" placeholder="{{this.settings.note}}" ></textarea>
+</form>
+
+<div class="footer">
+    <button class="btn submit" type="submit" [disabled]="!settingsForm.valid" (click)="submit()">Confirm</button> 
+    <button class="btn saved" (click)="save();" [disabled]="incomplete() === true" ></button>  
+    <button class="btn del" (click)="openDelTab()"></button>
+</div>

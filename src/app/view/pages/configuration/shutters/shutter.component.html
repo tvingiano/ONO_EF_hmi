@@ -1,0 +1,56 @@
+<!-- <mat-card-title style= "text-align:center; margin-top: 5px;">Tabella climatizzatori</mat-card-title> -->
+<mat-card-title style= "text-align:center; margin-top: 5px;">Shutters</mat-card-title>
+
+<div>
+
+
+    <!-- <div class="mat-table">
+        <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+    </div> -->
+    <div class="mat-elevation-z8" >
+
+        <table mat-table class="mat-elevation-z8 mat-table" [dataSource]="dataSource" matSort >
+            <ng-container matColumnDef="address">
+                <th mat-header-cell *matHeaderCellDef> Shutter </th>
+                <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef> Position </th>
+                <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+            </ng-container>
+
+
+            <div layout="column" flex="30">
+                    <ng-container matColumnDef="up">
+                        <th mat-header-cell *matHeaderCellDef> Up </th>
+                        <td mat-cell *matCellDef="let element; let i = index;"> <button mat-button color="primary"
+                                (click)="up(element)">
+                                <mat-icon>thumb_up</mat-icon>
+                            </button> </td>
+                    </ng-container>
+                </div>
+                <div layout="column" flex="30">
+                        <ng-container matColumnDef="down">
+                            <th mat-header-cell *matHeaderCellDef> Down </th>
+                            <td mat-cell *matCellDef="let element; let i = index;"> <button mat-button color="primary"
+                                    (click)="down(element)">
+                                    <mat-icon>thumb_down</mat-icon>
+                                </button> </td>
+                        </ng-container>
+                    </div>
+
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+        </table>
+        <div class="mat-table">
+            <mat-paginator [pageSize]="50" [pageSizeOptions]="[50,75,100,200]" showFirstLastButtons></mat-paginator>
+        </div>
+    </div>
+
+</div> 

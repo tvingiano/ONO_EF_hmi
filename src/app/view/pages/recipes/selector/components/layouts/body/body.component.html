@@ -1,0 +1,336 @@
+<div class="body noselect" (contextmenu)="false">
+   <div class="navbar">
+
+      <div class="logo">
+         <div class="img"></div>
+     </div>
+   
+      <div class="title">
+         <h1>Recipe book</h1>
+         <div class="recap">
+            <div class="status" (click)="resetToFarm('none')" style="font-size: 18px">Selected:&nbsp;&nbsp;</div>
+            <div class="status" (click)="resetToFarm(selected.farm)" *ngIf="selected.farm !== 'none'">
+               {{selected.farm}} >&nbsp;&nbsp;
+            </div >
+            <div class="status" (click)="resetToSpecie(selected.specie)" *ngIf="selected.specie !== 'none'">
+               {{selected.specie}} >&nbsp;&nbsp;
+            </div >
+            <div class="status" (click)="resetToSeed(selected.seed)" *ngIf="selected.seed !== 'none'">
+               {{selected.seed}} >&nbsp;&nbsp;
+            </div>
+         </div>
+      </div>
+
+      <div class="searchbar">
+         <div class="src-bar">
+            <input type="text" #src class="src-field" placeholder="What are you looking for?" (keyup)="setFilter(src.value)">
+            <button type="submit" class="src-btn">
+               <img src="url(../../../../../../../../../../assets/icons/search.svg" style="height:20px; width:20px;">
+            </button>
+         </div>
+         <div class="reset">
+            <div (click)="src.value = ''" style="cursor:pointer;">reset</div>
+         </div>
+      </div>
+      
+   </div>
+
+   <div class="field">
+      <!-- First level: FARM -->
+   <div class="farm">
+      <div class="card-wrapper-top" class="card-wrapper-top" *ngIf="this.selected.specie === 'none'">
+
+         <ng-container *ngFor="let farm of farmings">
+            <ng-container *ngIf="searched(farm.Farming)">
+               <div class="flip">
+                  <div class="front" [ngStyle]="{'background-image':'url('+ imageUrl(farm.Farming ,'farm') +')'}">
+                     <h1 class="text-shadow">{{farm.Farming}}</h1>
+                     <div class="widget">
+                        species <span style="font-size: 30px">{{childNum('farm', farm.Farming)}}</span>   
+                     </div>
+                  </div>
+                  <div class="back" (click)="setFarmSelection(farm.Farming);">
+                     <p class="tit">{{farm.Farming}}</p>
+                     <p style="text-align: left;">{{farm.Description}}</p>
+                  </div>
+               </div>
+            </ng-container>
+         </ng-container>
+         
+      </div>
+   </div>
+<!-- Second level: PLANT
+   <div class="plant">
+      <div [ngClass]="this.selected.plant === 'none' ? 'card-wrapper-bottom' : 'card-wrapper-top'" *ngIf="this.selected.farm !== 'none' && this.selected.specie === 'none'">
+
+         <ng-container *ngFor="let plant of plants">
+            <ng-container *ngIf="plant.Farming === this.selected.farm">
+      
+               <div class="flip" >
+                  <div class="front" [ngStyle]="{'background-image':'url('+ imageUrl(plant.Plant, 'plant') +')'}">
+                     <h1 class="text-shadow">{{plant.Plant}}</h1>
+                     <div class="widget">
+                        species <span style="font-size: 30px">{{childNum('plant', plant.Plant)}}</span>   
+                     </div>
+                  </div>
+                  <div class="back" (click)="setPlantSelection(plant.Plant);">
+                     <p class="tit">{{plant.Plant}}</p>
+                     <p>{{plant.Description}}</p>
+                  </div>
+               </div>
+      
+            </ng-container>
+         </ng-container>
+      </div>
+   </div> -->
+<!-- third level: SPECIE -->
+   <div class="specie">
+      <div [ngClass]="this.selected.specie === 'none' ? 'card-wrapper-bottom' : 'card-wrapper-top'" *ngIf="this.selected.seed === 'none'">
+   
+         <ng-container *ngFor="let specie of this.species">
+            <ng-container *ngIf="specie.Farming === selected.farm">
+      
+               <div class="flip" >
+                  <!-- <div class="front" [ngStyle]="{'background-image':'url('+ imageUrl(specie.Specie, 'specie') +')'}"> -->
+                  <div class="front" [ngStyle]="{'background-image':'url('+ imageUrl(specie.Specie,'specie') +')'}">
+                     <h1 class="text-shadow">{{specie.Specie.replaceAll('_', ' ')}}</h1>
+                     <div class="widget">
+                        seeds <span style="font-size: 30px">{{childNum('specie', specie.Specie)}}</span>
+                     </div>
+                  </div>
+                  <div class="back" (click)="setSpecieSelection(specie.Specie); ">
+                     <p class="tit">{{specie.Specie.replaceAll('_',' ')}}</p>
+                     <p>{{specie.Description}}</p>
+                  </div>
+               </div>
+      
+            </ng-container>
+         </ng-container>
+      
+      </div>
+   </div>
+<!-- FILER bar -->
+   <div class="filter-wrapper" *ngIf="this.selected.specie !== 'none'">
+      <div class="filter" [ngClass]="this.filter.nutritionals.open === true ? 'open-filter' : ''" (click)="openFilter(0)">
+         <div class="filter-label">Nutritionals </div>
+         <div class="arrow" [ngClass]="this.filter.nutritionals.open === true ? 'collapse-arrow' : ''"></div>
+      </div>
+
+      <div class="filter" [ngClass]="this.filter.costs.open === true ? 'open-filter' : ''" (click)="openFilter(1)">
+         <div class="filter-label">Costs</div>
+         <div class="arrow" [ngClass]="this.filter.costs.open === true ? 'collapse-arrow' : ''"></div>
+      </div>
+
+      <div class="filter" [ngClass]="this.filter.qualities.open === true ? 'open-filter' : ''" (click)="openFilter(2)">
+         <div class="filter-label">Quality</div>
+         <div class="arrow" [ngClass]="this.filter.qualities.open === true ? 'collapse-arrow' : ''"></div>
+      </div>
+      
+      <div class="filter" [ngClass]="this.filter.name.open === true ? 'open-filter' : ''">
+         <input #nameInput id="nameInput" class="text-filter" type="text" placeholder="name" (keyup)="this.filter.name.value = nameInput.value">
+         <div class="erase" (click)="nameInput.value = ''; this.filter.name.value = ''"></div>
+      </div>
+
+      <div class="filter" [ngClass]="this.filter.owner.open === true ? 'open-filter' : ''">
+         <input #ownerInput id="ownerInput" class="text-filter" type="text" placeholder="owner" (keyup)="this.filter.owner.value = ownerInput.value">
+         <div class="erase" (click)="ownerInput.value = ''; this.filter.owner.value = ''"></div>
+      </div>
+   </div>
+<!-- FILTER DROPDOWNS -->
+   <div class="dropdown-wrapper nutritionals" [ngClass]="this.filter.nutritionals.open === true ? 'open-dropdown-wrapper' : ''">
+
+      <table class="nutritional-table">
+         <tr class="uneven">
+            <th>Calories</th>
+            <td>
+               <div class="filterType" (click)="filter.nutritionals.calories.major = !filter.nutritionals.calories.major" [ngClass]="filter.nutritionals.calories.major === true ? 'major':'minor'">{{filter.nutritionals.calories.major === true ? 'major of':'minor of'}}</div>
+            </td>
+            <td> <input #calories type="number" min="0" step="0.1" (change)="filter.nutritionals.calories.value = calories.value" ></td>
+         </tr>
+         <tr class="even">
+            <th>Carbohydrates</th>
+            <td>
+               <div class="filterType" (click)="filter.nutritionals.carbohydrates.major = !filter.nutritionals.carbohydrates.major" [ngClass]="filter.nutritionals.carbohydrates.major === true ? 'major':'minor'">{{filter.nutritionals.carbohydrates.major === true ? 'major of':'minor of'}}</div>
+            </td>
+            <td> <input #carbohydrates type="number" min="0" step="0.1" (change)="filter.nutritionals.carbohydrates.value = carbohydrates.value" ></td>
+         </tr>
+         <tr class="uneven">
+            <th>Fats</th>
+            <td>
+               <div class="filterType" 
+                    (click)="filter.nutritionals.fats.major = 
+                            !filter.nutritionals.fats.major" 
+                  [ngClass]="filter.nutritionals.fats.major === true ? 'major':'minor'">
+                           {{filter.nutritionals.fats.major === true ? 'major of':'minor of'}}
+               </div>
+            </td>
+            <td> <input #fats type="number" min="0" step="0.1" (change)="filter.nutritionals.fats.value = fats.value" ></td>
+         </tr>
+         <tr class="even">
+            <th>Proteins</th>
+            <td>
+               <div class="filterType" 
+                    (click)="filter.nutritionals.proteins.major = 
+                            !filter.nutritionals.proteins.major" 
+                  [ngClass]="filter.nutritionals.proteins.major === true ? 'major':'minor'">
+                           {{filter.nutritionals.proteins.major === true ? 'major of':'minor of'}}
+               </div>
+            </td>
+            <td> <input #proteins type="number" min="0" step="0.1" (change)="filter.nutritionals.proteins.value = proteins.value" ></td>
+         </tr>
+      </table>
+   </div>
+   <div class="dropdown-wrapper costs" [ngClass]="this.filter.costs.open === true ? 'open-dropdown-wrapper' : ''">
+
+      <table class="cost-table">
+         <tr class="uneven">
+            <th>Energy</th>
+            <td>
+               <div class="filterType" 
+                    (click)="filter.costs.energy.major = 
+                            !filter.costs.energy.major" 
+                  [ngClass]="filter.costs.energy.major === true ? 'major':'minor'">
+                           {{filter.costs.energy.major === true ? 'major of':'minor of'}}
+               </div>
+            </td>
+            <td> <input #energy type="number" min="0" step="0.1" (change)="filter.costs.energy.value = energy.value" ></td>
+         </tr>
+         <tr class="even">
+            <th>Quantity</th>
+            <td>
+               <div class="filterType" 
+                    (click)="filter.costs.quantity.major = 
+                            !filter.costs.quantity.major" 
+                  [ngClass]="filter.costs.quantity.major === true ? 'major':'minor'">
+                           {{filter.costs.quantity.major === true ? 'major of':'minor of'}}
+               </div>
+            </td>
+            <td> <input #quantity type="number" min="0" step="0.1" (change)="filter.costs.quantity.value = quantity.value" ></td>
+         </tr>
+         <tr class="uneven">
+            <th>Seed cost</th>
+            <td>
+               <div class="filterType" 
+                    (click)="filter.costs.cost.major = 
+                            !filter.costs.cost.major" 
+                  [ngClass]="filter.costs.cost.major === true ? 'major':'minor'">
+                           {{filter.costs.cost.major === true ? 'major of':'minor of'}}
+               </div>
+            </td>
+            <td> <input #cost type="number" min="0" step="0.1" (change)="filter.costs.cost.value = cost.value" ></td>
+         </tr>
+         <tr class="even">
+            <th>Seed weight</th>
+            <td>
+               <div class="filterType" 
+                    (click)="filter.costs.sWeight.major = 
+                            !filter.costs.sWeight.major" 
+                  [ngClass]="filter.costs.sWeight.major === true ? 'major':'minor'">
+                           {{filter.costs.sWeight.major === true ? 'major of':'minor of'}}
+               </div>
+            </td>
+            <td> <input #sWeight type="number" min="0" step="0.1" (change)="filter.costs.sWeight.value = sWeight.value" ></td>
+         </tr>
+         <tr class="uneven">
+            <th>Refill quantity</th>
+            <td>
+               <div class="filterType" 
+                    (click)="filter.costs.refill.major = 
+                            !filter.costs.refill.major" 
+                  [ngClass]="filter.costs.refill.major === true ? 'major':'minor'">
+                           {{filter.costs.refill.major === true ? 'major of':'minor of'}}
+               </div>
+            </td>
+            <td> <input #refill type="number" min="0" (change)="filter.costs.refill.value = refill.value" ></td>
+         </tr>
+         <tr class="even">
+            <th>Drawer weight</th>
+            <td>
+               <div class="filterType" 
+                    (click)="filter.costs.dWeight.major = 
+                            !filter.costs.dWeight.major" 
+                  [ngClass]="filter.costs.dWeight.major === true ? 'major':'minor'">
+                           {{filter.costs.dWeight.major === true ? 'major of':'minor of'}}
+               </div>
+            </td>
+            <td> <input #dWeight type="number" min="0" step="0.1" (change)="filter.costs.dWeight.value = dWeight.value" ></td>
+         </tr>
+      </table>
+   </div>
+   <div class="dropdown-wrapper qualities" [ngClass]="this.filter.qualities.open === true ? 'open-dropdown-wrapper' : ''">
+
+      <table class="qualities-table">
+         <tr class="uneven">
+            <th>Aesthetic</th>
+            <td>
+               <div class="filterType" 
+                    (click)="filter.qualities.aesthetics.major = 
+                            !filter.qualities.aesthetics.major" 
+                  [ngClass]="filter.qualities.aesthetics.major === true ? 'major':'minor'">
+                           {{filter.qualities.aesthetics.major === true ? 'major of':'minor of'}}
+               </div>
+            </td>
+            <td> <input #aesthetic type="number" min="0" max="10" (change)="aesthetic.value > 10? color.value = 10: '';filter.qualities.aesthetics.value = aesthetic.value" ></td>
+         </tr>
+         <tr class="even">
+            <th>Color</th>
+            <td>
+               <div class="filterType" 
+                    (click)="filter.qualities.color.major = 
+                            !filter.qualities.color.major" 
+                  [ngClass]="filter.qualities.color.major === true ? 'major':'minor'">
+                           {{filter.qualities.color.major === true ? 'major of':'minor of'}}
+               </div>
+            </td>
+            <td> <input #color type="number" min="0" max="10" (change)="color.value > 10 ? color.value = 10 : '';filter.qualities.color.value = color.value;" ></td>
+         </tr>
+         <tr class="uneven">
+            <th>Crunchiness</th>
+            <td>
+               <div class="filterType" 
+                    (click)="filter.qualities.crunchiness.major = 
+                            !filter.qualities.crunchiness.major" 
+                  [ngClass]="filter.qualities.crunchiness.major === true ? 'major':'minor'">
+                           {{filter.qualities.crunchiness.major === true ? 'major of':'minor of'}}
+               </div>
+            </td>
+            <td> <input #crunch type="number" min="0" max="10" (change)="crunch.value > 10? crunch.value = 10: '';filter.qualities.crunchiness.value = crunch.value" ></td>
+         </tr>
+         <tr class="even">
+            <th>Fragrance</th>
+            <td>
+               <div class="filterType" 
+                    (click)="filter.qualities.fragrance.major = 
+                            !filter.qualities.fragrance.major" 
+                  [ngClass]="filter.qualities.fragrance.major === true ? 'major':'minor'">
+                           {{filter.qualities.fragrance.major === true ? 'major of':'minor of'}}
+               </div>
+            </td>
+            <td> <input #frag type="number" min="0" max="10" (change)="frag.value > 10? frag.value = 10: '';filter.qualities.fragrance.value = frag.value" ></td>
+         </tr>
+         <tr class="uneven">
+            <th>Growth level</th>
+            <td>
+               <div class="filterType" (click)="filter.qualities.growthLevel.major = !filter.qualities.growthLevel.major" [ngClass]="filter.qualities.growthLevel.major === true ? 'major':'minor'">
+                  {{filter.qualities.growthLevel.major === true ? 'major of':'minor of'}}
+               </div>
+            </td>
+            <td> <input #growth type="number" min="0" max="10" (change)="growth.value > 10? growth.value = 10: '';filter.qualities.growthLevel.value = growth.value" ></td>
+         </tr>
+      </table>
+   </div>
+
+   <!-- fourth level: SEED -->
+   <div class="card-wrapper-bottom seed" *ngIf="this.selected.specie !== 'none'">
+      
+      <ng-container *ngFor="let seed of getFilteredSeeds()">
+         <ng-container *ngIf="filterNameOwner(seed)">
+            <app-card [seed]="seed"></app-card>
+         </ng-container>
+      </ng-container>
+   </div>
+   
+   <!-- cover is used as a filter -->
+   <div class="cover" *ngIf="this.filter.nutritionals.open === true || this.filter.qualities.open === true || this.filter.costs.open === true" (click)="closeFilter()">
+   </div>
+</div>

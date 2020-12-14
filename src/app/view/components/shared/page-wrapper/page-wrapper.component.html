@@ -1,0 +1,16 @@
+<div class="container-fluid mt-0 mb-0 pt-2 pb-3" [style.backgroundColor]="backgroundColor">
+    <!-- NAV BAR -->
+    <mat-toolbar class="mb-3">
+        <span *ngIf="title" [style.color]="titleColor">{{title}}</span>
+        <div class="flex-fill"></div>
+        <ng-content select="[appPageActionsButtons]"></ng-content>
+        <!--<button *ngIf="showBackButton" mat-button>{{'label.back' | translate}}</button>-->
+    </mat-toolbar>
+    <!-- PAGE CONTENT -->
+    <div class="content-wrapper">
+        <div [class]="containerStyle()">
+            <ng-content></ng-content>
+        </div>
+    </div>
+
+</div>

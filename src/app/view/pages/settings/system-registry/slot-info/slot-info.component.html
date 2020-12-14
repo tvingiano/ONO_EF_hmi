@@ -1,0 +1,156 @@
+<app-page-wrapper title="Slot Info" *ngIf="formGroup">
+    <mat-card class="">
+        <mat-card-content class="p-3 no-shadow">
+            <!-- INFO FORM -->
+            <form [formGroup]="formGroup">
+                <div class="row flex-column">
+                    <div class="row">
+                        <div class="col-md">
+                            <!-- System -->
+                            <mat-form-field appearance="outline">
+                                <mat-label>{{'label.System' | translate}}</mat-label>
+                                <input matInput type="text"
+                                       placeholder="{{'label.System' | translate}}"
+                                       formControlName="System"
+                                       autocomplete="off" [disableControl]="true">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md">
+                            <!-- System -->
+                            <mat-form-field appearance="outline">
+                                <mat-label>{{'label.Module' | translate}}</mat-label>
+                                <input matInput type="text"
+                                       placeholder="{{'label.Module' | translate}}"
+                                       formControlName="Module"
+                                       autocomplete="off" [disableControl]="true">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md">
+                            <!-- Rackname -->
+                            <mat-form-field appearance="outline">
+                                <mat-label>{{'label.Rack' | translate}}</mat-label>
+                                <input matInput type="number"
+                                       placeholder="{{'label.Rack' | translate}}"
+                                       formControlName="Rack"
+                                       autocomplete="off" [disableControl]="true">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <!-- Slotname -->
+                            <mat-form-field appearance="outline">
+                                <mat-label>{{'label.Slotname' | translate}}</mat-label>
+                                <input matInput type="number"
+                                       placeholder="{{'label.Slotname' | translate}}"
+                                       formControlName="Slotname"
+                                       autocomplete="off" [disableControl]="true">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md">
+                            <!-- Slotstatus -->
+                            <mat-form-field appearance="outline">
+                                <mat-label>{{'label.Slotstatus' | translate}}</mat-label>
+                                <input matInput type="text"
+                                       placeholder="{{'label.Slotstatus' | translate}}"
+                                       formControlName="Slotstatus"
+                                       autocomplete="off" [disableControl]="componentState!==pageStates.EDIT">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md">
+                            <!-- Owner -->
+                            <mat-form-field appearance="outline">
+                                <mat-label>{{'label.owner' | translate}}</mat-label>
+                                <input matInput type="text"
+                                       placeholder="{{'label.owner' | translate}}"
+                                       formControlName="Owner"
+                                       autocomplete="off" [disableControl]="true">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <mat-form-field appearance="outline">
+                                <mat-label>{{'label.RackSide' | translate}}</mat-label>
+                                <mat-select formControlName="RackSide" [disableControl]="componentState!==pageStates.EDIT">
+                                    <mat-option *ngFor="let rackSide of rackSides" [value]="rackSide">{{rackSide}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <mat-form-field appearance="outline">
+                                <mat-label>{{'label.Area' | translate}}</mat-label>
+                                <mat-select formControlName="Area" [disableControl]="componentState!==pageStates.EDIT">
+                                    <mat-option *ngFor="let type of areaTypes" [value]="type">{{type}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md">
+                            <mat-form-field appearance="outline">
+                                <mat-label>{{'label.LightConfiguration' | translate}}</mat-label>
+                                <mat-select formControlName="LightConfiguration" [disableControl]="componentState!==pageStates.EDIT">
+                                    <mat-option *ngFor="let light of lightConfigurations" [value]="light.Code">{{light.Code}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <!-- LampsNumber -->
+                            <mat-form-field appearance="outline">
+                                <mat-label>{{'label.LampsNumber' | translate}}</mat-label>
+                                <input matInput type="number"
+                                       placeholder="{{'label.LampsNumber' | translate}}"
+                                       formControlName="LampsNumber"
+                                       autocomplete="off" [disableControl]="true">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <!-- Height -->
+                            <mat-form-field appearance="outline">
+                                <mat-label>{{'label.Height' | translate}}</mat-label>
+                                <input matInput type="number"
+                                       placeholder="{{'label.Height' | translate}}"
+                                       formControlName="Height"
+                                       autocomplete="off" [disableControl]="true">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <!-- Description -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{'label.description' | translate}}</mat-label>
+                        <textarea matInput placeholder="{{'label.description' | translate}}"
+                                  formControlName="Description" [disableControl]="true"></textarea>
+                    </mat-form-field>
+                    <!-- Note -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{'label.note' | translate}}</mat-label>
+                        <textarea matInput placeholder="{{'label.note' | translate}}"
+                                  formControlName="Note" [disableControl]="true"></textarea>
+                    </mat-form-field>
+                    <!-- Description -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{'label.tag' | translate}}</mat-label>
+                        <textarea matInput placeholder="{{'label.tag' | translate}}"
+                                  formControlName="Tag" [disableControl]="true"></textarea>
+                    </mat-form-field>
+                </div>
+            </form>
+        </mat-card-content>
+        <mat-card-actions align="end">
+            <button mat-button (click)="onEditHandler()"
+                    *ngIf="componentState === pageStates.VIEW">{{"label.edit" | translate}}</button>
+            <button mat-button color="warn" *ngIf="componentState === pageStates.EDIT" [disabled]="!dirty"
+                    (click)="onSaveHandler()">{{"label.save" | translate}}</button>
+            <button mat-button color="primary" *ngIf="componentState === pageStates.EDIT"
+                    (click)="onCancelHandler()">{{"label.cancel" | translate}}</button>
+        </mat-card-actions>
+    </mat-card>
+</app-page-wrapper>

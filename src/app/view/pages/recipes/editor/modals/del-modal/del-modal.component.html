@@ -1,0 +1,6 @@
+<button class="btn cancel" type="close" (keydown.esc)="close()" (click)="close()"></button>  
+<h2>Do you really want to remove {{this.settings.name}} ?</h2>
+
+<div class="footer">
+    <button class="submit bigbutton" type="submit"  (click)="confirmDel()">Confirm</button> 
+</div>

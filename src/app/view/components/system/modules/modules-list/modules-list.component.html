@@ -1,0 +1,68 @@
+<div class="mb-3">
+    <mat-card>
+        <mat-card-header class="mb-3">
+            <mat-card-title class="mb-0" *ngIf="title">
+                {{title}}
+            </mat-card-title>
+            <div fxFlex></div>
+            <button mat-button (click)="createClick.emit()">
+                {{"label.create" | translate}}
+            </button>
+        </mat-card-header>
+        <div class="">
+            <table mat-table [dataSource]="dataSource">
+                <ng-container matColumnDef="Modulename">
+                    <th mat-header-cell *matHeaderCellDef>{{'label.ModuleName' | translate}}</th>
+                    <td mat-cell *matCellDef="let element"> {{element.Modulename}} </td>
+                </ng-container>
+                <ng-container matColumnDef="RackNumber">
+                    <th mat-header-cell *matHeaderCellDef>{{'label.RackNumber' | translate}}</th>
+                    <td mat-cell *matCellDef="let element"> {{element.RackNumber}} </td>
+                </ng-container>
+                <ng-container matColumnDef="LightSlotsNumber">
+                    <th mat-header-cell *matHeaderCellDef>{{'label.LightSlotsNumber' | translate}}</th>
+                    <td mat-cell *matCellDef="let element"> {{element.LightSlotsNumber}} </td>
+                </ng-container>
+                <ng-container matColumnDef="GrowthSlotsNumber">
+                    <th mat-header-cell *matHeaderCellDef>{{'label.GrowthSlotsNumber' | translate}}</th>
+                    <td mat-cell *matCellDef="let element"> {{element.GrowthSlotsNumber}} </td>
+                </ng-container>
+                <ng-container matColumnDef="SolutionCapacity">
+                    <th mat-header-cell *matHeaderCellDef>{{'label.SolutionCapacity' | translate}}</th>
+                    <td mat-cell *matCellDef="let element"> {{element.SolutionCapacity}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="View">
+                    <th mat-header-cell *matHeaderCellDef> View</th>
+                    <td mat-cell *matCellDef="let row">
+                        <button mat-button (click)="viewClick.emit(row)">
+                            <mat-icon>visibility</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="Edit">
+                    <th mat-header-cell *matHeaderCellDef> Edit</th>
+                    <td mat-cell *matCellDef="let row">
+                        <button mat-button (click)="editClick.emit(row)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="Delete">
+                    <th mat-header-cell *matHeaderCellDef> Delete</th>
+                    <td mat-cell *matCellDef="let row">
+                        <button mat-button (click)="deleteClick.emit(row)">
+                            <mat-icon>delete</mat-icon> 
+                        </button>
+                    </td>
+
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator showFirstLastButtons></mat-paginator>
+        </div>
+    </mat-card>
+
+</div>

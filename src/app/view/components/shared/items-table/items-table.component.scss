@@ -1,0 +1,11 @@
+:host {
+  .mat-cell {
+    min-width: 50px;
+    padding: 0 0.5rem;
+    white-space: nowrap !important;
+  }
+
+  th.mat-header-cell {
+    padding: 0 0.5rem;
+  }
+}

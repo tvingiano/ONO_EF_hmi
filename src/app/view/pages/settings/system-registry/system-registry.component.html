@@ -1,0 +1,17 @@
+<app-page-wrapper title="System Registry">
+    <div appPageActionsButtons>
+        <button mat-button (click)="onCreateClick()">create</button>
+    </div>
+
+    <mat-card *ngIf="systemsList">
+        <mat-list>
+            <mat-list-item *ngFor="let system of systemsList" class="h-100">
+                <app-system-info
+                        [systemInfo]="system"
+                        (editClick)="onEditClick($event)"
+                        (deleteClick)="onDeleteClick($event)"
+                ></app-system-info>
+            </mat-list-item>
+        </mat-list>
+    </mat-card>
+</app-page-wrapper>

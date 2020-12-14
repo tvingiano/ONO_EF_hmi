@@ -1,0 +1,79 @@
+<div class="mb-3">
+    <mat-card>
+        <mat-card-header class="mb-3">
+            <mat-card-title class="mb-0" *ngIf="title">
+                {{title}}
+            </mat-card-title>
+            <div fxFlex></div>
+            <button mat-button (click)="createClick.emit()">
+                {{"label.create" | translate}}
+            </button>
+        </mat-card-header>
+        <div class="">
+            <table mat-table [dataSource]="dataSource">
+                <ng-container matColumnDef="System">
+                    <th mat-header-cell *matHeaderCellDef> System</th>
+                    <td mat-cell *matCellDef="let element">{{element.System}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Rackname">
+                    <th mat-header-cell *matHeaderCellDef> ID rack</th>
+                    <td mat-cell *matCellDef="let element">{{element.Rackname}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Module">
+                    <th mat-header-cell *matHeaderCellDef> Module</th>
+                    <td mat-cell *matCellDef="let element">{{element.Module}} </td>
+                </ng-container>
+                <ng-container matColumnDef="LightSlotsNumber">
+                    <th mat-header-cell *matHeaderCellDef> N. slots light</th>
+                    <td mat-cell *matCellDef="let element">{{element.LightSlotsNumber}} </td>
+                </ng-container>
+                <ng-container matColumnDef="GrowthSlotsNumber">
+                    <th mat-header-cell *matHeaderCellDef> N. slots growth</th>
+                    <td mat-cell *matCellDef="let element">{{element.GrowthSlotsNumber}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Humidity">
+                    <th mat-header-cell *matHeaderCellDef> Humidity</th>
+                    <td mat-cell *matCellDef="let element">{{element.Humidity}} </td>
+                </ng-container>
+                <ng-container matColumnDef="Temperature">
+                    <th mat-header-cell *matHeaderCellDef> Temperature</th>
+                    <td mat-cell *matCellDef="let element">{{element.Temperature}} </td>
+                </ng-container>
+                <ng-container matColumnDef="PlcAddress">
+                    <th mat-header-cell *matHeaderCellDef> PLC address</th>
+                    <td mat-cell *matCellDef="let element">{{element.PlcAddress}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="View">
+                    <th mat-header-cell *matHeaderCellDef> View</th>
+                    <td mat-cell *matCellDef="let row">
+                        <button mat-button (click)="viewClick.emit(row)">
+                            <mat-icon>visibility</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="Edit">
+                    <th mat-header-cell *matHeaderCellDef> Edit</th>
+                    <td mat-cell *matCellDef="let row">
+                        <button mat-button (click)="editClick.emit(row)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="Delete">
+                    <th mat-header-cell *matHeaderCellDef> Delete</th>
+                    <td mat-cell *matCellDef="let row">
+                        <button mat-button (click)="deleteClick.emit(row)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator showFirstLastButtons></mat-paginator>
+        </div>
+    </mat-card>
+
+</div>

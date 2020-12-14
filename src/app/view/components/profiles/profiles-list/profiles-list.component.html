@@ -1,0 +1,13 @@
+<div class="row mb-3" *ngIf="profilesList">
+    <div *ngIf="_showTitle" class="col-md-3">
+        <h4>Profiles:</h4>
+    </div>
+    <div class="col-md">
+        <div class="list-group-horizontal">
+            <button mat-stroked-button
+                    *ngFor="let profile of profilesList"
+                    (click)="profileButtonHandler(profile)"
+            >{{profile.Name}}</button>
+        </div>
+    </div>
+</div>

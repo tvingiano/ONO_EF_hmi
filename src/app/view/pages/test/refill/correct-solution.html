@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>Solution correction</h1>
+<div mat-dialog-content>
+
+  <p>Ec:</p>
+  <mat-form-field>
+    <mat-slider class="slider" #matSliderEc (input)="updateEcSlider($event)" value ={{data.Ec}} min="0" max="3000" step="1"></mat-slider>
+    <input class="span-input" matInput min="0" max="3000" step="1" type="number" (change)="updateEcInput($event)" value={{matSliderEc.value}} >
+  </mat-form-field>
+
+  <p>Ph:</p>
+  <mat-form-field>
+    <mat-slider class="slider" #matSliedrPh (input)="updatePhSlider($event)" value ={{data.Ph}} min="0" max="14" step="0.01"></mat-slider>
+    <input class="span-input" matInput min="0" max="14" step="0.01" type="number" (change)="updatePhInput($event)" value={{matSliedrPh.value}} >
+  </mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Exit</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Start</button>
+</div>
+
+<style>
+  .slider{
+    display: inline-block;
+    width: 80%;
+  }
+  .span-input{
+    display: inline-block;
+    width: 20%;
+  }
+</style>

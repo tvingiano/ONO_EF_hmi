@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Solution Measure</h1>
+<div mat-dialog-content>
+  
+  <p>With solution purge:</p>
+  <mat-radio-group [(ngModel)]="data.purgeSol">
+      <mat-radio-button value="0">No</mat-radio-button>
+      <mat-radio-button value="1" style="margin-left: 20px">Yes</mat-radio-button>
+  </mat-radio-group>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Exit</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Start</button>
+</div>

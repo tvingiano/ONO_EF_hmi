@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Solution Purge</h1>
+<div mat-dialog-content>
+
+  <p>Quantity to remove [l]:</p>
+  <mat-form-field>
+    <input type="number" min="0" max="30" step="0.1" matInput [(ngModel)]="data.quantity">
+    <!--input matInput [(ngModel)]="data.quantity"-->
+  </mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Exit</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Start</button>
+</div>

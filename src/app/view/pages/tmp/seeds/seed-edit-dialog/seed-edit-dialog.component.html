@@ -1,0 +1,109 @@
+<ng-container *ngIf="data">
+    <div class="container-fluid">
+        <h2 mat-dialog-title>{{data.title}}</h2>
+        <mat-dialog-content>
+            <form [formGroup]="formGroup">
+                <div class="row flex-column">
+                    <div class="row">
+                        <div class="col">
+                            <!-- SeedType -->
+                            <mat-form-field appearance="outline">
+                                <mat-label>{{'label.SeedType' | translate}}</mat-label>
+                                <input matInput type="text"
+                                       placeholder="{{'label.SeedType' | translate}}"
+                                       formControlName="SeedType"
+                                       autocomplete="off">
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <!-- Specie -->
+                            <mat-form-field appearance="outline">
+                                <mat-label>{{'label.SeedSpecie' | translate}}</mat-label>
+                                <input matInput type="text"
+                                       placeholder="{{'label.SeedSpecie' | translate}}"
+                                       formControlName="Specie"
+                                       autocomplete="off">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <!-- Farming -->
+                            <mat-form-field appearance="outline">
+                                <mat-label>{{'label.SeedFarming' | translate}}</mat-label>
+                                <input matInput type="text"
+                                       placeholder="{{'label.SeedFarming' | translate}}"
+                                       formControlName="Farming"
+                                       autocomplete="off">
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <!-- GerminatedPercentage -->
+                            <mat-form-field appearance="outline">
+                                <mat-label>{{'label.SeedGerminatedPercentage' | translate}}</mat-label>
+                                <input matInput type="number"
+                                       placeholder="{{'label.SeedGerminatedPercentage' | translate}}"
+                                       formControlName="GerminatedPercentage"
+                                       autocomplete="off">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <!-- WeightForDrawer -->
+                            <mat-form-field appearance="outline">
+                                <mat-label>{{'label.SeedWeightForDrawer' | translate}}</mat-label>
+                                <input matInput type="number"
+                                       placeholder="{{'label.SeedWeightForDrawer' | translate}}"
+                                       formControlName="WeightForDrawer"
+                                       autocomplete="off">
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <!-- Contingency -->
+                            <mat-form-field appearance="outline">
+                                <mat-label>{{'label.SeedContingency' | translate}}</mat-label>
+                                <input matInput type="number"
+                                       placeholder="{{'label.SeedContingency' | translate}}"
+                                       formControlName="Contingency"
+                                       autocomplete="off">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <!-- Owner -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{'label.owner' | translate}}</mat-label>
+                        <input matInput type="text"
+                               placeholder="{{'label.owner' | translate}}"
+                               formControlName="Owner"
+                               autocomplete="off">
+                    </mat-form-field>
+                    <!-- Description -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{'label.description' | translate}}</mat-label>
+                        <textarea matInput placeholder="{{'label.description' | translate}}"
+                                  formControlName="Description"></textarea>
+                    </mat-form-field>
+                    <!-- Note -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{'label.note' | translate}}</mat-label>
+                        <textarea matInput placeholder="{{'label.note' | translate}}"
+                                  formControlName="Note"></textarea>
+                    </mat-form-field>
+                    <!-- Description -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{'label.tag' | translate}}</mat-label>
+                        <textarea matInput placeholder="{{'label.tag' | translate}}"
+                                  formControlName="Tag"></textarea>
+                    </mat-form-field>
+                </div>
+            </form>
+        </mat-dialog-content>
+        <mat-dialog-actions align="end">
+            <button mat-button [mat-dialog-close]="null">{{'label.cancel' | translate}}</button>
+            <button mat-button [mat-dialog-close]="formGroup" cdkFocusInitial>{{'label.save' | translate}}</button>
+        </mat-dialog-actions>
+    </div>
+</ng-container>
+

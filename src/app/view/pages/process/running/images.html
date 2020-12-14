@@ -1,0 +1,46 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Computer Vision</h1>
+
+  <mat-grid-list cols="1" rowHeight="600px">
+
+    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
+      <mat-card class="dashboard-card">
+        <div>
+
+          <mat-card-header>
+            <mat-card-title>
+              {{card.title}}
+
+            </mat-card-title>
+          </mat-card-header>
+
+          <mat-card-content class="dashboard-card-content" *ngIf="card.title=='Original'">
+            <p>
+            </p>
+            <img mat-card-image src={{card.id}}
+              style=" width:80%;display: block;margin-left: auto;margin-right: auto;">
+
+          </mat-card-content>
+          <mat-card-content class="dashboard-card-content" *ngIf="card.title=='Height'"
+            style=" width:80%;display: block;margin-left: auto;margin-right: auto;">
+            <p>
+            </p>
+
+            <img mat-card-image src={{card.id}}
+              style=" width:80%;display: block;margin-left: auto;margin-right: auto;">
+
+          </mat-card-content>
+          <mat-card-content class="dashboard-card-content" *ngIf="card.title=='Area'">
+            <p>
+            </p>
+
+            <img mat-card-image src={{card.id}}
+              style=" width:80%;display: block;margin-left: auto;margin-right: auto;">
+
+          </mat-card-content>
+        </div>
+
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

@@ -1,0 +1,199 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./assets/styles/variables.scss";
+@import '@angular/material/prebuilt-themes/purple-green.css';
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@500&display=swap');
+
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  min-width: 386px;
+  background: $body-color-white;
+  color: $body-text-color;
+  margin: 0;
+  font-family: 'Orbitron', sans-serif;
+  background: $lv-1;
+  background-size: cover;
+}
+
+iframe{ 
+  border: none !important;
+}
+
+input{
+  color: black;
+}
+
+.danger-color {
+  background-color: crimson;
+}
+
+button:focus {
+  outline: none;
+  border: 0;
+}
+
+table {
+  width: 100%;
+}
+
+th.mat-header-cell.mat-column-View,
+th.mat-header-cell.mat-column-Delete,
+th.mat-header-cell.mat-column-Edit,
+.mat-column-View,
+.mat-column-Delete,
+.mat-column-Edit {
+  text-align: center;
+  width: 50px;
+}
+
+.horizontal-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.no-shadow {
+  box-shadow: unset !important;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.icon-full-width {
+  display: inline-block;
+  font-size: 116px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.errorSnackBar{
+  background-color: $err-color;
+  color: white;
+  width: 80% !important;
+  max-width: 800px !important;
+}
+.errorSnackBar button{
+  background-color: white;
+  color: black;
+}
+
+.successSnackBar{
+  background-color: $editor-ono-blue;
+  color: $editor-background-color;
+  width: 80% !important;
+  max-width: 800px !important
+}
+.successSnackBar button{
+  background-color: white;
+  color: $editor-background-color;
+}
+
+.favSnackBar{
+  background-color: rgb(255, 177, 81);
+  color: white;
+  width: 80% !important;
+  max-width: 800px !important
+}
+.favSnackBar button{
+background-color: white;
+color: black;
+}
+
+
+
+/*
+ * These Snackbar are used to show drawer movements details
+*/
+
+.activeSnackbar{
+  background-color: rgb(255, 177, 81);
+  color: black;
+  width: fit-content !important;
+  min-width: 40vw !important
+}
+.activeSnackbar button{
+background-color: white;
+color: black;
+}
+.successSnackbar{
+  background-color: rgb(19, 158, 19);
+  color: white;
+  width: fit-content !important;
+  min-width: 40vw !important;
+}
+.successSnackbar button{
+  background-color: white;
+  color: rgb(19, 158, 19);
+}
+.errorSnackbar{
+  background-color: $err-color;
+  color: white;
+  width: fit-content !important;
+  min-width: 40vw !important;
+}
+.errorSnackbar button{
+  background-color: white;
+  color: black;
+}
+
+//////////////////////////////////
+
+.item {
+  top:10px;
+  position: relative;
+  height: 100px;
+  line-height: 100px;
+  display: flex;
+  justify-content: center;
+  cursor: auto;
+  transition: ease-in-out 200ms ;
+  min-width: max-content;
+  z-index: 0;
+}
+.item:hover{
+  
+  filter: 
+      drop-shadow(0 0 7px black)
+      drop-shadow(0 0 10px rgb(0,174, 239))
+      drop-shadow(0 0 15px blue);
+}
+
+.custom-light-dialog-component{
+	width: 400px;
+}
+.custom-climate-dialog-component{
+	width: 400px;
+}
+.custom-generic-dialog-component{
+	width: 400px;
+}
+.custom-solution-dialog-component{
+	width: 400px;
+}
+.custom-settings-dialog-component{
+	width: 400px;
+}
+.custom-Group-settings-dialog-component{
+	width: 400px;
+}
+.custom-recipe-settings-dialog-component{
+  width: 400px;
+}
+.custom-confirm-send-dialog-component{
+  width: 800px;
+}

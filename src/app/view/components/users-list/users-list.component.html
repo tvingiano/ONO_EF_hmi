@@ -1,0 +1,86 @@
+<div class="users-list">
+    <div class="row" *ngIf="users">
+        <div class="col-md-2" *ngIf="title">
+            <h4> {{title}}</h4>
+        </div>
+        <div class="col-md-4">
+            <mat-list>
+                <mat-list-item *ngFor="let user of users" (click)="selectUserHandler(user)" style="cursor: pointer"
+                               [class.active]="user == selectedUser">
+                    <ngx-avatar mat-list-avatar [name]="getFullName(user)" size="50"></ngx-avatar>
+                    <h4 mat-line>{{getFullName(user)}}</h4>
+                    <p mat-line class="text-muted"> {{getProfile(user)}} </p>
+                </mat-list-item>
+            </mat-list>
+
+            <mat-card-actions class="create-delete" align="end">
+                <button mat-button (click)="onCreateHandler()" color="primary">
+                    {{"label.create" | translate}}
+                </button>
+                <button mat-button color="warn">
+                    {{"label.delete" | translate}}
+                </button>
+            </mat-card-actions>
+        </div>
+        <div class="col-md-6">
+            <mat-card class="left-panel">
+                <form [formGroup]="usersFormGroup" (ngSubmit)="onSubmit()">
+                    <div class="container pt-3">
+                        <div class="row">
+                            <div class="col">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>{{'label.firstName' | translate}}</mat-label>
+                                    <input matInput type="text"
+                                           placeholder="{{'label.firstName' | translate}}"
+                                           formControlName="FirstName">
+                                </mat-form-field>
+                            </div>
+                            <div class="col">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>{{'label.lastName' | translate}}</mat-label>
+                                    <input matInput type="text"
+                                           placeholder="{{'label.lastName' | translate}}"
+                                           formControlName="LastName">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>{{'label.email' | translate}}</mat-label>
+                                    <input matInput type="email"
+                                           placeholder="{{'label.email' | translate}}"
+                                           formControlName="Email">
+                                </mat-form-field>
+                            </div>
+                            <div class="col">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>{{'label.userName' | translate}}</mat-label>
+                                    <input matInput type="text"
+                                           placeholder="{{'label.userName' | translate}}"
+                                           formControlName="Username"
+                                           autocomplete="off">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>{{'label.profiles' | translate}}</mat-label>
+                                    <input matInput type="text"
+                                           placeholder="{{'label.profiles' | translate}}"
+                                           formControlName="Profiles">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <mat-card-actions align="end">
+                    <button *ngIf="state === states.VIEW" mat-button color="primary"
+                            (click)="onEditHandler(selectedUser)">{{'label.edit' | translate}}</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+
+    </div>
+</div>

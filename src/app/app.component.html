@@ -1,0 +1,15 @@
+<div class="w-100" *ngIf="!isAuth()">
+    <app-header></app-header>
+    <app-login></app-login>
+</div>
+<div style="height: 100vh; width: 100vw" *ngIf="isAuth()">
+    <div class="row justify-content-center">
+        <div class="col-sm-3 col-md-3 col-lg-2 col-xl-2 custom-scrollbar" style="height: 100vh; overflow-y: scroll;">
+            <app-side-bar></app-side-bar>
+        </div>
+        <div class="col-sm-9 col-md-9 col-lg-10 col-xl-10 custom-scrollbar" style="height: 100vh; overflow-y: scroll; padding-left: 0; padding-right: 0;">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+<ngx-ui-loader [fgsType]="spinner.foldingCube"></ngx-ui-loader>

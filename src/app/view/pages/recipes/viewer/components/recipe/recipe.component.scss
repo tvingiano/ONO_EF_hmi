@@ -1,0 +1,785 @@
+// $submit_background: #46cf46;
+// $submit_border: rgb(26, 175, 26);
+// $del_color: rgb(245, 111, 111);
+// $ono_blue: rgb(0,174,239);
+// $ono_blue_light: rgb(153, 225, 252);
+// $ono_grey: rgb(138,139,147);
+// $card-background: rgb(0,153,255);
+// $background-dark: rgb(0, 0, 82);
+
+$submit_background: #46cf46;
+$submit_border: rgb(26, 175, 26);
+
+$del_color: rgb(245, 111, 111);
+
+$ono_blue: rgb(0,174,239);
+$ono_blue_light: rgb(153, 225, 252);
+$ono_grey: rgb(138,139,147);
+
+$lv-1: #101024;
+$lv0: #3D4754;
+$lv1: #2D343E;
+$lv2: #4D5662;
+$lv3: #646C76;
+
+$blue: #6972C4;
+$lightblue: #c0d8ff;
+$font-color: #f0f1f2;
+$border: #fff;
+
+
+
+@keyframes pulse {
+	10% {
+		transform: scale(1.0);
+	}
+	50% {
+		transform: scale(1.1);
+	}
+	90% {
+		transform: scale(0.9);
+	}
+}
+
+.body{
+    position:absolute;
+  background-color: $lv0;
+  height: -webkit-fill-available;
+
+  user-select: none;
+  -webkit-user-select: none;
+
+  width: 100%;
+
+}
+
+.page-title{
+
+    user-select: none;
+
+    width: 100%;
+    height: 100px;
+
+    color: $font-color;
+    background-color: $lv-1;
+    border: solid 1px grey;
+
+    padding: 10px 0;    
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    padding: 0.5em 3em 0.5em 0;
+
+    .logo{
+        flex: 0.1;
+        padding: 0 10px;
+        .img{
+            background-image: url(../../../../../../../assets/logo_fav.png);
+            width: 100%;
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+    }
+
+    .info{
+        flex: 0.6;
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        .title{
+            flex: 100%;
+            font-size: 20px;
+        }
+
+        .back{
+            flex: 40%;
+    
+            transition: all 300ms ease;
+    
+            &:hover{
+                color: $lightblue;
+                transform: translateX(20px);
+    
+                transition: all 300ms ease;
+            }
+        }
+
+        .src-cert{
+            flex: 60%;
+    
+            font-size: 15px;
+    
+            span{
+                font-size: 10px;
+                font-style: italic;
+                text-decoration: underline;
+    
+                margin: 0 10px;
+    
+                cursor: pointer;
+    
+                &:hover{
+                    color: rgb(250, 243, 178);
+                }
+            }
+    
+            .selected{
+                color: $lightblue;
+                font-weight: 400;
+            }
+        }
+    }
+
+    .search{
+        flex: 0.3;
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        .searchbar{
+            
+            flex: 100%;
+            display: flex;
+
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+    
+            .src{
+                flex: 0.85;
+    
+                border: none;
+                border-bottom: solid 1px aliceblue;
+                // border-radius: 10px 0 0 10px;
+    
+                color: $font-color;
+    
+                background-color: $lv-1;
+
+                transition: all ease 500ms;
+
+                
+
+                &:focus, &:hover{
+                    outline: none;
+                    background: rgb(0,0,81);
+                    background: linear-gradient(90deg,rgba(0,4,186,1) 9%, rgba(0,2,128,1) 31%, rgba(0,0,81,1) 100%,  );
+                    transition: all ease 250ms;
+                }
+
+            }
+    
+            .src-button{
+                flex: 0.15;
+    
+                border: none;
+                border-bottom: solid 1px aliceblue;
+                // border-radius: 0 10px 10px 0;
+                
+                background-color: none;
+                background-image: url(../../../../../../../assets/icons/search.svg);
+                background-repeat: no-repeat;
+                background-size: 20px;
+                background-position: center;
+            }
+    
+        }
+
+        .src-reset{
+            display: block;
+            flex: 100%;
+        }
+
+        .create-recipe{
+            flex: 100%;
+    
+            text-align: center;
+    
+            
+            .new-btn{
+    
+                width: fit-content;
+                float: right;
+                padding: 2px 40px;
+    
+                background-color: rgb(0, 148, 7);
+    
+                cursor: pointer;
+    
+                transition: all ease 250ms;
+    
+                &:focus {
+                    outline: none;
+                }
+                &:hover {
+                    animation: pulse 250ms ease;
+                    background-color: rgb(1, 192, 11);
+                    color: $font-color;
+                }
+            }
+        }
+    }
+
+
+}   
+
+
+
+.wrapper {
+    user-select: none;
+    color: $font-color;
+    // background-image: url(../../../../../../../assets/recipe_viewer/Endless-Constellation.svg);
+    // background-size: 30%;
+    background-color:$lv-1;
+
+    padding-top: 30px;
+
+    height: calc(100vh - 100px); // this is the max height of the main menu -- need to change it in future
+
+    overflow-y: scroll;
+
+    .recipe{
+        padding: 10px 10px 10px 20px;
+        margin-bottom: 30px;
+
+        .tab-wrapper{
+
+            padding: 0 20px;
+        
+            .tab{
+                display: inline-block;
+            
+                text-align: center;
+                color: $font-color;
+                background-color: $lv0;
+                position: relative;
+                width: 105px;
+                height: 30px;
+                line-height: 30px;
+
+                // border-radius: 5px 5px 0 0;
+            }
+
+            .btn{
+                display: inline-block;
+            
+                text-align: center;
+                color: $font-color;
+                position: relative;
+                width: 105px;
+                height: 30px;
+                line-height: 17px;
+
+                // border-radius: 5px 5px 0 0;
+
+                margin-left: 10px;
+
+                border-radius: 0;
+            }
+            
+            .active{
+                background-color: $lv1;
+                height:40px;
+                width: 105px;
+                font-weight: 500;
+            }
+            .inactive{
+                top: 10px;
+                transition: all 200ms ease;
+            }
+            .inactive:hover{
+                height: 38px;
+                top: 2px;
+
+                box-shadow: inset 0 -8px 14px -1px #fdfdfd;
+
+                transition: all 200ms ease;
+            }
+        }
+
+
+        
+    }
+}
+
+
+//group visualization
+.recipe-wrapper{
+    user-select: none;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+
+	overflow-x: auto;
+
+    margin-bottom: 5px;
+    
+    .group-wrapper{
+        
+        display: -webkit-box;
+        display: flex;
+        padding: 20px 20px 20px 0;
+        // border-radius: 10px;
+        background-color: $lv1;
+        // background-image: url('../../../../../../../assets/recipe_viewer/wave.svg');
+        // background-repeat-y: no-repeat;
+        // background-size: 800px;
+        overflow-x: auto;
+
+
+
+        height: 490px;
+        width: 100%;
+
+        overflow-x: auto;
+
+        #home{
+            display:flex;
+            width:100%;
+
+            .info-card{
+                flex: 50%;
+                padding-left: 20px;
+            
+                .nav{
+                    width: 100%;
+            
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+            
+                    .info{
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+
+                        flex:85%;
+                        height: 70px;
+            
+            
+                        #title{
+                            flex: 100%;
+                            color: $font-color;
+                            font-size: 26px;
+                            padding-left: 10px;
+                        }
+            
+                        #version{
+                            flex: 0.4;
+                            color: $font-color;
+                            margin-left: 10px;
+            
+                        }
+
+                        #time{
+                            flex: 0.6;
+                            color: $font-color;
+                            float: right;
+
+                        }
+            
+                        .subtitle{
+                            color: $font-color;
+                            font-size: 14px;
+                            font-style: italic;
+                    
+                        }
+            
+                    }
+                    #certified{
+                        display: block;
+                        flex: 15%;
+            
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        background-size: contain;
+                    }
+                }
+            
+                .gauge-wrapper{
+            
+                    width: 100%;
+            
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+            
+            
+                    .consumption{
+            
+                        flex: 100%;
+            
+                        padding: 0px 20px 10px 20px;
+            
+                        background-color: $lv2;
+                
+                        // background: rgb(0,14,255);
+                        // background: linear-gradient(180deg, rgba(0, 14, 255, 0.93) 0%, rgba(0, 142, 222, 0.68) 15%, rgba(86, 224, 230, 0.1) 25%);
+                        // border: solid 2px rgb(0,14,255);
+                
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                
+                        // border-radius: 20px;
+                        margin-top: 10px;
+                
+                        #name{
+                            flex: 100%;
+                            color:$font-color;
+                            font-size: 24px; 
+                        }
+                        #energy{
+                            display: block;
+                            height: 100px;
+                            flex: 50%;
+                            padding-right: 30px;
+                        }
+                        #water{
+                            display: block;
+                            width: 200px;
+                            height: 100px;
+                            flex: 50%;
+                            padding-left: 30px;
+                        }
+                        .gauge-label-energy{
+                            flex: 50%;
+                            text-align: center;
+                            padding-right: 30px;
+                        }
+                        .gauge-label-water{
+                            flex: 50%;
+                            text-align: center;
+                            padding-left: 30px;
+                        }
+                    }
+                    .production{
+            
+                        flex: calc(50% - 5px);
+                
+                        display: inline-block;
+                        padding: 0px 20px 10px 20px;
+                
+                        width: 240px;
+                
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                
+                        // border-radius: 20px;
+                        margin-top: 10px;
+                        margin-right: 5px;
+                        // background: rgb(0,171,17);
+                        // background: linear-gradient(180deg, rgba(0,171,17,0.93) 0%, rgba(60,222,0,0.68) 15%, rgba(18,255,0,0.1) 25%);
+                        
+                        background-color: $lv2;
+                        #name{
+                            flex: 100%;
+                            color:$font-color;
+                            font-size: 24px; 
+                        }
+                        #prod{
+                            flex: 100%;
+                            display: block;
+                            height: 100px;
+                        }
+                        .gauge-label-prod{
+                            flex: 100%;
+                            display : block;
+                            text-align: center;
+                        }
+                    }
+                
+                    .duration{
+            
+                        flex: calc(50% - 5px);
+                
+                        display: inline-block;
+                        padding: 0px 20px 10px 20px;
+                
+                        width: 240px;
+                        
+                        border: none;
+                
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                
+                        // border-radius: 20px;
+                        margin-top: 10px;
+                        margin-left: 5px;
+                        // background: rgb(125,2,156);
+                        // background: linear-gradient(180deg, rgba(125,2,156,0.93) 0%, rgba(182,0,222,0.68) 15%, rgba(235,0,255,0.1) 25%);
+                        
+                        background-color: $lv2;
+                        #name{
+                            flex: 100%;
+                            color:$font-color;
+                            font-size: 24px; 
+                        }
+                        #dur{
+                            flex: 100%;
+                            display: block;
+                            height: 100px;
+                        }
+                        .gauge-label-dur{
+                            flex: 100%;
+                            display : block;
+                            text-align: center;
+                        }
+                    }
+                }
+            }
+
+            #info-wrapper{
+                flex: 50%;
+                display: flex;
+                padding-left: 20px;
+            
+                .table-wrapper{
+                    flex: 66%;
+                    display: block;
+                    background-color: $lv2;
+                    color: $font-color;
+                    padding: 10px;
+                    // border-radius: 5px;
+                    margin-left: 10px;
+
+                    overflow: auto;
+
+                    th{
+                        font-weight: 500;
+
+                    }
+                    td{
+                        font-weight: 100;
+                    }
+            
+                    td,th{
+                        padding: 5px 15px; 
+                    }
+            
+                    .even{
+                        background-color: rgba(255, 255, 255, 0.05);
+                    }
+                }
+            
+                .button-wrapper{
+                    flex: 34%;
+                    display: flex;
+                    flex-direction: column;
+                    flex-wrap: nowrap;
+            
+                    color: $font-color;
+            
+                    text-align: center;
+            
+                    .edit-button{
+                        
+                        flex: 50%;
+                        display:flex;
+            
+                        #edit-btn{
+                            flex: 50%;
+                            align-self: flex-end;
+            
+                            
+                            background-color: rgb(0, 148, 7);
+                            margin: 10px;
+                            height: 50px;
+            
+                            line-height: 50px;
+            
+                            cursor: pointer;
+            
+                            transition: all ease 250ms;
+            
+                            &:focus {
+                                outline: none;
+                            }
+                            &:hover {
+                                animation: pulse 250ms ease;
+                                background-color: rgb(1, 192, 11);
+                                color: $font-color;
+                            }
+                        } 
+                    }
+                    .use-button{
+                        
+                        flex: 50%;
+                        display: flex;
+            
+            
+                        #use-btn{
+                            flex: 50%;
+                            align-self: flex-start;
+            
+            
+                            background-color: rgba(114, 114, 114, 0.596);
+                            margin: 10px;
+                            height: 50px;
+            
+                            line-height: 50px;
+                        }
+                    }
+                }
+            
+            }
+        }
+
+
+
+        .group-card{
+            display: block;
+            background-color: $lv2;
+            color: $font-color;
+
+            padding: 10px;
+            // border-radius: 5px;
+            
+            margin-left: 10px;
+            margin-right: 10px;
+
+            .item-wrapper{
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+
+                .item-card{
+                    display: block;
+                    background-color: $lv3;
+
+                    width: 300px;
+
+                    padding: 10px;
+                    // // border-radius: 5px;
+                    margin-right: 3px;
+
+                    font-size: 12px;
+
+                    overflow: overlay;
+
+                    th{
+                        font-weight: 500;
+
+                    }
+                    td{
+                        font-weight: 100;
+                    }
+                    td,th{
+                        padding: 5px 15px; 
+                    }
+                }
+            }
+        }
+
+
+        .chart-wrapper{
+
+            // background-color: rgba(255, 255, 255, 0.9);
+            background-color: none;
+            margin-left: 20px;
+            // // border-radius: 20px;
+            padding: 10px;
+            width: 100%;
+            height: 100%;
+
+
+        }
+
+        #growth-wrapper{
+            // background-color: rgba(255, 255, 255, 0.5);
+            background-color: none;
+            margin-left: 20px;
+            // // border-radius: 20px;
+            padding: 10px;
+            width: 100%;
+        }
+    }
+}
+
+
+
+
+
+.certified-img{
+    background-image: url(../../../../../../../assets/icons/certified.svg)
+}
+// .uncertified-img{
+//     // background-image: url(../../../../../../../assets/icons/uncertified.svg);
+//     // opacity: 0.5;
+// }
+
+td{
+    // text-align: right;
+    padding-left: 30px;
+}
+
+.even{
+	background: rgba(255,255,255, 0.05)
+}
+
+.disable{
+    opacity: 0.5;
+}
+
+.delete{
+    background-color: rgb(170, 24, 24);
+
+}
+.use{
+    background-color: rgb(13, 126, 28);
+
+}
+.edit{
+    background-color: rgb(228, 163, 90);
+
+}
+
+.right {
+    float: right;
+}
+
+.custom-scrollbar{
+
+    overflow: auto;
+    
+    /* customize scrollbar css */
+	&::-webkit-scrollbar{
+		width:5px;
+    background-color:none;
+	}
+	&::-webkit-scrollbar:horizontal{
+		height:5px;
+	}
+	&::-webkit-scrollbar-track{
+		border:none;
+    border-radius:10px;
+    box-shadow: none;
+		-webkit-box-shadow:none;
+	}
+	&::-webkit-scrollbar-thumb{
+		background-color: $lv3;
+		border:none;
+    border-radius:16px;
+    
+        &:hover{
+        background-color: $blue;
+        }
+
+        &:active{
+        background-color: $lightblue;
+        }
+    }
+}
+
+@media (orientation: portrait) {
+
+}

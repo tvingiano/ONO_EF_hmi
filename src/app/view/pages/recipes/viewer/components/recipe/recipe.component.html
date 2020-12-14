@@ -1,0 +1,230 @@
+<div class="body">
+
+    <div class="page-title">
+
+        <div class="logo">
+            <div class="img"></div>
+        </div>
+    
+        <div class="info">
+            <div class="title">Recipes for '<i> {{this.seed.SeedType}} </i>': {{this.totRecipes}}</div>
+            <div class="back" (click)="goBack()">&lt; back</div>
+            <div class="src-cert">
+                Display:
+                <span (click)="cert = false" [ngClass]="cert === false ? 'selected': ''">All</span>
+                |
+                <span (click)="cert = true" [ngClass]="cert === true ? 'selected': ''">Only certified</span> 
+            </div>
+        </div>
+    
+        <div class="search">
+            <div class="searchbar">
+                <input #src id="src" class="src" type="search">
+                <div class="src-button"></div>
+            </div>
+            <div class="src-reset" (click)="src.value = ''">reset</div>
+            <div class="create-recipe">
+                <div class="new-btn" (click)="goToEditorEmpty()">Crea Nuova Ricetta</div>
+            </div>
+        </div> 
+    </div>
+    
+    <div class="wrapper custom-scrollbar">
+        <ng-container *ngFor="let recipe of this.recipes" >
+            <div [style.display]="this.recipes !== undefined ? '': 'none'"  class="recipe" *ngIf="search(recipe, src.value)">
+                
+    
+                    <div class="tab-wrapper">
+    
+                        <div class="tab" (click)="setTabActive(recipe.id, 0)" [ngClass]="isTabActive(recipe.id, 0) ? 'active':'inactive'" id="0">Home</div>
+                        <div class="tab" (click)="setTabActive(recipe.id, 1)" [ngClass]="isTabActive(recipe.id, 1) ? 'active':'inactive'" id="1">Recipe</div>
+                        <div class="tab" (click)="setTabActive(recipe.id, 2)" [ngClass]="isTabActive(recipe.id, 2)? 'active':'inactive'" id="2">Chart</div>
+                        <div class="tab" (click)="setTabActive(recipe.id, 3)" [ngClass]="isTabActive(recipe.id, 3)? 'active':'inactive'" id="3">Growth</div>
+    
+                        <div class="btn inactive delete right" (click)="deleteRecipe()">Delete</div>
+                        <div class="btn inactive use right" (click)="goToProduction()">Use</div>
+                        <div class="btn inactive edit right" (click)="goToEditor(recipe)">Edit</div>
+    
+                    </div>
+                    
+                    <div class="recipe-wrapper">
+                        <div class="group-wrapper custom-scrollbar">
+    
+                            <!-- recipe info tab -->
+                            <ng-container *ngIf="isTabActive(recipe.id, 0) === true">
+                                <div id="home">
+                                    <div class="info-card custom-scrollbar">
+                                        <div class="nav">
+                                            <div class="info">
+                                                <div id="title">{{recipe.Recipename}} <span class="subtitle">v.</span>&#32;{{recipe.Version}}</div>
+                                                <div id="version"><span class="subtitle">Type: &#32;</span>{{recipe.Recipetype}}</div>  
+                                                <div id="time"><span class="subtitle">Last edit: &#32;</span>{{recipe.Timestamp}}</div>
+                                                
+                                            </div>
+                                            <div id="certified" [ngClass]="recipe.Certified === true ? 'certified-img' : 'uncertified-img'" title="This recipe has {{recipe.Certified === true ? 'been certified': 'not been certified'}} by ONO-EF as a reliable recipe."></div>
+                                        </div>
+                                        <div class="gauge-wrapper">
+                                            <div class="consumption">
+                                                <div id="name">Consumptions</div>
+                                                <div id="energy">
+                                                    <app-gauge-chart [range]="{min: 0, max: 100}" [type]="'energy'" [id]="recipe.id" [data]="recipe.EstimatedConsumption.Energy"></app-gauge-chart>
+                                                </div>
+                                                <div id="water">
+                                                    <app-gauge-chart [range]="{min: 0, max: 100}" [type]="'water'" [id]="recipe.id" [data]="recipe.EstimatedConsumption.Water"></app-gauge-chart>
+                                                </div>
+                                                <div class="gauge-label-energy">kW/h</div>
+                                                <div class="gauge-label-water">Liters</div>
+                                            </div>
+                                            <div class="production">
+                                                <div id="name">Production</div>
+                                                <div id="prod">
+                                                    <app-gauge-chart [range]="{min: 0, max: 20}" [type]="'prod'" [id]="recipe.id" [data]="recipe.EstimatedProduction"></app-gauge-chart>
+                                                </div>
+                                                <div class="gauge-label-prod">Kg/m<sup>2</sup></div>
+                                            </div>
+                                            <div class="duration">
+                                                <div id="name">Duration</div>
+                                                <div id="dur">
+                                                    <!-- modify the inputs when nwe recipes will be added, the one already in the DB contains only dataperiod in days-->
+                                                    <app-gauge-chart [range]="{min: 1, max: 90}" [type]="'dur'" [id]="recipe.id" [data]="recipe.TotalDuration / 1440"></app-gauge-chart>
+                                                </div>
+                                                <div class="gauge-label-dur">Days</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="info-wrapper">
+                                        <div class="table-wrapper custom-scrollbar">
+                                            <table class="info-table">
+                                                <tr>
+                                                    <th colspan="2">{{recipe.Recipename}} v.{{recipe.Version}}</th>
+                                                </tr>
+                                                <tr class="even">
+                                                    <th>Type</th>
+                                                    <td>{{recipe.Recipetype}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Seed</th>
+                                                    <td>{{seed.SeedType}}</td>
+                                                </tr>
+                                                <tr class="even">
+                                                    <th>tot Duration</th>
+                                                    <td>{{recipe.TotalDuration / 60}} days</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Certified</th>
+                                                    <td>{{recipe.Certified}}</td>
+                                                </tr>
+                                                <tr class="even">
+                                                    <th>Energy</th>
+                                                    <td>{{recipe.EstimatedConsumption.Energy}} kW/h</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Water</th>
+                                                    <td>{{recipe.EstimatedConsumption.Water}} L</td>
+                                                </tr>
+                                                <tr class="even">
+                                                    <th>Production</th>
+                                                    <td>{{recipe.EstimatedProduction}} Kg/m<sup>2 </sup></td>
+                                                </tr>
+                                                <tr>
+                                                    <th coslpan="2">Description</th>
+                                                </tr>
+                                                <tr class="even">
+                                                    <td colspan="2">{{recipe.Description}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="2">Note</th>
+                                                </tr>
+                                                <tr class="even">
+                                                    <td colspan="2">{{recipe.Note}}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </ng-container>
+    
+                            <!-- recipe details tab -->
+                            <ng-container *ngIf="isTabActive(recipe.id, 1) === true">
+                                <div class="group-card" *ngFor="let group of recipe.Periods">
+                                    <b style="font-size: 20px">{{group.Title}}</b><span style="float: right">Repetition: <b style="font-size: 20px">{{group.Exp}}</b></span>
+                                    <div class="item-wrapper">
+                                        <ng-container *ngFor="let item of group.Items">
+                                            <ng-container *ngIf="item.Name">
+                                                <div class="item-card">
+                                                    <table>
+                                                        <tr>
+                                                            <th colspan="2" style="text-align: center">{{item.Name}}</th>
+                                                        </tr>
+                                                        <tr class = "even">
+                                                            <th>Photoperiod</th>
+                                                            <td>{{item.Photoperiod.Day / 60}}:{{item.Photoperiod.Night / 60}}h</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Intensity</th>
+                                                            <td>{{item.LightIntensity}}</td>
+                                                        </tr>
+                                                        <tr class = "even">
+                                                            <th>Spectrum</th>
+                                                            <td>{{item.LightSpectrum}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Dist</th>
+                                                            <td>{{item.DrawerDistance}}cm</td>
+                                                        </tr>
+                                                        <tr class = "even">
+                                                            <th>Refill</th>
+                                                            <td>{{getRefillType(item.Refill.RefillType)}} ({{item.Refill.Frequency / 60}} hours)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Solution</th>
+                                                            <td>{{item.Solution}} ({{item.SolutionQuantity}} l)</td>
+                                                        </tr>
+                                                        <tr class = "even">
+                                                            <th>Ph</th>
+                                                            <td>{{item.Refill.Ph.Min}} - {{item.Refill.Ph.Max}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Ec</th>
+                                                            <td>{{item.Refill.Ec.Min}} - {{item.Refill.Ec.Max}}</td>
+                                                        </tr>
+                                                        <tr class = "even">
+                                                            <th>Temp.</th>
+                                                            <td>{{item.Temperature}}°C</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Hum</th>
+                                                            <td>{{item.Humidity}}%</td>
+                                                        </tr>
+                                                        <tr class = "even">
+                                                            <th>Duration</th>
+                                                            <td>{{item.PeriodDuration / 1440}} days</td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </ng-container>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </ng-container>
+    
+                            <!-- recipe chart tab -->
+                            <ng-container *ngIf="isTabActive(recipe.id, 2) === true">
+                                <div class="chart-wrapper">
+                                    <app-step-chart [periods]="recipe.Periods" [id]="recipe.id"></app-step-chart>
+                                </div>
+                            </ng-container>
+    
+                            <!-- recipe growth chart -->
+                            <ng-container *ngIf="isTabActive(recipe.id, 3) === true">
+                                    <div class="chart-wrapper">
+                                        <app-production-chart [seed]="this.seed.Quality.HeightCurve" [recipe]="recipe"></app-production-chart>
+                                    </div>
+                            </ng-container>
+                        </div>
+                    </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

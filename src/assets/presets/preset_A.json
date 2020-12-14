@@ -1,0 +1,295 @@
+[{
+  "pid": -2,
+  "name": "empty",
+  "note": ""
+}, {
+  "pid": -1,
+  "name": "sprout_A",
+  "note": "",
+  "photoperiod": {
+    "day": 0,
+    "night": 24
+  },
+  "lightintensity": 0,
+  "lightspectrum": "OFF",
+  "drawerdistance": 10,
+  "solution": "Water",
+  "solutionquantity": 5,
+  "refill": {
+    "ph": {
+      "min": 6.8,
+      "max": 7.3
+    },
+    "ec": {
+      "min": 200,
+      "max": 300
+    },
+    "type": "substitutive",
+    "frequency": 1
+  },
+  "temperature": 27,
+  "humidity": 50,
+  "periodduration": 10,
+  "testfactor": 5
+}, {
+  "pid": -1,
+  "name": "sprout_B",
+  "note": "",
+  "photoperiod": {
+    "day": 0,
+    "night": 24
+  },
+  "lightintensity": 0,
+  "lightspectrum": "OFF",
+  "drawerdistance": 10,
+  "solution": "Hoagland",
+  "solutionquantity": 10,
+  "refill": {
+    "ph": {
+      "min": 7,
+      "max": 8
+    },
+    "ec": {
+      "min": 900,
+      "max": 1000
+    },
+    "type": "corrective",
+    "frequency": 1
+  },
+  "temperature": 27,
+  "humidity": 50,
+  "periodduration": 11,
+  "testfactor": 5
+}, {
+  "pid": -1,
+  "name": "sprout_C",
+  "note": "",
+  "photoperiod": {
+    "day": 18,
+    "night": 6
+  },
+  "lightintensity": 80,
+  "lightspectrum": "White",
+  "drawerdistance": 10,
+  "solution": "Water",
+  "solutionquantity": 8,
+  "refill": {
+    "ph": {
+      "min": 6.9,
+      "max": 7.1
+    },
+    "ec": {
+      "min": 300,
+      "max": 400
+    },
+    "type": "substitutive",
+    "frequency": 5
+  },
+  "temperature": 26,
+  "humidity": 50,
+  "periodduration": 14,
+  "testfactor": 3
+}, {
+  "pid": -1,
+  "name": "sprout_D",
+  "note": "",
+  "photoperiod": {
+    "day": 16,
+    "night": 8
+  },
+  "lightintensity": 500,
+  "lightspectrum": "RedAndBlue",
+  "drawerdistance": 20,
+  "solution": "Hoagland",
+  "solutionquantity": 7,
+  "refill": {
+    "ph": {
+      "min": 6.8,
+      "max": 7.2
+    },
+    "ec": {
+      "min": 950,
+      "max": 1000
+    },
+    "type": "substitutive",
+    "frequency": 2
+  },
+  "temperature": 26,
+  "humidity": 60,
+  "periodduration": 3,
+  "testfactor": 1
+}, {
+  "pid": -1,
+  "name": "seedling_A",
+  "note": "",
+  "photoperiod": {
+    "day": 16,
+    "night": 8
+  },
+  "lightintensity": 152,
+  "lightspectrum": "White",
+  "drawerdistance": 20,
+  "solution": "Water",
+  "solutionquantity": 13,
+  "refill": {
+    "ph": {
+      "min": 6.5,
+      "max": 7.5
+    },
+    "ec": {
+      "min": 200,
+      "max": 300
+    },
+    "type": "substitutive",
+    "frequency": 5
+  },
+  "temperature": 26,
+  "humidity": 50,
+  "periodduration": 7,
+  "testfactor": 2
+}, {
+  "pid": -1,
+  "name": "seedling_B",
+  "note": "",
+  "photoperiod": {
+    "day": 16,
+    "night": 8
+  },
+  "lightintensity": 129,
+  "lightspectrum": "RedAndBlue",
+  "drawerdistance": 20,
+  "solution": "Hoagland",
+  "solutionquantity": 24,
+  "refill": {
+    "ph": {
+      "min": 6.3,
+      "max": 7.3
+    },
+    "ec": {
+      "min": 900,
+      "max": 1050
+    },
+    "type": "substitutive",
+    "frequency": 2
+  },
+  "temperature": 25,
+  "humidity": 50,
+  "periodduration": 14,
+  "testfactor": 4
+}, {
+  "pid": -1,
+  "name": "vegetative_A",
+  "note": "",
+  "photoperiod": {
+    "day": 16,
+    "night": 8
+  },
+  "lightintensity": 500,
+  "lightspectrum": "RedAndBlue",
+  "drawerdistance": 20,
+  "solution": "Baseplant",
+  "solutionquantity": 13,
+  "refill": {
+    "ph": {
+      "min": 6.6,
+      "max": 7.6
+    },
+    "ec": {
+      "min": 700,
+      "max": 800
+    },
+    "type": "corrective",
+    "frequency": 3
+  },
+  "temperature": 25,
+  "humidity": 50,
+  "periodduration": 7,
+  "testfactor": 3
+}, {
+  "pid": -1,
+  "name": "vegetative_B",
+  "note": "",
+  "photoperiod": {
+    "day": 16,
+    "night": 8
+  },
+  "lightintensity": 500,
+  "lightspectrum": "Purple",
+  "drawerdistance": 20,
+  "solution": "Water",
+  "solutionquantity": 16,
+  "refill": {
+    "ph": {
+      "min": 6.5,
+      "max": 7.5
+    },
+    "ec": {
+      "min": 700,
+      "max": 800
+    },
+    "type": "corrective",
+    "frequency": 5
+  },
+  "temperature": 24,
+  "humidity": 50,
+  "periodduration": 12,
+  "testfactor": 4
+}, {
+  "pid": -1,
+  "name": "flowering",
+  "note": "",
+  "photoperiod": {
+    "day": 20,
+    "night": 4
+  },
+  "lightintensity": 170,
+  "lightspectrum": "White",
+  "drawerdistance": 30,
+  "solution": "Baseplant",
+  "solutionquantity": 24,
+  "refill": {
+    "ph": {
+      "min": 6.6,
+      "max": 7.6
+    },
+    "ec": {
+      "min": 1050,
+      "max": 1250
+    },
+    "type": "corrective",
+    "frequency": 5
+  },
+  "temperature": 28,
+  "humidity": 67,
+  "periodduration": 7,
+  "testfactor": 1
+}, {
+  "pid": -1,
+  "name": "ripening",
+  "note": "",
+  "photoperiod": {
+    "day": 19,
+    "night": 5
+  },
+  "lightintensity": 201,
+  "lightspectrum": "StarLight 2000",
+  "drawerdistance": 30,
+  "solution": "Hoagland",
+  "solutionquantity": 18,
+  "refill": {
+    "ph": {
+      "min": 6,
+      "max": 7.5
+    },
+    "ec": {
+      "min": 800,
+      "max": 900
+    },
+    "type": "corrective",
+    "frequency": 7
+  },
+  "temperature": 25,
+  "humidity": 50,
+  "periodduration": 7,
+  "testfactor": 3
+}]

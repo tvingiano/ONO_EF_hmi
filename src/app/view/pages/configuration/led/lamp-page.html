@@ -1,0 +1,93 @@
+<h1 mat-dialog-title>Custom turn on</h1>
+
+<div mat-dialog-content>
+
+  <!-- <p>Panel type:</p>
+  <mat-form-field>
+    <mat-select [(ngModel)]="data.panel">
+      <mat-option *ngFor="let panel of panels" [(value)]="panel">
+        {{panel}} 
+      </mat-option>
+    </mat-select>
+  </mat-form-field> -->
+
+  <!-- <p>Distance:</p>
+  <mat-form-field>
+    <mat-select [(ngModel)]="data.distance">
+      <mat-option *ngFor="let distance of distances" [(value)]="distance">
+        {{distance}} 
+      </mat-option>
+    </mat-select>
+  </mat-form-field> -->
+
+  <div *ngIf="data.type === 'Full' || data.type === 'White'">
+    <p>White PAR:</p>
+    <mat-form-field>
+      <input matInput [(ngModel)]="data.white">
+      <mat-hint>{{data.type === 'Full'? "Max: 114.7" : "Max: 229.4"}}</mat-hint>
+
+    </mat-form-field>
+  </div>
+
+
+  <div *ngIf="data.type === 'Full' || data.type === 'Red&Blue'">
+
+    <p>Red PAR:</p>
+    <mat-form-field>
+      <input matInput [(ngModel)]="data.red">
+      <mat-hint>Max: 209.7</mat-hint>
+
+    </mat-form-field>
+  </div>
+
+  <div *ngIf="data.type === 'Full' || data.type === 'Red&Blue'">
+
+    <p>Blue PAR:</p>
+    <mat-form-field>
+      <input matInput [(ngModel)]="data.blue">
+      <mat-hint>Max: 129.4</mat-hint>
+
+    </mat-form-field>
+  </div>
+
+  <div *ngIf="data.type === 'Purple'">
+
+    <p>Purple PAR:</p>
+    <mat-form-field>
+      <input matInput [(ngModel)]="data.purple">
+      <mat-hint>Max: 416</mat-hint>
+
+    </mat-form-field>
+  </div>
+  <div *ngIf="data.type === 'PLC'">
+    <p>White:</p>
+    <mat-radio-group [(ngModel)]="data.white">
+      <mat-radio-button *ngFor="let booll of bools" value="{{booll}}">
+        {{booll}}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div *ngIf="data.type === 'PLC'">
+    <p>Red:</p>
+    <mat-radio-group [(ngModel)]="data.red">
+      <mat-radio-button *ngFor="let booll of bools" value="{{booll}}">
+        {{booll}}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div *ngIf="data.type === 'PLC'">
+    <p>Blue:</p>
+    <mat-radio-group [(ngModel)]="data.blue">
+      <mat-radio-button *ngFor="let booll of bools" value="{{booll}}">
+        {{booll}}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Exit</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Turn on</button>
+
+</div>

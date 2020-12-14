@@ -1,0 +1,28 @@
+.item{
+
+    display: inline-flex;
+    max-width: max-content;
+    height:120px;
+    
+}
+
+.bracket{
+    max-width: 20px;
+    height: 120px;
+    display: inline-flex;
+    margin: 0 10px;    
+}
+
+.content{
+    display:inline-flex;
+    line-height: 120px;
+    position: relative;
+}
+
+.exp{
+    position:relative;
+    display: inline-flex;
+
+    max-width: min-content;
+    height: 20px;
+}

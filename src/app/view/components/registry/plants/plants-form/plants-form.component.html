@@ -1,0 +1,66 @@
+<div class="container-fluid" style="margin-left:30px">
+    <mat-card class="mb-3" *ngIf="formGroup">
+        <mat-card-header>
+            <mat-card-title>{{title}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <!-- MODULE INFO FORM -->
+            <form [formGroup]="formGroup">
+                <h6>{{'label.baseInfo' | translate}}</h6>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>{{'label.Plant' | translate}}</mat-label>
+                    <input matInput type="text"
+                           placeholder="{{'label.Plant' | translate}}"
+                           formControlName="Plant"
+                           autocomplete="off"
+                           [disableControl]="isDisabled('Plant')">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>{{'label.Farming' | translate}}</mat-label>
+                    <mat-select formControlName="Farming" [disableControl]="isDisabled('Farming')">
+                        <mat-option *ngFor="let farmingsInfo of farmsList" [value]="farmingsInfo.Farming">{{farmingsInfo.Farming}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <h6>{{'label.additionInformation' | translate}}</h6>
+                <!-- Description -->
+                <mat-form-field appearance="outline">
+                    <mat-label>{{'label.description' | translate}}</mat-label>
+                    <textarea matInput placeholder="{{'label.description' | translate}}"
+                              formControlName="Description" [disableControl]="isDisabled('Description')"></textarea>
+                </mat-form-field>
+                <!-- Note -->
+                <mat-form-field appearance="outline">
+                    <mat-label>{{'label.note' | translate}}</mat-label>
+                    <textarea matInput placeholder="{{'label.note' | translate}}"
+                              formControlName="Note" [disableControl]="isDisabled('Note')"></textarea>
+                </mat-form-field>
+                <!-- Description -->
+                <mat-form-field appearance="outline">
+                    <mat-label>{{'label.tag' | translate}}</mat-label>
+                    <textarea matInput placeholder="{{'label.tag' | translate}}"
+                              formControlName="Tag" [disableControl]="isDisabled('Tag')"></textarea>
+                </mat-form-field>
+            </form>
+        </mat-card-content>
+        <mat-card-actions align="end">
+            <!-- EDIT BUTTON -->
+            <button mat-button (click)="onEditHandler()"
+                    *ngIf="componentState === pageStates.VIEW && formData">{{"label.edit" | translate}}</button>
+
+            <!-- SAVE BUTTON -->
+            <button mat-button color="warn" *ngIf="componentState === pageStates.EDIT" [disabled]="!dirty"
+                    (click)="formSubmit.emit(formGroup)">{{"label.save" | translate}}</button>
+
+            <!-- CREATE BUTTON -->
+            <button mat-button color="warn" *ngIf="componentState === pageStates.CREATE" [disabled]="formGroup.invalid"
+                    (click)="formSubmit.emit(formGroup)">{{"label.create" | translate}}</button>
+
+            <!-- CANCEL BUTTON -->
+            <button mat-button color="primary" *ngIf="componentState === pageStates.EDIT"
+                    (click)="onCancelHandler()">{{"label.cancel" | translate}}</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

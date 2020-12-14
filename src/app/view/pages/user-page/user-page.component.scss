@@ -1,0 +1,38 @@
+@import '../../../../assets/styles/variables.scss';
+
+:host {
+
+  color: $font-color;
+
+  mat-card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  .list-group-item {
+    border: 0 !important;
+    background-color: $lv0;
+  }
+  
+  mat-label.list-label {
+    color: $lightblue;
+    
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    font-weight: 500;
+  }
+}
+
+.page-wrapper{
+  background-color: $lv-1;
+  width: 97%;
+  height: 100%;
+
+  padding: 2.5%;
+}

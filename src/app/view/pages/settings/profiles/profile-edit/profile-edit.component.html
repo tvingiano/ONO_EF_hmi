@@ -1,0 +1,25 @@
+<app-page-wrapper title="Create profile" shadow="false" >
+    <mat-card class="no-shadow">
+        <div class="row">
+            <div class="col-md-4">
+                <mat-card class="no-shadow">
+                    <app-profiles-list showTitle='false' (profileSelect)="onProfileSelect($event)"></app-profiles-list>
+                    <mat-card-actions align="end">
+                        <button *ngIf="profileInfo" mat-button color="warn" [disabled]="!profileInfo.Deletable"
+                                (click)="deleteSelectedProfile()">
+                            {{'label.delete' | translate}}
+                        </button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+            <div class="col-md-8">
+                <app-profile-form
+                        [formData]="profileInfo"
+                        (formSubmit)="onFormSubmit($event)"
+                        [disabledFields]="disabledFields"
+                ></app-profile-form>
+            </div>
+        </div>
+    </mat-card>
+</app-page-wrapper>
+

@@ -1,0 +1,35 @@
+<button class="btn cancel" type="close" (keydown.esc)="close()" (click)="close()"></button>  
+<h2>Recipe Settings</h2>
+
+<form [formGroup]="recipeSettingsForm">
+  <label >Name </label><span>{{this.dataService.finalJson.Recipename}}</span><br>
+  <input type="text"  formControlName="Recipename"/><br>
+
+  <label >Version </label><span>{{this.dataService.finalJson.Version}}</span><br>
+  <input type="number" value="{{this.dataService.finalJson.Version}}" formControlName="Version"/><br>
+
+  <label >Type </label><span>{{this.dataService.finalJson.Recipetype}}</span><br>
+  <input type="text"  formControlName="Recipetype"/><br>
+
+  <label >Seed type: </label><span>{{this.dataService.finalJson.SeedType}}</span><br>
+  <select id="Seedtype" formControlName="Seedtype" value="{{this.dataService.finalJson.SeedType}}">
+    <option *ngFor="let seed of this.sortedType" value="{{seed}}">{{seed}}</option>
+  </select><br>
+
+  <label >Estimated Production </label><span>{{this.dataService.finalJson.EstimatedProduction}} Kg/m<sup>2</sup></span><br>
+  <input type="number" value="{{this.dataService.finalJson.EstimatedProduction}}" formControlName="EstProd"/>Kg/m<sup>2</sup><br>
+
+  <label >Description </label><br>
+  <textarea rows="3" formControlName="Description" placeholder="{{this.dataService.finalJson.Description}}"></textarea><br>
+
+  <label >Note </label><br>
+  <textarea rows="3" formControlName="Note" placeholder="{{this.dataService.finalJson.Note}}"></textarea><br>
+
+  <label >Tag </label><br>
+  <input type="text"  formControlName="Tag" placeholder="{{this.dataService.finalJson.Tag}}"><br>
+
+</form>
+
+<div class="footer">
+    <button class="btn submit" type="submit" (click)="submit()">Confirm</button> 
+</div>

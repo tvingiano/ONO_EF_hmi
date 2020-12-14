@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Add Ozonated Water</h1>
+<div mat-dialog-content>
+
+  <p>Quantity to add [l]:</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.totransfer">
+  </mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Exit</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Start</button>
+</div>

@@ -1,0 +1,62 @@
+<ng-container *ngIf="systemInfo">
+    <div class="row">
+        <!-- left block -->
+        <div class="col-md-3">
+            <h4>{{systemInfo.SystemName || '-'}}</h4>
+            <div class="bottom-list">
+                <button mat-button (click)="onEditClick(systemInfo)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-button (click)="onDeleteClick(systemInfo)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </div>
+        <!-- right block  -->
+        <div class="col-md-9">
+            <div class="horizontal-list">
+                <div class="horizontal-list-item">
+                    <mat-label>Account Holder</mat-label>
+                    <p>{{systemInfo.AccountHolder || '-'}}</p>
+                </div>
+                <div class="horizontal-list-item">
+                    <mat-label>Hardware Version</mat-label>
+                    <p>{{systemInfo.HardwareVersion || '-'}}</p>
+                </div>
+                <div class="horizontal-list-item">
+                    <mat-label>Production Date</mat-label>
+                    <p>{{(systemInfo.ProductionDate | date) || '-'}}</p>
+                </div>
+                <div class="horizontal-list-item">
+                    <mat-label>Installation Date</mat-label>
+                    <p>{{(systemInfo.InstallationDate | date) || '-'}}</p>
+                </div>
+                <div class="horizontal-list-item">
+                    <mat-label>Place</mat-label>
+                    <p>{{systemInfo.Place || '-'}}</p>
+                </div>
+                <div class="horizontal-list-item">
+                    <mat-label>Plc Version</mat-label>
+                    <p>{{systemInfo.PlcVersion || '-'}}</p>
+                </div>
+                <div class="horizontal-list-item">
+                    <mat-label>Software Version</mat-label>
+                    <p>{{systemInfo.SoftwareVersion || '-'}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- show spinner -->
+    <div class="d-flex justify-content-center" *ngIf="!modulesList">
+        <mat-spinner diameter="50"></mat-spinner>
+    </div>
+    <!-- system modules -->
+    <app-modules-list *ngIf="modulesList" title="{{'label.systemModules' | translate}}"
+                      [initialData]="modulesList"
+                      (createClick)="moduleCreateHandler()"
+                      (viewClick)="moduleViewHandler($event)"
+                      (editClick)="moduleEditHandler($event)"
+                      (deleteClick)="moduleDeleteHandler($event)"
+    ></app-modules-list>
+</ng-container>
+

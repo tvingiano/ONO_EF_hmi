@@ -1,0 +1,58 @@
+<h1 mat-dialog-title>Porters stress test</h1>
+<div mat-dialog-content>
+
+  <!-- <p>Indirizzo PLC:</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.address">
+  </mat-form-field>
+
+  <p>Deck:</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.register">
+  </mat-form-field> -->
+
+  <p>Drawer:</p>
+  <mat-form-field>
+    <mat-select [(ngModel)]="data.DrawerSerial">
+      <mat-option *ngFor="let val1 of drawers" [(value)]="val1">
+        {{val1}} 
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <p>Slot:</p>
+  <mat-form-field>
+    <mat-select [(ngModel)]="data.to">
+      <mat-option *ngFor="let val2 of slots" [(value)]="val2">
+        {{val2}} 
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <p>Reps:</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.reps">
+  </mat-form-field>
+
+  <p>Acceleration:</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.acceleration">
+  </mat-form-field>
+
+  <p>Speed:</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.speed">
+  </mat-form-field>
+
+  <p>Deceleration:</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.deceleration">
+  </mat-form-field>
+
+
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Exit</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Go</button>
+</div>

@@ -1,0 +1,26 @@
+@import "../../../../../assets/styles/mixins";
+
+:host {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.mat-toolbar-row, .mat-toolbar-single-row{
+  height: 80px;
+}
+.mat-toolbar{
+  background: none;
+  color: #FFFFFF;
+}
+.logo{
+  @include flex(row, center, center);
+  width: 100px;
+  img{
+    width: 100%;
+  }
+}

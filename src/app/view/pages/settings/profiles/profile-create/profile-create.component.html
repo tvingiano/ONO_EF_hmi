@@ -1,0 +1,20 @@
+<app-page-wrapper title="Create profile">
+    <mat-card>
+        <div class="row">
+            <div class="col-md-4">
+                <mat-card class="">
+                    <mat-card-header>
+                        <mat-card-title>
+                            {{'label.CloneProfileParams' | translate}}
+                        </mat-card-title>
+                    </mat-card-header>
+                    <app-profiles-list showTitle='false' (profileSelect)="onProfileSelect($event)"></app-profiles-list>
+                </mat-card>
+            </div>
+            <div class="col-md-8">
+                <app-profile-form [formData]="profileInfo" (formSubmit)="onFormSubmit($event)"></app-profile-form>
+            </div>
+        </div>
+    </mat-card>
+</app-page-wrapper>
+

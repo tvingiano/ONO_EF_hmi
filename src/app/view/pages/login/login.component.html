@@ -1,0 +1,42 @@
+<div class="authorization-block">
+    <mat-card>
+        <mat-card-title>{{'label.login' | translate}}</mat-card-title>
+        <mat-card-content>
+            <form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()" (keyup.enter)="onSubmit()" #loginForm="ngForm">
+                <mat-form-field appearance="outline">
+                    <mat-label>{{'label.userName' | translate}}</mat-label>
+                    <mat-icon matPrefix>email</mat-icon>
+                    <input type="text" matInput placeholder="{{'label.userName' | translate}}"
+                           formControlName="username"
+                           autocomplete="username">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>{{'label.password' | translate}}</mat-label>
+                    <mat-icon matPrefix>lock_open</mat-icon>
+                    <input type="password" matInput placeholder="{{'label.password' | translate}}"
+                           formControlName="password"
+                           autocomplete="password">
+
+                </mat-form-field>
+
+            </form>
+        </mat-card-content>
+
+        <mat-card-actions>
+            <button *ngIf="!loading" mat-stroked-button (click)="loginForm.ngSubmit.emit()"
+                    [disabled]="!loginForm.form.valid">{{'label.login'|translate}}
+            </button>
+            <mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
+        </mat-card-actions>
+    </mat-card>
+
+    <!--<div class="forget-pass-row">
+        <div class="forget-pwd">
+            <button  mat-button >Forgot password?</button>
+        </div>
+        <div class="create-acc">
+            <button mat-button >Create a new account</button>
+        </div>
+    </div>-->
+</div>

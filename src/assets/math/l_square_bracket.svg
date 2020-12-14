@@ -1,0 +1,35 @@
+<svg width="93" height="641" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet">
+ <defs>
+  <path id="a2MW5iHD4o" d="m3.14,41.65l38.32,0l0,563.42l-38.32,0l0,-563.42z"/>
+  <path id="b14j8HSO6l" d="m45.96,3.34l0,42.82l-42.82,0c0,0 0,0 0,0c0,-23.65 19.18,-42.82 42.82,-42.82c0,0 0,0 0,0z"/>
+  <path id="e1hyHx4Hfk" d="m3.14,601.69l38.32,0l0,38.31c0,0 0,0 0,0c-21.16,0 -38.32,-17.15 -38.32,-38.31c0,0 0,0 0,0z"/>
+  <path id="a5h0oCbRUg" d="m41.46,3.34c16.18,0 26.3,0 30.35,0c6.88,0 12.47,5.58 12.47,12.47c0,6.07 0,10.39 0,16.1c0,7.87 -6.38,14.25 -14.25,14.25c-3.81,0 -13.34,0 -28.57,0l0,-42.82z"/>
+  <path id="h2I05POsGf" d="m38.87,601.69c14.48,0 23.53,0 27.15,0c6.16,0 11.16,4.99 11.16,11.15c0,5.43 0,10.57 0,16c0,6.17 -5,11.16 -11.16,11.16c-3.62,0 -12.67,0 -27.15,0l0,-38.31z"/>
+ </defs>
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="643" width="95" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g id="svg_1">
+   <g id="svg_3">
+    <g id="svg_4">
+     <use x="2.79" y="-1.169986" id="svg_5" fill="#00aeef" xlink:href="#a2MW5iHD4o"/>
+    </g>
+    <g id="svg_6">
+     <use x="2.79" y="-1.169986" id="svg_7" fill="#00aeef" xlink:href="#b14j8HSO6l"/>
+    </g>
+    <g id="svg_8">
+     <use x="2.79" y="-1.169986" id="svg_9" fill="#00aeef" xlink:href="#e1hyHx4Hfk"/>
+    </g>
+    <g id="svg_10">
+     <use x="2.79" y="-1.169986" id="svg_11" fill="#00aeef" xlink:href="#a5h0oCbRUg"/>
+    </g>
+    <g id="svg_12">
+     <use x="2.79" y="-1.169986" id="svg_13" fill="#00aeef" xlink:href="#h2I05POsGf"/>
+    </g>
+   </g>
+  </g>
+ </g>
+</svg>

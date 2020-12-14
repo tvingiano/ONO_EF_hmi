@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Purge Nutrient</h1>
+<div mat-dialog-content>
+  
+  <p>Tank:</p>
+  <mat-form-field>
+    <input type="number" min="1" max="4" matInput [(ngModel)]="data.tank">
+    <!--input matInput [(ngModel)]="data.tank"-->
+  </mat-form-field>
+
+  <p>Quantity to purge [ml]:</p>
+  <mat-form-field>
+    <input type="number" min="0" max="60000" step="1" matInput [(ngModel)]="data.quantity">
+    <!--input matInput [(ngModel)]="data.quantity"-->
+  </mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Exit</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Start</button>
+</div>

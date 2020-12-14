@@ -1,0 +1,30 @@
+<app-page-wrapper title="Farmings" shadow="false">
+    <mat-card>
+        <mat-card-content>
+            <div class="row w-100">
+                <div class="col-md-7 no-padding">
+                    <!-- show spinner -->
+                    <div class="d-flex justify-content-center mt-5" *ngIf="!farmingsInfoList">
+                        <mat-spinner diameter="50"></mat-spinner>
+                    </div>
+                    <app-items-table *ngIf="farmingsInfoList"
+                                     [title]="'label.FarmingsList' | translate"
+                                     [initialData]="farmingsInfoList"
+                                     [displayedColumns]="displayedColumns"
+                                     [actionButtons]="actionButtons"
+                                     (createClick)="createClick()"
+                                     (editClick)="farmingsInfo=$event"
+                                     (deleteClick)="deleteClick($event)"
+                    ></app-items-table>
+                </div>
+                <div class="col-md-5 no-padding">
+                    <app-farming-create-form [formData]="farmingsInfo"
+                                             [initialState]="!farmingsInfo ? pageStates.CREATE : pageStates.VIEW"
+                                             (formSubmit)="!farmingsInfo ? onCreateFromSubmit($event):onEditFromSubmit($event)"
+                    ></app-farming-create-form>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+</app-page-wrapper>

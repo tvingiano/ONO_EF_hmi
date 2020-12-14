@@ -1,0 +1,79 @@
+<h1 mat-dialog-title>Refill schedule</h1>
+
+<div style="height: 670px;">
+  <p>Refill type:</p>
+  <mat-form-field>
+    <!-- <mat-label>Refill type</mat-label> -->
+    <mat-select [(ngModel)]="data.type">
+      <mat-option *ngFor="let type of types" value="{{type}}">{{type}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div *ngIf="data.type !== 'Spray'">
+    <mat-form-field>
+      <p>Tanks:</p>
+      <!-- <mat-label>Tanks</mat-label> -->
+      <mat-select multiple [(ngModel)]="data.tank">
+        <mat-option *ngFor="let tank of tanks" value="{{tank}}">{{tank}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div *ngIf="data.type !== 'Spray'">
+    <p>Volume [l]:</p>
+    <mat-form-field>
+      <input matInput [(ngModel)]="data.volume">
+    </mat-form-field>
+  </div>
+  <div *ngIf="data.type !== 'Spray'">
+    <p>pH [%]:</p>
+    <mat-form-field>
+      <input matInput [(ngModel)]="data.ph">
+    </mat-form-field>
+  </div>
+  <div *ngIf="data.type !== 'Spray'">
+    <p>Electric conducibility [mS]:</p>
+    <mat-form-field>
+      <input matInput [(ngModel)]="data.ec">
+    </mat-form-field>
+  </div>
+  <div *ngIf="data.type == 'Spray'">
+    <p>Liquid to spray:</p>
+    <mat-form-field>
+      <mat-select [(ngModel)]="data.solution">
+        <mat-option *ngFor="let sol of sols" value="{{sol}}">{{sol}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div>
+    <p>Schedule type:</p>
+    <mat-form-field>
+      <!-- <mat-label>Refill type</mat-label> -->
+      <mat-select [(ngModel)]="data.sched">
+        <mat-option *ngFor="let sched of scheds" value="{{sched}}">{{sched}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+  <div *ngIf="data.sched == 'Periodical'">
+    <div>
+      <p>Start Hour:</p>
+      <mat-form-field>
+        <input matInput [(ngModel)]="data.hour">
+      </mat-form-field>
+    </div>
+    <div>
+      <p>Start Minute:</p>
+      <mat-form-field>
+        <input matInput [(ngModel)]="data.minute">
+      </mat-form-field>
+    </div>
+    <div>
+      <p>Frequency:</p>
+      <mat-form-field>
+        <input matInput [(ngModel)]="data.frequency">
+      </mat-form-field>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Exit</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Schedule</button>
+  </div>

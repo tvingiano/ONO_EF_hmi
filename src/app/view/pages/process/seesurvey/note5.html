@@ -1,0 +1,87 @@
+<mat-card-title style= "text-align:center; margin-top: 5px;">Samplings</mat-card-title> 
+
+<div >
+
+
+    <div class="mat-elevation-z8" >
+
+        <table mat-table class="mat-elevation-z8 mat-table" [dataSource]="dataSource" matSort style="height:100px">
+            <ng-container matColumnDef="Type">
+                <th mat-header-cell *matHeaderCellDef> Sampling Type </th>
+                <td mat-cell *matCellDef="let element"> {{element.Type}} </td>
+            </ng-container> 
+             <ng-container matColumnDef="Germination">
+                <th mat-header-cell *matHeaderCellDef> Germination </th>
+                <td mat-cell *matCellDef="let element"> {{element.Germination}} </td>
+            </ng-container> 
+            <ng-container matColumnDef="Area">
+                <th mat-header-cell *matHeaderCellDef> Area </th>
+                <td mat-cell *matCellDef="let element"> {{element.Area}} </td>
+            </ng-container> 
+            <ng-container matColumnDef="Number">
+                <th mat-header-cell *matHeaderCellDef> Plants Number </th>
+                <td mat-cell *matCellDef="let element"> {{element.Number}} </td>
+            </ng-container> 
+
+            <ng-container matColumnDef="Phi2">
+                <th mat-header-cell *matHeaderCellDef> Phi2 </th>
+                <td mat-cell *matCellDef="let element"> {{element.Phi2}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="NPQt">
+                <th mat-header-cell *matHeaderCellDef> NPQt </th>
+                <td mat-cell *matCellDef="let element"> {{element.NPQt}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="FvPFmP">
+                <th mat-header-cell *matHeaderCellDef> FvPFmP </th>
+                <td mat-cell *matCellDef="let element"> {{element.FvPFmP}} </td>
+            </ng-container>
+            <ng-container matColumnDef="LeafTempDifferential">
+                <th mat-header-cell *matHeaderCellDef> LeafTempDifferential </th>
+                <td mat-cell *matCellDef="let element"> {{element.LeafTempDifferential}} </td>
+            </ng-container> 
+            <ng-container matColumnDef="RelativeChlorophyll">
+                <th mat-header-cell *matHeaderCellDef> RelativeChlorophyll </th>
+                <td mat-cell *matCellDef="let element"> {{element.RelativeChlorophyll}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="PlantsHeight">
+                <th mat-header-cell *matHeaderCellDef> PlantsHeight </th>
+                <td mat-cell *matCellDef="let element"> {{element.PlantsHeight}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="LeavesNumber">
+                <th mat-header-cell *matHeaderCellDef> LeavesNumber </th>
+                <td mat-cell *matCellDef="let element"> {{element.LeavesNumber}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="FreshWeight">
+                <th mat-header-cell *matHeaderCellDef> FreshWeight </th>
+                <td mat-cell *matCellDef="let element"> {{element.FreshWeight}} </td>
+            </ng-container>
+            <ng-container matColumnDef="StemThickness">
+                <th mat-header-cell *matHeaderCellDef> StemThickness </th>
+                <td mat-cell *matCellDef="let element"> {{element.StemThickness}} </td>
+            </ng-container>
+            <ng-container matColumnDef="SamplingDate">
+                <th mat-header-cell *matHeaderCellDef> SamplingDate </th>
+                <td mat-cell *matCellDef="let element"> {{element.SamplingDate}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Notes">
+                <th mat-header-cell *matHeaderCellDef> Notes </th>
+                <td mat-cell *matCellDef="let element"> {{element.Notes}} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+        </table>
+        <div class="mat-table">
+            <mat-paginator [pageSize]="50" [pageSizeOptions]="[50,75,100,200]" showFirstLastButtons></mat-paginator>
+        </div>
+    </div>
+
+    <button mat-button (click)="return()" style="margin-right: 45px;margin-left: 60px;margin-top:30px">Exit</button> 
+
+</div>

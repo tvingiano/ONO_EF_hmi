@@ -1,0 +1,154 @@
+@import '../../../../../assets/styles/variables.scss';
+@import '../../../../../styles.scss';
+
+.page-wrapper{
+    height: stretch;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    background-color: $lv-1;
+
+    color: $font-color;
+
+    user-select: none;
+
+    font-family: Roboto,Helvetica Neue,Arial,sans-serif;
+
+    .order-wrapper{
+        flex: 1;
+
+        padding: 1%;
+        margin: 15px;
+        margin-right: 7.5px;
+        background-color: $lv0;
+
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+
+
+
+        #order-card{
+            flex:100%;
+            background-color: lightseagreen;
+            padding: .5rem; 
+
+            height: 150px;
+
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+
+            .text{
+                flex: 70%;
+
+                height: fit-content;
+
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+
+                .field{
+                    height: fit-content;
+                    padding: .1rem;
+                }
+
+                .title{
+                    flex: 100%;
+                }
+                .author{
+                    flex: 40%;
+                }
+                .recipe{
+                    flex: 60%;
+                }
+            }
+            .action{
+                flex: 30%;
+
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+
+                #valid, #edit, #del{
+                    flex: calc(100/3);
+                }
+
+                #start{
+                    flex: 100%;
+                }
+            }
+
+
+        }
+
+    } 
+
+    #details-wrapper{
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        padding: 1%;
+        margin: 15px;
+        margin-left: 7.5px;
+        background-color: $lv0;
+
+        #top {
+            flex: 100%;
+            height: calc(50% - 7.5px);
+            padding: 1%;
+            margin-bottom: 7.5px;
+
+            background-color: $lv1;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            #details-table{
+                width: 100%;
+                height: 100%;
+            }
+
+        }
+
+        #bottom {
+            flex: 100%;
+            height: calc(50% - 7.5px);
+
+            background-color: $lv1;
+
+            padding: 1%;
+        }
+    }
+}
+
+
+
+@media screen and (orientation: portrait) {
+    .page-wrapper{
+        flex-direction: column;
+
+        width: 97%; 
+
+        #order-wrapper{
+            order: 1;
+            flex: 0.4;
+            margin: 0;
+            margin-top: 2%;
+            margin-bottom: 1%;
+        }
+        #details-wrapper{
+            order: 2;
+            margin: 0;
+            margin-bottom: 2%;
+            flex: 0.6;
+            margin-top: 1%;
+
+        }
+    }
+}

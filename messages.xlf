@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="loginHeader" datatype="html">
+        <source>loginHeader</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/view/pages/login/login.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="usernamePlaceholder" datatype="html">
+        <source>Username</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/view/pages/login/login.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="requiredUserName" datatype="html">
+        <source>requiredUserName</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/view/pages/login/login.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="requiredPassword" datatype="html">
+        <source>requiredPassword</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/view/pages/login/login.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="signIn" datatype="html">
+        <source>Sign In
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/view/pages/login/login.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,74 @@
+<button class="btn cancel" type="close" (keydown.esc)="close()" (click)="close()"></button>  
+<h2>Recap:</h2>
+<div class="group-wrapper">
+    <ng-container *ngFor="let group of this.dataService.groups">
+        <ng-container *ngIf="group.items[0]">
+            <div class="group-card">
+                {{group.title}}<span style="float: right">x{{group.exp}}</span>
+                <div class="item-wrapper">
+                    <ng-container *ngFor="let item of group.items">
+                        <div class="item-card">
+                            <table>
+                                <tr>
+                                    <th>Name</th>
+                                    <td>{{item.name}}</td>
+                                </tr>
+                                <tr class = "even">
+                                    <th>Photoperiod</th>
+                                    <td>{{item.photoperiod.day / 60}}:{{item.photoperiod.night / 60}}h</td>
+                                </tr>
+                                <tr>
+                                    <th>Intensity</th>
+                                    <td>{{item.lightintensity}}</td>
+                                </tr>
+                                <tr class = "even">
+                                    <th>Spectrum</th>
+                                    <td>{{item.lightspectrum}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Dist</th>
+                                    <td>{{item.drawerdistance}}cm</td>
+                                </tr>
+                                <tr class = "even">
+                                    <th>Solution</th>
+                                    <td>{{item.solution}} ({{item.solutionquantity}} l)</td>
+                                </tr>
+                                <tr>
+                                    <th>Ph</th>
+                                    <td>{{item.refill.ph.min}} - {{item.refill.ph.max}}</td>
+                                </tr>
+                                <tr class = "even">
+                                    <th>Ec</th>
+                                    <td>{{item.refill.ec.min}} - {{item.refill.ec.max}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Temp.</th>
+                                    <td>{{item.temperature}}°C</td>
+                                </tr>
+                                <tr class = "even">
+                                    <th>Hum</th>
+                                    <td>{{item.humidity}}%</td>
+                                </tr>
+                                <tr>
+                                    <th>Duration</th>
+                                    <td>{{item.periodduration / 60}}days</td>
+                                </tr>
+                                <tr class = "even">
+                                    <th>Test</th>
+                                    <td>{{item.refill.refilltype}} ({{item.refill.frequency / 60}} h)</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </ng-container>
+    </ng-container>
+</div>
+
+
+<div class="footer">
+    Do you want to confirm and send this recipe into your DB?
+    <button class="btn submit" style="float:none" type="submit" (click)="submit()">Confirm</button> 
+</div>
+

@@ -1,0 +1,14 @@
+<button class="btn cancel" type="close" (keydown.esc)="close()" (click)="close()"></button> 
+<h2>Climate settings</h2>
+
+<mat-label>Temperature</mat-label><br>
+<mat-slider #matslidertemperature value ="{{this.climate.temperature}}" min="18" max="30" step="0.5" (input)="setTemp($event)"></mat-slider>
+<input matInput min="18" max="30" class="span-input" type="number" value={{this.climate.temperature}} (change)="setTemp($event)">°C<br>
+
+<mat-label>Humidity</mat-label><br>
+<mat-slider #matsliderhumidity value ="{{this.climate.humidity}}" min="40" max="100" step="0.5" (input)="setHum($event)"></mat-slider>
+<input matInput min="40" max="100" class="span-input" type="number" value={{this.climate.humidity}} (change)="setHum($event)"> %<br>
+
+<div class="footer">
+    <button class="btn submit" type="submit" (click)="submit()">Confirm</button>  
+</div>

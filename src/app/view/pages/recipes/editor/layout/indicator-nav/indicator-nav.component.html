@@ -1,0 +1,33 @@
+<div class="limiteIndicatori noselect">
+        <div class="icon">
+            <div id="tempo" class="label"></div>
+            <span *ngIf="totDuration !== 0" id="value">{{totDuration / 1440}} days</span>
+        </div>
+        <div class="icon">
+            <div id="luce" class="label"></div>
+            <span *ngIf="totDol !== 0" id="value">{{totDol}} DoL</span>
+        </div>
+        <div class="icon">
+            <div id="hum" class="label"></div>
+            <span *ngIf="avgTemp" id="value">avg. {{avgHum}}%</span>
+        </div>
+        <div class="icon">
+            <div id="temp" class="label"></div>
+            <span *ngIf="avgTemp" id="value">avg. {{avgTemp}}°C</span>
+        </div>
+
+        <div id = "recipeForm">
+            <p>
+                name: <i>{{this.dataService.finalJson.Recipename}}</i> v.{{this.dataService.finalJson.Version}}<br>
+                type: <i>{{this.dataService.finalJson.Recipetype}}</i><br>
+                seed: <i>{{this.dataService.finalJson.SeedType}}</i><br>
+            </p> 
+        </div>
+        <div id="settings" (click)="this.openRecipeSettings()"></div>
+
+        <div class="icon">
+            <app-clock></app-clock>
+        </div>
+</div>
+
+<app-period-nav></app-period-nav>

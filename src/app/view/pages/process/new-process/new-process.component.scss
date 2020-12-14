@@ -1,0 +1,182 @@
+@import '../../../../../assets/styles/variables.scss';
+@import '../../../../../styles.scss';
+
+.ng-valid[required], .ng-valid.required  {
+    border-left: 5px solid #42A948; /* green */
+  }
+  
+.ng-invalid:not(form)  {
+border-left: 5px solid #a94442; /* red */
+}
+
+.page-wrapper{
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+
+    user-select: none;
+
+
+    .form{
+
+        min-width: 400px;
+        max-width: 60%;
+
+        margin-left: 50%;
+        transform: translateX(-50%);
+
+        padding: 15px;
+
+        background-color: $lv1;
+
+        .field{
+            flex: 100%;
+            height: fit-content;
+
+            border-bottom: solid 1px $blue;
+            padding: .5rem;
+
+
+            .form-label{
+                width: 100%;
+                height: fit-content;
+
+                padding: 5px 20px;
+            }
+
+            .text-input{
+
+                width: 80%;
+                min-width: 300px;   
+
+
+                height: fit-content;
+
+                background: none;
+                border: none;
+                border-radius: 5px; 
+                padding: 1rem 1rem;
+
+                background-color: rgba(255,255,255,0.1);
+                color: $font-color;
+
+                &:focus{
+                    outline:none;
+                    background-color: rgba(255,255,255,0.4);
+                }
+            }
+
+            .text-area{
+
+                width: 80%;
+                min-width: 300px;   
+
+                background: none;
+                border: none;
+                border-radius: 5px; 
+                padding: 1rem 1rem;
+
+                background-color: rgba(255,255,255,0.1);
+                color: $font-color;
+
+                &:focus{
+                    outline:none;
+                    background-color: rgba(255,255,255,0.4);
+                }
+            }
+
+            .select{
+
+                width: 80%;
+                min-width: 300px;
+
+                background: none;
+                border: none;
+                border-radius: 5px; 
+                padding: .5rem 2rem;
+
+                background-color: rgba(255,255,255,0.1);
+                color: $font-color;
+
+                &:focus{
+                    outline:none;
+                    background-color: rgba(255,255,255,0.4);
+                }
+
+                option{
+                    background-color: $lv1;
+                    color: $font-color;
+                }
+            }
+
+            .select-light{
+            }
+
+            .slider{
+                display: inline-block;
+                width: calc(100% - 5rem);
+                max-width: 80%;
+            }
+            .slider-input{
+                display: inline-block;
+
+                width: 5rem;
+
+                height: fit-content;
+
+
+                background: none;
+                border: none;
+                border-radius: 5px; 
+                padding: 1rem .5rem 1rem 1rem;
+
+                background-color: rgba(255,255,255,0.1);
+                color: $font-color;
+
+                &:focus {
+                    outline: none;
+                }
+            }
+
+
+            .alert-span{
+                color: rgb(255, 208, 0);
+                height: fit-content;
+                border: 0 !important;
+
+                font-size: .75rem;
+            }
+            
+        }
+
+        div[class*="-button"]{
+            border: none;
+            background: none;
+            color: $font-color;
+            margin: .5rem;
+            padding: .5rem 1.5rem;
+            border-radius: 2px;
+            width: fit-content;
+            height: fit-content;
+
+            display: inline-block;
+
+            cursor: pointer;
+        }
+
+        .submit-button{
+            background-color: $lv3 !important;
+        }
+        .clear-button{
+            float: right;
+            background-color: $lv1 !important;
+        }
+
+        .disabled{
+            opacity: 0.3;
+
+            cursor: not-allowed !important;
+        }
+    }
+
+}

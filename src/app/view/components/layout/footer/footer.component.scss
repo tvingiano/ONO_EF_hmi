@@ -1,0 +1,15 @@
+@import "../../../../../assets/styles/mixins";
+
+:host {
+  width: 100%;
+}
+
+.footer-wrapper {
+  @include flex(row, center, flex-end);
+  height: 2rem;
+  padding: 0 10px;
+}
+
+.middle-content {
+  flex: 1 1 auto;
+}

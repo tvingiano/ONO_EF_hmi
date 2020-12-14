@@ -1,0 +1,74 @@
+<div class="page-wrapper">
+    <div class="form">
+        <h1>New process Form</h1>
+
+        <div class="field">
+            <label class="form-label">Title</label>
+            <input type="text" [(ngModel)]="model.OrderID" class="text-input" name="title" required>
+            <div *ngIf="foundOrderID() === true" class="alert-span">Unavaiable title. Altready taken.</div>
+        </div>
+        <div class="field">
+            <label class="form-label">Tray ID</label>
+            <select class="select custom-scrollbar"[(ngModel)]="model.DrawerSerial" required>
+                <option *ngFor="let tray of trayList" value="{{tray.Serial}}" [disabled]="tray.CurrentOrder !== ''">
+                    {{tray.Serial}}{{tray.CurrentOrder === '' ? '':' - ' + tray.CurrentOrder }}
+                </option>
+                <option value="">-</option>
+            </select>
+        </div>
+        <div class="field">
+            <label class="form-label">Home</label>
+            <select class="select select-light custom-scrollbar"[(ngModel)]="model.Light" required>
+                <option *ngFor="let slot of slotList" value="{{slot.Area}}" [disabled]="slot.Slotstatus === 'lock'">
+                    {{slot.Slotname + ' - ' + slot.Area}}
+                </option>
+                <option value="">-</option>
+            </select>
+            <div class="alert-span"
+            title="the selected slot may be between a light and an active tray."
+            *ngIf="isShadow(model.Light)">
+                <mat-icon>warning</mat-icon>The current home may obscure or be obscured by a tray.
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="form-label">Light</label>
+            <select class="select custom-scrollbar" [(ngModel)]="model.Configuration" required>
+                <option *ngFor="let light of configList" value="{{light}}">
+                    {{light}}
+                </option>
+                <option value="">-</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label class="form-label">Description</label>
+            <textarea [(ngModel)]="model.Description" class="text-area" name="description" id="description" rows="3" col="1"></textarea>
+        </div>
+
+        <div class="field">
+            <label class="form-label">Duration (days)</label>
+            <mat-slider class="slider" [(ngModel)]="model.Duration" min="0" max="100" step="1" (input)="model.Duration = $event.value" value="{{model.Duration}}" [thumbLabel]="true"></mat-slider>
+            <input class="slider-input" [(ngModel)]="model.Duration" min="0" max="100" step="1" type="number" value="{{model.Duration}}">
+        </div>
+
+        <div class="field">
+            <label class="form-label">Expected weight (Kg)</label>
+            <input type="number" min="0" [(ngModel)]="model.FinalWeight" class="text-input" name="weight" required>Kg
+        </div>
+
+        <div class="field">
+            <label class="form-label">Recipe</label>
+            <select class="select" [(ngModel)]="model.Recipe" required>
+                <option *ngFor="let recipe of recipeList" value="{{recipe.Recipename}}">
+                    {{recipe.Recipename}}
+                </option>
+            </select>
+        </div>
+
+        <div class="submit-button" (click)="validForm() ? submit() : ''" [ngClass]="!validForm() ? 'disabled' : ''">Submit</div>
+        <div class="clear-button" (click)="model = {}">Reset</div>
+        <!-- <button (click)="check()">check</button> -->
+        
+    </div>
+</div>

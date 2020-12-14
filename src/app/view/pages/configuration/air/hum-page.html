@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Set humidity </h1>
+
+<div mat-dialog-content>
+
+  <p> Value to set [%]:</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.humidity">
+  </mat-form-field>
+
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Exit</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Set</button>
+
+</div>

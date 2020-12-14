@@ -1,0 +1,78 @@
+<h1 mat-dialog-title>Refill schedule</h1>
+
+<div mat-dialog-content style="height: 850px;">
+  <mat-form-field>
+    <mat-label>Tanks</mat-label>
+    <mat-select multiple [(ngModel)]="data.tank">
+      <mat-option  *ngFor="let tank of tanks" value="{{tank}}">{{tank}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div>
+    <div>
+      <p>Volume [l]:</p>
+      <mat-form-field>
+        <input matInput [(ngModel)]="data.volume">
+      </mat-form-field>
+    </div>
+    <mat-label>Measures:</mat-label>
+    <div>
+      <mat-radio-group [(ngModel)]="data.measures">
+        <p><mat-radio-button value="off">Off</mat-radio-button></p>
+        <p><mat-radio-button value="on">On</mat-radio-button></p>
+      </mat-radio-group>
+    </div>
+  </div>
+  <div>
+    <mat-label>Correction:</mat-label>
+    <div>
+      <mat-radio-group [(ngModel)]="data.correction">
+        <p><mat-radio-button value="off">Off</mat-radio-button></p>
+        <p> <mat-radio-button value="on">On</mat-radio-button></p>
+      </mat-radio-group>
+    </div>
+  </div>
+  <div>
+    <mat-label>Suction:</mat-label>
+    <div>
+      <mat-radio-group [(ngModel)]="data.suctiontype">
+        <p><mat-radio-button value="no">No suction</mat-radio-button></p>
+        <p><mat-radio-button value="all">Aspirate all</mat-radio-button></p>
+        <p><mat-radio-button value="other">Select quantity to aspirate</mat-radio-button></p>
+      </mat-radio-group>
+    </div>
+  </div>
+  <div *ngIf="data.suctiontype == 'other' ">
+    <p>Quantity to aspirate [l]:</p>
+    <mat-form-field>
+      <input matInput [(ngModel)]="data.suction">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-label>Transfer:</mat-label>
+    <div>
+      <mat-radio-group [(ngModel)]="data.transfertype">
+        <p> <mat-radio-button value="no">No transfer</mat-radio-button></p>
+        <p> <mat-radio-button value="all">Transfer all</mat-radio-button></p>
+        <p> <mat-radio-button value="other">Select quantity to transfer</mat-radio-button></p>
+      </mat-radio-group>
+    </div>
+  </div>
+  <div *ngIf="data.transfertype == 'other' ">
+    <p>Quantity to transfer [l]:</p>
+    <mat-form-field>
+      <input matInput [(ngModel)]="data.transfer">
+    </mat-form-field>
+  </div>
+  <div>
+    <p>Frequency [h]:</p>
+    <mat-form-field>
+      <input matInput [(ngModel)]="data.frequency">
+    </mat-form-field>
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Exit</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Schedule</button>
+
+</div>

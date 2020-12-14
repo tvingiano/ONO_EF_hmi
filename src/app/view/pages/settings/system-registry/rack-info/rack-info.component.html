@@ -1,0 +1,148 @@
+<app-page-wrapper *ngIf="rackInfo" title="Rack Info">
+    <mat-card *ngIf="formGroup">
+        <mat-card class="mb-3 no-shadow">
+            <!-- MODULE INFO FORM -->
+            <form [formGroup]="formGroup">
+                <div class="row">
+                    <div class="col-md">
+                        <!-- System -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'label.System' | translate}}</mat-label>
+                            <input matInput type="text"
+                                   placeholder="{{'label.System' | translate}}"
+                                   formControlName="System"
+                                   autocomplete="off" [disableControl]="true">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md">
+                        <!-- Rackname -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'label.Rackname' | translate}}</mat-label>
+                            <input matInput type="number"
+                                   placeholder="{{'label.Rackname' | translate}}"
+                                   formControlName="Rackname"
+                                   autocomplete="off" [disableControl]="true">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md">
+                        <!-- Module -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'label.ModuleName' | translate}}</mat-label>
+                            <input matInput type="number"
+                                   placeholder="{{'label.ModuleName' | translate}}"
+                                   formControlName="Module"
+                                   autocomplete="off" [disableControl]="true">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md">
+                        <!-- Owner -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'label.owner' | translate}}</mat-label>
+                            <input matInput type="text"
+                                   placeholder="{{'label.owner' | translate}}"
+                                   formControlName="Owner"
+                                   autocomplete="off" [disableControl]="true">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md">
+                        <!-- LightSlotsNumber -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'label.LightSlotsNumber' | translate}}</mat-label>
+                            <input matInput type="number"
+                                   placeholder="{{'label.LightSlotsNumber' | translate}}"
+                                   formControlName="LightSlotsNumber"
+                                   autocomplete="off" [disableControl]="isDisabled('LightSlotsNumber')">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md">
+                        <!-- GrowthSlotsNumber -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'label.GrowthSlotsNumber' | translate}}</mat-label>
+                            <input matInput type="number"
+                                   placeholder="{{'label.GrowthSlotsNumber' | translate}}"
+                                   formControlName="GrowthSlotsNumber"
+                                   autocomplete="off" [disableControl]="isDisabled('GrowthSlotsNumber')">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md">
+                        <!-- Humidity -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'label.Humidity' | translate}}</mat-label>
+                            <input matInput type="number"
+                                   placeholder="{{'label.Humidity' | translate}}"
+                                   formControlName="Humidity"
+                                   autocomplete="off" [disableControl]="isDisabled('Humidity')">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md">
+                        <!-- Temperature -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'label.Temperature' | translate}}</mat-label>
+                            <input matInput type="number"
+                                   placeholder="{{'label.Temperature' | translate}}"
+                                   formControlName="Temperature"
+                                   autocomplete="off" [disableControl]="isDisabled('Temperature')">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md">
+                        <!-- PlcAddress -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'label.PlcAddress' | translate}}</mat-label>
+                            <input matInput type="text"
+                                   placeholder="{{'label.PlcAddress' | translate}}"
+                                   formControlName="PlcAddress"
+                                   autocomplete="off" [disableControl]="isDisabled('PlcAddress')">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <!-- Description -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'label.description' | translate}}</mat-label>
+                            <textarea matInput placeholder="{{'label.description' | translate}}"
+                                      formControlName="Description"
+                                      [disableControl]="isDisabled('Description')"></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <!-- Note -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'label.note' | translate}}</mat-label>
+                            <textarea matInput placeholder="{{'label.note' | translate}}"
+                                      formControlName="Note" [disableControl]="isDisabled('Note')"></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </form>
+            <mat-card-actions align="end">
+                <button mat-button (click)="onEditHandler()"
+                        *ngIf="componentState === pageStates.VIEW">{{"label.edit" | translate}}</button>
+                <button mat-button color="warn" *ngIf="componentState === pageStates.EDIT" [disabled]="!dirty"
+                        (click)="onSaveHandler()">{{"label.save" | translate}}</button>
+                <button mat-button color="primary" *ngIf="componentState === pageStates.EDIT"
+                        (click)="onCancelHandler()">{{"label.cancel" | translate}}</button>
+            </mat-card-actions>
+            <mat-divider></mat-divider>
+        </mat-card>
+        <!-- show spinner -->
+        <div class="d-flex justify-content-center" *ngIf="!slotInfos">
+            <mat-spinner diameter="50"></mat-spinner>
+        </div>
+        <!--MODULE  RACKS LIST -->
+        <app-slots-list *ngIf="slotInfos" title="{{'label.rackSlots' | translate}}"
+                        [initialData]="slotInfos"
+                        [parentRackID]="rackInfo.Rackname"
+                        (createClick)="slotCreateHandler()"
+                        (editClick)="slotEditHandler($event)"
+                        (viewClick)="slotViewHandler($event)"
+                        (deleteClick)="slotDeleteHandler($event)"
+        ></app-slots-list>
+    </mat-card>
+</app-page-wrapper>

@@ -1,0 +1,76 @@
+<!-- <mat-card-title style= "text-align:center; margin-top: 5px;">Running processes</mat-card-title> -->
+<mat-card-title style="text-align:center; margin-top: 5px;">Next Refills/Samplings</mat-card-title>
+
+<div>
+
+
+
+
+    <div class="mat-elevation-z8">
+        <div class="mat-table">
+            <mat-form-field>
+                <input matInput (keyup)="applyFilter($event.target.value)"
+                    placeholder="Filter" style="width:100%">
+            </mat-form-field>
+        </div>
+        <table mat-table class="mat-elevation-z8 mat-table" [dataSource]="dataSource" matSort style="height:100px">
+            <ng-container matColumnDef="expid">
+                <th mat-header-cell *matHeaderCellDef> Experiment name</th>
+                <td mat-cell *matCellDef="let element"> {{element.expid}} </td>
+            </ng-container>
+            <ng-container matColumnDef="drawer">
+                <th mat-header-cell *matHeaderCellDef> Drawer ID</th>
+                <td mat-cell *matCellDef="let element"> {{element.drawer}} </td>
+            </ng-container>
+            <ng-container matColumnDef="tankid">
+                <th mat-header-cell *matHeaderCellDef> Tank ID</th>
+                <td mat-cell *matCellDef="let element"> {{element.tankid}} </td>
+            </ng-container>
+            <ng-container matColumnDef="lastRefill">
+                <th mat-header-cell *matHeaderCellDef> Last refill</th>
+                <td mat-cell *matCellDef="let element"> {{element.lastRefill}} </td>
+            </ng-container>
+            <ng-container matColumnDef="nextRefill">
+                <th mat-header-cell *matHeaderCellDef> Next refill</th>
+                <td mat-cell *matCellDef="let element"> {{element.nextRefill}} </td>
+            </ng-container>
+            <ng-container matColumnDef="lastSampling">
+                <th mat-header-cell *matHeaderCellDef> Last Sampling </th>
+                <td mat-cell *matCellDef="let element"> {{element.lastSampling}} </td>
+            </ng-container>
+            <ng-container matColumnDef="nextSampling">
+                <th mat-header-cell *matHeaderCellDef> Next Sampling </th>
+                <td mat-cell *matCellDef="let element"> {{element.nextSampling}} </td>
+            </ng-container>
+            <div layout="column" flex="30">
+                <ng-container matColumnDef="status1">
+                    <th mat-header-cell *matHeaderCellDef> Refill Status </th>
+                    <td mat-cell *matCellDef="let element; let i = index;">
+                        <mat-icon>{{element.status1}}</mat-icon>
+                    </td>
+                </ng-container>
+            </div>
+            <div layout="column" flex="30">
+                <ng-container matColumnDef="status2">
+                    <th mat-header-cell *matHeaderCellDef> Sampling Status </th>
+                    <td mat-cell *matCellDef="let element; let i = index;">
+                        <mat-icon>{{element.status2}}</mat-icon>
+                    </td>
+                </ng-container>
+            </div>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+        </table>
+        <div class="mat-table">
+            <mat-paginator [pageSize]="50" [pageSizeOptions]="[50,75,100,200]" showFirstLastButtons></mat-paginator>
+        </div>
+    </div>
+
+
+    <!-- <button mat-button (click)="return()" style="margin-right: 45px;margin-left: 60px;margin-top:30px">Exit</button> -->
+
+</div>
+<!-- 
+<div id="chartContainerr" style="width: 90%; height: 1000px;float: left;"></div> -->

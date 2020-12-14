@@ -1,0 +1,54 @@
+/* Structure */
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+
+.mat-paginator {
+  width: 100%;
+}
+
+table {
+  margin-top: 0;
+  width: 100%;
+}
+
+.mat-form-field {
+  margin-top: 0;
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-table {
+  font-size: 12px;
+  width: 100%;
+  margin-left: 0%;
+}
+
+input {
+  font-family: 'Roboto Mono', monospace;
+}
+
+.mat-elevation-z8 {
+  width: 90%;
+  margin-left: 5%;
+}
+
+/* Structure */
+.mat-table,
+table {
+  width: 100%;
+  margin-left: 0%;
+}
+
+.mat-form-field {
+  margin-top: 0;
+  font-size: 14px;
+  width: 90%;
+  margin-left: 5%;
+}

@@ -1,0 +1,60 @@
+<mat-card-title style= "text-align:center; margin-top: 5px;">Measurements</mat-card-title> 
+
+<div >
+
+
+    <div class="mat-elevation-z8" >
+
+        <table mat-table class="mat-elevation-z8 mat-table" [dataSource]="dataSource" matSort style="height:100px">
+            
+
+<!-- <ng-container matColumnDef="Height">
+                <th mat-header-cell *matHeaderCellDef> Altezza </th>
+                <td mat-cell *matCellDef="let element"> {{element.Height}} </td>
+            </ng-container> -->
+
+
+             <ng-container matColumnDef="Ec">
+                <th mat-header-cell *matHeaderCellDef> EC </th>
+                <td mat-cell *matCellDef="let element"> {{element.Ec}} </td>
+            </ng-container> 
+            <ng-container matColumnDef="Ph">
+                <th mat-header-cell *matHeaderCellDef> pH </th>
+                <td mat-cell *matCellDef="let element"> {{element.Ph}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Solution">
+                <th mat-header-cell *matHeaderCellDef> Solution </th>
+                <td mat-cell *matCellDef="let element"> {{element.Solution}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Lights">
+                <th mat-header-cell *matHeaderCellDef> Lights </th>
+                <td mat-cell *matCellDef="let element"> {{element.Lights}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Note">
+                <th mat-header-cell *matHeaderCellDef> Notes </th>
+                <td mat-cell *matCellDef="let element"> {{element.Note}} </td>
+            </ng-container>
+
+
+
+            <ng-container matColumnDef="Timestamp">
+                <th mat-header-cell *matHeaderCellDef> Timestamp</th>
+                <td mat-cell *matCellDef="let element"> {{element.Timestamp}} </td>
+            </ng-container>   
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+        </table>
+        <div class="mat-table">
+            <mat-paginator [pageSize]="50" [pageSizeOptions]="[50,75,100,200]" showFirstLastButtons></mat-paginator>
+        </div>
+    </div>
+
+    <button mat-button (click)="return()" style="margin-right: 45px;margin-left: 60px;margin-top:30px">Exit</button> 
+
+</div>

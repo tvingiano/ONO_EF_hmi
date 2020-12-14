@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Set Belt</h1>
+<div mat-dialog-content>
+
+  <select name="pole" id="pole" [(ngModel)]="data.belt">
+    <option value="0">EAST</option>
+    <option value="1">WEAST</option>
+  </select>
+
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="submit()">confirm</button>
+</div>

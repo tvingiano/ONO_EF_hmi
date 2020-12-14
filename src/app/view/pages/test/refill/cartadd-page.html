@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Fill cart tank</h1>
+<div mat-dialog-content>
+
+  <p>Tank:</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.tank">
+  </mat-form-field>
+
+  <p>Quantity to add [ml]:</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.toadd">
+  </mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Exit</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Start</button>
+</div>

@@ -1,0 +1,29 @@
+<app-page-wrapper title="Plants Info" shadow="false">
+    <mat-card>
+        <mat-card-content>
+            <div class="row w-100">
+                <div class="col-md-7">
+                    <!-- show spinner -->
+                    <div class="d-flex justify-content-center mt-5" *ngIf="!plantsList" >
+                        <mat-spinner diameter="50"></mat-spinner>
+                    </div>
+                    <app-items-table *ngIf="plantsList"
+                                     [title]="'label.PlantsList' | translate"
+                                     [initialData]="plantsList"
+                                     [displayedColumns]="displayedColumns"
+                                     [actionButtons]="actionButtons"
+                                     (createClick)="createClick()"
+                                     (editClick)="plantsInfo=$event"
+                                     (deleteClick)="deleteClick($event)"
+                    ></app-items-table>
+                </div>
+                <div class="col-md-5 no-padding">
+                    <app-plants-form [formData]="plantsInfo"
+                                     [initialState]="!plantsInfo ? pageStates.CREATE : pageStates.VIEW"
+                                     (formSubmit)="plantsFormSubmit($event)"
+                    ></app-plants-form>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</app-page-wrapper>

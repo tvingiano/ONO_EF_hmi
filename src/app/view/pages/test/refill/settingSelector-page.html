@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Action Selection</h1>
+<div mat-dialog-content>
+
+  <p>Type of action:</p>
+  <mat-form-field>
+    <mat-select placeholder="Select" type="number" [(ngModel)]="data.value" >
+      <mat-option [value]="">None</mat-option>
+      <mat-option [value]="1">Send Settings to PLC</mat-option>
+      <mat-option [value]="2">Add Settings</mat-option>
+      <mat-option [value]="3">Get Settings</mat-option>
+      <mat-option [value]="4">Change Settings</mat-option>
+      <mat-option [value]="5">Delete Settings</mat-option>
+    </mat-select>
+</mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Exit</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Start</button>
+</div>

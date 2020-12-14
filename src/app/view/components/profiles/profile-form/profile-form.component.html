@@ -1,0 +1,106 @@
+<div class="container-fluid">
+    <mat-card class="mb-3 no-shadow" *ngIf="formGroup">
+        <!-- MODULE INFO FORM -->
+        <form [formGroup]="formGroup">
+            <h6>{{'label.baseInfo' | translate}}</h6>
+
+            <mat-form-field appearance="outline">
+                <mat-label>{{'label.ProfileName' | translate}}</mat-label>
+                <input matInput type="text"
+                       placeholder="{{'label.ProfileName' | translate}}"
+                       formControlName="Name"
+                       autocomplete="off"
+                       [disableControl]="isDisabled('Name')">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>{{'label.StandardCost' | translate}}</mat-label>
+                <input matInput type="number"
+                       placeholder="{{'label.StandardCost' | translate}}"
+                       formControlName="StandardCost"
+                       autocomplete="off" [disableControl]="isDisabled('StandardCost')">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>{{'label.StandardSchedule' | translate}}</mat-label>
+                <input matInput type="text"
+                       placeholder="{{'label.StandardSchedule' | translate}}"
+                       formControlName="StandardSchedule"
+                       autocomplete="off" [disableControl]="isDisabled('StandardSchedule')">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>{{'label.OvertimeCost' | translate}}</mat-label>
+                <input matInput type="number"
+                       placeholder="{{'label.OvertimeCost' | translate}}"
+                       formControlName="OvertimeCost"
+                       autocomplete="off" [disableControl]="isDisabled('OvertimeCost')">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>{{'label.OvertimeSchedule' | translate}}</mat-label>
+                <input matInput type="text"
+                       placeholder="{{'label.OvertimeSchedule' | translate}}"
+                       formControlName="OvertimeSchedule"
+                       autocomplete="off" [disableControl]="isDisabled('OvertimeSchedule')">
+            </mat-form-field>
+
+            <h6>{{'label.accessRights' | translate}}</h6>
+
+            <div class="mb-3">
+                <div class="row">
+                    <mat-slide-toggle [disabled]="isDisabled('AnomaliesManaging')"
+                                      formControlName="AnomaliesManaging">{{'label.AnomaliesManaging' | translate}}</mat-slide-toggle>
+                </div>
+                <div class="row">
+                    <mat-slide-toggle [disabled]="isDisabled('SetupManaging')"
+                                      formControlName="SetupManaging">{{'label.SetupManaging' | translate}}</mat-slide-toggle>
+                </div>
+                <div class="row">
+                    <mat-slide-toggle [disabled]="isDisabled('ProductionManaging')"
+                                      formControlName="ProductionManaging">{{'label.ProductionManaging' | translate}}</mat-slide-toggle>
+                </div>
+                <div class="row">
+                    <mat-slide-toggle [disabled]="isDisabled('MaintainanceManaging')"
+                                      formControlName="MaintainanceManaging">{{'label.MaintainanceManaging' | translate}}</mat-slide-toggle>
+                </div>
+                <div class="row">
+                    <mat-slide-toggle [disabled]="isDisabled('OperativityManaging')"
+                                      formControlName="OperativityManaging">{{'label.OperativityManaging' | translate}}</mat-slide-toggle>
+                </div>
+                <div class="row">
+                    <mat-slide-toggle [disabled]="isDisabled('SystemManaging')"
+                                      formControlName="SystemManaging">{{'label.SystemManaging' | translate}}</mat-slide-toggle>
+                </div>
+                <div class="row">
+                    <mat-slide-toggle [disabled]="isDisabled('OrderManaging')"
+                                      formControlName="OrderManaging">{{'label.OrderManaging' | translate}}</mat-slide-toggle>
+                </div>
+            </div>
+
+            <h6>{{'label.additionInformation' | translate}}</h6>
+            <!-- Description -->
+            <mat-form-field appearance="outline">
+                <mat-label>{{'label.description' | translate}}</mat-label>
+                <textarea matInput placeholder="{{'label.description' | translate}}"
+                          formControlName="Description" [disableControl]="isDisabled('Description')"></textarea>
+            </mat-form-field>
+            <!-- Note -->
+            <mat-form-field appearance="outline">
+                <mat-label>{{'label.note' | translate}}</mat-label>
+                <textarea matInput placeholder="{{'label.note' | translate}}"
+                          formControlName="Note" [disableControl]="isDisabled('Note')"></textarea>
+            </mat-form-field>
+            <!-- Description -->
+            <mat-form-field appearance="outline">
+                <mat-label>{{'label.tag' | translate}}</mat-label>
+                <textarea matInput placeholder="{{'label.tag' | translate}}"
+                          formControlName="Tag" [disableControl]="isDisabled('Tag')"></textarea>
+            </mat-form-field>
+        </form>
+        <mat-card-actions align="end">
+            <button mat-button (click)="onEditHandler()"
+                    *ngIf="componentState === pageStates.VIEW && formData">{{"label.edit" | translate}}</button>
+            <button mat-button color="warn" *ngIf="componentState === pageStates.EDIT" [disabled]="!dirty"
+                    (click)="formSubmit.emit(formGroup)">{{"label.save" | translate}}</button>
+            <button mat-button color="primary" *ngIf="componentState === pageStates.EDIT"
+                    (click)="onCancelHandler()">{{"label.cancel" | translate}}</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

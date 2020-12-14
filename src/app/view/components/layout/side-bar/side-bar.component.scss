@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@500&display=swap');
+@import url('../../../../../styles.scss');
+@import url('../../../../../assets/styles/variables.scss');
+
+$ono-blue: #00aeef;
+$ono_grey: rgb(138,139,147);
+
+$lv-1: #101024;
+$lv0: #3D4754;
+$lv1: #2D343E;
+$lv2: #4D5662;
+$lv3: #646C76;
+
+$blue: #6972C4;
+$lightblue: #c0d8ff;
+
+$font-color: #f0f1f2;
+
+.body {
+  width: 100%;
+  height: fit-content;
+
+  font-family: 'Jura', sans-serif;
+  background-color: $lv1;
+
+  .logo{
+    height: 100px;
+    width: 100%;
+
+    padding: 2.5%;
+
+    display:flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    .logo-ono{
+
+      flex: 60%;
+      height: 100%;
+  
+      background-image: url('../../../../../assets/logo_fav.png');
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: $lv2;
+    }
+  }
+  
+
+  .header{
+
+    background-color: $blue;
+    margin: 20px 0;
+    padding: 2.5%;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .avatar{
+      flex: 30%;
+    }
+    .name{
+      flex: 70%;
+      padding-left: 5px;
+    }
+
+    cursor: pointer;
+  }
+
+
+  div[class^='menu-item-'] {
+
+    height: 60px;
+
+    padding: 15px 10px;
+    margin-bottom: 20px;
+
+    transition: all ease 100ms;
+
+    &:hover{
+      transform: translateX(5px);
+      transition: all ease 100ms;
+    }
+
+    .title-wrapper{
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      .icon{
+        width: 24px;
+        height: 24px;
+        margin-top: 3px;
+      }
+      .title{
+        width: fit-content;
+        line-height: 30px;
+      }
+    }
+
+    cursor: pointer;
+  }
+}
+
+div[class*="secondary"]{
+  margin-left: 10px;
+
+  background-color: $lv2;
+
+  &:hover{
+    background-color: $lv3;
+
+  }
+
+  &:active, &:focus{
+    outline: none;
+  }
+  
+}
+
+div[class*="primary"]{
+  border-left: 10px solid;
+  font-weight: 500;
+  background-color: $lv0;
+
+  &:hover{
+    background-color: $lv2;
+
+  }
+
+  &:active, &:focus{
+    outline: none;
+  }
+}
+
+.activeTab{
+  transform: translateX(5px);
+}
+.activeSub{
+  background-color: $lv3 !important;
+  box-shadow: 0 0 1px 1px white;
+  transform: translateX(5px);
+}
+
+
+@media screen and (orientation: portrait) {
+  .logo{
+
+    height: 5% !important;
+
+  }
+}

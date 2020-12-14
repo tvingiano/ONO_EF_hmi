@@ -1,0 +1,95 @@
+<!-- <mat-card-title style= "text-align:center; margin-top: 5px;">Tabella climatizzatori</mat-card-title> -->
+<mat-card-title style= "text-align:center; margin-top: 5px;">Air conditioning</mat-card-title>
+
+<div>
+
+
+    <!-- <div class="mat-table">
+        <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+    </div> -->
+    <div class="mat-elevation-z8" >
+
+        <table mat-table class="mat-elevation-z8 mat-table" [dataSource]="dataSource" matSort >
+            <ng-container matColumnDef="address">
+                <th mat-header-cell *matHeaderCellDef> Air conditioner </th>
+                <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef> Status </th>
+                <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+            </ng-container>
+             <ng-container matColumnDef="temperature">
+                <th mat-header-cell *matHeaderCellDef> Temperature </th>
+                <td mat-cell *matCellDef="let element"> {{element.temperature}} </td>
+            </ng-container> 
+             <ng-container matColumnDef="humidity">
+                <th mat-header-cell *matHeaderCellDef> Humidity </th>
+                <td mat-cell *matCellDef="let element"> {{element.humidity}} </td>
+            </ng-container> 
+
+             <ng-container matColumnDef="fan">
+                <th mat-header-cell *matHeaderCellDef> Fan </th>
+                <td mat-cell *matCellDef="let element"> {{element.fan}} </td>
+            </ng-container> 
+
+
+         <!--    <ng-container matColumnDef="Consumption">
+                    <th mat-header-cell *matHeaderCellDef> Consumi </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Consumption}} </td>
+                </ng-container> -->
+
+
+            <div layout="column" flex="30">
+                    <ng-container matColumnDef="changestat">
+                        <th mat-header-cell *matHeaderCellDef> Turn off/on </th>
+                        <td mat-cell *matCellDef="let element; let i = index;"> <button mat-button color="primary"
+                                (click)="onStatus(element)">
+                                <mat-icon>power_settings_new</mat-icon>
+                            </button> </td>
+                    </ng-container>
+                </div>
+                <div layout="column" flex="30">
+                        <ng-container matColumnDef="changetemp">
+                            <th mat-header-cell *matHeaderCellDef> Set temperature </th>
+                            <td mat-cell *matCellDef="let element; let i = index;"> <button mat-button color="primary"
+                                    (click)="onTemperature(element)">
+                                    <mat-icon>wb_sunny</mat-icon>
+                                </button> </td>
+                        </ng-container>
+                    </div>
+                <div layout="column" flex="30">
+                        <ng-container matColumnDef="changehum">
+                            <th mat-header-cell *matHeaderCellDef> Set humidity </th>
+                            <td mat-cell *matCellDef="let element; let i = index;"> <button mat-button color="primary"
+                                    (click)="onHumidity(element)">
+                                    <mat-icon>cloud_queue</mat-icon>
+                                </button> </td>
+                        </ng-container>
+                    </div>
+                   <div layout="column" flex="30">
+                        <ng-container matColumnDef="changefan">
+                            <th mat-header-cell *matHeaderCellDef> Set fan </th>
+                            <td mat-cell *matCellDef="let element; let i = index;"> <button mat-button color="primary"
+                                    (click)="onFan(element)">
+                                    <mat-icon>toys</mat-icon>
+                                </button> </td>
+                        </ng-container>
+                    </div>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+        </table>
+        <div class="mat-table">
+            <mat-paginator [pageSize]="50" [pageSizeOptions]="[50,75,100,200]" showFirstLastButtons></mat-paginator>
+        </div>
+    </div>
+    <button mat-button (click)="onReset()" style="margin-right: 45px;margin-left: 60px;margin-top:30px">Reset Alarms
+    </button>
+    <!-- <button mat-button (click)="return()" style="margin-right: 45px;margin-left: 60px;margin-top:30px">Esci</button> -->
+
+</div> 
