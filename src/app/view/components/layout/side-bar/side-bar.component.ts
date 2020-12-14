@@ -76,12 +76,6 @@ export class SideBarComponent implements OnInit {
                 }
             ]
         }, {
-            link: '/user/edit',
-            icon:  'account_box',
-            title: 'Profile',
-            color: '#eb34e2',
-            sub: [],
-        }, {
             link: '/processes/manage',
             icon:  'spa',
             title: 'Processes',

@@ -67,6 +67,17 @@ $font-color: #f0f1f2;
     }
 
     cursor: pointer;
+
+    transition: all ease 100ms;
+
+    &:hover{
+      transform: translateX(5px);
+      transition: all ease 100ms;
+    }
+
+    &:focus{
+      outline: none;
+    }
   }
 
 
