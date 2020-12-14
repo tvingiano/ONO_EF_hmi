@@ -6,7 +6,7 @@
 
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
 
     background-color: $lv-1;
 
@@ -16,114 +16,29 @@
 
     font-family: Roboto,Helvetica Neue,Arial,sans-serif;
 
-    .order-wrapper{
-        flex: 1;
+    .gantt-wrapper{
+        flex:100%;
+        margin: 1rem;
+        margin-bottom: .5rem;
+        height: calc(40% - 1.5rem);
 
-        padding: 1%;
-        margin: 15px;
-        margin-right: 7.5px;
         background-color: $lv0;
+        color: $font-color;
+    }
 
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: flex-start;
-
-
-
-        #order-card{
-            flex:100%;
-            background-color: lightseagreen;
-            padding: .5rem; 
-
-            height: 150px;
-
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-
-            .text{
-                flex: 70%;
-
-                height: fit-content;
-
-                display: flex;
-                flex-direction: row;
-                flex-wrap: wrap;
-
-                .field{
-                    height: fit-content;
-                    padding: .1rem;
-                }
-
-                .title{
-                    flex: 100%;
-                }
-                .author{
-                    flex: 40%;
-                }
-                .recipe{
-                    flex: 60%;
-                }
-            }
-            .action{
-                flex: 30%;
-
-                display: flex;
-                flex-direction: row;
-                flex-wrap: wrap;
-
-                #valid, #edit, #del{
-                    flex: calc(100/3);
-                }
-
-                #start{
-                    flex: 100%;
-                }
-            }
-
-
-        }
-
-    } 
-
-    #details-wrapper{
-        flex: 1;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-
-        padding: 1%;
-        margin: 15px;
-        margin-left: 7.5px;
+    .order-info{
+        flex: .5;
+        height: calc(60% - 1.5rem);
+        margin: .5rem .5rem 1rem 1rem;
         background-color: $lv0;
-
-        #top {
-            flex: 100%;
-            height: calc(50% - 7.5px);
-            padding: 1%;
-            margin-bottom: 7.5px;
-
-            background-color: $lv1;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-
-            #details-table{
-                width: 100%;
-                height: 100%;
-            }
-
-        }
-
-        #bottom {
-            flex: 100%;
-            height: calc(50% - 7.5px);
-
-            background-color: $lv1;
-
-            padding: 1%;
-        }
+        color: $font-color;
+    }
+    .order-action{
+        flex: .5;
+        height: calc(60% - 1.5rem);
+        margin: .5rem 1rem 1rem .5rem;
+        background-color: $lv0;
+        color: $font-color;
     }
 }
 

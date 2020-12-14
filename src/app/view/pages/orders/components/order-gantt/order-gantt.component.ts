@@ -51,27 +51,35 @@ export class OrderGanttComponent implements OnInit {
     categoryAxis.renderer.cellEndLocation = 0.75;
     categoryAxis.title.text = 'Orders';
     categoryAxis.title.fontWeight = 'bold';
-    categoryAxis.title.fill = am4core.color('#fff');
-    categoryAxis.renderer.grid.template.stroke = am4core.color('#fff');
+    categoryAxis.title.fill = am4core.color('#c0d8ff');
+    categoryAxis.renderer.grid.template.stroke = am4core.color('#c0d8ff');
     categoryAxis.renderer.grid.template.strokeWidth = 1;
-    categoryAxis.renderer.baseGrid.stroke = am4core.color('#fff');
+    categoryAxis.renderer.baseGrid.stroke = am4core.color('#c0d8ff');
+
+
+
 
     const dateAxis = chart.xAxes.push(new am4charts.DateAxis());
     dateAxis.dateFormatter.dateFormat = 'yyyy-MM-dd HH:mm';
     dateAxis.renderer.minGridDistance = 1;
-    // dateAxis.baseInterval = { count: 7, timeUnit: "day" };
-    // dateAxis.max = new Date();
-    // dateAxis.strictMinMax = true;
+
     dateAxis.renderer.tooltipLocation = 0;
-    dateAxis.title.text = 'Date';
-    dateAxis.title.fontWeight = 'bold';
-    dateAxis.renderer.grid.template.stroke = am4core.color('#fff');
+
+    dateAxis.renderer.grid.template.stroke = am4core.color('#c0d8ff');
     dateAxis.renderer.grid.template.strokeWidth = 1;
-    dateAxis.renderer.baseGrid.stroke = am4core.color('#fff');
-    dateAxis.title.fill = am4core.color('#fff');
+    dateAxis.renderer.baseGrid.stroke = am4core.color('#c0d8ff');
+
+    dateAxis.renderer.labels.template.rotation = 60;
+    dateAxis.renderer.labels.template.horizontalCenter = 'left';
+    dateAxis.renderer.labels.template.verticalCenter = 'middle';
+    dateAxis.renderer.labels.template.fill = am4core.color('#c0d8ff');
+    dateAxis.renderer.labels.template.fontSize = 14;
+
+
+
 
     const series1 = chart.series.push(new am4charts.ColumnSeries());
-    series1.columns.template.tooltipText = '{name}: {openDateX} - {dateX}';
+    series1.columns.template.tooltipText = '{name} {openDateX}-{dateX}';
     series1.dataFields.openDateX = 'fromDate';
     series1.dataFields.dateX = 'toDate';
     series1.dataFields.categoryY = 'name';
@@ -84,6 +92,10 @@ export class OrderGanttComponent implements OnInit {
     chart.scrollbarX = new am4core.Scrollbar();
     chart.scrollbarX.background.fillOpacity = 0.2;
     chart.scrollbarX.thumb.background.fillOpacity = 0.2;
+
+    const startGrip = chart.scrollbarX.startGrip;
+    const endGrip = chart.scrollbarX.endGrip;
+
 
     chart.logo.disabled = true;
   }

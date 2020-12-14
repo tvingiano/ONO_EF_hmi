@@ -274,6 +274,7 @@ export class ProcessesComponent implements OnInit {
           this.imagesFound = true;
           this.currentImageIndex = 0;
 
+
           this.getUrl();
           this.loadingImages = false;
 
@@ -294,7 +295,7 @@ export class ProcessesComponent implements OnInit {
           this.currentImageIndex = 0;
           this.currentImageMetadata = res;
           this.imagesMetadata.push(res);
-          // console.log('new push');
+          console.log(res);
 
         } else {
           this.imagesFound = false;
@@ -331,7 +332,7 @@ export class ProcessesComponent implements OnInit {
     const d = new Date(date);
 
     const dt = {
-      h:  d.getUTCHours() > 10   ? d.getUTCHours() : '0'   + d.getUTCHours(),
+      h:  d.getUTCHours(),
       m:  d.getUTCMinutes() > 10 ? d.getUTCMinutes() : '0' + d.getUTCMinutes(),
       s:  d.getUTCSeconds() > 10 ? d.getUTCSeconds() : '0' + d.getUTCSeconds()
     };
@@ -493,7 +494,7 @@ export class ProcessesComponent implements OnInit {
       const x = new Date(this.getLastSolutionElement(this.selectedProcess.Solution).Timestamp);
 
       const date = {
-        h:  x.getUTCHours() > 10 ? x.getUTCHours() : '0' + x.getUTCHours(),
+        h:  x.getUTCHours(),
         m:  x.getUTCMinutes() > 10 ? x.getUTCMinutes() : '0' + x.getUTCMinutes(),
         s:  x.getUTCSeconds() > 10 ? x.getUTCSeconds() : '0' + x.getUTCSeconds()
       };
@@ -509,7 +510,7 @@ export class ProcessesComponent implements OnInit {
       const x = new Date(this.getLastCvElement(this.selectedProcess.CvMeasures).Timestamp);
 
       const date = {
-        h:  x.getUTCHours() > 10 ? x.getUTCHours() : '0' + x.getUTCHours(),
+        h:  x.getUTCHours(),
         m:  x.getUTCMinutes() > 10 ? x.getUTCMinutes() : '0' + x.getUTCMinutes(),
         s:  x.getUTCSeconds() > 10 ? x.getUTCSeconds() : '0' + x.getUTCSeconds()
       };
@@ -545,7 +546,7 @@ export class ProcessesComponent implements OnInit {
         const x = new Date(this.selectedProcess.NextRefill);
 
         const date = {
-          h:  x.getUTCHours() > 10 ? x.getUTCHours() : '0' + x.getUTCHours(),
+          h:  x.getUTCHours(),
           m:  x.getUTCMinutes() > 10 ? x.getUTCMinutes() : '0' + x.getUTCMinutes(),
           s:  x.getUTCSeconds() > 10 ? x.getUTCSeconds() : '0' + x.getUTCSeconds()
         };
