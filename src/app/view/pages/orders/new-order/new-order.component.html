@@ -56,10 +56,12 @@
 
 <div class="page-wrapper" *ngIf="dataSource">
     <div class="gantt-wrapper">
-        <app-order-gantt [data]="dataSource"></app-order-gantt>
+        <app-order-gantt [data]="dataSource" (selectedOrderChange)="setSelectedOrder($event)"></app-order-gantt>
     </div>
     <div class="order-info">
-
+        <pre>
+            {{selectedOrder | json}}
+        </pre>
     </div>
     <div class="order-action">
         

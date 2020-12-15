@@ -32,6 +32,9 @@
         margin: .5rem .5rem 1rem 1rem;
         background-color: $lv0;
         color: $font-color;
+        pre{
+            color: $font-color;
+        }
     }
     .order-action{
         flex: .5;
@@ -45,25 +48,23 @@
 
 
 @media screen and (orientation: portrait) {
+    
     .page-wrapper{
         flex-direction: column;
 
-        width: 97%; 
+        width: 97%;
 
-        #order-wrapper{
-            order: 1;
-            flex: 0.4;
-            margin: 0;
-            margin-top: 2%;
-            margin-bottom: 1%;
+        .gantt-wrapper{
+            flex: .3 !important;
+            margin: .5rem 1rem .5rem 1rem !important;
         }
-        #details-wrapper{
-            order: 2;
-            margin: 0;
-            margin-bottom: 2%;
-            flex: 0.6;
-            margin-top: 1%;
-
+        .order-info{
+            flex: .35 !important;
+            margin: .5rem 1rem .5rem 1rem !important;
+        }
+        .order-action{
+            flex: .35 !important;
+            margin: .5rem 1rem .5rem 1rem !important;
         }
     }
 }
