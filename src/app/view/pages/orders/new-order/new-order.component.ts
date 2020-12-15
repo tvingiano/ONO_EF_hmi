@@ -87,10 +87,6 @@ export class NewOrderComponent implements OnInit {
     });
   }
 
-  test() {
-    
-  }
-
   setSelectedOrder(e){
     this.selectedOrder = this.dataSource.filter(x => x.OrderName === e)[0];
   }
