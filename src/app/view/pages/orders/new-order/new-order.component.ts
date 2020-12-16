@@ -100,7 +100,7 @@ export class NewOrderComponent implements OnInit {
   }
 
   showDetail(data) {
-
+    console.log(data);
   }
 
 }
