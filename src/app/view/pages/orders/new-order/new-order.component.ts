@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ComponentFactoryResolver, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { IOrderInfo } from 'src/app/model/orders/orders-info';
 import { UtilsService } from 'src/app/service/helper/utils.service';
@@ -16,7 +16,9 @@ export class NewOrderComponent implements OnInit {
     private utilsService: UtilsService,
     private onoApiService: OnoApiService,
     private dialog: MatDialog,
+    private resolve: ComponentFactoryResolver,
   ) { }
+
 
   dataSource: IOrderInfo[];
   selectedOrder: IOrderInfo;
@@ -88,7 +90,20 @@ export class NewOrderComponent implements OnInit {
   }
 
   setSelectedOrder(e){
-    this.selectedOrder = this.dataSource.filter(x => x.OrderName === e)[0];
+    const newOrder = this.dataSource.filter(x => x.OrderName === e)[0];
+    console.log(newOrder);
+    if(newOrder === this.selectedOrder) {
+      this.selectedOrder = undefined;
+    } else {
+      this.selectedOrder = newOrder;
+    }
+  }
+
+  showDetail(data) {
+
   }
 
 }
+
+
+

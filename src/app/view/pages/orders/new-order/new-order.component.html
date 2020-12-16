@@ -24,30 +24,30 @@
     <div id="details-wrapper">
         <div id="top">
             <table id="details-table" *ngIf="selectedOrder">
-                <tr><th></th><th>value</th></tr>
+                <tr class="o-row"><th></th><th>value</th></tr>
 
-                <tr><td>BatchID</td><td>{{selectedOrder.BatchID}}</td></tr>
-                <tr><td>BookedDrawers</td><td>{{selectedOrder.BookedDrawers}}</td></tr>
-                <tr><td>Client</td><td>{{selectedOrder.Client}}</td></tr>
-                <tr><td>FinalQuantity</td><td>{{selectedOrder.FinalQuantity}}</td></tr>
-                <tr><td>FinalQuantityMeasureUnit</td><td>{{selectedOrder.FinalQuantityMeasureUnit}}</td></tr>
-                <tr><td>FinalWeight</td><td>{{selectedOrder.FinalWeight}}</td></tr>
-                <tr><td>LastUpdate</td><td>{{selectedOrder.LastUpdate}}</td></tr>
-                <tr><td>LoadOperator</td><td>{{selectedOrder.LoadOperator}}</td></tr>
-                <tr><td>OrderAuthor</td><td>{{selectedOrder.OrderAuthor}}</td></tr>
-                <tr><td>OrderName</td><td>{{selectedOrder.OrderName}}</td></tr>
-                <tr><td>OrderNotes</td><td>{{selectedOrder.OrderNotes}}</td></tr>
+                <tr class="o-row"><td>BatchID</td><td>{{selectedOrder.BatchID}}</td></tr>
+                <tr class="o-row"><td>BookedDrawers</td><td>{{selectedOrder.BookedDrawers}}</td></tr>
+                <tr class="o-row"><td>Client</td><td>{{selectedOrder.Client}}</td></tr>
+                <tr class="o-row"><td>FinalQuantity</td><td>{{selectedOrder.FinalQuantity}}</td></tr>
+                <tr class="o-row"><td>FinalQuantityMeasureUnit</td><td>{{selectedOrder.FinalQuantityMeasureUnit}}</td></tr>
+                <tr class="o-row"><td>FinalWeight</td><td>{{selectedOrder.FinalWeight}}</td></tr>
+                <tr class="o-row"><td>LastUpdate</td><td>{{selectedOrder.LastUpdate}}</td></tr>
+                <tr class="o-row"><td>LoadOperator</td><td>{{selectedOrder.LoadOperator}}</td></tr>
+                <tr class="o-row"><td>OrderAuthor</td><td>{{selectedOrder.OrderAuthor}}</td></tr>
+                <tr class="o-row"><td>OrderName</td><td>{{selectedOrder.OrderName}}</td></tr>
+                <tr class="o-row"><td>OrderNotes</td><td>{{selectedOrder.OrderNotes}}</td></tr>
                 
-                <tr><td>OrderStatus</td><td>{{selectedOrder.OrderStatus}}</td></tr>
-                <tr><td>OrderTags</td><td>{{selectedOrder.OrderTags}}</td></tr>
-                <tr><td>Priority</td><td>{{selectedOrder.Priority}}</td></tr>
-                <tr><td>RealEndTime</td><td>{{selectedOrder.RealEndTime}}</td></tr>
-                <tr><td>RealStartTime</td><td>{{selectedOrder.RealStartTime}}</td></tr>
-                <tr><td>Recipe</td><td>{{selectedOrder.Recipe}}</td></tr>
-                <tr><td>ScheduledEndTime</td><td>{{selectedOrder.ScheduledEndTime}}</td></tr>
-                <tr><td>ScheduledStartTime</td><td>{{selectedOrder.ScheduledStartTime}}</td></tr>
-                <tr><td>Seed</td><td>{{selectedOrder.Seed}}</td></tr>
-                <tr><td>UnloadOperator</td><td>{{selectedOrder.UnloadOperator}}</td></tr>
+                <tr class="o-row"><td>OrderStatus</td><td>{{selectedOrder.OrderStatus}}</td></tr>
+                <tr class="o-row"><td>OrderTags</td><td>{{selectedOrder.OrderTags}}</td></tr>
+                <tr class="o-row"><td>Priority</td><td>{{selectedOrder.Priority}}</td></tr>
+                <tr class="o-row"><td>RealEndTime</td><td>{{selectedOrder.RealEndTime}}</td></tr>
+                <tr class="o-row"><td>RealStartTime</td><td>{{selectedOrder.RealStartTime}}</td></tr>
+                <tr class="o-row"><td>Recipe</td><td>{{selectedOrder.Recipe}}</td></tr>
+                <tr class="o-row"><td>ScheduledEndTime</td><td>{{selectedOrder.ScheduledEndTime}}</td></tr>
+                <tr class="o-row"><td>ScheduledStartTime</td><td>{{selectedOrder.ScheduledStartTime}}</td></tr>
+                <tr class="o-row"><td>Seed</td><td>{{selectedOrder.Seed}}</td></tr>
+                <tr class="o-row"><td>UnloadOperator</td><td>{{selectedOrder.UnloadOperator}}</td></tr>
             </table>
         </div>
         <div id="bottom">ciao</div>
@@ -56,12 +56,66 @@
 
 <div class="page-wrapper" *ngIf="dataSource">
     <div class="gantt-wrapper">
-        <app-order-gantt [data]="dataSource" (selectedOrderChange)="setSelectedOrder($event)"></app-order-gantt>
+        <div id="gantt">
+            <app-order-gantt [data]="dataSource" (selectedOrderChange)="setSelectedOrder($event)"></app-order-gantt>
+        </div>
+        <div id="buttons">
+            <div class="square-btn">+</div>
+            <div class="square-btn">-</div>
+            <div class="square-btn">edit</div>
+        </div>
+        
     </div>
     <div class="order-info">
-        <pre>
-            {{selectedOrder | json}}
-        </pre>
+        <div class="info-container">
+            <table class="o-table" *ngIf="selectedOrder">
+                <tr class="o-row">
+                    <td class="key even">Name</td>
+                    <td class="value even">{{selectedOrder.OrderName}}</td>
+                </tr>
+                <tr class="o-row">
+                    <td class="key">Author</td>
+                    <td class="value">{{selectedOrder.OrderAuthor}}</td>
+                </tr>
+                <tr class="o-row">
+                    <td class="key even">Client</td>
+                    <td class="value even">{{selectedOrder.Client}}</td>
+                </tr>
+                <tr class="o-row">
+                    <td class="key">Seed</td>
+                    <td class="value">{{selectedOrder.Seed}}</td>
+                </tr>
+                <tr class="o-row">
+                    <td class="key even">Recipe</td>
+                    <td class="value even">{{selectedOrder.Recipe}}</td>
+                </tr>
+                <tr class="o-row">
+                    <td class="key">Priority</td>
+                    <td class="value">{{selectedOrder.Priority}}</td>
+                </tr>
+                <tr class="o-row">
+                    <td class="key even">Status</td>
+                    <td class="value even">{{selectedOrder.OrderStatus}}</td>
+                </tr>
+                <tr class="o-row">
+                    <td class="key">f. prod.</td>
+                    <td class="value">{{selectedOrder.FinalWeight}}Kg</td>
+                </tr>
+                <tr class="o-row">
+                    <td class="key even">Production</td>
+                    <td class="value even">-</td>
+                </tr>
+                <tr class="o-row">
+                    <td class="key">{{selectedOrder.OrderStatus !== 'running' ? 'Started' : 'Scheduled'}}</td>
+                    <td class="value">{{selectedOrder.OrderStatus !== 'running' ? selectedOrder.RealStartTime : selectedOrder.ScheduledStartTime | date}}</td>
+                </tr>
+                <tr class="o-row">
+                    <td class="key even">end</td>
+                    <td class="value even">{{selectedOrder.OrderStatus !== 'running' ? selectedOrder.RealEndTime : selectedOrder.ScheduledEndTime | date}}</td>
+                </tr>
+            </table>
+            <button (click)="showDetails(selectedOrder)">more</button>
+        </div>
     </div>
     <div class="order-action">
         
