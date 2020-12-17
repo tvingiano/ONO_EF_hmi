@@ -229,6 +229,7 @@ import { GaugeProgressComponent } from './view/pages/process/manage/gauge-progre
 import { NewProcessComponent } from './view/pages/process/new-process/new-process.component';
 import { NewOrderComponent } from './view/pages/orders/new-order/new-order.component';
 import { OrderGanttComponent } from './view/pages/orders/components/order-gantt/order-gantt.component';
+import { OrderDetailModalComponent } from './view/pages/orders/components/order-detail-modal/order-detail-modal';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -397,7 +398,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         NewProcessComponent,
         NewOrderComponent,
         OrderGanttComponent,
-
+        OrderDetailModalComponent,
     ],
     imports: [
         MatRadioModule,
@@ -508,6 +509,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         SeedEditDialogComponent,
         SlotEditDialogComponent,
         ConfirmDialogComponent,
+        OrderDetailModalComponent,
         Note2,
         Edit,
         Add,

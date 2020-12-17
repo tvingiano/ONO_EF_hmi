@@ -23,7 +23,7 @@
         flex:100%;
         margin: 1rem;
         margin-bottom: .5rem;
-        height: calc(40% - 1.5rem);
+        height: calc(50% - 1.5rem);
 
         background-color: $lv0;
         color: $font-color;
@@ -63,9 +63,9 @@
 
     .order-info{
         flex: .5;
-        height: calc(60% - 1.5rem);
+        height: calc(50% - 1.5rem);
         margin: .5rem .5rem 1rem 1rem;
-        background-color: $lv0;
+        background-color: $lv1;
         color: $font-color;
 
         padding: 1rem;
@@ -74,29 +74,53 @@
             width: 85%;
             margin-left: 50%;
             transform: translateX(-50%);
+            
             .o-table{
                 width: 100%;
-                border: 1px solid rgba(255,255,255,.2);
+                border: 1px solid rgba(255,255,255,.3);
                 padding: 1rem;
                 .o-row{
                     padding: .5rem;
                     // border-bottom: solid 1px $font-color;
 
                     .even{
-                        background-color: rgba(255,255,255,.05);
+                        background-color: rgba(255,255,255,.1);
                     }
 
                     .key{
-                        border-right: 1px solid rgba(255,255,255,.2);
+                        border-right: 1px solid rgba(255,255,255,.3);
                         padding: .25rem 1rem;
                         width: 35%;
+                        font-size: 1.1rem;
+                        color: $lightblue;
                     }
 
                     .value{
                         width: 65%;
                         padding: .25rem 1rem;
-                        opacity: .8;
+                        opacity: .9;
                     }
+                }
+            }
+
+            .more-button{
+                width: 100%;
+                height: stretch;
+
+                margin-top: 1rem;
+                padding: 1rem;
+                text-align: center;
+
+
+                background-color: $lv2;
+                color: $font-color;
+
+                &:hover{
+                    background-color: $lv3;
+                }
+
+                &:focus{
+                    outline: none;
                 }
             }
         }
@@ -104,10 +128,42 @@
     }
     .order-action{
         flex: .5;
-        height: calc(60% - 1.5rem);
+        height: calc(50% - 1.5rem);
         margin: .5rem 1rem 1rem .5rem;
-        background-color: $lv0;
+        background-color: $lv1;
         color: $font-color;
+        padding: .5rem;
+
+        text-align: center;
+
+        .square {
+            float:left;
+            position: relative;
+            width: calc(25% - 1rem);
+            padding-bottom : calc(25% - 1rem); /* = width for a 1:1 aspect ratio */
+            margin:.5rem;
+            background-color: $lv2;
+            overflow:hidden;
+
+            .content {
+                position:absolute;
+                height:calc(100%);
+                width:calc(100%); /* = 100% - 2*5% padding */
+                padding: 1rem;
+             
+                .table{
+                    display:table;
+                    width:100%;
+                    height:100%;
+                
+                    .table-cell{
+                        color: $font-color;
+                        display:table-cell;
+                        vertical-align:middle;
+                    }
+                }
+            }
+        }
     }
 }
 

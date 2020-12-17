@@ -67,8 +67,8 @@
         
     </div>
     <div class="order-info">
-        <div class="info-container">
-            <table class="o-table" *ngIf="selectedOrder">
+        <div class="info-container" *ngIf="selectedOrder">
+            <table class="o-table">
                 <tr class="o-row">
                     <td class="key even">Name</td>
                     <td class="value even">{{selectedOrder.OrderName}}</td>
@@ -98,7 +98,7 @@
                     <td class="value even">{{selectedOrder.OrderStatus}}</td>
                 </tr>
                 <tr class="o-row">
-                    <td class="key">f. prod.</td>
+                    <td class="key">final prod.</td>
                     <td class="value">{{selectedOrder.FinalWeight}}Kg</td>
                 </tr>
                 <tr class="o-row">
@@ -114,10 +114,50 @@
                     <td class="value even">{{selectedOrder.OrderStatus !== 'running' ? selectedOrder.RealEndTime : selectedOrder.ScheduledEndTime | date}}</td>
                 </tr>
             </table>
-            <button (click)="showDetails(selectedOrder)">more</button>
+            <div class="more-button" (click)="showDetails(selectedOrder)">more</div>
         </div>
     </div>
     <div class="order-action">
-        
+        <div class="square">
+            <div class="content">
+                <div class="table">
+                    <div class="table-cell numbers">
+                            98%
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="square">
+            <div class="content">
+                <div class="table">
+                    <div class="table-cell numbers">
+                            98%
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="square">
+            <div class="content">
+                <div class="table">
+                    <div class="table-cell numbers">
+                            98%
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="square">
+            <div class="content">
+                <div class="table">
+                    <div class="table-cell numbers">
+                            98%
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        div.
     </div>
 </div>

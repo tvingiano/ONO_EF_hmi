@@ -1,0 +1,33 @@
+<table>
+    <tr *ngFor="let o of dataSource">
+        <ng-container *ngIf="o.key !== 'Cost'">
+            <td>{{o.key}}</td>
+            <td class="val">{{o.value}}</td>
+        </ng-container>
+        <ng-container *ngIf="o.key === 'Cost'">
+            <td>Costs</td>
+            <td>
+                <table>
+                    <tr *ngFor="let c of costs">
+                        <td>{{c.key}}</td>
+                        <td class="val">{{c.value}}</td>
+                    </tr>
+                </table>
+            </td>
+        </ng-container>
+    </tr>
+</table>
+
+<style>
+    table tr{
+        border: solid 1px white;
+        color: white;
+    }
+    table tr td {
+        padding: .5rem;
+    }
+
+    .val{
+        opacity: 0.7;
+    }
+</style>

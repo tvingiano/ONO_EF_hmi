@@ -113,6 +113,14 @@ export class OrderGanttComponent implements OnInit {
 
     const Event = series1.columns.template.events.on('hit', e => {this.setCurrentOrder(e); }, this);
 
+    const label = series1.columns.template.createChild(am4core.Label);
+    label.text = '{name}';
+    label.fill = am4core.color('#fff');
+    label.strokeWidth = 0;
+    label.fontSize = 20;
+    label.align = 'center';
+    label.valign = 'middle';
+
 
     chart.scrollbarX = new am4core.Scrollbar();
     chart.scrollbarX.background.fillOpacity = 0.2;
@@ -198,6 +206,8 @@ export class OrderGanttComponent implements OnInit {
     range2.label.above = true;
     range2.label.background.fill = am4core.color('#3D4754');
     range2.label.background.opacity = 0.7;
+
+    console.log(e);
 
   }
 
