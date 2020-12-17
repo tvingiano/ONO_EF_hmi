@@ -158,6 +158,8 @@
             </div>
         </div>
 
-        div.
+        <div class="prod-chart" style="width: 100%; height: stretch" *ngIf="selectedOrder">
+            <app-order-production-chart [data]="selectedOrder"></app-order-production-chart>
+        </div>
     </div>
 </div>

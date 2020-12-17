@@ -230,6 +230,7 @@ import { NewProcessComponent } from './view/pages/process/new-process/new-proces
 import { NewOrderComponent } from './view/pages/orders/new-order/new-order.component';
 import { OrderGanttComponent } from './view/pages/orders/components/order-gantt/order-gantt.component';
 import { OrderDetailModalComponent } from './view/pages/orders/components/order-detail-modal/order-detail-modal';
+import { OrderProductionChartComponent } from './view/pages/orders/components/order-production-chart/order-production-chart.component';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -399,6 +400,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         NewOrderComponent,
         OrderGanttComponent,
         OrderDetailModalComponent,
+        OrderProductionChartComponent,
     ],
     imports: [
         MatRadioModule,
