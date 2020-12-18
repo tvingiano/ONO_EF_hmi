@@ -22,6 +22,7 @@ export class NewOrderComponent implements OnInit {
 
   dataSource: IOrderInfo[];
   selectedOrder: IOrderInfo;
+  selData: IOrderInfo[];
 
   ngOnInit() {
     this.getData();
@@ -91,8 +92,7 @@ export class NewOrderComponent implements OnInit {
 
   setSelectedOrder(e){
     const newOrder = this.dataSource.filter(x => x.OrderName === e)[0];
-    console.log(newOrder);
-    if(newOrder === this.selectedOrder) {
+    if (newOrder === this.selectedOrder) {
       this.selectedOrder = undefined;
     } else {
       this.selectedOrder = newOrder;

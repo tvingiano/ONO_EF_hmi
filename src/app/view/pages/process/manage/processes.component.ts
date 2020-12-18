@@ -295,8 +295,6 @@ export class ProcessesComponent implements OnInit {
           this.currentImageIndex = 0;
           this.currentImageMetadata = res;
           this.imagesMetadata.push(res);
-          console.log(res);
-
         } else {
           this.imagesFound = false;
           this.currentImageIndex = undefined;

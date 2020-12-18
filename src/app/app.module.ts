@@ -231,6 +231,7 @@ import { NewOrderComponent } from './view/pages/orders/new-order/new-order.compo
 import { OrderGanttComponent } from './view/pages/orders/components/order-gantt/order-gantt.component';
 import { OrderDetailModalComponent } from './view/pages/orders/components/order-detail-modal/order-detail-modal';
 import { OrderProductionChartComponent } from './view/pages/orders/components/order-production-chart/order-production-chart.component';
+import { BatchGanttPreviewComponent } from './view/pages/orders/components/batch-gantt-preview/batch-gantt-preview.component';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -401,6 +402,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         OrderGanttComponent,
         OrderDetailModalComponent,
         OrderProductionChartComponent,
+        BatchGanttPreviewComponent,
     ],
     imports: [
         MatRadioModule,

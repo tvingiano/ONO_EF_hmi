@@ -1,20 +1,25 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { IOrderInfo } from 'src/app/model/orders/orders-info';
+
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
-import { IOrderInfo } from 'src/app/model/orders/orders-info';
+import { OnoApiService } from 'src/app/service/ono-api.service';
+import { random } from '@amcharts/amcharts4/.internal/core/utils/String';
 
 @Component({
-  selector: 'app-order-gantt',
-  templateUrl: './order-gantt.component.html'
+  selector: 'app-batch-gantt-preview',
+  templateUrl: './batch-gantt-preview.component.html',
 })
-export class OrderGanttComponent implements OnInit {
+export class BatchGanttPreviewComponent implements OnInit {
+  
+  @Input() order;
 
-  @Input() data: IOrderInfo[];
+  @Output() goBatch: EventEmitter<string> =   new EventEmitter();
 
-  @Output() selectedOrderChange: EventEmitter<string> =   new EventEmitter();
-
-  constructor() { }
+  constructor(
+    private api: OnoApiService,
+  ) { }
 
   colors = [
     '#AB2572',
@@ -32,10 +37,67 @@ export class OrderGanttComponent implements OnInit {
 
   ngOnInit() {
 
+    console.log(this.order);
+
+    /**
+     * to use when Batch api will be developed
+     */
+    // this.order.BatchID.forEach(b => {
+    //   this.api.getBatchInfo(b).subscribe( x => {
+    //     this.drawChart(x);
+    //   });
+    // });
+    const batches = [];
+    const r = parseInt((Math.random() * 100 % 4).toFixed(1), 10) + 1;
+
+    for (let i = 0; i < r; i++) {
+      batches.push({
+        BatchID: Math.random().toString(36).substring(7),
+        StartTime: this.getStartTime(i, r, true),
+        EndTime: this.getStartTime(i, r, false),
+        TrayID: i * i * 5,
+        ProcessID: parseInt((Math.random() * 100 % 100).toFixed(1), 10),
+        Status: parseInt((Math.random() * 100 % 2).toFixed(1), 10) === 0 ? 'running' : 'scheduled'
+      });
+    }
+    
+    this.drawChart(batches);
+  }
+
+  getStartTime(index, total, start) {
+    let res;
+    const me = this.order;
+
+    const st = new Date(me.OrderStatus === 'running' ? me.ScheduledStartTime : me.RealStartTime);
+    const et = new Date(me.OrderStatus === 'running' ? me.ScheduledEndTime : me.RealEndTime);
+
+    if (index === 0) {
+      res = st;
+    } else {
+      res = new Date(((et.getTime() - st.getTime()) / total) * index);
+    }
+
+    switch (start) {
+      case true: return res;
+      case false: return new Date(res.getTime() + ((et.getTime() - st.getTime()) / total));
+    }
+  }
+
+  drawChart(data) {
+
+
+    const dataSource = [];
+
+    data.forEach(x => {
+      console.log(x);
+    });
+
+
+
     am4core.useTheme(am4themes_animated);
 
 
-    const chart = am4core.create('chartdiv', am4charts.XYChart);
+    const chart = am4core.create('chartdiv2', am4charts.XYChart);
     chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
 
     chart.paddingRight = 30;
@@ -43,18 +105,6 @@ export class OrderGanttComponent implements OnInit {
 
     const colorSet = new am4core.ColorSet();
     colorSet.saturation = 0.4;
-
-
-    const dataSource = [];
-
-    this.data.forEach( (element, index) => {
-          dataSource.push({
-            name: element.OrderName,
-            fromDate: this.formatData(element.ScheduledStartTime),
-            toDate: this.formatData(element.ScheduledEndTime),
-            color: this.colors[index],
-          });
-        });
 
     chart.data = dataSource;
 
@@ -170,7 +220,7 @@ export class OrderGanttComponent implements OnInit {
     if (x) { z = x; }
     if (y) { z = y; }
 
-    this.selectedOrderChange.emit(z);
+    this.goBatch.emit(z);
   }
 
   formatData(x) {

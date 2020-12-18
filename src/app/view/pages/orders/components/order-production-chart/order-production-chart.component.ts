@@ -34,9 +34,6 @@ export class OrderProductionChartComponent implements OnInit {
       observedDuration = (new Date().getTime() - new Date(this.data.ScheduledStartTime).getTime())  / (1440 * 60 * 60 * 24);
     }
 
-    console.log(duration + '/' + observedDuration);
-
-
   }
 
 }

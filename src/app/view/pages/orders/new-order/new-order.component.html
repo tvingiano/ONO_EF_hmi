@@ -107,11 +107,11 @@
                 </tr>
                 <tr class="o-row">
                     <td class="key">{{selectedOrder.OrderStatus !== 'running' ? 'Started' : 'Scheduled'}}</td>
-                    <td class="value">{{selectedOrder.OrderStatus !== 'running' ? selectedOrder.RealStartTime : selectedOrder.ScheduledStartTime | date}}</td>
+                    <td class="value">{{(selectedOrder.OrderStatus !== 'running' ? selectedOrder.ScheduledStartTime : selectedOrder.ScheduledStartTime) | date}}</td>
                 </tr>
                 <tr class="o-row">
                     <td class="key even">end</td>
-                    <td class="value even">{{selectedOrder.OrderStatus !== 'running' ? selectedOrder.RealEndTime : selectedOrder.ScheduledEndTime | date}}</td>
+                    <td class="value even">{{(selectedOrder.OrderStatus !== 'running' ? selectedOrder.ScheduledEndTime : selectedOrder.ScheduledEndTime) | date}}</td>
                 </tr>
             </table>
             <div class="more-button" (click)="showDetails(selectedOrder)">more</div>
@@ -122,7 +122,7 @@
             <div class="content">
                 <div class="table">
                     <div class="table-cell numbers">
-                            98%
+                            hey!
                     </div>
                 </div>
             </div>
@@ -132,7 +132,7 @@
             <div class="content">
                 <div class="table">
                     <div class="table-cell numbers">
-                            98%
+                            click me
                     </div>
                 </div>
             </div>
@@ -142,7 +142,7 @@
             <div class="content">
                 <div class="table">
                     <div class="table-cell numbers">
-                            98%
+                            I'm
                     </div>
                 </div>
             </div>
@@ -152,14 +152,13 @@
             <div class="content">
                 <div class="table">
                     <div class="table-cell numbers">
-                            98%
+                            sad :(
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="prod-chart" style="width: 100%; height: stretch" *ngIf="selectedOrder">
-            <app-order-production-chart [data]="selectedOrder"></app-order-production-chart>
-        </div>
+    </div>
+    <div class="prod-chart" style="width: 100%; height: stretch; background-color: red" *ngIf="selectedOrder">
+        <app-batch-gantt-preview [order]="selectedOrder" (goBatch)="true"></app-batch-gantt-preview>
     </div>
 </div>
