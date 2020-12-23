@@ -169,6 +169,7 @@
 
                 margin-left: 50%;
                 transform: translateX(-50%);
+
             }
 
             .found-img{
@@ -179,6 +180,15 @@
                 background-position: center;
                 background-repeat: no-repeat;
                 background-size: contain;  
+
+                &:before{
+                    content:"before";
+                    position: absolute;
+                    z-index: 0;
+
+                    transform: translateY(50%);
+                }
+
             }
 
             .action-img{

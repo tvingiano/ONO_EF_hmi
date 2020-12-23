@@ -34,12 +34,8 @@ export class DataService {
 
   public expJSON;
 
-  Preset_a = [{
-      type: 0,
-      pid: -2,
-      name: 'empty',
-      note: ''
-    }, {
+  Preset_a = [
+    {
       type: 0,
       pid: -1,
       name: 'sprout_A',

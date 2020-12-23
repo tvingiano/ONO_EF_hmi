@@ -157,8 +157,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="prod-chart" style="width: 100%; height: stretch; background-color: red" *ngIf="selectedOrder">
-        <app-batch-gantt-preview [order]="selectedOrder" (goBatch)="true"></app-batch-gantt-preview>
+        <div class="prod-chart" *ngIf="selectedOrder">
+            <app-batch-gantt-preview [order]="selectedOrder" (goBatch)="true"></app-batch-gantt-preview>
+        </div>
     </div>
 </div>

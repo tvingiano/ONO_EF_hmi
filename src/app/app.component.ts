@@ -17,7 +17,7 @@ export class AppComponent {
         private translate: TranslateService,
         private svgIconsService: SvgIconsService,
         private auth: AuthenticationService,
-        private ono: OnoApiService
+        private ono: OnoApiService,
     ) {
         /* init i18n module */
         translate.setDefaultLang(localStorage.getItem('userLocale') || 'en');

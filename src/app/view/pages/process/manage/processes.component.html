@@ -1,5 +1,18 @@
 <div class="page-wrapper">
     <div id="process-wrapper" class="custom-scrollbar">
+        
+        <div class="filterbar">
+            <button (click)="showfilter = !showfilter">filter</button>
+
+            <div *ngIf="showfilter === true">
+                <div *ngFor="let item of filters | keyvalue">
+                    {{item.key}}: <input type="text" name="ciao" id="id" value="{{item.value}}" (change)="setFilter(item.key, item.value)">
+                </div>
+                <button (click)="print()">apply</button>
+            </div>
+
+        </div>
+
         <div class="process" *ngFor="let process of processesData" (click)="setSelectedProcess(process)" 
         [ngClass]="[
             process === this.selectedProcess ? 'active' : '',
@@ -263,12 +276,23 @@
                 </div>
 
 
-                <div class="square square-btn" [ngClass]="{'dis-btn': this.drawerState()}" (click)="this.drawerState() ? '' : onClose(selectedProcess)">
+                <div class="square square-btn" [ngClass]="{'dis-btn': this.drawerState()}" (click)="this.drawerState() ? '' : onClose(selectedProcess)" *ngIf="selectedProcess.Status === 'running'">
                     <div class="content">
                         <div class="table">
                             <div class="table-cell">
                                     <div class="icon" id="abort"></div>
                                     <div class="square-label">Close</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="square square-btn" [ngClass]="{'dis-btn': this.drawerState()}" (click)="this.drawerState() ? '' : onStart(selectedProcess.ProcessID)" *ngIf="selectedProcess.Status === 'to start'">
+                    <div class="content">
+                        <div class="table">
+                            <div class="table-cell">
+                                    <div class="icon" id="start">ciao</div>
+                                    <div class="square-label">Start!</div>
                             </div>
                         </div>
                     </div>

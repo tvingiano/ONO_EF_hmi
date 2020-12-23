@@ -140,7 +140,7 @@ export class OrderGanttComponent implements OnInit {
     title.marginTop = 10;
     title.fill = am4core.color('#fff');
 
-
+    chart.scrollbarX = new am4core.Scrollbar();
 
     const startGrip = chart.scrollbarX.startGrip;
     startGrip.icon.scale = 0.4;

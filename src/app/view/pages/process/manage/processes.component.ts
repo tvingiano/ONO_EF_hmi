@@ -198,6 +198,18 @@ export class ProcessesComponent implements OnInit {
 
   refillMenu = false;
 
+  filters = {
+    startDate: undefined,
+    endDate: undefined,
+    status: [],
+    progress: undefined,
+    customer: undefined,
+    id: undefined,
+    recipe: undefined,
+  };
+
+  showfilter = false;
+
   constructor(
     public dialog: MatDialog,
     private onoApiService: OnoApiService,
@@ -213,23 +225,83 @@ export class ProcessesComponent implements OnInit {
     this.getProcessData();
   }
 
+  print() {
+    console.log(this.filters);
+  }
+
   getProcessData() {
     this.onoApiService.infoprocess().subscribe(x => {
-      this.processesData = this.sortProcess(x);
-      // console.log(this.processesData);
+      const appo = this.sortProcess(x);
+      this.processesData = this.filter(appo);
+      console.log('## => ', this.processesData);
     });
     this.onoApiService.getFullDrawers().subscribe(y => {
       this.fullDrawers = y;
     });
     this.onoApiService.slotsGet().subscribe(s => {
       this.slotList = s;
-    })
+    });
 
     this.now = new Date();
   }
 
   sortProcess(x) {
     return x.sort( (a, b) => new Date(a.EndTime).valueOf() - new Date(b.EndTime).valueOf());
+  }
+
+  setFilter(key: string, value) {
+    this.filters[`${key}`] = value;
+    console.log(this.filters);
+  }
+
+  filter(x: IInfoProcess[]) {
+
+    const appo = [];
+
+    x.forEach(ele => {
+
+      const f = this.filters;
+
+      let pass = true;
+
+      // check order ID
+      f.id ? ((ele.OrderID !== f.id) ? pass = false : '') : '';
+
+
+      // check status
+      f.status.length ? f.status.forEach(s => {(s !== ele.Status) ? pass = false : ''; }) : '';
+
+
+      // check recipe
+      f.recipe ?  (ele.Recipe !== f.recipe ? pass = false : '') : '';
+
+      // // check customer
+      // if (f.customer) {
+      //   if (ele !== f.recipe) {pass = false;}
+      // }
+
+      // check progress
+      f.progress ? (this.getDateProgress(ele.StartTime, ele.EndTime) >= f.progress ? pass = false : '') : '';
+
+      // check period
+
+      const fs = f.startDate ? new Date(f.startDate).getTime() : new Date();
+      const fe = f.endDate ? new Date(f.endDate).getTime() : new Date(2022, 0, 0);
+      const s = new Date(ele.StartTime).getTime();
+      const e = new Date(ele.StartTime).getTime();
+
+      ((s >= fs) && (e <= fe)) ? pass = false : '';
+
+      
+
+      // alla fine se ele è ancora passabile:
+
+      pass === true ? appo.push(ele) : '';
+
+
+    });
+
+    return appo;
   }
 
 
@@ -292,7 +364,7 @@ export class ProcessesComponent implements OnInit {
 
         if (res && res['ProcessID'] === process.ProcessID) {
           this.imagesFound = true;
-          this.currentImageIndex = 0;
+          this.currentImageIndex = res['Images'].length - 1;
           this.currentImageMetadata = res;
           this.imagesMetadata.push(res);
         } else {
