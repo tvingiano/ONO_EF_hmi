@@ -2,9 +2,9 @@
     <div id="process-wrapper" class="custom-scrollbar">
         
         <ng-container *ngIf="loadingData === false">
+
             <div class="filterbar">
                 <button (click)="showfilter = !showfilter">filter</button>
-    
                 <div *ngIf="showfilter === true">
                     <div *ngFor="let item of filters | keyvalue">
                         {{item.key}}: <input type="text" name="ciao" id="id" value="{{item.value}}" (change)="setFilter(item.key, item.value)">
@@ -65,6 +65,7 @@
                     Let's go to  <button routerLink="/new-orders">ORDER'S PLANNING</button> to start a process o create a new one
                 </div>
             </ng-container>
+
         </ng-container>
 
         <ng-container *ngIf="loadingData === true">

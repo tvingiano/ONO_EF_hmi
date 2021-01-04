@@ -47,6 +47,7 @@ export class BatchGanttPreviewComponent implements OnInit {
     //     this.drawChart(x);
     //   });
     // });
+    
     const batches = [];
     const r = parseInt((Math.random() * 100 % 4).toFixed(1), 10) + 1;
 
@@ -87,12 +88,6 @@ export class BatchGanttPreviewComponent implements OnInit {
 
 
     const dataSource = [];
-
-    data.forEach(x => {
-      console.log(x);
-    });
-
-
 
     am4core.useTheme(am4themes_animated);
 
