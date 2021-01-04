@@ -210,6 +210,8 @@ export class ProcessesComponent implements OnInit {
 
   showfilter = false;
 
+  loadingData = false;
+
   constructor(
     public dialog: MatDialog,
     private onoApiService: OnoApiService,
@@ -230,16 +232,25 @@ export class ProcessesComponent implements OnInit {
   }
 
   getProcessData() {
+
+    this.loadingData = true;
     this.onoApiService.infoprocess().subscribe(x => {
-      const appo = this.sortProcess(x);
-      this.processesData = this.filter(appo);
-      console.log('## => ', this.processesData);
-    });
-    this.onoApiService.getFullDrawers().subscribe(y => {
-      this.fullDrawers = y;
-    });
-    this.onoApiService.slotsGet().subscribe(s => {
-      this.slotList = s;
+      if (x !== null) {
+        const appo = this.sortProcess(x);
+        this.processesData = this.filter(appo);
+
+        this.onoApiService.getFullDrawers().subscribe(y => {
+          this.fullDrawers = y;
+
+          this.onoApiService.slotsGet().subscribe(s => {
+            this.slotList = s;
+
+            // this.loadingData = false;
+          });
+
+        });
+      }
+      this.loadingData = false;
     });
 
     this.now = new Date();

@@ -102,6 +102,7 @@ export class BatchGanttPreviewComponent implements OnInit {
 
     chart.paddingRight = 30;
     chart.dateFormatter.inputDateFormat = 'yyyy-MM-dd HH:mm';
+    chart.dateFormatter.dateFormat = 'yyyy-MM-dd HH:mm';
 
     const colorSet = new am4core.ColorSet();
     colorSet.saturation = 0.4;
@@ -125,18 +126,19 @@ export class BatchGanttPreviewComponent implements OnInit {
 
 
     const dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-    dateAxis.dateFormatter.dateFormat = 'yyyy-MM-dd HH:mm';
+    dateAxis.dateFormatter.dateFormat = 'yyyy-MM-dd';
     dateAxis.renderer.tooltipLocation = 0;
     dateAxis.renderer.grid.template.stroke = am4core.color('#c0d8ff');
     dateAxis.renderer.grid.template.strokeWidth = 1;
     dateAxis.renderer.baseGrid.stroke = am4core.color('#c0d8ff');
-    dateAxis.renderer.minGridDistance = 1;
+    dateAxis.renderer.minGridDistance = 70;
+    dateAxis.baseInterval = {count: 1, timeUnit: 'day'};
 
-    dateAxis.renderer.labels.template.rotation = 90;
-    dateAxis.renderer.labels.template.horizontalCenter = 'left';
-    dateAxis.renderer.labels.template.verticalCenter = 'middle';
-    dateAxis.renderer.labels.template.fill = am4core.color('#c0d8ff');
-    dateAxis.renderer.labels.template.fontSize = 10;
+    // dateAxis.renderer.labels.template.rotation = 90;
+    // dateAxis.renderer.labels.template.horizontalCenter = 'left';
+    // dateAxis.renderer.labels.template.verticalCenter = 'middle';
+    // dateAxis.renderer.labels.template.fill = am4core.color('#c0d8ff');
+    // dateAxis.renderer.labels.template.fontSize = 10;
 
 
     dateAxis.events.on('datavalidated', e => {this.highlightNow(e); }, this);

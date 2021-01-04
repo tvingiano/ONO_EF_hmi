@@ -109,7 +109,7 @@ export const ROUTES: Routes = [
 
     /* ORDERS */
     { path: 'orders', component: OrdersListComponent },
-    { path: 'newOrders', component: NewOrderComponent },
+    { path: 'new-orders', component: NewOrderComponent },
 
     /* PROCESSES */
     { path: 'processes/manage', component: ProcessesComponent },

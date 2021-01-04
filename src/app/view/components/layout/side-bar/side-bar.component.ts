@@ -134,7 +134,7 @@ export class SideBarComponent implements OnInit {
             color: '#7aeb34',
             sub: [
                 {
-                    link: '/newOrders',
+                    link: '/new-orders',
                     icon:  'fingerprint',
                     title: 'test new',
                 },
