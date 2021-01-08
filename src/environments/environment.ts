@@ -28,6 +28,10 @@ export const environment = {
         solutions: `${API_HOST_URL}/solutions`,
         substrates: `${API_HOST_URL}/substrates`,
 
+        // recipes
+
+        recipes: `${API_HOST_URL}/recipes`,
+
         // system configuration
         managelamp: `${API_HOST_URL}/managelamp`,
         cronlamp: `${API_HOST_URL}/cronlamp`,

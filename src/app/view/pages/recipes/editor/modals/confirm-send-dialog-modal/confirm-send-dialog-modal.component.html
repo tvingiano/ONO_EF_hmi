@@ -4,14 +4,14 @@
     <ng-container *ngFor="let group of this.dataService.groups">
         <ng-container *ngIf="group.items[0]">
             <div class="group-card">
-                {{group.title}}<span style="float: right">x{{group.exp}}</span>
+                <input type="text" placeholder="{{group.title}}" [(ngModel)]="group.title"> <span style="float: right">x{{group.exp}}</span>
                 <div class="item-wrapper">
                     <ng-container *ngFor="let item of group.items">
                         <div class="item-card">
                             <table>
                                 <tr>
                                     <th>Name</th>
-                                    <td>{{item.name}}</td>
+                                    <td><input type="text" [(ngModel)]="item.name" placeholder="{{item.name}}"></td>
                                 </tr>
                                 <tr class = "even">
                                     <th>Photoperiod</th>
