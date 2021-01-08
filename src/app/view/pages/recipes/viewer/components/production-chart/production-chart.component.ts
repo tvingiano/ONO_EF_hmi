@@ -57,6 +57,7 @@ export class ProductionChartComponent implements OnInit {
       /* Chart code */
       // Themes begin
       am4core.useTheme(am4themes_animated);
+      am4core.options.autoDispose = true;
       // Themes end
 
       const chart = am4core.create('chartdiv-' + this.recipe.id, am4charts.XYChart);

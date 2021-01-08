@@ -45,6 +45,7 @@ export class GaugeChartComponent implements OnInit {
 
       // Set theme
       am4core.useTheme(am4themes_animated);
+      am4core.options.autoDispose = true;
 
       // Create chart
       const chart = am4core.create('chartdiv-' + this.type + '-' + this.id, am4charts.GaugeChart);

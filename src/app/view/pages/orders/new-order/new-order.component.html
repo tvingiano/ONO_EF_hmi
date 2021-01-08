@@ -60,6 +60,9 @@
             <app-order-gantt [data]="dataSource" (selectedOrderChange)="setSelectedOrder($event)"></app-order-gantt>
         </div>
         <div id="buttons">
+            
+            sort by:<button (click)="sortGantt(1)">ending</button><button (click)="sortGantt(2)">creation</button><button (click)="sortGantt(3)">state</button>
+            
             <div class="square-btn">+</div>
             <div class="square-btn">-</div>
             <div class="square-btn">edit</div>
@@ -119,49 +122,7 @@
     </div>
     <div class="order-action">
         <ng-container *ngIf="this.selectedOrder">
-            <div class="square">
-                <div class="content">
-                    <div class="table">
-                        <div class="table-cell numbers">
-                            <mat-icon>play_arrow</mat-icon>
-                            <div>Start & load</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    
-            <div class="square">
-                <div class="content">
-                    <div class="table">
-                        <div class="table-cell numbers">
-                            <mat-icon>pause</mat-icon>
-                            <div>Pause</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    
-            <div class="square">
-                <div class="content">
-                    <div class="table">
-                        <div class="table-cell numbers">
-                            <mat-icon>stop</mat-icon>
-                            <div>Stop</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    
-            <div class="square">
-                <div class="content">
-                    <div class="table">
-                        <div class="table-cell numbers">
-                            <mat-icon>calendar_today</mat-icon>
-                            <div>Re-schedule</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
             <div class="prod-chart" *ngIf="selectedOrder">
                 <app-batch-gantt-preview [order]="selectedOrder" (goBatch)="true"></app-batch-gantt-preview>
             </div>

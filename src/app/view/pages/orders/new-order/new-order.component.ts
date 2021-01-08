@@ -4,6 +4,7 @@ import { IOrderInfo } from 'src/app/model/orders/orders-info';
 import { UtilsService } from 'src/app/service/helper/utils.service';
 import { OnoApiService } from 'src/app/service/ono-api.service';
 import { OrderDetailModalComponent } from '../components/order-detail-modal/order-detail-modal';
+import { OrderGanttComponent } from '../components/order-gantt/order-gantt.component';
 import { OrderOrder } from '../ordersList.component';
 
 @Component({
@@ -17,6 +18,7 @@ export class NewOrderComponent implements OnInit {
     private utilsService: UtilsService,
     private onoApiService: OnoApiService,
     private dialog: MatDialog,
+    private ganttChart: OrderGanttComponent,
   ) { }
 
 

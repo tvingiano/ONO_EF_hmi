@@ -3,6 +3,7 @@ import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import { IOrderInfo } from 'src/app/model/orders/orders-info';
+import { inputs } from '@syncfusion/ej2-angular-diagrams/src/diagram/diagram.component';
 
 @Component({
   selector: 'app-order-gantt',
@@ -16,49 +17,89 @@ export class OrderGanttComponent implements OnInit {
 
   constructor() { }
 
-  colors = [
-    '#AB2572',
-    '#A3489C',
-    '#8F66C0',
-    '#7081DA',
-    '#4699E9',
-    '#00AEEF',
-    '#00C7ED',
-    '#00DBD6',
-    '#49EBB1',
-    '#A8F58A',
-    '#F9F871'
-  ];
+  colors = {
+    early: '#9ee396',
+    ok: '#96cee3',
+    late: '#e0cd80',
+    veryLate: '#db5353'
+  };
+
+  dataSource;
+  chartData;
+
+  CHART: any;
 
   ngOnInit() {
+    this.dataSource = this.data;
+    this.updateSort(0);
+  }
+
+  updateSort(val) {
+    console.log(this.dataSource);
+
+    let appo = [];
+    console.log(appo);
+
+
+    appo = this.dataSource;
+
+    switch (val) {
+      case 0: break;
+      case 1:
+        appo.sort((a, b) => new Date(a.ScheduledEndTime).getTime() - new Date(b.ScheduledEndTime).getTime());
+        break;
+      case 2:
+        break;
+      case 3:
+        break;
+      default: break;
+    }
+
+
+    this.chartData = [];
+    appo.forEach( element => {
+      this.chartData.push({
+        name: element.OrderName,
+        fromDate: this.formatData(element.ScheduledStartTime),
+        toDate: this.formatData(element.ScheduledEndTime),
+        color: this.getRandomColor(),
+      });
+    });
+
+    console.log('FINAL CHARTDATA = ', this.chartData);
+    this.drawChart();
+    this.drawChart();
+  }
+
+  drawChart() {
+
+    console.log('drawing this.CHART with: ', this.dataSource);
+
+    /**
+     * am4chart theming and settings
+     */
 
     am4core.useTheme(am4themes_animated);
+    am4core.options.autoDispose = true;
 
 
-    const chart = am4core.create('chartdiv', am4charts.XYChart);
-    chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+    /**
+     * chart creation
+     */
 
-    chart.paddingRight = 30;
-    chart.dateFormatter.inputDateFormat = 'yyyy-MM-dd HH:mm';
+    this.CHART = am4core.create('chartdiv', am4charts.XYChart);
+
+    this.CHART.data = this.chartData;
+
+    this.CHART.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+    this.CHART.paddingRight = 30;
+    this.CHART.dateFormatter.inputDateFormat = 'yyyy-MM-dd HH:mm';
 
     const colorSet = new am4core.ColorSet();
     colorSet.saturation = 0.4;
 
-
-    const dataSource = [];
-
-    this.data.forEach( (element, index) => {
-          dataSource.push({
-            name: element.OrderName,
-            fromDate: this.formatData(element.ScheduledStartTime),
-            toDate: this.formatData(element.ScheduledEndTime),
-            color: this.colors[index],
-          });
-        });
-
-    chart.data = dataSource;
-
-    const categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
+    const categoryAxis = this.CHART.yAxes.push(new am4charts.CategoryAxis());
     categoryAxis.dataFields.category = 'name';
 
     categoryAxis.renderer.labels.template.fill = am4core.color('#fff');
@@ -74,7 +115,7 @@ export class OrderGanttComponent implements OnInit {
     categoryAxis.renderer.cellEndLocation = 0.8;
 
 
-    const dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+    const dateAxis = this.CHART.xAxes.push(new am4charts.DateAxis());
     dateAxis.dateFormatter.dateFormat = 'yyyy-MM-dd HH:mm';
     dateAxis.renderer.tooltipLocation = 0;
     dateAxis.renderer.grid.template.stroke = am4core.color('#c0d8ff');
@@ -100,11 +141,7 @@ export class OrderGanttComponent implements OnInit {
       { timeUnit: 'month', count: 100 },
     ]);
 
-
-
-
-
-    const series1 = chart.series.push(new am4charts.ColumnSeries());
+    const series1 = this.CHART.series.push(new am4charts.ColumnSeries());
 
     series1.dataFields.openDateX = 'fromDate';
     series1.dataFields.dateX = 'toDate';
@@ -125,33 +162,33 @@ export class OrderGanttComponent implements OnInit {
     label.valign = 'middle';
 
 
-    chart.scrollbarX = new am4core.Scrollbar();
-    chart.scrollbarX.disabled = true;
+    this.CHART.scrollbarX = new am4core.Scrollbar();
+    this.CHART.scrollbarX.disabled = true;
 
 
-    chart.cursor = new am4charts.XYCursor();
-    chart.cursor.lineY.disabled = true;
-    chart.cursor.xAxis = dateAxis;
+    this.CHART.cursor = new am4charts.XYCursor();
+    this.CHART.cursor.lineY.disabled = true;
+    this.CHART.cursor.xAxis = dateAxis;
 
-    const title = chart.titles.create();
+    const title = this.CHART.titles.create();
     title.text = 'Order\'s planning';
     title.fontSize = 25;
     title.marginBottom = 10;
     title.marginTop = 10;
     title.fill = am4core.color('#fff');
 
-    chart.scrollbarX = new am4core.Scrollbar();
+    this.CHART.scrollbarX = new am4core.Scrollbar();
 
-    const startGrip = chart.scrollbarX.startGrip;
+    const startGrip = this.CHART.scrollbarX.startGrip;
     startGrip.icon.scale = 0.4;
-    const endGrip = chart.scrollbarX.endGrip;
+    const endGrip = this.CHART.scrollbarX.endGrip;
     endGrip.icon.scale = 0.4;
 
 
-    chart.logo.disabled = true;
+    this.CHART.logo.disabled = true;
 
 
-    chart.events.on('datavalidated', _ => {
+    this.CHART.events.on('datavalidated', _ => {
 
       const now = new Date();
 
@@ -159,7 +196,6 @@ export class OrderGanttComponent implements OnInit {
       const endDate = this.addDays(now, 24);
       dateAxis.zoomToDates(startDate, endDate);
     }, this);
-
   }
 
   setCurrentOrder(e) {
@@ -230,4 +266,23 @@ export class OrderGanttComponent implements OnInit {
     result.setDate(result.getDate() + days);
     return result;
   }
+
+  getRandomColor() {
+   const rnd = Math.floor(Math.random() * Math.floor(4));
+
+
+   switch (rnd) {
+     case 0: return this.colors.early;
+     case 1: return this.colors.ok;
+     case 2: return this.colors.late;
+     case 3: return this.colors.veryLate;
+     default: return this.colors.ok;
+    }
+  }
+
+
+  disposeChart() {
+    this.CHART.disposeChart();
+  }
+
 }

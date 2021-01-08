@@ -24,6 +24,7 @@ export class GrowthChartComponent implements OnInit {
       /* Chart code */
     // Themes begin
     am4core.useTheme(am4themes_animated);
+    am4core.options.autoDispose = true;
     // Themes end
 
     // Create chart instance

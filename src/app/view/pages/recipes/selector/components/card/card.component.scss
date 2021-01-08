@@ -1,21 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Yantramanav:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@500&display=swap');
 
-// $ono-blue: rgb(0, 174, 239);
-// $ono-grey:#000;
-// $ui-prj: rgb(77, 129, 238);
-// $ui-prj-light: rgb(247, 248, 253);
+@import '../../../../../../../styles.scss';
+@import '../../../../../../../assets/styles/variables.scss';
 
-$ono-blue: rgb(0, 174, 239);
-$ono_grey: rgb(138,139,147);
-
-$lv-1: #101024;
-$lv0: #3D4754;
-$lv1: #2D343E;
-$lv2: #4D5662;
-$lv3: #646C76;
-$blue: #6972C4;
-$lightblue: #c0d8ff;
-$font-color: #f0f1f2;
 
 *{
   font-family: 'Yantramanav', sans-serif;

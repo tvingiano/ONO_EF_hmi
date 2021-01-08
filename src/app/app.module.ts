@@ -477,6 +477,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         UtilsService,
         SvgIconsService,
         Images,
+        OrderGanttComponent,
         { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         { provide: LocationStrategy, useClass: HashLocationStrategy },
