@@ -27,53 +27,58 @@ export class OrderGanttComponent implements OnInit {
   dataSource;
   chartData;
 
+
   CHART: any;
 
   ngOnInit() {
-    this.dataSource = this.data;
-    this.updateSort(0);
+    this.drawChart();
   }
 
   updateSort(val) {
-    console.log(this.dataSource);
+    this.CHART.data = this.sortGantt(this.data, val);
+  }
 
-    let appo = [];
-    console.log(appo);
+  sortGantt(data, val) {
 
 
-    appo = this.dataSource;
+    const appo = data;
 
     switch (val) {
       case 0: break;
       case 1:
-        appo.sort((a, b) => new Date(a.ScheduledEndTime).getTime() - new Date(b.ScheduledEndTime).getTime());
+        appo.sort((a, b) => new Date(a.RealEndTime).getTime() - new Date(b.RealEndTime).getTime());
         break;
       case 2:
+        appo.sort((a, b) => new Date(a.RealStartTime ).getTime() - new Date(b.RealEndTime).getTime());
         break;
       case 3:
+        this.groupByCol(appo, 'OrderStatus');
+        break;
+      case 4:
+        this.groupByCol(appo, 'Priorita');
         break;
       default: break;
     }
 
-
-    this.chartData = [];
+    const appo2 = [];
     appo.forEach( element => {
-      this.chartData.push({
+      appo2.push({
         name: element.OrderName,
         fromDate: this.formatData(element.ScheduledStartTime),
         toDate: this.formatData(element.ScheduledEndTime),
+        status: element.OrderStatus,
+        priority: element.Priority,
         color: this.getRandomColor(),
       });
     });
 
-    console.log('FINAL CHARTDATA = ', this.chartData);
-    this.drawChart();
-    this.drawChart();
+    console.log('updated data : ', appo2);
+
+    return appo2;
   }
 
   drawChart() {
 
-    console.log('drawing this.CHART with: ', this.dataSource);
 
     /**
      * am4chart theming and settings
@@ -89,7 +94,7 @@ export class OrderGanttComponent implements OnInit {
 
     this.CHART = am4core.create('chartdiv', am4charts.XYChart);
 
-    this.CHART.data = this.chartData;
+    this.CHART.data = this.sortGantt(this.data, 0);
 
     this.CHART.hiddenState.properties.opacity = 0; // this creates initial fade-in
 
@@ -196,6 +201,9 @@ export class OrderGanttComponent implements OnInit {
       const endDate = this.addDays(now, 24);
       dateAxis.zoomToDates(startDate, endDate);
     }, this);
+
+
+
   }
 
   setCurrentOrder(e) {
@@ -280,9 +288,24 @@ export class OrderGanttComponent implements OnInit {
     }
   }
 
+  groupByCol(data, colName) {
+    const sortedData = {};
+
+    for (const _ of data) {
+
+
+        if (Object.keys(sortedData).indexOf(data[colName]) === -1) {
+            sortedData[data[colName]] = [];
+        }
+
+        sortedData[data[colName]].push(data);
+    }
+    return sortedData;
+}
+
 
   disposeChart() {
-    this.CHART.disposeChart();
+    this.CHART.dispose();
   }
 
 }

@@ -61,9 +61,12 @@
         </div>
         <div id="buttons">
             
-            sort by:<button (click)="sortGantt(1)">ending</button><button (click)="sortGantt(2)">creation</button><button (click)="sortGantt(3)">state</button>
+            sort by:
+            <button (click)="sortGantt(1)">ending</button>
+            <button (click)="sortGantt(2)">creation</button>
+            <button (click)="sortGantt(3)">state</button>
             
-            <div class="square-btn">+</div>
+            <div class="square-btn" (click)="addOrder()">+</div>
             <div class="square-btn">-</div>
             <div class="square-btn">edit</div>
         </div>

@@ -39,7 +39,7 @@ export class SolutionDialogModalComponent implements OnInit {
 
   ecOptions: Options = {
     floor: 0,
-    ceil: 1000,
+    ceil: 3000,
     step: 10,
     showTicks: false
   };

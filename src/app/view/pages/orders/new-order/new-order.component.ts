@@ -42,6 +42,10 @@ export class NewOrderComponent implements OnInit {
       );
   }
 
+  sortGantt(x) {
+    this.ganttChart.updateSort(x);
+  }
+
   updateOrderList() {
     this.getData();
   }
