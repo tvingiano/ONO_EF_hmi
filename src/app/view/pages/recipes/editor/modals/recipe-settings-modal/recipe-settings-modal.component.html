@@ -6,7 +6,7 @@
   <input type="text"  formControlName="Recipename"/><br>
 
   <label >Version </label><span>{{this.dataService.finalJson.Version}}</span><br>
-  <input type="number" value="{{this.dataService.finalJson.Version}}" formControlName="Version"/><br>
+  <input type="number" placeholder="{{this.dataService.finalJson.Version}}" formControlName="Version"/><br>
 
   <label >Type </label><span>{{this.dataService.finalJson.Recipetype}}</span><br>
   <input type="text"  formControlName="Recipetype"/><br>
@@ -31,5 +31,7 @@
 </form>
 
 <div class="footer">
-    <button class="btn submit" type="submit" (click)="submit()">Confirm</button> 
+    <button class="btn submit" type="submit" (click)="submit()" [disabled]="this.recipeSettingsForm.status === 'INVALID'">Confirm</button> 
 </div>
+
+<button (click)="test()">test form control</button>

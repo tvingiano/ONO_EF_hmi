@@ -97,6 +97,8 @@ $ono_grey: rgb(138,139,147);
 	display: flex;
 	width: 100%;
 
+	overflow: hidden;
+
 	.submit {
 		flex: 20%;
 
@@ -115,6 +117,12 @@ $ono_grey: rgb(138,139,147);
 			animation: pulse 250ms ease;
 			background-color: $submit_border;
 			color: white;
+		}
+
+		&:disabled {
+			animation: none;
+
+			cursor: not-allowed;
 		}
 	}
 
@@ -395,6 +403,8 @@ input:focus, select:focus{
 
 	margin-bottom: 5px;
 
+	justify-content: center;
+
 	.group-card{
 		display: block;
 		background-color: #6b6b6b;
@@ -405,11 +415,14 @@ input:focus, select:focus{
 		
 		margin-right: 3px;
 		margin-bottom: 15px;
+		width: fit-content;
 
 		.item-wrapper{
 			display: flex;
 			flex-direction: row;
 			flex-wrap: nowrap;
+
+			width: fit-content;
 
 			.item-card{
 				display: block;

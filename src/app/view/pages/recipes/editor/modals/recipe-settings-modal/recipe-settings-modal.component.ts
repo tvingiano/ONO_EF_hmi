@@ -44,7 +44,7 @@ export class RecipeSettingsModalComponent implements OnInit {
       Recipetype: new FormControl(this.dataService.finalJson.Recipetype),
       Seedtype: new FormControl(this.dataService.finalJson.SeedType),
       Description: new FormControl(this.dataService.finalJson.Description),
-      EstProd: new FormControl(this.dataService.finalJson.EstimatedProduction),
+      EstProd: new FormControl(this.dataService.finalJson.EstimatedProduction, Validators.min(1)),
       Note: new FormControl(this.dataService.finalJson.Note),
       Tag: new FormControl(this.dataService.finalJson.Tag)
     });
@@ -72,6 +72,10 @@ export class RecipeSettingsModalComponent implements OnInit {
   close() {
 
     this.recipeDialogRef.close(false);
+  }
+
+  test() {
+    console.log(this.recipeSettingsForm)
   }
 
 }
