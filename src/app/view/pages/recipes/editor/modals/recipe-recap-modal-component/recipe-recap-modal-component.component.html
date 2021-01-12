@@ -4,35 +4,31 @@
     <div class="group-card">
 
         <div class="item-wrapper">
-            <div class="item-card">
-                <table [formGroup]="form">
-                    <tr>
-                        <th>Recipe name</th>
-                        <td>
-                            <input type="text" value="{{data.Recipename}}" [(ngModel)]="data.Recipename" formControlName="Name">
-                        </td>
-                    </tr>
-                    <tr class="even">
-                        <th>Type</th>
-                        <td>
-                            <input type="text" value="{{data.Recipetype}}" [(ngModel)]="data.Recipetype" formControlName="Type">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Estimated Production</th>
-                        <td>
-                            <input type="number" value="{{data.EstimatedProduction}}" [(ngModel)]="data.EstimatedProduction" formControlName="EstProd">
-                        </td>
-                    </tr>
-                </table>
-                <p style="padding: 1rem; font-size: .5rem;">
-                NB. These are some important data that you won't be able to change.
-                </p>
-            </div>
-
+            <table [formGroup]="form">
+                <tr>
+                    <th>Recipe name</th>
+                    <td>
+                        <input type="text" value="{{data.Recipename}}" [(ngModel)]="data.Recipename" formControlName="Name">
+                    </td>
+                </tr>
+                <tr class="even">
+                    <th>Type</th>
+                    <td>
+                        <input class="even" type="text" value="{{data.Recipetype}}" [(ngModel)]="data.Recipetype" formControlName="Type">
+                    </td>
+                </tr>
+                <tr>
+                    <th>Estimated Production</th>
+                    <td>
+                        <input type="number" value="{{data.EstimatedProduction}}" [(ngModel)]="data.EstimatedProduction" formControlName="EstProd"> kg
+                    </td>
+                </tr>
+            </table>
         </div>
+        <p style="padding: 1rem; font-size: .5rem;">
+            NB. These are some important data that you won't be able to change.
+        </p>
     </div>
-
 </div>
 
 

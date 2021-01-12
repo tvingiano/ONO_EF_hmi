@@ -1006,7 +1006,7 @@ export class DataService {
 
       group.Items.forEach(item => {
 
-        const newPer: IPeriod = {
+        const  newPer: IPeriod = {
           type: 0,
           pid: item.Pid,
           name: (item.Name) ? item.Name : 'period ' + newPid,

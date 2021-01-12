@@ -232,6 +232,7 @@ import { OrderGanttComponent } from './view/pages/orders/components/order-gantt/
 import { OrderDetailModalComponent } from './view/pages/orders/components/order-detail-modal/order-detail-modal';
 import { OrderProductionChartComponent } from './view/pages/orders/components/order-production-chart/order-production-chart.component';
 import { BatchGanttPreviewComponent } from './view/pages/orders/components/batch-gantt-preview/batch-gantt-preview.component';
+import { RecipeRecapModalComponentComponent } from './view/pages/recipes/editor/modals/recipe-recap-modal-component/recipe-recap-modal-component.component';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -403,6 +404,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         OrderDetailModalComponent,
         OrderProductionChartComponent,
         BatchGanttPreviewComponent,
+        RecipeRecapModalComponentComponent,
     ],
     imports: [
         MatRadioModule,
@@ -463,7 +465,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatDialogModule,
         MatSelectModule,
         MatSlideToggleModule,
-        MatButtonToggleModule,
+        MatButtonToggleModule
     ],
     providers: [
         RefillComponent,
@@ -494,6 +496,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         /* svg service */
         SvgIconsService,
         UtilsService,
+
         /* fake server */
         fakeBackendProvider
     ],
@@ -515,6 +518,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         SlotEditDialogComponent,
         ConfirmDialogComponent,
         OrderDetailModalComponent,
+        RecipeRecapModalComponentComponent,
         Note2,
         Edit,
         Add,

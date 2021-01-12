@@ -35,15 +35,15 @@ export class IndicatorNavComponent implements OnInit {
   update() {
     // update of recipe info too
     this.dataService.finalJson = {
-      Recipename: 'Ono Nameless Recipe',
+      Recipename: undefined,
       Version: 1,
-      Recipetype: 'any',
-      SeedType: 'any',
+      Recipetype: undefined,
+      SeedType: undefined,
       Periods: this.dataService.groups,
-      EstimatedProduction: 0,
-      Description: 'Doesn\'t have a description yet',
-      Note: 'Doesn\'t have notes yet',
-      Tag: 'Choose them wisely',
+      EstimatedProduction: undefined,
+      Description: undefined,
+      Note: undefined,
+      Tag: undefined,
     };
 
     // It gets executed every 10ms, it will get the value that must be shown in the indicators-bar

@@ -54,7 +54,7 @@ export interface IGroup {
 
 
 export interface IPeriod {
-    type: number;                   // which type of period is it (0: presets, 1:saved, 2 custom)
+    type: number;                   // which type of period is it? (0: presets, 1:saved, 2 custom)
     pid: number;                    // unique integer
     name: string;                   // string
     note: string;                   // string
@@ -83,6 +83,15 @@ export interface IPeriod {
             max: number;
         };
     };
+
+    //////////////////////
+    // firstRefill: {
+    //     refill: boolean;        // does this type of refill even exist?
+    //     refillType: number;     // same code as refill.refilltype (0,1,2,3,4)
+    //     solution: string;       // 'water' | 'ozonated' | 'solution'
+    // };
+    /////////////////////
+
     temperature: number;
     humidity: number;
     periodduration: number;
