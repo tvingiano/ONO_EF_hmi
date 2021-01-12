@@ -57,6 +57,10 @@
                                     <th>Refill (type frequency)</th>
                                     <td>{{item.refill.refilltype}} ({{item.refill.frequency / 60}} h)</td>
                                 </tr>
+                                <tr *ngIf="item.spray.active === true">
+                                    <th>Spray frequency</th>
+                                    <td>{{item.spray.frequency / 60}}h {{item.spray.solution}} </td>
+                                </tr>
                             </table>
                         </div>
                     </ng-container>

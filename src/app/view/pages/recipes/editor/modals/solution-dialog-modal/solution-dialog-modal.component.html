@@ -38,6 +38,38 @@
     <ng5-slider [(value)]="solution.refill.ec.min" [(highValue)]="solution.refill.ec.max" [options]="ecOptions"></ng5-slider>
     <br>
 
+    <hr>
+
+    <div style="border: solid 1px grey; padding: 1rem">
+      <label>Periodical spray</label>
+      <input type="checkbox" 
+        name="sprayActive"
+        id="sprayActive" 
+        [checked]="this.solution.spray.active === true" 
+        [(ngModel)]="this.solution.spray.active"
+
+        style="width: auto; float:right; margin: 0 0 8px 0"
+      >
+  
+      <div *ngIf="this.solution.spray.active === true" [formGroup]="solutionForm">
+        
+        <label style="margin-top: 20px">Frequency</label><br>
+        <mat-slider #matslidersprayfrequency value ="{{sprayShow}}" min="1" max="{{maxFrequency() * 24}}" step="1" (input)="setSprayFrequency(matslidersprayfrequency.value)"></mat-slider>
+        <input #matsprayInput min="1" max="{{maxFrequency() * 24}}" class="span-input" type="number" value="{{sprayShow}}" (change)="setSprayFrequency(matsprayInput.value)"><strong> h</strong><br>
+  
+  
+        <label>Solution</label><span>{{this.solution.spray.solution}}</span><br>
+        <input list="solList"  formControlName="spraySolution" require  placeholder="{{this.solution.spray.solution}}" [(ngModel)]="this.solution.spray.solution"/>
+        <datalist id="solList">
+          <option *ngFor="let sol of this.dataService.solutionList" [value]="sol">{{sol}}</option>
+        </datalist>
+  
+      </div>
+    </div>
+
+
+
+
 
     <div class="footer">
       <button class="btn submit" type="submit" (click) = "submit()">Confirm</button> 

@@ -18,9 +18,11 @@ export class SolutionDialogModalComponent implements OnInit {
 
   solutionForm = new FormGroup({
     solution: new FormControl('', [Validators.required, Validators.maxLength(14)]),
+    spraySolution: new FormControl('', [Validators.maxLength(14)])
   });
 
   show;
+  sprayShow;
 
   refillTypes = [
     {value: 0, view: 'Only measure'},
@@ -54,6 +56,7 @@ export class SolutionDialogModalComponent implements OnInit {
     public dataService: DataService
   ) { }
 
+
   ngOnInit() {
     this.getStarterValue();
   }
@@ -76,6 +79,11 @@ export class SolutionDialogModalComponent implements OnInit {
             },
             refilltype: item.refill.refilltype,
             frequency: item.refill.frequency
+        },
+        spray: {
+          active: item.spray.active,
+          frequency: item.spray.frequency,
+          solution: item.spray.solution
         }
       };
         this.solution = app;
@@ -98,6 +106,11 @@ export class SolutionDialogModalComponent implements OnInit {
         },
         refilltype: 1,
         frequency: 1
+      },
+      spray: {
+        active: false,
+        frequency: 0,
+        solution: ''
       }
 
     };
@@ -109,6 +122,9 @@ export class SolutionDialogModalComponent implements OnInit {
 
     if (this.solutionForm.value.solution) {
       this.solution.solution = this.solutionForm.value.solution;
+      if (this.solution.spray.active === true) {
+        this.solution.spray.solution = this.solutionForm.value.spraySolution;
+      }
     }
 
     let add = true;
@@ -121,12 +137,17 @@ export class SolutionDialogModalComponent implements OnInit {
           i.refill.ec.min === this.solution.refill.ec.min &&
           i.refill.ec.max === this.solution.refill.ec.max &&
           i.refill.frequency === this.solution.refill.frequency &&
-          i.refill.refilltype === this.solution.refill.refilltype) {
+          i.refill.refilltype === this.solution.refill.refilltype &&
+          i.spray.active === this.solution.spray.active &&
+          i.spray.frequency === this.solution.spray.frequency &&
+          i.spray.solution === this.solution.spray.solution 
+          ) {
             add = false;
           }
-      }
+      } 
     }
     if (add === true) {
+      console.log(this.solution);
       this.dataService.addSolution(this.solution);
     }
 
@@ -178,5 +199,10 @@ export class SolutionDialogModalComponent implements OnInit {
   setFrequency(val) {
     this.solution.refill.frequency = val * 1440;
     this.show = val;
+  }
+
+  setSprayFrequency(val) {
+    this.solution.spray.frequency = val * 60;
+    this.sprayShow = val;
   }
 }

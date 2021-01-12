@@ -61,6 +61,11 @@ export class DataService {
         refilltype: 1,
         frequency: 1440
       },
+      spray: {
+        active: true,
+        frequency: 720,
+        solution: 'water'
+      },
       temperature: 27,
       humidity: 50,
       periodduration: 14400
@@ -89,6 +94,11 @@ export class DataService {
       },
       refilltype: 1,
       frequency: 1440
+    },
+    spray: {
+      active: true,
+      frequency: 720,
+      solution: 'water'
     },
     temperature: 27,
     humidity: 50,
@@ -119,6 +129,11 @@ export class DataService {
       refilltype: 0,
       frequency: 1440
     },
+    spray: {
+      active: true,
+      frequency: 720,
+      solution: 'water'
+    },
     temperature: 26,
     humidity: 50,
     periodduration: 20160
@@ -147,6 +162,11 @@ export class DataService {
       },
       refilltype: 2,
       frequency: 2880
+    },
+    spray: {
+      active: true,
+      frequency: 720,
+      solution: 'water'
     },
     temperature: 26,
     humidity: 60,
@@ -177,6 +197,11 @@ export class DataService {
       refilltype: 3,
       frequency: 1440
     },
+    spray: {
+      active: true,
+      frequency: 720,
+      solution: 'water'
+    },
     temperature: 26,
     humidity: 50,
     periodduration: 10080
@@ -205,6 +230,11 @@ export class DataService {
       },
       refilltype: 1,
       frequency: 2880
+    },
+    spray: {
+      active: true,
+      frequency: 720,
+      solution: 'water'
     },
     temperature: 25,
     humidity: 50,
@@ -235,6 +265,11 @@ export class DataService {
       refilltype: 4,
       frequency: 2880
     },
+    spray: {
+      active: true,
+      frequency: 720,
+      solution: 'water'
+    },
     temperature: 25,
     humidity: 50,
     periodduration: 10080
@@ -263,6 +298,11 @@ export class DataService {
       },
       refilltype: 2,
       frequency: 1440
+    },
+    spray: {
+      active: true,
+      frequency: 720,
+      solution: 'water'
     },
     temperature: 24,
     humidity: 50,
@@ -293,6 +333,11 @@ export class DataService {
       refilltype: 0,
       frequency: 2880
     },
+    spray: {
+      active: true,
+      frequency: 720,
+      solution: 'water'
+    },
     temperature: 28,
     humidity: 67,
     periodduration: 10080
@@ -321,6 +366,11 @@ export class DataService {
       },
       refilltype: 1,
       frequency: 1440
+    },
+    spray: {
+      active: true,
+      frequency: 720,
+      solution: 'water'
     },
     temperature: 25,
     humidity: 50,
@@ -598,6 +648,11 @@ export class DataService {
               refilltype: s.refill.refilltype,
               frequency: s.refill.frequency
             },
+            spray: {
+              active: s.spray.active,      // does this type of refill even exist?
+              frequency: s.spray.frequency,
+              solution: s.spray.solution
+          },
             temperature: c.temperature,
             humidity: c.humidity,
             periodduration: g.periodduration,
@@ -657,6 +712,11 @@ export class DataService {
           },
           refilltype: presPer.refill.refilltype,
           frequency: presPer.refill.frequency
+        },
+        spray: {
+          active: presPer.spray.active,
+          frequency: presPer.spray.frequency,
+          solution: presPer.spray.solution
         }
       };
 
@@ -843,6 +903,11 @@ export class DataService {
                 },
                 refilltype: item.refill.refilltype,
                 frequency: item.refill.frequency
+              },
+              spray: {
+                active: item.spray.active,
+                frequency: item.spray.frequency,
+                solution: item.spray.solution
               }
             };
 
@@ -1032,6 +1097,11 @@ export class DataService {
                   max: item.Refill.Ec.Max,
               },
           },
+          spray: {
+            active: item.spray.active,
+            frequency: item.spray.frequency,
+            solution: item.spray.solution
+          },
           temperature: item.Temperature,
           humidity: item.Humidity,
           periodduration: item.PeriodDuration
@@ -1144,6 +1214,11 @@ export class DataService {
                 },
                 refilltype: item.Refill.RefillType,
                 frequency:  item.Refill.Frequency
+              },
+              spray: {
+                active: item.spray.active,
+                frequency: item.spray.frequency,
+                solution: item.spray.solution
               }
             };
 

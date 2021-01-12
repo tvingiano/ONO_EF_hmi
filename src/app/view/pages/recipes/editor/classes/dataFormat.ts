@@ -24,6 +24,11 @@ export interface ISolutionData {
         };
         frequency: number;
     };
+    spray: {
+        active: boolean;        // does this type of refill even exist?
+        frequency: number;
+        solution: string;
+    };
 }
 export interface IClimateData {
     pid: number;
@@ -85,11 +90,11 @@ export interface IPeriod {
     };
 
     //////////////////////
-    // firstRefill: {
-    //     refill: boolean;        // does this type of refill even exist?
-    //     refillType: number;     // same code as refill.refilltype (0,1,2,3,4)
-    //     solution: string;       // 'water' | 'ozonated' | 'solution'
-    // };
+    spray: {
+        active: boolean;        // does this type of refill even exist?
+        frequency: number;
+        solution: string;
+    };
     /////////////////////
 
     temperature: number;
