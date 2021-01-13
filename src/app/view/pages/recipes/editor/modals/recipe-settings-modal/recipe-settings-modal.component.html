@@ -2,36 +2,105 @@
 <h2>Recipe Settings</h2>
 
 <form [formGroup]="recipeSettingsForm">
-  <label >Name </label><span>{{this.dataService.finalJson.Recipename}}</span><br>
-  <input type="text"  formControlName="Recipename"/><br>
+  <table>
 
-  <label >Version </label><span>{{this.dataService.finalJson.Version}}</span><br>
-  <input type="number" placeholder="{{this.dataService.finalJson.Version}}" formControlName="Version"/><br>
+    <tr>
+      <th><label >Name </label></th>
+      <td><input type="text"  formControlName="Recipename"/></td>
+    </tr>
 
-  <label >Type </label><span>{{this.dataService.finalJson.Recipetype}}</span><br>
-  <input type="text"  formControlName="Recipetype"/><br>
+    <tr>
+      <th><label >Version </label></th>
+      <td><input type="number" placeholder="{{this.dataService.finalJson.Version}}" formControlName="Version"/></td>
+    </tr>
 
-  <label >Seed type: </label><span>{{this.dataService.finalJson.SeedType}}</span><br>
-  <select id="Seedtype" formControlName="Seedtype" value="{{this.dataService.finalJson.SeedType}}">
-    <option *ngFor="let seed of this.sortedType" value="{{seed}}">{{seed}}</option>
-  </select><br>
+    <tr>
+      <th><label >Type </label></th>
+      <td><input type="text"  formControlName="Recipetype"/></td>
+    </tr>
 
-  <label >Estimated Production </label><span>{{this.dataService.finalJson.EstimatedProduction}} Kg/m<sup>2</sup></span><br>
-  <input type="number" value="{{this.dataService.finalJson.EstimatedProduction}}" formControlName="EstProd"/>Kg/m<sup>2</sup><br>
+    <tr>
+      <th><label >Seed type: </label></th>
+      <td>
+        <select id="Seedtype" formControlName="Seedtype" value="{{this.dataService.finalJson.SeedType}}">
+          <option *ngFor="let seed of this.sortedType" value="{{seed}}">{{seed}}</option>
+        </select>
+    </td>
+    </tr>
 
-  <label >Description </label><br>
-  <textarea rows="3" formControlName="Description" placeholder="{{this.dataService.finalJson.Description}}"></textarea><br>
+    <tr>
+      <th><label >Estimated Production </label></th>
+      <td><input type="number" value="{{this.dataService.finalJson.EstimatedProduction}}" formControlName="EstProd"/>Kg/m<sup>2</sup></td>
+    </tr>
 
-  <label >Note </label><br>
-  <textarea rows="3" formControlName="Note" placeholder="{{this.dataService.finalJson.Note}}"></textarea><br>
+    <tr>
+      <th><label >Description </label></th>
+      <td><textarea rows="3" formControlName="Description" placeholder="{{this.dataService.finalJson.Description}}"></textarea></td>
+    </tr>
 
-  <label >Tag </label><br>
-  <input type="text"  formControlName="Tag" placeholder="{{this.dataService.finalJson.Tag}}"><br>
+    <tr>
+      <th> <label >Note </label></th>
+      <td><textarea rows="3" formControlName="Note" placeholder="{{this.dataService.finalJson.Note}}"></textarea></td>
+    </tr>
+
+    <tr>
+      <th><label >Tag </label></th>
+      <td><input type="text"  formControlName="Tag" placeholder="{{this.dataService.finalJson.Tag}}"></td>
+    </tr>
+
+    <tr>
+      <td colspan="2">
+        <table style="border: solid 1px grey">
+          <tr>
+            <th>Wet seedling terrain</th>
+            <td>
+              <div id="lightOn" style="width: 3rem; float: right">
+                <div id="lightOn-btn" [style.background-color]="this.dataService.finalJson.FirstRefill.active === true ? 'rgb(153, 225, 252)' : ''"
+                (click)="this.dataService.finalJson.FirstRefill.active = !this.dataService.finalJson.FirstRefill.active">
+                  <div id="hand" [ngClass]="this.dataService.finalJson.FirstRefill.active === true ? 'on' : 'off'"></div>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <tr *ngIf="this.dataService.finalJson.FirstRefill.active === true">
+            <th><label>Type</label></th>
+            <td>
+              <select [(ngModel)]="this.dataService.finalJson.FirstRefill.type">
+                <option *ngFor="let r of this.dataService.refillTypes" [value]="r.value">{{r.view}}</option>
+              </select>
+            </td>
+          </tr>
+      
+          <tr *ngIf="this.dataService.finalJson.FirstRefill.active === true">
+            <th>
+              <label>Solution</label>
+            </th>
+            <td>
+              <select [(ngModel)]="this.dataService.finalJson.FirstRefill.solution">
+                <option *ngFor="let s of this.dataService.solutionList" [value]="s">{{s}}</option>
+              </select>
+            </td>
+          </tr>
+      
+          <tr *ngIf="this.dataService.finalJson.FirstRefill.active === true">
+            <th>Quantity</th>
+            <td>
+              <mat-slider #matsliderquantity min="0.5" max="25" step="0.5" [(ngModel)]="this.dataService.finalJson.FirstRefill.quantity"></mat-slider>
+              <input #matInput min="0.5" max="25" class="span-input" type="number" [(ngModel)]="this.dataService.finalJson.FirstRefill.quantity"><strong> L</strong>
+            </td>
+          </tr>
+      
+        </table>
+      </td>
+    </tr>
+    
+
+    
+  </table>
 
 </form>
 
 <div class="footer">
     <button class="btn submit" type="submit" (click)="submit()" [disabled]="this.recipeSettingsForm.status === 'INVALID'">Confirm</button> 
 </div>
-
-<button (click)="test()">test form control</button>

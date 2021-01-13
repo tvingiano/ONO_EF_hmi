@@ -253,6 +253,10 @@ textarea {
 	min-height: 100px;
 	background-color: #424242;
 	color: rgb(185, 185, 185);
+
+	&:focus{
+		outline: none;
+	}
 }
 
 .span-input {

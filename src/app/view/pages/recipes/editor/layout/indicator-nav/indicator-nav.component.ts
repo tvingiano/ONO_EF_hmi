@@ -44,6 +44,12 @@ export class IndicatorNavComponent implements OnInit {
       Description: undefined,
       Note: undefined,
       Tag: undefined,
+      FirstRefill: {
+        active: false,
+        solution: undefined,
+        type: undefined,
+        quantity: undefined,
+      }
     };
 
     // It gets executed every 10ms, it will get the value that must be shown in the indicators-bar

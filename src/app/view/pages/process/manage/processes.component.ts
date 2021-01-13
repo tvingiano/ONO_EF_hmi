@@ -232,29 +232,24 @@ export class ProcessesComponent implements OnInit {
   }
 
   getProcessData() {
-
-    this.loadingData = true;
     this.onoApiService.infoprocess().subscribe(x => {
-      if (x !== null) {
-        const appo = this.sortProcess(x);
-        this.processesData = this.filter(appo);
-
-        this.onoApiService.getFullDrawers().subscribe(y => {
-          this.fullDrawers = y;
-
-          this.onoApiService.slotsGet().subscribe(s => {
-            this.slotList = s;
-
-            // this.loadingData = false;
-          });
-
-        });
-      }
-      this.loadingData = false;
+      this.processesData = this.sortProcess(x);
+    });
+    this.onoApiService.getFullDrawers().subscribe(y => {
+      this.fullDrawers = y;
+    });
+    this.onoApiService.slotsGet().subscribe(s => {
+      const trans = [];
+      s.forEach(val => {
+        trans.push({ str: val.Area, num: val.Slotname },)
+      });
+      this.trans = trans;
+      this.slotList = s;
     });
 
     this.now = new Date();
   }
+
 
   sortProcess(x) {
     return x.sort( (a, b) => new Date(a.EndTime).valueOf() - new Date(b.EndTime).valueOf());

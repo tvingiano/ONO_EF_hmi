@@ -4,8 +4,6 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { HttpClient } from '@angular/common/http';
-import { OnoApiService } from 'src/app/service/ono-api.service';
-
 
 @Injectable()
 export class DataService {
@@ -66,7 +64,13 @@ export class DataService {
       },
       temperature: 27,
       humidity: 50,
-      periodduration: 14400
+      periodduration: 14400,
+      firstRefill: {
+        active: true,
+        solution: 'Water',
+        type: 'Spray',
+        quantity: 5,
+      }
   }, {
     type: 0,
     pid: -1,
@@ -100,7 +104,13 @@ export class DataService {
     },
     temperature: 27,
     humidity: 50,
-    periodduration: 15840
+    periodduration: 15840,
+    firstRefill: {
+      active: true,
+      solution: 'Water',
+      type: 'Spray',
+      quantity: 5,
+    }
   }, {
     type: 0,
     pid: -1,
@@ -134,7 +144,13 @@ export class DataService {
     },
     temperature: 26,
     humidity: 50,
-    periodduration: 20160
+    periodduration: 20160,
+    firstRefill: {
+      active: true,
+      solution: 'Water',
+      type: 'Spray',
+      quantity: 5,
+    }
   }, {
     type: 0,
     pid: -1,
@@ -168,7 +184,13 @@ export class DataService {
     },
     temperature: 26,
     humidity: 60,
-    periodduration: 4320
+    periodduration: 4320,
+    firstRefill: {
+      active: true,
+      solution: 'Water',
+      type: 'Spray',
+      quantity: 5,
+    }
   }, {
     type: 0,
     pid: -1,
@@ -202,7 +224,13 @@ export class DataService {
     },
     temperature: 26,
     humidity: 50,
-    periodduration: 10080
+    periodduration: 10080,
+    firstRefill: {
+      active: true,
+      solution: 'Water',
+      type: 'Spray',
+      quantity: 5,
+    }
   }, {
     type: 0,
     pid: -1,
@@ -236,7 +264,13 @@ export class DataService {
     },
     temperature: 25,
     humidity: 50,
-    periodduration: 20160
+    periodduration: 20160,
+    firstRefill: {
+      active: true,
+      solution: 'Water',
+      type: 'Spray',
+      quantity: 5,
+    }
   }, {
     type: 0,
     pid: -1,
@@ -270,7 +304,13 @@ export class DataService {
     },
     temperature: 25,
     humidity: 50,
-    periodduration: 10080
+    periodduration: 10080,
+    firstRefill: {
+      active: true,
+      solution: 'Water',
+      type: 'Spray',
+      quantity: 5,
+    }
   }, {
     type: 0,
     pid: -1,
@@ -304,7 +344,13 @@ export class DataService {
     },
     temperature: 24,
     humidity: 50,
-    periodduration: 17280
+    periodduration: 17280,
+    firstRefill: {
+      active: true,
+      solution: 'Water',
+      type: 'Spray',
+      quantity: 5,
+    }
   }, {
     type: 0,
     pid: -1,
@@ -338,7 +384,13 @@ export class DataService {
     },
     temperature: 28,
     humidity: 67,
-    periodduration: 10080
+    periodduration: 10080,
+    firstRefill: {
+      active: true,
+      solution: 'Water',
+      type: 'Spray',
+      quantity: 5,
+    }
   }, {
     type: 0,
     pid: -1,
@@ -372,12 +424,25 @@ export class DataService {
     },
     temperature: 25,
     humidity: 50,
-    periodduration: 10080
+    periodduration: 10080,
+    firstRefill: {
+      active: true,
+      solution: 'Water',
+      type: 'Spray',
+      quantity: 5,
+    }
   }];
 
 
   spectrumList = ['Red', 'Blue', 'RedAndBlue', 'Purple', 'White', 'OFF'];
-  solutionList = ['Water', 'Hoagland', 'Baseplant'];
+  solutionList = ['Water', 'Hydroplant', 'Hoagland', 'Baseplant'];
+  refillTypes = [
+    {value: 1, view: 'Flood w/ solution recycle'},
+    {value: 2, view: 'Flood w/o solution recycle'},
+    {value: 3, view: 'Ebb & Flow'},
+    {value: 4, view: 'Spray'}
+  ];
+
   stages = [
     {
       name: 'Sprout',
@@ -1255,6 +1320,21 @@ export class DataService {
 
 
     this.checkRecipe();
+  }
+
+
+  /**
+   * accept refilltype code (0,1,2,3,4) and return litteral 
+   */
+  refillTypeEncoder(x) {
+    switch (x) {
+      case 'only measure':                    return 0;
+      case 'flood with solution recycle':     return 1;
+      case 'flood without solution recycle':  return 2;
+      case 'Ebb&Flow':                        return 3;
+      case 'spray':                           return 4;
+      default: return '';
+    }
   }
 }
 

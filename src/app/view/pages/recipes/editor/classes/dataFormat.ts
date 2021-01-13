@@ -109,6 +109,14 @@ export interface FinalJson {
     SeedType: string;
     Periods: IGroup[];
     EstimatedProduction: number;
+
+    FirstRefill: {
+        active: boolean;
+        type: boolean;
+        solution: string;
+        quantity: number; // solo se type === 'spray'
+    };
+
     Description: string;
     Note: string;
     Tag: string;
