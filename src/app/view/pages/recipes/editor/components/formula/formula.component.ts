@@ -120,6 +120,10 @@ export class FormulaComponent implements OnInit {
         this.dataService.groups[gIndex].items[pIndex].refill.ec.max = res.refill.ec.max ;
         this.dataService.groups[gIndex].items[pIndex].refill.frequency = res.refill.frequency;
         this.dataService.groups[gIndex].items[pIndex].refill.refilltype = res.refill.refilltype;
+        this.dataService.groups[gIndex].items[pIndex].spray = res.spray;
+        this.dataService.groups[gIndex].items[pIndex].spray.active = res.spray.active;
+        this.dataService.groups[gIndex].items[pIndex].spray.frequency = res.spray.frequency;
+        this.dataService.groups[gIndex].items[pIndex].spray.solution = res.spray.solution;
       }
     });
   }

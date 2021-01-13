@@ -199,7 +199,6 @@ import { PeriodNavComponent } from './view/pages/recipes/editor/layout/period-na
 import { IndicatorNavComponent } from './view/pages/recipes/editor/layout/indicator-nav/indicator-nav.component';
 import { CommonModule } from '@angular/common';
 import { DiagramModule } from '@syncfusion/ej2-angular-diagrams';
-import { ConnectorComponent } from './view/pages/recipes/editor/components/connector/connector.component';
 import { SettingsModalComponent } from './view/pages/recipes/editor/modals/settings-modal/settings-modal.component';
 import { DelModalComponent } from './view/pages/recipes/editor/modals/del-modal/del-modal.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
@@ -251,7 +250,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         SolutionDialogModalComponent,
         PeriodNavComponent,
         IndicatorNavComponent,
-        ConnectorComponent,
         SettingsModalComponent,
         DelModalComponent,
         MathComponent,

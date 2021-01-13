@@ -41,7 +41,7 @@
     <hr>
 
     <div style="border: solid 1px grey; padding: 1rem">
-      <label>Periodical spray</label>
+      <!-- <label>Periodical spray</label>
       <input type="checkbox" 
         name="sprayActive"
         id="sprayActive" 
@@ -49,13 +49,26 @@
         [(ngModel)]="this.solution.spray.active"
 
         style="width: auto; float:right; margin: 0 0 8px 0"
-      >
+      > -->
+
+      <div id="lightOn">
+        <div id="lightOn-label">
+          Periodical Spray {{solution.spray.active === true ? 'ON' : 'OFF'}}
+        </div>
+      
+        <div id="lightOn-btn" [style.background-color]="this.solution.spray.active === true ? 'rgb(153, 225, 252)' : ''"
+        (click)="this.solution.spray.active = !this.solution.spray.active">
+          <div id="hand" [ngClass]="this.solution.spray.active === true ? 'on' : 'off'"></div>
+        </div>
+      </div>
   
       <div *ngIf="this.solution.spray.active === true" [formGroup]="solutionForm">
         
         <label style="margin-top: 20px">Frequency</label><br>
         <mat-slider #matslidersprayfrequency value ="{{sprayShow}}" min="1" max="{{maxFrequency() * 24}}" step="1" (input)="setSprayFrequency(matslidersprayfrequency.value)"></mat-slider>
-        <input #matsprayInput min="1" max="{{maxFrequency() * 24}}" class="span-input" type="number" value="{{sprayShow}}" (change)="setSprayFrequency(matsprayInput.value)"><strong> h</strong><br>
+        <input #matsprayInput min="1" max="{{maxFrequency() * 24}}" class="span-input" type="number"
+        value="{{sprayShow}}" (change)="setSprayFrequency(matsprayInput.value)">
+        <strong> h</strong><br>
   
   
         <label>Solution</label><span>{{this.solution.spray.solution}}</span><br>

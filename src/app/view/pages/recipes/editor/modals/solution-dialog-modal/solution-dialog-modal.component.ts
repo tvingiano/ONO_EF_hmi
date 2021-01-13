@@ -88,6 +88,7 @@ export class SolutionDialogModalComponent implements OnInit {
       };
         this.solution = app;
         this.show = this.solution.refill.frequency / 1440;
+        this.sprayShow = this.solution.spray.frequency / 60;
         return;
       }
     }
@@ -140,17 +141,16 @@ export class SolutionDialogModalComponent implements OnInit {
           i.refill.refilltype === this.solution.refill.refilltype &&
           i.spray.active === this.solution.spray.active &&
           i.spray.frequency === this.solution.spray.frequency &&
-          i.spray.solution === this.solution.spray.solution 
+          i.spray.solution === this.solution.spray.solution
           ) {
             add = false;
           }
-      } 
+      }
     }
     if (add === true) {
-      console.log(this.solution);
+      console.log('add sol: ', this.solution)
       this.dataService.addSolution(this.solution);
     }
-
     this.solutionDialogRef.close(this.solution);
   }
 

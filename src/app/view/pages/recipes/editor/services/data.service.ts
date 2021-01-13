@@ -1,6 +1,5 @@
 import { Injectable, ComponentFactoryResolver} from '@angular/core';
 import { ILightData, ISolutionData, IGenericData, IClimateData, IPeriod, IGroup, FinalJson } from '../classes/dataFormat';
-import { ConnectorService } from './connector.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
@@ -12,7 +11,6 @@ import { OnoApiService } from 'src/app/service/ono-api.service';
 export class DataService {
 
   constructor(
-    public connService: ConnectorService,
     private sanitizer: DomSanitizer,
     public snackBar: MatSnackBar,
     public http: HttpClient
@@ -649,7 +647,7 @@ export class DataService {
               frequency: s.refill.frequency
             },
             spray: {
-              active: s.spray.active,      // does this type of refill even exist?
+              active: s.spray.active,
               frequency: s.spray.frequency,
               solution: s.spray.solution
           },
@@ -763,7 +761,7 @@ export class DataService {
 
     try {
 
-      // this will remove spaces and breakline, theiy're annoying
+      // this will remove spaces and breakline, they're annoying
       rec = rec.replace(/(\r\n|\n|\r|\s)/gm, '');
       rec = JSON.parse(rec);
 
@@ -885,7 +883,11 @@ export class DataService {
             item.refill.ec.min !== undefined &&
             item.refill.ec.max !== undefined &&
             item.solution !== undefined &&
-            item.solutionquantity !== undefined
+            item.solutionquantity !== undefined &&
+            item.spray !== undefined &&
+            item.spray.active !== undefined &&
+            item.spray.frequency !== undefined &&
+            item.spray.solution !== undefined
           ) {
 
             newSolution = {
@@ -1125,6 +1127,7 @@ export class DataService {
       this.groups.push(pushGroup);
 
     });
+
 
     const pushLight: ILightData[] = [];
     const pushClimate: IClimateData[] = [];

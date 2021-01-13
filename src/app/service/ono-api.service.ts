@@ -26,6 +26,7 @@ import { Drawer } from '../model/configuration/drawer';
 import { SlotSimple } from '../model/configuration/slot-simple';
 import { IOrder } from '../model/orders/IOrder';
 import { IOrderInfo } from '../model/orders/orders-info';
+import { IRectangleEvents } from '@amcharts/amcharts4/core';
 
 @Injectable({
     providedIn: 'root'
@@ -1528,10 +1529,10 @@ export class OnoApiService {
     /*
     * Create new recipe
     * */
-    postRecipe(value: any) {
+    postRecipe(value: any): Observable<IResponse> {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        this.http.post('http://192.168.60.3:8000/recipes', value, { withCredentials: false }).subscribe();
+        return this.http.post<IResponse>('http://192.168.60.3:8000/recipes', value, { withCredentials: false });
     }
 
     shutter(deck, direction): Observable<IResponse> {
