@@ -148,7 +148,6 @@ export class SolutionDialogModalComponent implements OnInit {
       }
     }
     if (add === true) {
-      console.log('add sol: ', this.solution)
       this.dataService.addSolution(this.solution);
     }
     this.solutionDialogRef.close(this.solution);

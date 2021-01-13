@@ -488,9 +488,6 @@ export class PeriodNavComponent implements AfterViewInit, OnInit {
 
         this.dataService.finalJson.Periods = [];
 
-
-        console.log('in send: ', this.dataService.groups);
-
         this.dataService.groups.forEach(g => {
           g.items[0] ? this.dataService.finalJson.Periods.push(g) : '';
         });
