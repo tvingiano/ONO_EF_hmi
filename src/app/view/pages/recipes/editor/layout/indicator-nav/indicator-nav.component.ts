@@ -38,17 +38,17 @@ export class IndicatorNavComponent implements OnInit {
       Recipename: undefined,
       Version: 1,
       Recipetype: undefined,
-      SeedType: undefined,
+      SeedType: 'any',
       Periods: this.dataService.groups,
       EstimatedProduction: undefined,
       Description: undefined,
       Note: undefined,
       Tag: undefined,
       FirstRefill: {
-        active: false,
-        solution: undefined,
-        type: undefined,
-        quantity: undefined,
+        Active: false,
+        Solution: undefined,
+        Type: undefined,
+        Quantity: undefined,
       }
     };
 

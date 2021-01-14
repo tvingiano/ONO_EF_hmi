@@ -1,9 +1,8 @@
 <button class="btn cancel" type="close" (keydown.esc)="close()" (click)="close()"></button>  
 <h2>Recipe Settings</h2>
 
-<form [formGroup]="recipeSettingsForm">
-  <table>
-
+<form >
+  <table [formGroup]="recipeSettingsForm">
     <tr>
       <th><label >Name </label></th>
       <td><input type="text"  formControlName="Recipename"/></td>
@@ -24,6 +23,7 @@
       <td>
         <select id="Seedtype" formControlName="Seedtype" value="{{this.dataService.finalJson.SeedType}}">
           <option *ngFor="let seed of this.sortedType" value="{{seed}}">{{seed}}</option>
+          <option value='any'>any</option>
         </select>
     </td>
     </tr>
@@ -55,39 +55,42 @@
             <th>Wet seedling terrain</th>
             <td>
               <div id="lightOn" style="width: 3rem; float: right">
-                <div id="lightOn-btn" [style.background-color]="this.dataService.finalJson.FirstRefill.active === true ? 'rgb(153, 225, 252)' : ''"
-                (click)="this.dataService.finalJson.FirstRefill.active = !this.dataService.finalJson.FirstRefill.active">
-                  <div id="hand" [ngClass]="this.dataService.finalJson.FirstRefill.active === true ? 'on' : 'off'"></div>
+                <div id="lightOn-btn" [style.background-color]="this.dataService.finalJson.FirstRefill.Active === true ? 'rgb(153, 225, 252)' : ''"
+                (click)="this.dataService.finalJson.FirstRefill.Active = !this.dataService.finalJson.FirstRefill.Active">
+                  <div id="hand" [ngClass]="this.dataService.finalJson.FirstRefill.Active === true ? 'on' : 'off'"></div>
                 </div>
               </div>
             </td>
           </tr>
 
-          <tr *ngIf="this.dataService.finalJson.FirstRefill.active === true">
+          <tr *ngIf="this.dataService.finalJson.FirstRefill.Active === true">
             <th><label>Type</label></th>
             <td>
-              <select [(ngModel)]="this.dataService.finalJson.FirstRefill.type">
+              <select formControlName="FRtype">
                 <option *ngFor="let r of this.dataService.refillTypes" [value]="r.value">{{r.view}}</option>
               </select>
             </td>
           </tr>
       
-          <tr *ngIf="this.dataService.finalJson.FirstRefill.active === true">
+          <tr *ngIf="this.dataService.finalJson.FirstRefill.Active === true">
             <th>
               <label>Solution</label>
             </th>
             <td>
-              <select [(ngModel)]="this.dataService.finalJson.FirstRefill.solution">
+              <select formControlName="FRsolution">
                 <option *ngFor="let s of this.dataService.solutionList" [value]="s">{{s}}</option>
               </select>
             </td>
           </tr>
       
-          <tr *ngIf="this.dataService.finalJson.FirstRefill.active === true">
+          <tr *ngIf="this.dataService.finalJson.FirstRefill.Active === true">
             <th>Quantity</th>
             <td>
-              <mat-slider #matsliderquantity min="0.5" max="25" step="0.5" [(ngModel)]="this.dataService.finalJson.FirstRefill.quantity"></mat-slider>
-              <input #matInput min="0.5" max="25" class="span-input" type="number" [(ngModel)]="this.dataService.finalJson.FirstRefill.quantity"><strong> L</strong>
+              <mat-slider #matsliderquantity min="0.5" max="25" step="0.5" (input)="this.dataService.finalJson.FirstRefill.Quantity = matsliderquantity.value"></mat-slider>
+              <input #matInput min="0.5" max="25" class="span-input" type="number"
+              [value]="this.dataService.finalJson.FirstRefill.Quantity"
+              (change)="this.dataService.finalJson.FirstRefill.Quantity = matInput.value">
+                <strong> L</strong>
             </td>
           </tr>
       
@@ -102,5 +105,6 @@
 </form>
 
 <div class="footer">
-    <button class="btn submit" type="submit" (click)="submit()" [disabled]="this.recipeSettingsForm.status === 'INVALID'">Confirm</button> 
+  <button (click)="test()">test</button>
+    <button class="btn submit" type="submit" (click)="submit()" [disabled]="FirstRefillValid()">Confirm</button> 
 </div>

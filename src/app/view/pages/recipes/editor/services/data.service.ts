@@ -65,7 +65,7 @@ export class DataService {
       temperature: 27,
       humidity: 50,
       periodduration: 14400,
-      firstRefill: {
+      FirstRefill: {
         active: true,
         solution: 'Water',
         type: 'Spray',
@@ -105,7 +105,7 @@ export class DataService {
     temperature: 27,
     humidity: 50,
     periodduration: 15840,
-    firstRefill: {
+    FirstRefill: {
       active: true,
       solution: 'Water',
       type: 'Spray',
@@ -145,7 +145,7 @@ export class DataService {
     temperature: 26,
     humidity: 50,
     periodduration: 20160,
-    firstRefill: {
+    FirstRefill: {
       active: true,
       solution: 'Water',
       type: 'Spray',
@@ -185,7 +185,7 @@ export class DataService {
     temperature: 26,
     humidity: 60,
     periodduration: 4320,
-    firstRefill: {
+    FirstRefill: {
       active: true,
       solution: 'Water',
       type: 'Spray',
@@ -225,7 +225,7 @@ export class DataService {
     temperature: 26,
     humidity: 50,
     periodduration: 10080,
-    firstRefill: {
+    FirstRefill: {
       active: true,
       solution: 'Water',
       type: 'Spray',
@@ -265,7 +265,7 @@ export class DataService {
     temperature: 25,
     humidity: 50,
     periodduration: 20160,
-    firstRefill: {
+    FirstRefill: {
       active: true,
       solution: 'Water',
       type: 'Spray',
@@ -305,7 +305,7 @@ export class DataService {
     temperature: 25,
     humidity: 50,
     periodduration: 10080,
-    firstRefill: {
+    FirstRefill: {
       active: true,
       solution: 'Water',
       type: 'Spray',
@@ -345,7 +345,7 @@ export class DataService {
     temperature: 24,
     humidity: 50,
     periodduration: 17280,
-    firstRefill: {
+    FirstRefill: {
       active: true,
       solution: 'Water',
       type: 'Spray',
@@ -385,7 +385,7 @@ export class DataService {
     temperature: 28,
     humidity: 67,
     periodduration: 10080,
-    firstRefill: {
+    FirstRefill: {
       active: true,
       solution: 'Water',
       type: 'Spray',
@@ -425,7 +425,7 @@ export class DataService {
     temperature: 25,
     humidity: 50,
     periodduration: 10080,
-    firstRefill: {
+    FirstRefill: {
       active: true,
       solution: 'Water',
       type: 'Spray',

@@ -25,7 +25,7 @@ export interface ISolutionData {
         frequency: number;
     };
     spray: {
-        active: boolean;        // does this type of refill even exist?
+        active: boolean; 
         frequency: number;
         solution: string;
     };
@@ -91,7 +91,7 @@ export interface IPeriod {
 
     //////////////////////
     spray: {
-        active: boolean;        // does this type of refill even exist?
+        active: boolean;        
         frequency: number;
         solution: string;
     };
@@ -100,6 +100,7 @@ export interface IPeriod {
     temperature: number;
     humidity: number;
     periodduration: number;
+    
 }
 
 export interface FinalJson {
@@ -111,10 +112,10 @@ export interface FinalJson {
     EstimatedProduction: number;
 
     FirstRefill: {
-        active: boolean;
-        type: boolean;
-        solution: string;
-        quantity: number; // solo se type === 'spray'
+        Active: boolean;
+        Type: boolean;
+        Solution: string;
+        Quantity: number; // solo se type !== 'spray'
     };
 
     Description: string;

@@ -1,4 +1,4 @@
-<button class="btn cancel" type="close" (keydown.esc)="close()" (click)="close()"></button>  
+<button class="btn cancel" type="close" (keydown.esc)="close()" (click)="close()"></button>
 <h2>Final check</h2>
 <div class="group-wrapper">
     <div class="group-card">
@@ -8,24 +8,77 @@
                 <tr>
                     <th>Recipe name</th>
                     <td>
-                        <input type="text" value="{{data.Recipename}}" [(ngModel)]="data.Recipename" formControlName="Name">
+                        <input type="text" value="{{data.Recipename}}" [(ngModel)]="data.Recipename"
+                            formControlName="Name">
                     </td>
                 </tr>
                 <tr class="even">
                     <th>Type</th>
                     <td>
-                        <input class="even" type="text" value="{{data.Recipetype}}" [(ngModel)]="data.Recipetype" formControlName="Type">
+                        <input class="even" type="text" value="{{data.Recipetype}}" [(ngModel)]="data.Recipetype"
+                            formControlName="Type">
                     </td>
                 </tr>
                 <tr>
                     <th>Estimated Production</th>
                     <td>
-                        <input type="number" value="{{data.EstimatedProduction}}" [(ngModel)]="data.EstimatedProduction" formControlName="EstProd"> kg
+                        <input type="number" value="{{data.EstimatedProduction}}" [(ngModel)]="data.EstimatedProduction"
+                            formControlName="EstProd"> kg
                     </td>
                 </tr>
-                <tr class="even">
-                    <th>custom first refill</th>
-                    <td><div class="mat-button-toggle"></div></td>
+                <tr>
+                    <td colspan="2">
+                        <table style="border: solid 1px grey">
+                            <tr>
+                                <th>Wet seedling terrain</th>
+                                <td>
+                                    <div id="lightOn" style="width: 3rem; float: right">
+                                        <div id="lightOn-btn"
+                                            [style.background-color]="data.FirstRefill.Active === true ? 'rgb(153, 225, 252)' : ''"
+                                            (click)="data.FirstRefill.Active = !data.FirstRefill.Active">
+                                            <div id="hand" [ngClass]="data.FirstRefill.Active === true ? 'on' : 'off'">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr *ngIf="data.FirstRefill.Active === true">
+                                <th><label>Type</label></th>
+                                <td>
+                                    <select formControlName="FRtype">
+                                        <option *ngFor="let r of this.dataService.refillTypes" [value]="r.value">
+                                            {{r.view}}</option>
+                                    </select>
+                                </td>
+                            </tr>
+
+                            <tr *ngIf="data.FirstRefill.Active === true">
+                                <th>
+                                    <label>Solution</label>
+                                </th>
+                                <td>
+                                    <select formControlName="FRsolution">
+                                        <option *ngFor="let s of this.dataService.solutionList" [value]="s">{{s}}
+                                        </option>
+                                    </select>
+                                </td>
+                            </tr>
+
+                            <tr *ngIf="data.FirstRefill.Active === true">
+                                <th>Quantity</th>
+                                <td>
+                                    <mat-slider #matsliderquantity min="0.5" max="25" step="0.5"
+                                        (input)="data.FirstRefill.Quantity = matsliderquantity.value"></mat-slider>
+                                    <input #matInput min="0.5" max="25" class="span-input" type="number"
+                                        [value]="data.FirstRefill.Quantity"
+                                        (change)="data.FirstRefill.Quantity = matInput.value">
+                                    <strong> L</strong>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -38,6 +91,6 @@
 
 <div class="footer">
     Do you want to proceed?
-    <button class="btn submit" style="float: right; max-width: 300px;" type="submit" (click)="submit()" [disabled]="form.status === 'INVALID'">commit recipe</button> 
+    <button class="btn submit" style="float: right; max-width: 300px;" type="submit" (click)="submit()"
+        [disabled]="FirstRefillValid()">commit recipe</button>
 </div>
-
