@@ -32,6 +32,38 @@ input{
   background-color: crimson;
 }
 
+.custom-scrollbar{
+
+	overflow: overlay;
+
+  /* customize scrollbar css */
+	&::-webkit-scrollbar{
+		width:5px;
+		background-color:none;
+	}
+	&::-webkit-scrollbar:horizontal{
+		height:5px;
+	}
+	&::-webkit-scrollbar-track{
+		border:none;
+		border-radius:10px;
+		-webkit-box-shadow:none;
+	}
+	&::-webkit-scrollbar-thumb{
+		background-color: $lv3;
+		border:none;
+    border-radius:16px;
+    
+    &:hover{
+      background-color: $lightblue;
+    }
+
+    &:active{
+      background-color: $blue;
+    }
+  }
+}
+
 button:focus {
   outline: none;
   border: 0;

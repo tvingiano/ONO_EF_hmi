@@ -1324,7 +1324,7 @@ export class DataService {
 
 
   /**
-   * accept refilltype code (0,1,2,3,4) and return litteral 
+   * accept refilltype code (0,1,2,3,4) and return litteral
    */
   refillTypeEncoder(x) {
     switch (x) {
@@ -1333,6 +1333,17 @@ export class DataService {
       case 'flood without solution recycle':  return 2;
       case 'Ebb&Flow':                        return 3;
       case 'spray':                           return 4;
+      default: return '';
+    }
+  }
+
+  refillTypeDecoder(x) {
+    switch (x) {
+      case 0: return 'only measure';
+      case 1: return 'flood with solution recycle';
+      case 2: return 'flood without solution recycle';
+      case 3: return 'Ebb&Flow';
+      case 4: return 'spray';
       default: return '';
     }
   }

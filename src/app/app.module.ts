@@ -232,6 +232,8 @@ import { OrderDetailModalComponent } from './view/pages/orders/components/order-
 import { OrderProductionChartComponent } from './view/pages/orders/components/order-production-chart/order-production-chart.component';
 import { BatchGanttPreviewComponent } from './view/pages/orders/components/batch-gantt-preview/batch-gantt-preview.component';
 import { RecipeRecapModalComponentComponent } from './view/pages/recipes/editor/modals/recipe-recap-modal-component/recipe-recap-modal-component.component';
+import { StartProcessComponent } from './view/pages/process/start-process/start-process.component';
+import { UrlService } from './service/url.service';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -403,6 +405,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         OrderProductionChartComponent,
         BatchGanttPreviewComponent,
         RecipeRecapModalComponentComponent,
+        StartProcessComponent,
     ],
     imports: [
         MatRadioModule,
@@ -496,7 +499,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         UtilsService,
 
         /* fake server */
-        fakeBackendProvider
+        fakeBackendProvider,
+        UrlService,
     ],
     entryComponents: [
         SystemEditDialogComponent,

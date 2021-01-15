@@ -161,9 +161,13 @@ export class GaugeProgressComponent implements OnInit {
     const d2 = new Date(process.EndTime).getTime();
     const now = Date.now();
 
-    const res = Math.round((now - d1) / (d2 - d1) * 100)
+    const res = Math.round((now - d1) / (d2 - d1) * 100);
 
-    return res >= 100 ? 100 : res;
+    switch (true) {
+      case res > 100: return 100;
+      case res < 0:   return 0;
+      default:        return  res;
+    }
   }
 
   getGrowthProgress(process: IInfoProcess) {
@@ -171,7 +175,13 @@ export class GaugeProgressComponent implements OnInit {
       const res = process.CvMeasures.sort(
         (a, b) => new Date(b.Timestamp).valueOf() - new Date(a.Timestamp).valueOf()
       )[0].Percentage;
-      return res >= 100 ? 100 : res;
+      
+      switch (true) {
+        case res > 100: return 100;
+        case res < 0:   return 0;
+        default:        return res;
+      }
+
     } else {
       return undefined;
     }

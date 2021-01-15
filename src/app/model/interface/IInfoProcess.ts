@@ -36,7 +36,7 @@ export interface IInfoProcess {
         }
     ];
     StartTime: string;
-    Status: 'running' | 'closed';
+    Status: 'running' | 'closed' | 'to start';
     Temperature: number;
 }
 

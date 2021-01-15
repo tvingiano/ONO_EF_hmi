@@ -121,7 +121,7 @@
                     <div class="content">
                         <div class="table">
                             <div class="table-cell">
-                                <div class="strong">
+                                <div class="strong" *ngIf="selectedProcess.Home">
 
                                     <select (change)="updateNewHome($event)" [formControl]="homeForm">
                                         <option *ngFor="let s of filterSlotList(slotList)"
@@ -313,11 +313,11 @@
                     </div>
                 </div>
 
-                <div class="square square-btn" [ngClass]="{'dis-btn': this.drawerState()}" (click)="this.drawerState() ? '' : onStart(selectedProcess.ProcessID)" *ngIf="selectedProcess.Status === 'to start'">
+                <div class="square square-btn" [ngClass]="{'dis-btn': this.drawerState()}" (click)="this.drawerState() ? '' : onStart(selectedProcess)" *ngIf="selectedProcess.Status === 'to start'">
                     <div class="content">
                         <div class="table">
                             <div class="table-cell">
-                                    <div class="icon" id="start">ciao</div>
+                                    <div class="icon" id="start">start</div>
                                     <div class="square-label">Start!</div>
                             </div>
                         </div>
