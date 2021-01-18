@@ -10,9 +10,6 @@ import {
   DataService
 } from '../../services/data.service';
 import {
-  ConnectorService
-} from '../../services/connector.service';
-import {
   CdkDragDrop,
   moveItemInArray,
   transferArrayItem
@@ -42,7 +39,6 @@ export class PeriodNavComponent implements AfterViewInit, OnInit {
 
   constructor(
     public dataService: DataService,
-    public connService: ConnectorService,
     public dialog: MatDialog,
     public http: HttpClient,
     private ono: OnoApiService,
@@ -498,12 +494,9 @@ export class PeriodNavComponent implements AfterViewInit, OnInit {
 
         const expJSON = JSON.parse(JSON.stringify(this.dataService.finalJson, null, 2));
 
-        const done = this.ono.postRecipe(expJSON);
-        // console.log(expJSON);
-
-        // setTimeout( x => {
-        //   console.log(done);
-        // }, 1000);
+        this.ono.postRecipe(expJSON).subscribe(x => {
+          console.log(x);
+        });
 
       } else {
         // console.log('nothing has been done');

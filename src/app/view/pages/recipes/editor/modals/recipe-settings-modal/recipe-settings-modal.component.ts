@@ -44,9 +44,14 @@ export class RecipeSettingsModalComponent implements OnInit {
       Recipetype: new FormControl(this.dataService.finalJson.Recipetype),
       Seedtype: new FormControl(this.dataService.finalJson.SeedType),
       Description: new FormControl(this.dataService.finalJson.Description),
-      EstProd: new FormControl(this.dataService.finalJson.EstimatedProduction),
+      EstProd: new FormControl(this.dataService.finalJson.EstimatedProduction, Validators.min(1)),
       Note: new FormControl(this.dataService.finalJson.Note),
-      Tag: new FormControl(this.dataService.finalJson.Tag)
+      Tag: new FormControl(this.dataService.finalJson.Tag),
+
+      // FRactive: new FormControl(this.dataService.finalJson.FirstRefill.Active),
+      FRtype: new FormControl(this.dataService.finalJson.FirstRefill.Type),
+      FRsolution: new FormControl(this.dataService.finalJson.FirstRefill.Solution),
+      // FRquantity: new FormControl('', Validators.min(1)),
     });
   }
 
@@ -64,6 +69,12 @@ export class RecipeSettingsModalComponent implements OnInit {
     this.dataService.finalJson.EstimatedProduction = this.recipeSettingsForm.value.EstProd;
     this.dataService.finalJson.Note = this.recipeSettingsForm.value.Note;
     this.dataService.finalJson.Tag = this.recipeSettingsForm.value.Tag;
+    // this.dataService.finalJson.FirstRefill.Active = this.recipeSettingsForm.value.FRactive;
+    this.dataService.finalJson.FirstRefill.Type = this.recipeSettingsForm.value.FRtype;
+    this.dataService.finalJson.FirstRefill.Solution = this.recipeSettingsForm.value.FRsolution;
+    // this.dataService.finalJson.FirstRefill.Quantity = this.recipeSettingsForm.value.FRquantity;
+
+    console.log('updated finalJSON: ', this.dataService.finalJson)
 
     this.recipeDialogRef.close();
   }
@@ -72,6 +83,32 @@ export class RecipeSettingsModalComponent implements OnInit {
   close() {
 
     this.recipeDialogRef.close(false);
+  }
+
+  test() {
+    console.log(this.dataService.finalJson.FirstRefill)
+  }
+
+  FirstRefillValid(){
+    console.clear()
+    if(this.recipeSettingsForm.status === 'INVALID') {
+      console.log('INVALID');
+      return true;
+
+    } else {
+      console.log('VALID');
+      console.log(this.recipeSettingsForm.value.FRsolution, this.dataService.finalJson.FirstRefill.Quantity, this.recipeSettingsForm.value.FRtype);
+      
+      if(this.dataService.finalJson.FirstRefill.Active === true) {
+        if(this.recipeSettingsForm.value.FRsolution === null || !this.dataService.finalJson.FirstRefill.Quantity || this.recipeSettingsForm.value.FRtype === null) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    }
   }
 
 }

@@ -48,6 +48,7 @@ import { RecipeComponent } from '../view/pages/recipes/viewer/components/recipe/
 import { RefillTestComponent } from '../view/pages/test/refill/refilltest.component';
 import { NewProcessComponent } from '../view/pages/process/new-process/new-process.component';
 import { NewOrderComponent } from '../view/pages/orders/new-order/new-order.component';
+import { StartProcessComponent } from '../view/pages/process/start-process/start-process.component';
 export const ROUTES: Routes = [
     /* LOGIN PAGE */
     { path: 'login', component: LoginComponent },
@@ -119,6 +120,7 @@ export const ROUTES: Routes = [
     { path: 'processes/details', component: SurveyRead },
     { path: 'processes/todo', component: Todo },
     { path: 'processes/new', component: NewProcessComponent},
+    { path: 'processes/start', component: StartProcessComponent},
 
     { path: 'demo', component: DemoComponent },
 

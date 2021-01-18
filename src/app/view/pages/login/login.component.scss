@@ -17,58 +17,6 @@ input{
 }
 
 
-// .authorization-block{
-//   color: darkgrey;
-// }
-
-// .mat-form-field {
-//   width: 100%;
-//   min-width: 200px;
-// }
-// mat-card-title{
-//   margin-bottom: 30px;
-// }
-// mat-card-title,
-// mat-card-content {
-//   display: flex;
-//   justify-content: center;
-// }
-
-// mat-card {
-//   max-width: 450px;
-//   background: $mat-card-color-grey;
-//   color: $mat-card-font-color;
-//   padding: 40px;
-// }
-// mat-card-actions{
-//   text-align: center;
-
-//   & button{
-//     background: $button-color!important;
-//     color: $body-text-color!important;
-//     padding: 3px 25px;
-//   }
-// }
-
-// ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-//   background-color: white !important;
-//   border-radius: 4px;
-// }
-//   .danger {
-//     background-color: crimson;
-//   }
-// .forget-pass-row{
-//   margin-top: 80px;
-
-//   .forget-pwd{
-//     display: inline-block
-//   }
-//   .create-acc{
-//     display: inline-block;
-//     float: right;
-//   }
-// }
-
 ::ng-deep{
   .mat-card{
     background: $lv0;

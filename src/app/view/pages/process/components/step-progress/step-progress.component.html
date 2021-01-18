@@ -1,0 +1,5 @@
+<div class="container">
+    <ul class="progressbar">
+        <li *ngFor="let node of nodes; let i = index" [ngClass]="{'active' : activeStep(i)}">{{node}}</li>
+    </ul>
+</div>

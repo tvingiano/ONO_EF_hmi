@@ -1,9 +1,5 @@
-$submit_background: #46cf46;
-$submit_border: rgb(26, 175, 26);
-$del_color: rgb(245, 111, 111);
-$ono_blue: rgb(0,174,239);
-$ono_blue_light: rgb(153, 225, 252);
-$ono_grey: rgb(138,139,147);
+@import '../../../../../../styles.scss';
+@import '../../../../../../assets/styles/variables.scss';
 
 @keyframes pulse {
 	10% {
@@ -97,6 +93,8 @@ $ono_grey: rgb(138,139,147);
 	display: flex;
 	width: 100%;
 
+	overflow: hidden;
+
 	.submit {
 		flex: 20%;
 
@@ -115,6 +113,12 @@ $ono_grey: rgb(138,139,147);
 			animation: pulse 250ms ease;
 			background-color: $submit_border;
 			color: white;
+		}
+
+		&:disabled {
+			animation: none;
+
+			cursor: not-allowed;
 		}
 	}
 
@@ -245,6 +249,10 @@ textarea {
 	min-height: 100px;
 	background-color: #424242;
 	color: rgb(185, 185, 185);
+
+	&:focus{
+		outline: none;
+	}
 }
 
 .span-input {
@@ -358,7 +366,7 @@ input,select{
 	background-color: #424242;
 	color:rgb(185, 185, 185);
 
-	margin-bottom: 20px;
+	margin: 10px 0;
 
 	width: 80%;
 
@@ -390,26 +398,29 @@ input:focus, select:focus{
 	flex-direction: row;
 	flex-wrap: nowrap;
 
-	overflow-x: scroll;
+	overflow-x: auto;
 	overflow-y: hidden;
 
 	margin-bottom: 5px;
-
+	
 	.group-card{
 		display: block;
 		background-color: #6b6b6b;
 		color: #cacaca;
 
 		padding: 10px;
-		border-radius: 5px;
+		border-radius: 2px;
 		
 		margin-right: 3px;
 		margin-bottom: 15px;
+		width: fit-content;
 
 		.item-wrapper{
 			display: flex;
 			flex-direction: row;
 			flex-wrap: nowrap;
+
+			width: fit-content;
 
 			.item-card{
 				display: block;
@@ -418,7 +429,7 @@ input:focus, select:focus{
 				width: 300px;
 
 				padding: 10px;
-				border-radius: 5px;
+				border-radius: 2px;
 				margin-right: 3px;
 			}
 		}

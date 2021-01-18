@@ -1,16 +1,45 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { OnoApiService } from '../../../../service/ono-api.service';
-import { Router } from '@angular/router';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatDialog } from '@angular/material/dialog';
-import { UtilsService } from 'src/app/service/helper/utils.service';
-import { BusyService } from 'src/app/service/busy.service';
-import { IInfoProcess, IImageMetadata } from 'src/app/model/interface/IInfoProcess';
+import {
+  Component,
+  Inject,
+  OnInit
+} from '@angular/core';
+import {
+  OnoApiService
+} from '../../../../service/ono-api.service';
+import {
+  Router
+} from '@angular/router';
+import {
+  MatDialogRef,
+  MAT_DIALOG_DATA
+} from '@angular/material/dialog';
+import {
+  MatDialog
+} from '@angular/material/dialog';
+import {
+  UtilsService
+} from 'src/app/service/helper/utils.service';
+import {
+  BusyService
+} from 'src/app/service/busy.service';
+import {
+  IInfoProcess,
+  IImageMetadata
+} from 'src/app/model/interface/IInfoProcess';
 
-import { environment } from 'src/environments/environment';
-import { DomSanitizer } from '@angular/platform-browser';
-import { FormBuilder, FormControl } from '@angular/forms';
-import { listLazyRoutes } from '@angular/compiler/src/aot/lazy_routes';
+import {
+  environment
+} from 'src/environments/environment';
+import {
+  DomSanitizer
+} from '@angular/platform-browser';
+import {
+  FormBuilder,
+  FormControl
+} from '@angular/forms';
+import {
+  listLazyRoutes
+} from '@angular/compiler/src/aot/lazy_routes';
 
 
 
@@ -61,8 +90,7 @@ export interface Drawer {
   selector: 'app-processes',
   templateUrl: './processes.component.html',
   styleUrls: ['./manage-style.scss']
-}
-)
+})
 export class ProcessesComponent implements OnInit {
   ProcessID: number;
   OrderID: string;
@@ -96,80 +124,234 @@ export class ProcessesComponent implements OnInit {
 
   // displayedColumns: string[] = ['ProcessID', 'OrderID', 'Description','DrawerSerial', 'StartTime','measurements','delete','edit'];
   // displayedColumns: string[] = ['ProcessID', 'OrderID', 'Description','DrawerSerial', 'StartTime','measurements','edit'];
-  displayedColumns: string[] =
-    ['OrderID', 'Description', 'DrawerSerial', 'Actual', 'Light', 'edit', 'call', 'home', 'refill', 'deleterefill', 'delete'];
+  displayedColumns: string[] = ['OrderID', 'Description', 'DrawerSerial', 'Actual', 'Light', 'edit', 'call', 'home', 'refill', 'deleterefill', 'delete'];
 
-  trans = [
-    { str: 'External bay', num: 0 },
-    { str: 'Pit-stop', num: 101 },
-    { str: 'Spray', num: 200 },
-    { str: 'Window1', num: 5 },
-    { str: 'Window2', num: 7 },
-    { str: 'Window3', num: 9 },
-    { str: 'Window4', num: 11 },
-    { str: 'Window6', num: 15 },
-    { str: 'Window7', num: 17 },
+  trans = [{
+      str: 'External bay',
+      num: 0
+    },
+    {
+      str: 'Pit-stop',
+      num: 101
+    },
+    {
+      str: 'Spray',
+      num: 200
+    },
+    {
+      str: 'Window1',
+      num: 5
+    },
+    {
+      str: 'Window2',
+      num: 7
+    },
+    {
+      str: 'Window3',
+      num: 9
+    },
+    {
+      str: 'Window4',
+      num: 11
+    },
+    {
+      str: 'Window6',
+      num: 15
+    },
+    {
+      str: 'Window7',
+      num: 17
+    },
 
-    { str: 'Full11-30cm', num: 103 },
-    { str: 'Full11-20cm', num: 104 },
-    { str: 'Full11-10cm', num: 105 },
-    { str: 'Full11-0cm', num: 106 },
+    {
+      str: 'Full11-30cm',
+      num: 103
+    },
+    {
+      str: 'Full11-20cm',
+      num: 104
+    },
+    {
+      str: 'Full11-10cm',
+      num: 105
+    },
+    {
+      str: 'Full11-0cm',
+      num: 106
+    },
 
-    { str: 'Shadow3', num: 108 },
-    { str: 'Shadow4', num: 126 },
-    { str: 'Shadow5', num: 20 },
+    {
+      str: 'Shadow3',
+      num: 108
+    },
+    {
+      str: 'Shadow4',
+      num: 126
+    },
+    {
+      str: 'Shadow5',
+      num: 20
+    },
 
-    { str: 'Full7-0cm', num: 36 },
-    { str: 'Full7-10cm', num: 35 },
-    { str: 'Full7-20cm', num: 34 },
+    {
+      str: 'Full7-0cm',
+      num: 36
+    },
+    {
+      str: 'Full7-10cm',
+      num: 35
+    },
+    {
+      str: 'Full7-20cm',
+      num: 34
+    },
 
-    { str: 'Red&Blue6-0cm', num: 122 },
-    { str: 'Red&Blue6-10cm', num: 121 },
-    { str: 'Red&Blue6-20cm', num: 120 },
-    { str: 'Red&Blue6-30cm', num: 119 },
+    {
+      str: 'Red&Blue6-0cm',
+      num: 122
+    },
+    {
+      str: 'Red&Blue6-10cm',
+      num: 121
+    },
+    {
+      str: 'Red&Blue6-20cm',
+      num: 120
+    },
+    {
+      str: 'Red&Blue6-30cm',
+      num: 119
+    },
 
-    { str: 'White9-0cm', num: 33 },
-    { str: 'White9-10cm', num: 32 },
-    { str: 'White9-20cm', num: 31 },
-    { str: 'White9-30cm', num: 30 },
+    {
+      str: 'White9-0cm',
+      num: 33
+    },
+    {
+      str: 'White9-10cm',
+      num: 32
+    },
+    {
+      str: 'White9-20cm',
+      num: 31
+    },
+    {
+      str: 'White9-30cm',
+      num: 30
+    },
 
-    { str: 'Purple5-0cm', num: 113 },
-    { str: 'Purple5-10cm', num: 112 },
-    { str: 'Purple5-20cm', num: 111 },
-    { str: 'Purple5-30cm', num: 110 },
+    {
+      str: 'Purple5-0cm',
+      num: 113
+    },
+    {
+      str: 'Purple5-10cm',
+      num: 112
+    },
+    {
+      str: 'Purple5-20cm',
+      num: 111
+    },
+    {
+      str: 'Purple5-30cm',
+      num: 110
+    },
 
-    { str: 'Full1-0cm', num: 116 },
-    { str: 'Full1-10cm', num: 115 },
-    { str: 'Full1-20cm', num: 114 },
-    { str: 'Full1-30cm', num: 113 },
+    {
+      str: 'Full1-0cm',
+      num: 116
+    },
+    {
+      str: 'Full1-10cm',
+      num: 115
+    },
+    {
+      str: 'Full1-20cm',
+      num: 114
+    },
+    {
+      str: 'Full1-30cm',
+      num: 113
+    },
 
-    { str: 'Red&Blue3-0cm', num: 29 },
-    { str: 'Red&Blue3-10cm', num: 28 },
-    { str: 'Red&Blue3-20cm', num: 27 },
-    { str: 'Red&Blue3-30cm', num: 26 },
+    {
+      str: 'Red&Blue3-0cm',
+      num: 29
+    },
+    {
+      str: 'Red&Blue3-10cm',
+      num: 28
+    },
+    {
+      str: 'Red&Blue3-20cm',
+      num: 27
+    },
+    {
+      str: 'Red&Blue3-30cm',
+      num: 26
+    },
 
 
-    { str: 'Red&Blue4-0cm', num: 4 },
-    { str: 'Red&Blue4-10cm', num: 3 },
-    { str: 'Red&Blue4-20cm', num: 2 },
-    { str: 'Red&Blue4-30cm', num: 1 },
+    {
+      str: 'Red&Blue4-0cm',
+      num: 4
+    },
+    {
+      str: 'Red&Blue4-10cm',
+      num: 3
+    },
+    {
+      str: 'Red&Blue4-20cm',
+      num: 2
+    },
+    {
+      str: 'Red&Blue4-30cm',
+      num: 1
+    },
 
-    { str: 'Red&Blue2-0cm', num: 40 },
-    { str: 'Red&Blue2-10cm', num: 39 },
-    { str: 'Red&Blue2-20cm', num: 38 },
-    { str: 'Red&Blue2-30cm', num: 37 },
+    {
+      str: 'Red&Blue2-0cm',
+      num: 40
+    },
+    {
+      str: 'Red&Blue2-10cm',
+      num: 39
+    },
+    {
+      str: 'Red&Blue2-20cm',
+      num: 38
+    },
+    {
+      str: 'Red&Blue2-30cm',
+      num: 37
+    },
 
 
-    { str: 'Purple8-0cm', num: 102 },
+    {
+      str: 'Purple8-0cm',
+      num: 102
+    },
 
-    { str: 'Purple10-0cm', num: 130 },
-    { str: 'Purple10-10cm', num: 129 },
-    { str: 'Purple10-20cm', num: 128 },
-    { str: 'Purple10-30cm', num: 127 }
+    {
+      str: 'Purple10-0cm',
+      num: 130
+    },
+    {
+      str: 'Purple10-10cm',
+      num: 129
+    },
+    {
+      str: 'Purple10-20cm',
+      num: 128
+    },
+    {
+      str: 'Purple10-30cm',
+      num: 127
+    }
 
   ];
 
-  processesData: IInfoProcess[];
+  processesData;
 
   selectedProcess: IInfoProcess;
   currentImageMetadata;
@@ -221,7 +403,7 @@ export class ProcessesComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private fb: FormBuilder,
 
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.getProcessData();
@@ -232,32 +414,63 @@ export class ProcessesComponent implements OnInit {
   }
 
   getProcessData() {
-
-    this.loadingData = true;
     this.onoApiService.infoprocess().subscribe(x => {
-      if (x !== null) {
-        const appo = this.sortProcess(x);
-        this.processesData = this.filter(appo);
+      this.processesData = this.sortProcess(x);
 
-        this.onoApiService.getFullDrawers().subscribe(y => {
-          this.fullDrawers = y;
+      const e = {
+        ProcessID: 69,
+        OrderID: 'test_tostart',
+        DrawerSerial: undefined,
+        StartTime: '2021-01-30T10:34:30.722Z',
+        EndTime: '2021-02-25T10:34:30.722Z',
+        CvMeasures: [],
+        LastUpdate: '',
+        ExpectedFinalWeight: 10,
+        LightType: 'White',
+        LightStatus: false,
+        NextRefill: '2021-01-30T01:30:00+01:00',
+        Solution: [],
+        Temperature: 22.444854736328125,
+        Humidity: 47.195953369140625,
+        Status: 'to start',
+        Home: undefined,
+        Recipe: 'Lattuce_Optimal',
+        Phases: [{
+          Title: 'Germination',
+          Duration: 18,
+          GroupID: 0
+        }, {
+          Title: 'Growth',
+          Duration: 12,
+          GroupID: 1
+        }],
+        RealEndTime: null,
+        Solutioncorrection: []
+      };
 
-          this.onoApiService.slotsGet().subscribe(s => {
-            this.slotList = s;
-
-            // this.loadingData = false;
-          });
-
-        });
-      }
-      this.loadingData = false;
+      this.processesData.push(e);
+    });
+    this.onoApiService.getFullDrawers().subscribe(y => {
+      this.fullDrawers = y;
+    });
+    this.onoApiService.slotsGet().subscribe(s => {
+      const trans = [];
+      s.forEach(val => {
+        trans.push({
+          str: val.Area,
+          num: val.Slotname
+        }, )
+      });
+      this.trans = trans;
+      this.slotList = s;
     });
 
     this.now = new Date();
   }
 
+
   sortProcess(x) {
-    return x.sort( (a, b) => new Date(a.EndTime).valueOf() - new Date(b.EndTime).valueOf());
+    return x.sort((a, b) => new Date(a.EndTime).valueOf() - new Date(b.EndTime).valueOf());
   }
 
   setFilter(key: string, value) {
@@ -280,11 +493,13 @@ export class ProcessesComponent implements OnInit {
 
 
       // check status
-      f.status.length ? f.status.forEach(s => {(s !== ele.Status) ? pass = false : ''; }) : '';
+      f.status.length ? f.status.forEach(s => {
+        (s !== ele.Status) ? pass = false : '';
+      }) : '';
 
 
       // check recipe
-      f.recipe ?  (ele.Recipe !== f.recipe ? pass = false : '') : '';
+      f.recipe ? (ele.Recipe !== f.recipe ? pass = false : '') : '';
 
       // // check customer
       // if (f.customer) {
@@ -303,7 +518,7 @@ export class ProcessesComponent implements OnInit {
 
       ((s >= fs) && (e <= fe)) ? pass = false : '';
 
-      
+
 
       // alla fine se ele è ancora passabile:
 
@@ -409,13 +624,13 @@ export class ProcessesComponent implements OnInit {
    * returns dd/mm/yyyy-hh:mm
    * @param date - date
    */
-  formatFullDate(date)  {
+  formatFullDate(date) {
     const d = new Date(date);
 
     const dt = {
-      h:  d.getUTCHours(),
-      m:  d.getUTCMinutes() > 10 ? d.getUTCMinutes() : '0' + d.getUTCMinutes(),
-      s:  d.getUTCSeconds() > 10 ? d.getUTCSeconds() : '0' + d.getUTCSeconds()
+      h: d.getUTCHours(),
+      m: d.getUTCMinutes() > 10 ? d.getUTCMinutes() : '0' + d.getUTCMinutes(),
+      s: d.getUTCSeconds() > 10 ? d.getUTCSeconds() : '0' + d.getUTCSeconds()
     };
 
     return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}-${dt.h}:${dt.m}:${dt.s}`;
@@ -433,7 +648,12 @@ export class ProcessesComponent implements OnInit {
 
     const res = Math.round((now - d1) / (d2 - d1) * 100);
 
-    return (res > 100 ? 100 : res) + '%';
+    switch (true) {
+      case (res > 100): return '100%';
+      case (res < 0):   return '0%';
+      default: return res + '%';
+    }
+
   }
 
   /**
@@ -460,7 +680,13 @@ export class ProcessesComponent implements OnInit {
     const d2 = new Date(process.EndTime).getTime();
     const now = Date.now();
 
-    return Math.round((now - d1) / (d2 - d1) * 100);
+    const res = Math.round((now - d1) / (d2 - d1) * 100);
+
+    switch (true) {
+      case (res > 100): return 100;
+      case (res < 0 ): return 0;
+      default: return res;
+    }
   }
 
   getTime(date) {
@@ -575,9 +801,9 @@ export class ProcessesComponent implements OnInit {
       const x = new Date(this.getLastSolutionElement(this.selectedProcess.Solution).Timestamp);
 
       const date = {
-        h:  x.getUTCHours(),
-        m:  x.getUTCMinutes() > 10 ? x.getUTCMinutes() : '0' + x.getUTCMinutes(),
-        s:  x.getUTCSeconds() > 10 ? x.getUTCSeconds() : '0' + x.getUTCSeconds()
+        h: x.getUTCHours(),
+        m: x.getUTCMinutes() > 10 ? x.getUTCMinutes() : '0' + x.getUTCMinutes(),
+        s: x.getUTCSeconds() > 10 ? x.getUTCSeconds() : '0' + x.getUTCSeconds()
       };
 
       return `${date.h}:${date.m}:${date.s}`;
@@ -591,9 +817,9 @@ export class ProcessesComponent implements OnInit {
       const x = new Date(this.getLastCvElement(this.selectedProcess.CvMeasures).Timestamp);
 
       const date = {
-        h:  x.getUTCHours(),
-        m:  x.getUTCMinutes() > 10 ? x.getUTCMinutes() : '0' + x.getUTCMinutes(),
-        s:  x.getUTCSeconds() > 10 ? x.getUTCSeconds() : '0' + x.getUTCSeconds()
+        h: x.getUTCHours(),
+        m: x.getUTCMinutes() > 10 ? x.getUTCMinutes() : '0' + x.getUTCMinutes(),
+        s: x.getUTCSeconds() > 10 ? x.getUTCSeconds() : '0' + x.getUTCSeconds()
       };
 
       return `${date.h}:${date.m}:${date.s}`;
@@ -627,9 +853,9 @@ export class ProcessesComponent implements OnInit {
         const x = new Date(this.selectedProcess.NextRefill);
 
         const date = {
-          h:  x.getUTCHours(),
-          m:  x.getUTCMinutes() > 10 ? x.getUTCMinutes() : '0' + x.getUTCMinutes(),
-          s:  x.getUTCSeconds() > 10 ? x.getUTCSeconds() : '0' + x.getUTCSeconds()
+          h: x.getUTCHours(),
+          m: x.getUTCMinutes() > 10 ? x.getUTCMinutes() : '0' + x.getUTCMinutes(),
+          s: x.getUTCSeconds() > 10 ? x.getUTCSeconds() : '0' + x.getUTCSeconds()
         };
 
         return `${date.h}:${date.m}:${date.s}`;
@@ -725,13 +951,11 @@ export class ProcessesComponent implements OnInit {
     const ranges = [];
     for (const x of process.Phases) {
 
-      ranges.push(
-        {
-          GroupID: x.GroupID,
-          floor: duration,
-          ceil: duration + x.Duration
-        }
-      );
+      ranges.push({
+        GroupID: x.GroupID,
+        floor: duration,
+        ceil: duration + x.Duration
+      });
 
 
       duration += x.Duration;
@@ -744,11 +968,17 @@ export class ProcessesComponent implements OnInit {
     ranges.forEach(range => {
       if (range.GroupID === phase.GroupID) {
 
-        if (progress < range.floor) { res = 0; }
+        if (progress < range.floor) {
+          res = 0;
+        }
 
-        if (progress >= range.floor && progress < range.ceil) { res = ((progress - range.floor) / (range.ceil - range.floor)); }
+        if (progress >= range.floor && progress < range.ceil) {
+          res = ((progress - range.floor) / (range.ceil - range.floor));
+        }
 
-        if (progress >= range.ceil) { res = 1; }
+        if (progress >= range.ceil) {
+          res = 1;
+        }
 
       }
     });
@@ -761,24 +991,39 @@ export class ProcessesComponent implements OnInit {
 
 
   getPosition(process: IInfoProcess) {
-    const a = (this.fullDrawers).find(x => x.Serial === process.DrawerSerial).Slotname;
-    if (a !== undefined) {
-      const b = (this.trans).find(x => x.num === a).str;
+    try {
 
-      return b;
-    } else {
+
+      const a = (this.fullDrawers).find(x => x.Serial === process.DrawerSerial).Slotname;
+      if (a !== undefined) {
+        const b = (this.trans).find(x => x.num === a).str;
+
+        return b;
+      } else {
+        return ' - ';
+      }
+    } catch(err) {
       return ' - ';
     }
   }
 
   getPositionID(process: IInfoProcess) {
-    return (this.fullDrawers).find(x => x.Serial === process.DrawerSerial).Slotname;
+    try {
+      return (this.fullDrawers).find(x => x.Serial === process.DrawerSerial).Slotname;
+    } catch {
+      return '-';
+    }
   }
 
   getHome(home) {
-    const b = (this.trans).find(x => x.num === home);
 
-    return b.str;
+    try {
+      const b = (this.trans).find(x => x.num === home).str;
+
+      return b;
+    } catch (err) {
+      return '-';
+    }
   }
 
   resetData() {
@@ -792,10 +1037,12 @@ export class ProcessesComponent implements OnInit {
   }
 
   setNewHome() {
-    const data = {Home: parseInt(this.newHome, 10)};
+    const data = {
+      Home: parseInt(this.newHome, 10)
+    };
 
     this.busyService.commitSettingState();
-    this.onoApiService.putProcessHome(this.selectedProcess.ProcessID, data).subscribe( x => {
+    this.onoApiService.putProcessHome(this.selectedProcess.ProcessID, data).subscribe(x => {
 
       this.newHome = undefined;
       this.updateProcessInfoList();
@@ -808,7 +1055,7 @@ export class ProcessesComponent implements OnInit {
   }
 
   filterSlotList(list) {
-    return list.filter( x => x.Area.includes('cm'));
+    return list.filter(x => x.Area.includes('cm'));
   }
 
   isDisabled(slot) {
@@ -893,7 +1140,12 @@ export class ProcessesComponent implements OnInit {
     const dialogRef = this.dialog.open(Edit, {
       width: '800px',
       height: '450px',
-      data: { description: this.description, light: this.light, configuration: this.configuration, drawerserial: this.drawerserial }
+      data: {
+        description: this.description,
+        light: this.light,
+        configuration: this.configuration,
+        drawerserial: this.drawerserial
+      }
     });
     const me = this;
     dialogRef.afterClosed().subscribe(result => {
@@ -912,8 +1164,15 @@ export class ProcessesComponent implements OnInit {
     const dialogRef = this.dialog.open(Refill, {
       width: '500px',
       data: {
-        type: this.type, tank: this.tank, volume: this.volume, ph: this.ph,
-        ec: this.ec, hour: this.hour, minute: this.minute, frequency: this.frequency, sched: this.sched
+        type: this.type,
+        tank: this.tank,
+        volume: this.volume,
+        ph: this.ph,
+        ec: this.ec,
+        hour: this.hour,
+        minute: this.minute,
+        frequency: this.frequency,
+        sched: this.sched
       }
     });
     const me = this;
@@ -921,7 +1180,10 @@ export class ProcessesComponent implements OnInit {
 
       this.refillMenu = false;
 
-      if (!result) { this.busyService.inactiveRefillState(result); return; }
+      if (!result) {
+        this.busyService.inactiveRefillState(result);
+        return;
+      }
       if (result.type === 'Ebb and flow') {
         for (let i = 0; i < (result.tank).length; i++) {
           result.tank[i] = parseInt(result.tank[i], 10);
@@ -1085,6 +1347,16 @@ export class ProcessesComponent implements OnInit {
         );
     }
   }
+
+  onStart(element: IInfoProcess) {
+    this.router.navigate(['/processes/start'], {
+      state: {
+        process: element
+      }
+    });
+  }
+
+
   onAdd(): void {
     const dialogRef = this.dialog.open(Add, {
       width: '800px',
@@ -1135,7 +1407,12 @@ export class ProcessesComponent implements OnInit {
 
   onZero(): void {
 
-    this.onoApiService.height({ height: 0, acceleration: 1, speed: 0.05, deceleration: 1 });
+    this.onoApiService.height({
+      height: 0,
+      acceleration: 1,
+      speed: 0.05,
+      deceleration: 1
+    });
   }
 
   onMeasure(): void {
@@ -1168,15 +1445,124 @@ export class ProcessesComponent implements OnInit {
 
     const dialogRef = this.dialog.open(Swap2, {
       width: '500px',
-      data: { to: this.to }
+      data: {
+        to: this.to
+      }
     });
     const me = this;
     dialogRef.afterClosed().subscribe(result => {
-      if (!result) { this.busyService.toggleDrawerState(); return; } // doesn't continue the code if result is null/undefined
+      if (!result) {
+        this.busyService.toggleDrawerState();
+        return;
+      } // doesn't continue the code if result is null/undefined
 
       result.From = parseInt(element.DrawerSerial, 10);
 
-      if (result.to === 'Pit-stop') { result.To = 101; } else if (result.to === 'Spray') { result.To = 200; } else if (result.to === 'External Bay') { result.To = 0; } else if (result.to === 'Window1') { result.To = 5; } else if (result.to === 'Window2') { result.To = 7; } else if (result.to === 'Window3') { result.To = 9; } else if (result.to === 'Window4') { result.To = 11; } else if (result.to === 'Window6') { result.To = 15; } else if (result.to === 'Window7') { result.To = 17; } else if (result.to === 'Window8') { result.To = 20; } else if (result.to === 'Full11-20cm') { result.To = 104; } else if (result.to === 'Full11-10cm') { result.To = 105; } else if (result.to === 'Full11-0cm') { result.To = 106; } else if (result.to === 'Shadow3') { result.To = 108; } else if (result.to === 'Shadow4') { result.To = 126; } else if (result.to === 'Shadow5') { result.To = 20; } else if (result.to === 'Full7-0cm') { result.To = 36; } else if (result.to === 'Full7-10cm') { result.To = 35; } else if (result.to === 'Full7-20cm') { result.To = 34; } else if (result.to === 'Red&Blue6-0cm') { result.To = 122; } else if (result.to === 'Red&Blue6-10cm') { result.To = 121; } else if (result.to === 'Red&Blue6-20cm') { result.To = 120; } else if (result.to === 'Red&Blue6-30cm') { result.To = 119; } else if (result.to === 'White9-0cm') { result.To = 33; } else if (result.to === 'White9-10cm') { result.To = 32; } else if (result.to === 'White9-20cm') { result.To = 31; } else if (result.to === 'White9-30cm') { result.To = 30; } else if (result.to === 'Purple5-0cm') { result.To = 113; } else if (result.to === 'Purple5-10cm') { result.To = 112; } else if (result.to === 'Purple5-20cm') { result.To = 111; } else if (result.to === 'Purple5-30cm') { result.To = 110; } else if (result.to === 'Full1-0cm') { result.To = 116; } else if (result.to === 'Full1-10cm') { result.To = 115; } else if (result.to === 'Full1-20cm') { result.To = 114; } else if (result.to === 'Red&Blue3-0cm') { result.To = 29; } else if (result.to === 'Red&Blue3-10cm') { result.To = 28; } else if (result.to === 'Red&Blue3-20cm') { result.To = 27; } else if (result.to === 'Red&Blue3-30cm') { result.To = 26; } else if (result.to === 'Red&Blue4-0cm') { result.To = 4; } else if (result.to === 'Red&Blue4-10cm') { result.To = 3; } else if (result.to === 'Red&Blue4-20cm') { result.To = 2; } else if (result.to === 'Red&Blue4-30cm') { result.To = 1; } else if (result.to === 'Red&Blue2-0cm') { result.To = 40; } else if (result.to === 'Red&Blue2-10cm') { result.To = 39; } else if (result.to === 'Red&Blue2-20cm') { result.To = 38; } else if (result.to === 'Red&Blue2-30cm') { result.To = 37; } else if (result.to === 'Purple8-0cm') { result.To = 102; } else if (result.to === 'Purple10-0cm') { result.To = 130; } else if (result.to === 'Purple10-10cm') { result.To = 129; } else if (result.to === 'Purple10-20cm') { result.To = 128; } else if (result.to === 'Purple10-30cm') { result.To = 127; } else { result.To = parseInt(result.to, 10); }
+      if (result.to === 'Pit-stop') {
+        result.To = 101;
+      } else if (result.to === 'Spray') {
+        result.To = 200;
+      } else if (result.to === 'External Bay') {
+        result.To = 0;
+      } else if (result.to === 'Window1') {
+        result.To = 5;
+      } else if (result.to === 'Window2') {
+        result.To = 7;
+      } else if (result.to === 'Window3') {
+        result.To = 9;
+      } else if (result.to === 'Window4') {
+        result.To = 11;
+      } else if (result.to === 'Window6') {
+        result.To = 15;
+      } else if (result.to === 'Window7') {
+        result.To = 17;
+      } else if (result.to === 'Window8') {
+        result.To = 20;
+      } else if (result.to === 'Full11-20cm') {
+        result.To = 104;
+      } else if (result.to === 'Full11-10cm') {
+        result.To = 105;
+      } else if (result.to === 'Full11-0cm') {
+        result.To = 106;
+      } else if (result.to === 'Shadow3') {
+        result.To = 108;
+      } else if (result.to === 'Shadow4') {
+        result.To = 126;
+      } else if (result.to === 'Shadow5') {
+        result.To = 20;
+      } else if (result.to === 'Full7-0cm') {
+        result.To = 36;
+      } else if (result.to === 'Full7-10cm') {
+        result.To = 35;
+      } else if (result.to === 'Full7-20cm') {
+        result.To = 34;
+      } else if (result.to === 'Red&Blue6-0cm') {
+        result.To = 122;
+      } else if (result.to === 'Red&Blue6-10cm') {
+        result.To = 121;
+      } else if (result.to === 'Red&Blue6-20cm') {
+        result.To = 120;
+      } else if (result.to === 'Red&Blue6-30cm') {
+        result.To = 119;
+      } else if (result.to === 'White9-0cm') {
+        result.To = 33;
+      } else if (result.to === 'White9-10cm') {
+        result.To = 32;
+      } else if (result.to === 'White9-20cm') {
+        result.To = 31;
+      } else if (result.to === 'White9-30cm') {
+        result.To = 30;
+      } else if (result.to === 'Purple5-0cm') {
+        result.To = 113;
+      } else if (result.to === 'Purple5-10cm') {
+        result.To = 112;
+      } else if (result.to === 'Purple5-20cm') {
+        result.To = 111;
+      } else if (result.to === 'Purple5-30cm') {
+        result.To = 110;
+      } else if (result.to === 'Full1-0cm') {
+        result.To = 116;
+      } else if (result.to === 'Full1-10cm') {
+        result.To = 115;
+      } else if (result.to === 'Full1-20cm') {
+        result.To = 114;
+      } else if (result.to === 'Red&Blue3-0cm') {
+        result.To = 29;
+      } else if (result.to === 'Red&Blue3-10cm') {
+        result.To = 28;
+      } else if (result.to === 'Red&Blue3-20cm') {
+        result.To = 27;
+      } else if (result.to === 'Red&Blue3-30cm') {
+        result.To = 26;
+      } else if (result.to === 'Red&Blue4-0cm') {
+        result.To = 4;
+      } else if (result.to === 'Red&Blue4-10cm') {
+        result.To = 3;
+      } else if (result.to === 'Red&Blue4-20cm') {
+        result.To = 2;
+      } else if (result.to === 'Red&Blue4-30cm') {
+        result.To = 1;
+      } else if (result.to === 'Red&Blue2-0cm') {
+        result.To = 40;
+      } else if (result.to === 'Red&Blue2-10cm') {
+        result.To = 39;
+      } else if (result.to === 'Red&Blue2-20cm') {
+        result.To = 38;
+      } else if (result.to === 'Red&Blue2-30cm') {
+        result.To = 37;
+      } else if (result.to === 'Purple8-0cm') {
+        result.To = 102;
+      } else if (result.to === 'Purple10-0cm') {
+        result.To = 130;
+      } else if (result.to === 'Purple10-10cm') {
+        result.To = 129;
+      } else if (result.to === 'Purple10-20cm') {
+        result.To = 128;
+      } else if (result.to === 'Purple10-30cm') {
+        result.To = 127;
+      } else {
+        result.To = parseInt(result.to, 10);
+      }
 
       if (result.To === 0) {
         if (confirm('Hai controllato i pistoni del modulo di refill?')) {
@@ -1406,7 +1792,7 @@ export class ProcessesComponent implements OnInit {
 
   }
 
-  return() {
+  return () {
     this.router.navigate(['status']);
   }
 
@@ -1414,7 +1800,11 @@ export class ProcessesComponent implements OnInit {
 
   drawerState() {
     const me = this.busyService.state;
-    if (me.drawer.active === true || me.refill.active === true) { return true; } else { return false; }
+    if (me.drawer.active === true || me.refill.active === true) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }
@@ -1427,9 +1817,9 @@ export class ProcessesComponent implements OnInit {
 export class Note2 implements OnInit {
   addresses = [];
   constructor(
-    public dialogRef: MatDialogRef<Note2>,
+    public dialogRef: MatDialogRef < Note2 > ,
     public OnoApiService: OnoApiService,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
   ngOnInit() {
     const me = this;
     // this.OnoApiService.getLampsAddress().then(function (res) {
@@ -1454,12 +1844,13 @@ export class Swap2 {
     'Red&Blue2-10cm', 'Red&Blue2-20cm', 'Red&Blue2-30cm', 'Red&Blue3-0cm', 'Red&Blue3-10cm', 'Red&Blue3-20cm', 'Red&Blue3-30cm',
     'Red&Blue4-0cm', 'Red&Blue4-10cm', 'Red&Blue4-20cm', 'Red&Blue4-30cm', 'Purple5-0cm', 'Purple5-10cm', 'Purple5-20cm', 'Purple5-30cm',
     'Red&Blue6-0cm', 'Red&Blue6-10cm', 'Red&Blue6-20cm', 'Red&Blue6-30cm', 'Full7-0cm', 'Full7-10cm', 'Full7-20cm', 'Purple8-0cm',
-    'White9-0cm', 'White9-10cm', 'White9-20cm', 'White9-30cm', 'Purple10-0cm', 'Purple10-10cm', 'Purple10-20cm', 'Full11-0cm', 'Full11-10cm', 'Full11-20cm', 'Full11-30cm'];
+    'White9-0cm', 'White9-10cm', 'White9-20cm', 'White9-30cm', 'Purple10-0cm', 'Purple10-10cm', 'Purple10-20cm', 'Full11-0cm', 'Full11-10cm', 'Full11-20cm', 'Full11-30cm'
+  ];
 
   constructor(
-    public dialogRef: MatDialogRef<Swap2>,
+    public dialogRef: MatDialogRef < Swap2 > ,
     public onoApiService: OnoApiService,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -1475,9 +1866,9 @@ export class Swap2 {
 export class Edit implements OnInit {
   addresses = [];
   constructor(
-    public dialogRef: MatDialogRef<Edit>,
+    public dialogRef: MatDialogRef < Edit > ,
     public onoApiService: OnoApiService,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
   ngOnInit() {
     const me = this;
     // this.OnoApiService.getLampsAddress().then(function (res) {
@@ -1499,9 +1890,9 @@ export class Edit implements OnInit {
 export class Add implements OnInit {
   addresses = [];
   constructor(
-    public dialogRef: MatDialogRef<Add>,
+    public dialogRef: MatDialogRef < Add > ,
     public onoApiService: OnoApiService,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
   ngOnInit() {
     const me = this;
     // this.OnoApiService.getLampsAddress().then(function (res) {
@@ -1525,9 +1916,9 @@ export class Refill implements OnInit {
   scheds = ['Instanteneous', 'Periodical'];
   sols = ['Water', 'OzonatedWater', 'Solution'];
   constructor(
-    public dialogRef: MatDialogRef<Add>,
+    public dialogRef: MatDialogRef < Add > ,
     public onoApiService: OnoApiService,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
   ngOnInit() {
     const me = this;
     // this.OnoApiService.getLampsAddress().then(function (res) {

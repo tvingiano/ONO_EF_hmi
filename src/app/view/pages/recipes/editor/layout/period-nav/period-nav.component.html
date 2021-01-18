@@ -101,8 +101,8 @@ id="groupSaved"
 
     
   
-  <!-- <button class="btn primary" (click)="this.dataService.exportRecipe()">Verify</button>
-  <button class="btn primary" (click)="this.checkDel()">Check Del</button><br>  -->
+  <button class="btn primary" (click)="this.dataService.exportRecipe()">Verify</button>
+  <button class="btn primary" (click)="this.checkDel()">Check Del</button><br> 
  
    
 
@@ -258,11 +258,17 @@ id="groupSaved"
     </tr>
     <tr>
       <td class="field">Refill type</td>
-      <td colspan="2" *ngIf="this.dataService.preview[0].refill.refilltype === 0">Measure only</td>
-      <td colspan="2" *ngIf="this.dataService.preview[0].refill.refilltype === 1">Flood w/ recycle</td>
-      <td colspan="2" *ngIf="this.dataService.preview[0].refill.refilltype === 2">Flood w/o recycle</td>
-      <td colspan="2" *ngIf="this.dataService.preview[0].refill.refilltype === 3">Ebb & Flow</td>
-      <td colspan="2" *ngIf="this.dataService.preview[0].refill.refilltype === 4">Spray</td>
+      <td colspan="2">
+        {{
+          this.dataService.preview[0].refilltype === 0 ? 'Measure Only' : 
+          this.dataService.preview[0].refill.refilltype === 1 ? 'Flood w/ recycle' :
+          this.dataService.preview[0].refill.refilltype === 2 ? 'Floow w/o recycle' :
+          this.dataService.preview[0].refill.refilltype === 3 ? 'Ebb & Flow' :
+          this.dataService.preview[0].refill.refilltype === 4 ? 'Spray' :
+          ''
+        }}
+    </td>
+
     </tr>
     <tr>
       <td class="field">Frequency</td>

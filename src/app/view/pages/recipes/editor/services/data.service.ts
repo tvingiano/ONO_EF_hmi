@@ -1,18 +1,14 @@
 import { Injectable, ComponentFactoryResolver} from '@angular/core';
 import { ILightData, ISolutionData, IGenericData, IClimateData, IPeriod, IGroup, FinalJson } from '../classes/dataFormat';
-import { ConnectorService } from './connector.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { HttpClient } from '@angular/common/http';
-import { OnoApiService } from 'src/app/service/ono-api.service';
-
 
 @Injectable()
 export class DataService {
 
   constructor(
-    public connService: ConnectorService,
     private sanitizer: DomSanitizer,
     public snackBar: MatSnackBar,
     public http: HttpClient
@@ -61,9 +57,20 @@ export class DataService {
         refilltype: 1,
         frequency: 1440
       },
+      spray: {
+        active: true,
+        frequency: 720,
+        solution: 'water'
+      },
       temperature: 27,
       humidity: 50,
-      periodduration: 14400
+      periodduration: 14400,
+      FirstRefill: {
+        active: true,
+        solution: 'Water',
+        type: 'Spray',
+        quantity: 5,
+      }
   }, {
     type: 0,
     pid: -1,
@@ -90,9 +97,20 @@ export class DataService {
       refilltype: 1,
       frequency: 1440
     },
+    spray: {
+      active: true,
+      frequency: 720,
+      solution: 'water'
+    },
     temperature: 27,
     humidity: 50,
-    periodduration: 15840
+    periodduration: 15840,
+    FirstRefill: {
+      active: true,
+      solution: 'Water',
+      type: 'Spray',
+      quantity: 5,
+    }
   }, {
     type: 0,
     pid: -1,
@@ -119,9 +137,20 @@ export class DataService {
       refilltype: 0,
       frequency: 1440
     },
+    spray: {
+      active: true,
+      frequency: 720,
+      solution: 'water'
+    },
     temperature: 26,
     humidity: 50,
-    periodduration: 20160
+    periodduration: 20160,
+    FirstRefill: {
+      active: true,
+      solution: 'Water',
+      type: 'Spray',
+      quantity: 5,
+    }
   }, {
     type: 0,
     pid: -1,
@@ -148,9 +177,20 @@ export class DataService {
       refilltype: 2,
       frequency: 2880
     },
+    spray: {
+      active: true,
+      frequency: 720,
+      solution: 'water'
+    },
     temperature: 26,
     humidity: 60,
-    periodduration: 4320
+    periodduration: 4320,
+    FirstRefill: {
+      active: true,
+      solution: 'Water',
+      type: 'Spray',
+      quantity: 5,
+    }
   }, {
     type: 0,
     pid: -1,
@@ -177,9 +217,20 @@ export class DataService {
       refilltype: 3,
       frequency: 1440
     },
+    spray: {
+      active: true,
+      frequency: 720,
+      solution: 'water'
+    },
     temperature: 26,
     humidity: 50,
-    periodduration: 10080
+    periodduration: 10080,
+    FirstRefill: {
+      active: true,
+      solution: 'Water',
+      type: 'Spray',
+      quantity: 5,
+    }
   }, {
     type: 0,
     pid: -1,
@@ -206,9 +257,20 @@ export class DataService {
       refilltype: 1,
       frequency: 2880
     },
+    spray: {
+      active: true,
+      frequency: 720,
+      solution: 'water'
+    },
     temperature: 25,
     humidity: 50,
-    periodduration: 20160
+    periodduration: 20160,
+    FirstRefill: {
+      active: true,
+      solution: 'Water',
+      type: 'Spray',
+      quantity: 5,
+    }
   }, {
     type: 0,
     pid: -1,
@@ -235,9 +297,20 @@ export class DataService {
       refilltype: 4,
       frequency: 2880
     },
+    spray: {
+      active: true,
+      frequency: 720,
+      solution: 'water'
+    },
     temperature: 25,
     humidity: 50,
-    periodduration: 10080
+    periodduration: 10080,
+    FirstRefill: {
+      active: true,
+      solution: 'Water',
+      type: 'Spray',
+      quantity: 5,
+    }
   }, {
     type: 0,
     pid: -1,
@@ -264,9 +337,20 @@ export class DataService {
       refilltype: 2,
       frequency: 1440
     },
+    spray: {
+      active: true,
+      frequency: 720,
+      solution: 'water'
+    },
     temperature: 24,
     humidity: 50,
-    periodduration: 17280
+    periodduration: 17280,
+    FirstRefill: {
+      active: true,
+      solution: 'Water',
+      type: 'Spray',
+      quantity: 5,
+    }
   }, {
     type: 0,
     pid: -1,
@@ -293,9 +377,20 @@ export class DataService {
       refilltype: 0,
       frequency: 2880
     },
+    spray: {
+      active: true,
+      frequency: 720,
+      solution: 'water'
+    },
     temperature: 28,
     humidity: 67,
-    periodduration: 10080
+    periodduration: 10080,
+    FirstRefill: {
+      active: true,
+      solution: 'Water',
+      type: 'Spray',
+      quantity: 5,
+    }
   }, {
     type: 0,
     pid: -1,
@@ -322,14 +417,32 @@ export class DataService {
       refilltype: 1,
       frequency: 1440
     },
+    spray: {
+      active: true,
+      frequency: 720,
+      solution: 'water'
+    },
     temperature: 25,
     humidity: 50,
-    periodduration: 10080
+    periodduration: 10080,
+    FirstRefill: {
+      active: true,
+      solution: 'Water',
+      type: 'Spray',
+      quantity: 5,
+    }
   }];
 
 
   spectrumList = ['Red', 'Blue', 'RedAndBlue', 'Purple', 'White', 'OFF'];
-  solutionList = ['Water', 'Hoagland', 'Baseplant'];
+  solutionList = ['Water', 'Hydroplant', 'Hoagland', 'Baseplant'];
+  refillTypes = [
+    {value: 1, view: 'Flood w/ solution recycle'},
+    {value: 2, view: 'Flood w/o solution recycle'},
+    {value: 3, view: 'Ebb & Flow'},
+    {value: 4, view: 'Spray'}
+  ];
+
   stages = [
     {
       name: 'Sprout',
@@ -598,6 +711,11 @@ export class DataService {
               refilltype: s.refill.refilltype,
               frequency: s.refill.frequency
             },
+            spray: {
+              active: s.spray.active,
+              frequency: s.spray.frequency,
+              solution: s.spray.solution
+          },
             temperature: c.temperature,
             humidity: c.humidity,
             periodduration: g.periodduration,
@@ -657,6 +775,11 @@ export class DataService {
           },
           refilltype: presPer.refill.refilltype,
           frequency: presPer.refill.frequency
+        },
+        spray: {
+          active: presPer.spray.active,
+          frequency: presPer.spray.frequency,
+          solution: presPer.spray.solution
         }
       };
 
@@ -703,7 +826,7 @@ export class DataService {
 
     try {
 
-      // this will remove spaces and breakline, theiy're annoying
+      // this will remove spaces and breakline, they're annoying
       rec = rec.replace(/(\r\n|\n|\r|\s)/gm, '');
       rec = JSON.parse(rec);
 
@@ -825,7 +948,11 @@ export class DataService {
             item.refill.ec.min !== undefined &&
             item.refill.ec.max !== undefined &&
             item.solution !== undefined &&
-            item.solutionquantity !== undefined
+            item.solutionquantity !== undefined &&
+            item.spray !== undefined &&
+            item.spray.active !== undefined &&
+            item.spray.frequency !== undefined &&
+            item.spray.solution !== undefined
           ) {
 
             newSolution = {
@@ -843,6 +970,11 @@ export class DataService {
                 },
                 refilltype: item.refill.refilltype,
                 frequency: item.refill.frequency
+              },
+              spray: {
+                active: item.spray.active,
+                frequency: item.spray.frequency,
+                solution: item.spray.solution
               }
             };
 
@@ -1006,7 +1138,7 @@ export class DataService {
 
       group.Items.forEach(item => {
 
-        const newPer: IPeriod = {
+        const  newPer: IPeriod = {
           type: 0,
           pid: item.Pid,
           name: (item.Name) ? item.Name : 'period ' + newPid,
@@ -1032,6 +1164,11 @@ export class DataService {
                   max: item.Refill.Ec.Max,
               },
           },
+          spray: {
+            active: item.spray.active,
+            frequency: item.spray.frequency,
+            solution: item.spray.solution
+          },
           temperature: item.Temperature,
           humidity: item.Humidity,
           periodduration: item.PeriodDuration
@@ -1055,6 +1192,7 @@ export class DataService {
       this.groups.push(pushGroup);
 
     });
+
 
     const pushLight: ILightData[] = [];
     const pushClimate: IClimateData[] = [];
@@ -1144,6 +1282,11 @@ export class DataService {
                 },
                 refilltype: item.Refill.RefillType,
                 frequency:  item.Refill.Frequency
+              },
+              spray: {
+                active: item.spray.active,
+                frequency: item.spray.frequency,
+                solution: item.spray.solution
               }
             };
 
@@ -1177,6 +1320,32 @@ export class DataService {
 
 
     this.checkRecipe();
+  }
+
+
+  /**
+   * accept refilltype code (0,1,2,3,4) and return litteral
+   */
+  refillTypeEncoder(x) {
+    switch (x) {
+      case 'only measure':                    return 0;
+      case 'flood with solution recycle':     return 1;
+      case 'flood without solution recycle':  return 2;
+      case 'Ebb&Flow':                        return 3;
+      case 'spray':                           return 4;
+      default: return '';
+    }
+  }
+
+  refillTypeDecoder(x) {
+    switch (x) {
+      case 0: return 'only measure';
+      case 1: return 'flood with solution recycle';
+      case 2: return 'flood without solution recycle';
+      case 3: return 'Ebb&Flow';
+      case 4: return 'spray';
+      default: return '';
+    }
   }
 }
 

@@ -24,6 +24,11 @@ export interface ISolutionData {
         };
         frequency: number;
     };
+    spray: {
+        active: boolean; 
+        frequency: number;
+        solution: string;
+    };
 }
 export interface IClimateData {
     pid: number;
@@ -54,7 +59,7 @@ export interface IGroup {
 
 
 export interface IPeriod {
-    type: number;                   // which type of period is it (0: presets, 1:saved, 2 custom)
+    type: number;                   // which type of period is it? (0: presets, 1:saved, 2 custom)
     pid: number;                    // unique integer
     name: string;                   // string
     note: string;                   // string
@@ -83,9 +88,19 @@ export interface IPeriod {
             max: number;
         };
     };
+
+    //////////////////////
+    spray: {
+        active: boolean;        
+        frequency: number;
+        solution: string;
+    };
+    /////////////////////
+
     temperature: number;
     humidity: number;
     periodduration: number;
+    
 }
 
 export interface FinalJson {
@@ -95,6 +110,14 @@ export interface FinalJson {
     SeedType: string;
     Periods: IGroup[];
     EstimatedProduction: number;
+
+    FirstRefill: {
+        Active: boolean;
+        Type: boolean;
+        Solution: string;
+        Quantity: number; // solo se type !== 'spray'
+    };
+
     Description: string;
     Note: string;
     Tag: string;

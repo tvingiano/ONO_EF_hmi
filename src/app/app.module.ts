@@ -199,7 +199,6 @@ import { PeriodNavComponent } from './view/pages/recipes/editor/layout/period-na
 import { IndicatorNavComponent } from './view/pages/recipes/editor/layout/indicator-nav/indicator-nav.component';
 import { CommonModule } from '@angular/common';
 import { DiagramModule } from '@syncfusion/ej2-angular-diagrams';
-import { ConnectorComponent } from './view/pages/recipes/editor/components/connector/connector.component';
 import { SettingsModalComponent } from './view/pages/recipes/editor/modals/settings-modal/settings-modal.component';
 import { DelModalComponent } from './view/pages/recipes/editor/modals/del-modal/del-modal.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
@@ -232,6 +231,11 @@ import { OrderGanttComponent } from './view/pages/orders/components/order-gantt/
 import { OrderDetailModalComponent } from './view/pages/orders/components/order-detail-modal/order-detail-modal';
 import { OrderProductionChartComponent } from './view/pages/orders/components/order-production-chart/order-production-chart.component';
 import { BatchGanttPreviewComponent } from './view/pages/orders/components/batch-gantt-preview/batch-gantt-preview.component';
+import { RecipeRecapModalComponentComponent } from './view/pages/recipes/editor/modals/recipe-recap-modal-component/recipe-recap-modal-component.component';
+import { StartProcessComponent } from './view/pages/process/start-process/start-process.component';
+import { UrlService } from './service/url.service';
+import { StepProgressComponent } from './view/pages/process/components/step-progress/step-progress.component';
+import { PrettyjsonPipe } from './pipes/prettyjson.pipe';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -250,7 +254,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         SolutionDialogModalComponent,
         PeriodNavComponent,
         IndicatorNavComponent,
-        ConnectorComponent,
         SettingsModalComponent,
         DelModalComponent,
         MathComponent,
@@ -403,6 +406,10 @@ export function HttpLoaderFactory(http: HttpClient) {
         OrderDetailModalComponent,
         OrderProductionChartComponent,
         BatchGanttPreviewComponent,
+        RecipeRecapModalComponentComponent,
+        StartProcessComponent,
+        StepProgressComponent,
+        PrettyjsonPipe,
     ],
     imports: [
         MatRadioModule,
@@ -463,7 +470,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatDialogModule,
         MatSelectModule,
         MatSlideToggleModule,
-        MatButtonToggleModule,
+        MatButtonToggleModule
     ],
     providers: [
         RefillComponent,
@@ -494,8 +501,10 @@ export function HttpLoaderFactory(http: HttpClient) {
         /* svg service */
         SvgIconsService,
         UtilsService,
+
         /* fake server */
-        fakeBackendProvider
+        fakeBackendProvider,
+        UrlService,
     ],
     entryComponents: [
         SystemEditDialogComponent,
@@ -515,6 +524,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         SlotEditDialogComponent,
         ConfirmDialogComponent,
         OrderDetailModalComponent,
+        RecipeRecapModalComponentComponent,
         Note2,
         Edit,
         Add,

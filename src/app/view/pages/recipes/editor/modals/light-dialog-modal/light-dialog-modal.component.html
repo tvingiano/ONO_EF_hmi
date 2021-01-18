@@ -4,9 +4,12 @@
   <div id="lightOn-label">
     Turn the lights {{this.lightOn === true ? 'OFF' : 'ON'}} for this period.
   </div>
+
+  <!-- togglable btn -->
   <div id="lightOn-btn" [style.background-color]="this.lightOn === true ? 'rgb(153, 225, 252)' : ''" (click)="this.lightOn = !this.lightOn; setLightOn()">
     <div id="hand" [ngClass]="this.lightOn === true ? 'on' : 'off'"></div>
   </div>
+
 </div>
 
 <ng-container *ngIf="lightOn === true">
