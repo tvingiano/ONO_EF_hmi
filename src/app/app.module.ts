@@ -234,6 +234,7 @@ import { BatchGanttPreviewComponent } from './view/pages/orders/components/batch
 import { RecipeRecapModalComponentComponent } from './view/pages/recipes/editor/modals/recipe-recap-modal-component/recipe-recap-modal-component.component';
 import { StartProcessComponent } from './view/pages/process/start-process/start-process.component';
 import { UrlService } from './service/url.service';
+import { StepProgressComponent } from './view/pages/process/components/step-progress/step-progress.component';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -406,6 +407,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         BatchGanttPreviewComponent,
         RecipeRecapModalComponentComponent,
         StartProcessComponent,
+        StepProgressComponent,
     ],
     imports: [
         MatRadioModule,

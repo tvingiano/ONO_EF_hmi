@@ -19,14 +19,30 @@ export class StartProcessComponent implements OnInit {
   ) {
   }
 
+  currentState = 0;
+
+  phases = ['preparation', 'substrates and supports', 'seed', 'ciao', 'ciao'];
+
   ngOnInit() {
-    try {
-      this.process = this.router.getCurrentNavigation().extras.state.process;
-    } catch (err) {
-      const last_url = this.urlService.history[this.urlService.history.length - 1];
-      this.router.navigate(last_url);
+
+    this.process = history.state.process;
+
+    if (this.process === undefined) {
+
+      console.log('go back'); 
+      this.router.navigate(['/processes/manage']);
+
+      return;
     }
-    console.log('history: ', this.urlService.history);
+
+    console.log(this.process);
   }
 
+  next() {
+    if (this.currentState >= (this.phases.length - 1)) {
+      this.router.navigate(['/processes']); // THIS NEEDS TO BE CHANGED TO A "COMPLETION" PAGE
+    } else {
+      this.currentState ++;
+    }
+  }
 }

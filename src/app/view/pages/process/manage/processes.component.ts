@@ -351,7 +351,7 @@ export class ProcessesComponent implements OnInit {
 
   ];
 
-  processesData: IInfoProcess[];
+  processesData;
 
   selectedProcess: IInfoProcess;
   currentImageMetadata;

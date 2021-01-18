@@ -1,1 +1,32 @@
 
+<div class="container">
+    <app-step-progress [nodes]="phases" [state]="currentState"></app-step-progress>
+
+    <!-- STATE = 0 CONFIRM DATA -->
+    <ng-container *ngIf="currentState === 0">
+    <div class="wrapper">
+        <div>cose da preparare</div>
+        <code>{{this.process | json}}</code>
+    </div>
+    </ng-container>
+
+    <!-- STATE = 1 CONFIRM DATA -->
+    <ng-container *ngIf="currentState === 1">
+        <div class="wrapper">
+            <div>alloggiare i supporti ed i substrati</div>
+            <code>{{this.process | json}}</code>
+        </div>
+        </ng-container>
+
+        <!-- STATE = 2 CONFIRM DATA -->
+    <ng-container *ngIf="currentState === 2">
+        <div class="wrapper">
+            <div>seminare</div>
+            <code>{{this.process | json}}</code>
+        </div>
+        </ng-container>
+
+    <div class="footer">
+        <button class="btn btn-success" (click)="next()">CONFIRM</button>
+    </div>
+</div>
