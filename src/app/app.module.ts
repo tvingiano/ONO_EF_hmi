@@ -235,6 +235,7 @@ import { RecipeRecapModalComponentComponent } from './view/pages/recipes/editor/
 import { StartProcessComponent } from './view/pages/process/start-process/start-process.component';
 import { UrlService } from './service/url.service';
 import { StepProgressComponent } from './view/pages/process/components/step-progress/step-progress.component';
+import { PrettyjsonPipe } from './pipes/prettyjson.pipe';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -408,6 +409,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         RecipeRecapModalComponentComponent,
         StartProcessComponent,
         StepProgressComponent,
+        PrettyjsonPipe,
     ],
     imports: [
         MatRadioModule,
