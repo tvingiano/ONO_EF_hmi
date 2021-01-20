@@ -1,6 +1,6 @@
 import { Component, OnInit, Optional, Inject, Input } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ISolutionData, IGroup } from '../../classes/dataFormat';
+import { ISolutionData, IGroup } from '../../model/dataFormat';
 import { DataService } from '../../services/data.service';
 import { FormGroup, FormControl, Validators, Validator } from '@angular/forms';
 import { Options } from 'ng5-slider';

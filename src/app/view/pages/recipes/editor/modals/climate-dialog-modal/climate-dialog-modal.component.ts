@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { DataService } from '../../services/data.service';
-import { IClimateData } from '../../classes/dataFormat';
+import { IClimateData } from '../../model/dataFormat';
 import { Validators, FormControl } from '@angular/forms';
 
 @Component({

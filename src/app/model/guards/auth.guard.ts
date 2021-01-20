@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const currentUser = this.authenticationService.currentUserValue;
-        var me = this
+        var me = this;
         this.ono.whoami().subscribe(
             error => me.errors = error
           );

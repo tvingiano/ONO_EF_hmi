@@ -1,5 +1,5 @@
 import { Injectable, ComponentFactoryResolver} from '@angular/core';
-import { ILightData, ISolutionData, IGenericData, IClimateData, IPeriod, IGroup, FinalJson } from '../classes/dataFormat';
+import { ILightData, ISolutionData, IGenericData, IClimateData, IPeriod, IGroup, FinalJson } from '../model/dataFormat';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';

@@ -16,7 +16,7 @@ import {
 } from '@angular/cdk/drag-drop';
 import {
   IGroup
-} from '../../classes/dataFormat';
+} from '../../model/dataFormat';
 import { FormulaComponent } from '../../components/formula/formula.component';
 import { ImportModalComponent } from '../../modals/import-modal/import-modal.component';
 import { MatDialog } from '@angular/material/dialog';

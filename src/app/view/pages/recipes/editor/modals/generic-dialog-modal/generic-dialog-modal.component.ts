@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { DataService } from '../../services/data.service';
-import { IGenericData } from '../../classes/dataFormat';
+import { IGenericData } from '../../model/dataFormat';
 
 @Component({
   selector: 'app-generic-dialog-modal',

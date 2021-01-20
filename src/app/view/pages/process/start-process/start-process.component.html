@@ -2,31 +2,13 @@
 <div class="container">
     <app-step-progress [nodes]="phases" [state]="currentState"></app-step-progress>
 
-    <!-- STATE = 0 CONFIRM DATA -->
-    <ng-container *ngIf="currentState === 0">
     <div class="wrapper">
-        <div>cose da preparare</div>
-        <pre>{{this.process | prettyjson}}</pre>
+        <div [innerHTML]="phases[currentState].description"></div>
     </div>
-    </ng-container>
-
-    <!-- STATE = 1 CONFIRM DATA -->
-    <ng-container *ngIf="currentState === 1">
-        <div class="wrapper">
-            <div>alloggiare i supporti ed i substrati</div>
-            <pre>{{this.process | prettyjson}}</pre>
-        </div>
-        </ng-container>
-
-        <!-- STATE = 2 CONFIRM DATA -->
-    <ng-container *ngIf="currentState === 2">
-        <div class="wrapper">
-            <div>seminare</div>
-            <pre>{{this.process | prettyjson}}</pre>
-        </div>
-        </ng-container>
 
     <div class="footer">
-        <button class="btn btn-success" (click)="next()">CONFIRM</button>
+        <button class="btn btn-success" (click)="next()" [disabled]="this.botMessage">next step</button>
     </div>
+
+    <div class="chatbot" [@fadeSlideInOut]="this.botMessage">{{botMessage}}</div>
 </div>

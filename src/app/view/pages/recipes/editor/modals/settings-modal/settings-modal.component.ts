@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
-import { IInfoData } from '../../classes/dataFormat';
+import { IInfoData } from '../../model/dataFormat';
 import { DelModalComponent } from '../del-modal/del-modal.component';
 import { emit } from 'process';
 // import { constants } from 'buffer';

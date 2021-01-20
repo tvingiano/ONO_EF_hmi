@@ -52,16 +52,25 @@
     content: none;
 }
 .progressbar li.active {
-    color: $submit-border;
+    color: $submit-border !important;
     transform: scaleX(0deg);
 }
 
 .progressbar li.active:before {
-    border-color: $green;
+    border-color: $green !important;
     content: '✔';
     font-size: 1rem;
 }
 .progressbar li.active + li:after {
     background-color: $green;
+}
+
+.progressbar li.lint {
+    
+    &:before {
+        border-color: yellow;
+        color: yellow;
+    }
+
 }
 

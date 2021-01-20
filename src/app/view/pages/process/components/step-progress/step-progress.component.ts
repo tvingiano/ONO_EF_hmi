@@ -7,12 +7,13 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class StepProgressComponent implements OnInit {
 
-  @Input() nodes; // starts from 1 to N -> 0 is "nothing done"
+  @Input() nodes: [{title: string, description: string}]; // starts from 1 to N -> 0 is "nothing done"
   @Input() state; // starts from 1 to N
 
   constructor() { }
 
   ngOnInit() {
+    this.nodes.push({title: 'Conclusion', description: 'do you want to load next tray?'})
   }
 
   activeStep(i) {

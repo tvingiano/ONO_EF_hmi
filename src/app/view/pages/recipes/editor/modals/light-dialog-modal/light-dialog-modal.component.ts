@@ -1,6 +1,6 @@
 import { Component, OnInit, Optional, Inject, Input } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ILightData } from '../../classes/dataFormat';
+import { ILightData } from '../../model/dataFormat';
 import { DataService } from '../../services/data.service';
 import { FormGroup, FormControl, Validators, Validator } from '@angular/forms';
 import { CustomValidators } from 'ng2-validation';
