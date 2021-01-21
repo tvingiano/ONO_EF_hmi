@@ -3,12 +3,14 @@
     <app-step-progress [nodes]="phases" [state]="currentState"></app-step-progress>
 
     <div class="wrapper">
-        <div [innerHTML]="phases[currentState].description"></div>
+        <div [innerHTML]="phases[currentState] ? phases[currentState].description : ''"></div>
     </div>
 
     <div class="footer">
-        <button class="btn btn-success" (click)="next()" [disabled]="this.botMessage">next step</button>
+        <div>{{this.currentState}} / {{this.phases.length}} - refill: {{this.refill ? 'yes' : 'no'}}</div>
+        <button class="btn btn-success" (click)="next()">next step</button>
+        <button class="btn btn-secondary" (click)="test()">test</button>
     </div>
 
-    <div class="chatbot" [@fadeSlideInOut]="this.botMessage">{{botMessage}}</div>
+    <div class="chatbot">{{message}}</div>
 </div>

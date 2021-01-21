@@ -1517,6 +1517,9 @@ export class OnoApiService {
         );
     }
 
+    /**
+     * move any drawer in external based on $from
+     */
     toExternal(from): Observable<IResponse> {
         return this.http.get<IResponse>(
             `${environment.server.sendexternal}/${from}`,

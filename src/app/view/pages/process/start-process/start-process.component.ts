@@ -6,22 +6,16 @@ import { UrlService } from 'src/app/service/url.service';
 
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { userInfo } from 'os';
+import { Observable } from 'rxjs';
+import { IResponse } from 'src/app/model/interface/IResponse';
+import { FinalJson } from '../../recipes/editor/model/dataFormat';
+import { BusyService } from '../../../../service/busy.service';
 
 @Component({
   selector: 'app-start-process',
   templateUrl: './start-process.component.html',
   styleUrls: ['./start-process.component.scss'],
-  animations: [
-    trigger('fadeSlideInOut', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(10px)' }),
-        animate('1s', style({ opacity: 1, transform: 'translateY(0)' })),
-      ]),
-      transition(':leave', [
-        animate('1s', style({ opacity: 0, transform: 'translateY(10px)' })),
-      ]),
-    ]),
-  ]
+  animations: []
 
 })
 export class StartProcessComponent implements OnInit {
@@ -32,11 +26,13 @@ export class StartProcessComponent implements OnInit {
   constructor(
     private router: Router,
     private urlService: UrlService,
-    private api: OnoApiService
+    private api: OnoApiService,
+    private busyService: BusyService
   ) {
   }
 
   currentState = 0;
+  movingDrawer = false;
 
   phases = [
     {
@@ -53,16 +49,22 @@ export class StartProcessComponent implements OnInit {
     }
   ];
 
-  botMessage = '';
+  message = '';
   refill;
+  trayList;
+
+  processData: {
+    ProcessID: string;
+    DrawerID: string;
+    RecipeID: string;
+    LoadPhases: {Title: string, Description: string}[];
+  };
 
   ngOnInit() {
 
     this.process = history.state.process;
 
     if (this.process === undefined) {
-
-      console.log('go back');
       this.router.navigate(['/processes/manage']);
 
       return;
@@ -70,33 +72,95 @@ export class StartProcessComponent implements OnInit {
 
 
     // check for recipe firstrefill info
-    this.api.getFullRecipes().then(res => {
+    this.refill = this.api.getFullRecipes().then(res => {
       const f = res.find(x => x.Recipename === this.process.Recipe);
-      this.refill = f.FirstRefill;
+      return f.FirstRefill;
+    });
+
+    // get process's tray ID that needs to get moving
+    this.trayList = this.api.getFullDrawers().subscribe(x => {
+      console.log('full drawers: ', x);
+      return x;
     });
 
   }
 
+  test() {
+    console.log('==================================================');
+    console.log('$currentState = ', this.currentState, '/', this.phases.length);
+    console.log('$refill = ', this.refill);
+  }
+
   next() {
 
-    switch (true) {
-      case this.currentState === 0:
-        this.botMessage = 'OK, ti porto il cassetto fuori!'; break;
+    const data = this.processData;
 
-      case (this.currentState === 1 && this.refill.Active === true && this.refill.Type === 'Spray'):
-        this.botMessage = 'OK, ti inzuppo il terreno prima della semina'; break;
-        // mand ail cassetto a fare il refill
-
-      case (this.currentState === 1 && this.refill.Active === true && this.refill.Type !== 'Spray'):
-        this.botMessage = 'OK, porto il tuo cassetto a casina'; break;
-      
-      case this.currentState === 2:
-        this.botMessage = 'OK, porto il tuo cassetto a casina'; break;
+    if (this.currentState < this.phases.length) {
+      this.currentState ++;
+    } else  {
+      this.currentState = 0;
     }
 
-    setTimeout(_ => {
-      this.currentState ++;
-    }, 2000);
+    console.log('avanzato!  ', this.currentState);
+
+    if (!this.refill) {
+      switch (this.currentState) {
+        case 1: alert('I\'m moving the tray to you'); this.toExternal(data.DrawerID); break;
+        case 2: alert('Bene!'); break;
+        case 3: alert('I\'m giving these seeds a warm new home'); this.toHome(); break;
+        case 4: alert('Gonna get a new empty tray'); this.getNextProcess(); break;
+        case 0: alert('Be ready bro'); break;
+      }
+    } else {
+      switch (this.currentState) {
+        case 1:
+          alert('I\'m moving the tray to you'); this.toExternal(data.DrawerID);
+          break;
+        case 2:
+          alert('OK, I\'m gonna moisten the soil first. Gimme a sec!');
+          break;
+        case 3:
+          alert('I\'m giving these seeds a warm new home');
+          break;
+        case 4:
+          alert('Gonna get a new empty tray'); this.toHome();
+          break;
+        case 0:
+          alert('Be ready bro');
+          break;
+      }
+    }
 
   }
+
+  /**
+   * It's used to move any tray in external based on input TrayID
+   * @param trayID - Tray ID to move to External
+   */
+  toExternal(trayID: string) {
+    return 'ciao';
+  }
+
+  /**
+   * It's used to make firstRefill before seed the tray
+   */
+  makeRefill(): void {
+
+  }
+
+  /**
+   * It's used to move the newly seed tray in home
+   */
+  toHome(): void {
+
+  }
+
+  /**
+   * used to go to next "to-start" process
+   */
+  getNextProcess() {
+
+  }
+
+
 }
