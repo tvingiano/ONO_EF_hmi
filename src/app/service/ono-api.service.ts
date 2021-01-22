@@ -1292,26 +1292,6 @@ export class OnoApiService {
         }
     }
 
-
-    // slotsGetSimple(): Promise<any> {
-    //     let headers = new Headers()
-    //     headers.append('Content-Type', 'application/json')
-    //     return this.http.get('http://192.168.60.3:8000/slots', { withCredentials: false })
-    //         .toPromise()
-    //         .then(res => {
-    //             return res
-    //         })
-    // }
-    // getClimateSetpoints(): Promise<any> {
-    //     let headers = new Headers()
-    //     headers.append('Content-Type', 'application/json')
-    //     return this.http.get('http://192.168.60.3:8000/climatesetpoints', { withCredentials: false })
-    //         .toPromise()
-    //         .then(res => {
-    //             return res
-    //         })
-    // }
-
     getClimateSetpoints(): Observable<ClimateSet> {
         return this.http.get<ClimateSet>(
             `${environment.server.climatesetpoints}`,
@@ -1535,7 +1515,13 @@ export class OnoApiService {
     postRecipe(value: any): Observable<IResponse> {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        return this.http.post<IResponse>('http://192.168.60.3:8000/recipes', value, { withCredentials: false });
+        return this.http.post<IResponse>(
+            `${environment.server.recipes}`,
+            value,
+            {
+                withCredentials: false,
+                responseType: 'json'
+            });
     }
 
     shutter(deck, direction): Observable<IResponse> {

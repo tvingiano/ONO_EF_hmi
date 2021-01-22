@@ -1,16 +1,17 @@
 
 <div class="container">
-    <app-step-progress [nodes]="phases" [state]="currentState"></app-step-progress>
+    <div class="top">
+        <app-step-progress [nodes]="this.processData.LoadPhases" [state]="currentState"></app-step-progress>
+    </div>
+    
 
     <div class="wrapper">
-        <div [innerHTML]="phases[currentState] ? phases[currentState].description : ''"></div>
+        <div [@fade] [innerHTML]="this.processData.LoadPhases[currentState] ? this.processData.LoadPhases[currentState].Description : ''" class="description"></div>
+        <div *ngIf="currentState <= (this.processData.LoadPhases.length - 1)" class="then">Then go to next step.</div>
     </div>
 
     <div class="footer">
-        <div>{{this.currentState}} / {{this.phases.length}} - refill: {{this.refill ? 'yes' : 'no'}}</div>
-        <button class="btn btn-success" (click)="next()">next step</button>
-        <button class="btn btn-secondary" (click)="test()">test</button>
+        <div class="state">{{this.currentState}} / {{this.processData.LoadPhases.length}} - refill: {{this.refill ? 'yes' : 'no'}}</div>
+        <button class="btn btn-success" (click)="next()" [disabled]="this.movingDrawer === true">next step</button>
     </div>
-
-    <div class="chatbot">{{message}}</div>
 </div>

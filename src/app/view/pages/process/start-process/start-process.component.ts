@@ -1,21 +1,50 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { IInfoProcess } from 'src/app/model/interface/IInfoProcess';
 import { OnoApiService } from 'src/app/service/ono-api.service';
 import { UrlService } from 'src/app/service/url.service';
-
-import { trigger, state, style, animate, transition } from '@angular/animations';
-import { userInfo } from 'os';
-import { Observable } from 'rxjs';
-import { IResponse } from 'src/app/model/interface/IResponse';
-import { FinalJson } from '../../recipes/editor/model/dataFormat';
 import { BusyService } from '../../../../service/busy.service';
+import {  trigger,  transition,  state,  style,  animate} from '@angular/animations';
 
 @Component({
   selector: 'app-start-process',
   templateUrl: './start-process.component.html',
   styleUrls: ['./start-process.component.scss'],
-  animations: []
+  animations: [
+    trigger(
+      'fade',
+      [
+        state(
+          'in', style({ opacity: 1 })),
+          transition(
+            ':enter',
+            [
+              style({ opacity: 0 }),
+              animate(600)
+            ]
+          ),
+          transition(
+            ':leave',
+            animate(600, style({ opacity: 0 }))
+        ),
+
+        state(
+          'out', style({ opacity: 0 })),
+          transition(
+            ':enter',
+            [
+              style({ opacity: 1 }),
+              animate(600)
+            ]
+          ),
+          transition(
+            ':leave',
+            animate(600, style({ opacity: 1 }))
+        )
+      ]
+    )
+  ]
 
 })
 export class StartProcessComponent implements OnInit {
@@ -27,38 +56,24 @@ export class StartProcessComponent implements OnInit {
     private router: Router,
     private urlService: UrlService,
     private api: OnoApiService,
-    private busyService: BusyService
+    private busyService: BusyService,
+    private snack: MatSnackBar,
   ) {
   }
 
   currentState = 0;
   movingDrawer = false;
 
-  phases = [
-    {
-      title: 'Ingredients',
-      description: 'The recipe requires 1Kg of "tropical basil" seeds and rockwool as a substrate. \n Be sure to have all these stuff near by and then go to next step.'
-    },
-    {
-      title: 'Substrates and supports',
-      description: 'Place supports and then substrates on the tray. Then go to next step.'
-    },
-    {
-      title: 'Seed',
-      description: 'Seed 1Kg of "tropical basil" seeds on the substrate. Then go to next step.'
-    }
-  ];
-
   message = '';
   refill;
   trayList;
 
   processData: {
-    ProcessID: string;
-    DrawerID: string;
-    RecipeID: string;
+    ProcessID: number;
+    DrawerID: number;
+    Recipe: string;
     LoadPhases: {Title: string, Description: string}[];
-  };
+  } = undefined;
 
   ngOnInit() {
 
@@ -68,12 +83,33 @@ export class StartProcessComponent implements OnInit {
       this.router.navigate(['/processes/manage']);
 
       return;
+    } else {
+      this.processData = {
+        ProcessID: this.process.ProcessID,
+        DrawerID: 10,
+        Recipe: this.process.Recipe,
+        LoadPhases: [
+          {
+            Title: 'Ingredients',
+            Description: 'The recipe requires 1Kg of "tropical basil" seeds and rockwool as a substrate. \n Be sure to have all these stuff near by.'
+          },
+          {
+            Title: 'Substrates and supports',
+            Description: 'Place supports and then substrates on the tray.'
+          },
+          {
+            Title: 'Seed',
+            Description: 'Seed 1Kg of "tropical basil" seeds on the substrate.'
+          }
+      ]};
     }
+
+    console.warn('input processdata= ', this.processData)
 
 
     // check for recipe firstrefill info
     this.refill = this.api.getFullRecipes().then(res => {
-      const f = res.find(x => x.Recipename === this.process.Recipe);
+      const f = res.find(x => x.Recipename === this.processData.Recipe);
       return f.FirstRefill;
     });
 
@@ -87,7 +123,7 @@ export class StartProcessComponent implements OnInit {
 
   test() {
     console.log('==================================================');
-    console.log('$currentState = ', this.currentState, '/', this.phases.length);
+    console.log('$currentState = ', this.currentState, '/', this.processData.LoadPhases.length);
     console.log('$refill = ', this.refill);
   }
 
@@ -95,71 +131,95 @@ export class StartProcessComponent implements OnInit {
 
     const data = this.processData;
 
-    if (this.currentState < this.phases.length) {
+    if (!this.refill) {
+      switch (this.currentState) {
+        case 0: this.toExternal(data.DrawerID); break;
+        case 1: break;
+        case 2: this.toHome(); break;
+        case 3: this.getNextProcess(); break;
+        case 4: break;
+      }
+    } else {
+      switch (this.currentState) {
+        case 0: this.toExternal(data.DrawerID);
+          break;
+        case 1: this.makeRefill()
+          break;
+        case 2: this.toHome();
+          break;
+        case 3:
+          break;
+        case 4: this.getNextProcess();
+          break;
+      }
+    }
+  }
+
+  increment() {
+    if (this.currentState < this.processData.LoadPhases.length) {
       this.currentState ++;
     } else  {
       this.currentState = 0;
     }
-
-    console.log('avanzato!  ', this.currentState);
-
-    if (!this.refill) {
-      switch (this.currentState) {
-        case 1: alert('I\'m moving the tray to you'); this.toExternal(data.DrawerID); break;
-        case 2: alert('Bene!'); break;
-        case 3: alert('I\'m giving these seeds a warm new home'); this.toHome(); break;
-        case 4: alert('Gonna get a new empty tray'); this.getNextProcess(); break;
-        case 0: alert('Be ready bro'); break;
-      }
-    } else {
-      switch (this.currentState) {
-        case 1:
-          alert('I\'m moving the tray to you'); this.toExternal(data.DrawerID);
-          break;
-        case 2:
-          alert('OK, I\'m gonna moisten the soil first. Gimme a sec!');
-          break;
-        case 3:
-          alert('I\'m giving these seeds a warm new home');
-          break;
-        case 4:
-          alert('Gonna get a new empty tray'); this.toHome();
-          break;
-        case 0:
-          alert('Be ready bro');
-          break;
-      }
-    }
-
   }
 
   /**
    * It's used to move any tray in external based on input TrayID
    * @param trayID - Tray ID to move to External
    */
-  toExternal(trayID: string) {
-    return 'ciao';
+  toExternal(trayID: number) {
+    const val = Math.random() * 10 * 1000;
+    this.openSnackbar(val, `We\'re taking the tray to you, pls wait ${(val / 1000).toPrecision(2)} seconds`);
+    this.movingDrawer = true;
+    setTimeout(_ => {
+      this.movingDrawer = false;
+    }, val + 1000);
   }
 
   /**
    * It's used to make firstRefill before seed the tray
    */
   makeRefill(): void {
-
+    const val = Math.random() * 10 * 1000;
+    this.openSnackbar(val, `We\'re moistening the soil, pls wait ${(val / 1000).toPrecision(2)} seconds`);
+    this.movingDrawer = true;
+    setTimeout(_ => {
+      this.movingDrawer = false;
+    }, val + 1000);
   }
 
   /**
    * It's used to move the newly seed tray in home
    */
   toHome(): void {
-
+    const val = Math.random() * 10 * 1000;
+    this.openSnackbar(val, `We\'re moving the tray at home, pls wait ${(val / 1000).toPrecision(2)} seconds`);
+    this.movingDrawer = true;
+    setTimeout(_ => {
+      this.movingDrawer = false;
+    }, val + 1000);
   }
 
   /**
    * used to go to next "to-start" process
    */
   getNextProcess() {
+    const val = Math.random() * 10 * 1000;
+    this.openSnackbar(val, `We\'re preparing next process, pls wait ${(val / 1000).toPrecision(2)} seconds`);
+    this.movingDrawer = true;
+    setTimeout(_ => {
+      this.movingDrawer = false;
+    }, val + 1000);
+  }
 
+  openSnackbar(time, msg) {
+    this.snack.open(msg, '', { duration: time});
+    setTimeout(_ => {
+      this.snack.open('COMPLETATO', '', {
+        panelClass: 'successSnackBar'
+      });
+      this.increment();
+    }, time + 500);
   }
 
 

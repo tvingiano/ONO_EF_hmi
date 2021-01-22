@@ -52,17 +52,19 @@
     content: none;
 }
 .progressbar li.active {
-    color: $submit-border !important;
+    color: $ono_blue_light !important;
     transform: scaleX(0deg);
 }
 
 .progressbar li.active:before {
-    border-color: $green !important;
+    border-color: $ono_blue !important;
+    color: $lv-1 !important;
+    background-color: $ono_blue_light !important;
     content: '✔';
     font-size: 1rem;
 }
 .progressbar li.active + li:after {
-    background-color: $green;
+    background-color: $ono-blue;
 }
 
 .progressbar li.lint {
