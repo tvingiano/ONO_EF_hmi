@@ -8,7 +8,6 @@ import { RackInfo } from '../model/system/RackInfo';
 import { SlotInfo } from '../model/system/SlotInfo';
 import { LampInfo } from '../model/system/LampInfo';
 import { IResponse } from '../model/interface/IResponse';
-import { SeedsInfo } from '../model/product/SeedsInfo';
 import { ISystemRegistry } from '../model/interface/ISystemRegistry';
 import { ProfilesInfo } from '../model/system/ProfilesInfo';
 import { FarmingsInfo } from '../model/registries/farmings-info';
@@ -27,6 +26,8 @@ import { SlotSimple } from '../model/configuration/slot-simple';
 import { IOrder } from '../model/orders/IOrder';
 import { IOrderInfo } from '../model/orders/orders-info';
 import { IRectangleEvents } from '@amcharts/amcharts4/core';
+import { PictorialStackedSeriesDataItem } from '@amcharts/amcharts4/charts';
+import { ISeed } from '../model/registries/seeds-info';
 
 @Injectable({
     providedIn: 'root'
@@ -456,12 +457,35 @@ export class OnoApiService {
         );
     }
 
+    // /*
+    // * Returns all seeds
+    // * */
+    // getFullSeeds(): Observable<SeedsInfo[]> {
+    //     return this.http.get<SeedsInfo[]>(
+    //         `${environment.server.fullseeds}`,
+    //         {
+    //             responseType: 'json'
+    //         }
+    //     );
+    // }
+
     /*
     * Returns all seeds
     * */
-    seedsGet(): Observable<SeedsInfo[]> {
-        return this.http.get<SeedsInfo[]>(
-            `${environment.server.fullseeds}`,
+   getSeeds(): Observable<ISeed[]> {
+        return this.http.get<ISeed[]>(
+            `${environment.server.seeds}`,
+            {
+                responseType: 'json'
+            }
+        );
+    }
+
+    postSeed(data: ISeed): Observable<IResponse> {
+
+        return this.http.post<IResponse>(
+            `${environment.server.seeds}`,
+            { ...data },
             {
                 responseType: 'json'
             }

@@ -6,7 +6,7 @@
     
 
     <div class="wrapper">
-        <div [@fade] [innerHTML]="this.processData.LoadPhases[currentState] ? this.processData.LoadPhases[currentState].Description : ''" class="description"></div>
+        <div [innerHTML]="this.processData.LoadPhases[currentState] ? this.processData.LoadPhases[currentState].Description : ''" class="description"></div>
         <div *ngIf="currentState <= (this.processData.LoadPhases.length - 1)" class="then">Then go to next step.</div>
     </div>
 

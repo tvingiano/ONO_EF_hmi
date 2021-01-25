@@ -35,7 +35,7 @@ export class RecipeRecapModalComponentComponent implements OnInit {
     this.form = new FormGroup({
       Name: new FormControl(this.data.Recipename, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
       Type: new FormControl(this.data.Recipetype, [Validators.required, Validators.minLength(1), Validators.maxLength(14)]),
-      EstProd: new FormControl(this.data.EstimatedProduction, [Validators.required, Validators.min(1)]),
+      EstProd: new FormControl(this.data.FinalWeight, [Validators.required, Validators.min(1)]),
       FRsolution: new FormControl(this.data.FirstRefill.Solution, []),
       FRtype: new FormControl(this.data.FirstRefill.Type)
 

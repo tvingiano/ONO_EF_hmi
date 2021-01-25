@@ -21,7 +21,7 @@ export const environment = {
 
         // plants registries
         seeds: `${API_HOST_URL}/seeds`,
-        fullseeds: `${API_HOST_URL}/fullseeds`,
+        // fullseeds: `${API_HOST_URL}/fullseeds`,
         farmings: `${API_HOST_URL}/farmings`,
         plants: `${API_HOST_URL}/plants`,
         species: `${API_HOST_URL}/species`,

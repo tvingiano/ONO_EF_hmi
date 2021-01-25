@@ -78,7 +78,7 @@
                                             <div class="production">
                                                 <div id="name">Production</div>
                                                 <div id="prod">
-                                                    <app-gauge-chart [range]="{min: 0, max: 20}" [type]="'prod'" [id]="recipe.id" [data]="recipe.EstimatedProduction"></app-gauge-chart>
+                                                    <app-gauge-chart [range]="{min: 0, max: 20}" [type]="'prod'" [id]="recipe.id" [data]="recipe.FinalWeight"></app-gauge-chart>
                                                 </div>
                                                 <div class="gauge-label-prod">Kg/m<sup>2</sup></div>
                                             </div>
@@ -124,7 +124,7 @@
                                                 </tr>
                                                 <tr class="even">
                                                     <th>Production</th>
-                                                    <td>{{recipe.EstimatedProduction}} Kg/m<sup>2 </sup></td>
+                                                    <td>{{recipe.FinalWeight}} Kg/m<sup>2 </sup></td>
                                                 </tr>
                                                 <tr>
                                                     <th coslpan="2">Description</th>

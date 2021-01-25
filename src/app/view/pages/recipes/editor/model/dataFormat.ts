@@ -109,7 +109,7 @@ export interface FinalJson {
     Recipetype: string;
     SeedType: string;
     Periods: IGroup[];
-    EstimatedProduction: number;
+    FinalWeight: number;
 
     FirstRefill: {
         Active: boolean;

@@ -64,7 +64,7 @@ export class RecipeComponent implements OnInit {
         for (const ele of appo) {
           if (ele.Periods && ele.Periods.length !== 0 && ele.SeedType === this.seed.SeedType) {
             ele.id = i;
-            ele.EstimatedProduction = Math.round(Math.random() * (20 - 1) + 1);
+            ele.FinalWeight = Math.round(Math.random() * (20 - 1) + 1);
 
             ele.TotalDuration = 0;
             for (const p of ele.Periods) {

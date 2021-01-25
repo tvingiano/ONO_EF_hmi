@@ -11,42 +11,8 @@ import {  trigger,  transition,  state,  style,  animate} from '@angular/animati
   selector: 'app-start-process',
   templateUrl: './start-process.component.html',
   styleUrls: ['./start-process.component.scss'],
-  animations: [
-    trigger(
-      'fade',
-      [
-        state(
-          'in', style({ opacity: 1 })),
-          transition(
-            ':enter',
-            [
-              style({ opacity: 0 }),
-              animate(600)
-            ]
-          ),
-          transition(
-            ':leave',
-            animate(600, style({ opacity: 0 }))
-        ),
-
-        state(
-          'out', style({ opacity: 0 })),
-          transition(
-            ':enter',
-            [
-              style({ opacity: 1 }),
-              animate(600)
-            ]
-          ),
-          transition(
-            ':leave',
-            animate(600, style({ opacity: 1 }))
-        )
-      ]
-    )
-  ]
-
 })
+
 export class StartProcessComponent implements OnInit {
 
 

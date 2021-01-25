@@ -27,8 +27,8 @@ export class RecipeSettingsModalComponent implements OnInit {
 
   ngOnInit() {
 
-    if (!this.dataService.finalJson.EstimatedProduction) {
-      this.dataService.finalJson.EstimatedProduction = 0;
+    if (!this.dataService.finalJson.FinalWeight) {
+      this.dataService.finalJson.FinalWeight = 0;
     }
 
     for (const s of this.seeds) {
@@ -44,7 +44,7 @@ export class RecipeSettingsModalComponent implements OnInit {
       Recipetype: new FormControl(this.dataService.finalJson.Recipetype),
       Seedtype: new FormControl(this.dataService.finalJson.SeedType),
       Description: new FormControl(this.dataService.finalJson.Description),
-      EstProd: new FormControl(this.dataService.finalJson.EstimatedProduction, Validators.min(1)),
+      EstProd: new FormControl(this.dataService.finalJson.FinalWeight, Validators.min(1)),
       Note: new FormControl(this.dataService.finalJson.Note),
       Tag: new FormControl(this.dataService.finalJson.Tag),
 
@@ -66,7 +66,7 @@ export class RecipeSettingsModalComponent implements OnInit {
     this.dataService.finalJson.Recipetype = this.recipeSettingsForm.value.Recipetype;
     this.dataService.finalJson.SeedType = this.recipeSettingsForm.value.Seedtype;
     this.dataService.finalJson.Description = this.recipeSettingsForm.value.Description;
-    this.dataService.finalJson.EstimatedProduction = this.recipeSettingsForm.value.EstProd;
+    this.dataService.finalJson.FinalWeight = this.recipeSettingsForm.value.EstProd;
     this.dataService.finalJson.Note = this.recipeSettingsForm.value.Note;
     this.dataService.finalJson.Tag = this.recipeSettingsForm.value.Tag;
     // this.dataService.finalJson.FirstRefill.Active = this.recipeSettingsForm.value.FRactive;

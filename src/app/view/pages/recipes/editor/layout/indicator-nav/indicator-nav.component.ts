@@ -40,7 +40,7 @@ export class IndicatorNavComponent implements OnInit {
       Recipetype: undefined,
       SeedType: 'any',
       Periods: this.dataService.groups,
-      EstimatedProduction: undefined,
+      FinalWeight: undefined,
       Description: undefined,
       Note: undefined,
       Tag: undefined,
