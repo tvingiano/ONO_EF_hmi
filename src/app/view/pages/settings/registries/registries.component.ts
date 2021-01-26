@@ -17,16 +17,16 @@ export class RegistriesComponent implements OnInit {
       link: '/settings/registries/farmings'
     },
     {
-      id: 2,
-      title: 'Plants',
-      icon: 'local_florist',
-      link: '/settings/registries/plants'
-    },
-    {
       id: 3,
       title: 'Species',
       icon: 'style',
       link: '/settings/registries/species'
+    },
+    {
+      id: 2,
+      title: 'Seeds',
+      icon: 'local_florist',
+      link: '/settings/registries/plants'
     },
     {
       id: 4,

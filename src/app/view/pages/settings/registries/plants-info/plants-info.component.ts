@@ -5,6 +5,7 @@ import {TableItem} from '../../../../../model/table-item';
 import {PageState} from '../../../../../model/page-state.enum';
 import {FormGroup} from '@angular/forms';
 import {UtilsService} from '../../../../../service/helper/utils.service';
+import { ISeed } from 'src/app/model/registries/seeds-info';
 
 @Component({
     selector: 'app-plants-info',
@@ -14,11 +15,11 @@ import {UtilsService} from '../../../../../service/helper/utils.service';
 export class PlantsInfoComponent implements OnInit {
     private pageStates = PageState;
 
-    plantsInfo: PlantsInfo;
-    plantsList: PlantsInfo[];
+    seedInfo: ISeed;
+    seedsList: ISeed[];
     displayedColumns: TableItem[] = [
-        {title: 'Plant', key: 'Plant'},
-        {title: 'Farming', key: 'Farming'},
+        {title: 'Specie', key: 'Specie'},
+        {title: 'SeedType', key: 'SeedType'},
     ];
     actionButtons: string[] = [
         'Edit',
@@ -32,55 +33,71 @@ export class PlantsInfoComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getPlantsInfoList();
+        this.getSeedsInfoList();
     }
 
-    updatePlantsInfoList() {
-        this.plantsList = null;
-        this.getPlantsInfoList();
+    // updatePlantsInfoList() {
+    //     this.plantsList = null;
+    //     this.getPlantsInfoList();
+    // }
+
+    // getPlantsInfoList() {
+    //     this.utilsService.showLoader();
+    //     this.onoApiService.getPlants()
+    //         .subscribe(
+    //             value => {
+    //                 this.utilsService.hideLoader();
+    //                 this.plantsList = value || [];
+    //             }
+    //         );
+    // }
+
+    updateSeedsInfoList() {
+        this.seedsList = null;
+        this.getSeedsInfoList();
     }
 
-    getPlantsInfoList() {
+    getSeedsInfoList() {
         this.utilsService.showLoader();
-        this.onoApiService.getPlants()
+        this.onoApiService.getSeeds()
             .subscribe(
                 value => {
                     this.utilsService.hideLoader();
-                    this.plantsList = value || [];
+                    this.seedsList = value || [];
                 }
             );
     }
 
     createClick() {
-        this.plantsInfo = null;
+        this.seedInfo = null;
     }
 
-    deleteClick(info: PlantsInfo) {
+    deleteClick(info: ISeed) {
         this.utilsService.showLoader();
         this.onoApiService
-            .deletePlants(info.Plant)
+            .deleteSeed(info.SeedType)
             .subscribe(
                 value => {
                     this.utilsService.hideLoader();
-                    this.updatePlantsInfoList();
+                    this.updateSeedsInfoList();
                 }
             );
     }
 
     plantsFormSubmit(formGroup: FormGroup) {
-        this.plantsInfo ? this.onEditFromSubmit(formGroup) : this.onCreateFromSubmit(formGroup);
+        this.seedInfo ? this.onEditFromSubmit(formGroup) : this.onCreateFromSubmit(formGroup);
     }
 
     onCreateFromSubmit(formGroup: FormGroup) {
         if (formGroup && formGroup.valid) {
             this.utilsService.showLoader();
             this.onoApiService
-                .postPlants(formGroup.value)
+                .postSeed(formGroup.value)
                 .subscribe(
                     _ => {
                         formGroup.reset();
                         this.utilsService.hideLoader();
-                        this.updatePlantsInfoList();
+                        this.updateSeedsInfoList();
                     }
                 );
         }
@@ -91,11 +108,11 @@ export class PlantsInfoComponent implements OnInit {
             this.utilsService.showLoader();
             const {Plant} = formGroup.value;
             this.onoApiService
-                .putPlants(Plant, this.utilsService.getDirtyValues(formGroup))
+                .putSeed(Plant, this.utilsService.getDirtyValues(formGroup))
                 .subscribe(
                     _ => {
                         this.utilsService.hideLoader();
-                        this.updatePlantsInfoList();
+                        this.updateSeedsInfoList();
                     }
                 );
         }

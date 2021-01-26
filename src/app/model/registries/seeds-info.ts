@@ -1,5 +1,6 @@
+import { BaseInfo } from "../BaseInfo";
 
-export interface ISeed {
+export interface ISeed{
     SeedType: string;
     Specie: string;
     NutritionalFact: ISeedNutritionals;

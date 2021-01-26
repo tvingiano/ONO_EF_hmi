@@ -4,12 +4,12 @@
             <div class="row w-100">
                 <div class="col-md-7">
                     <!-- show spinner -->
-                    <div class="d-flex justify-content-center mt-5" *ngIf="!plantsList" >
+                    <div class="d-flex justify-content-center mt-5" *ngIf="!seedsList" >
                         <mat-spinner diameter="50"></mat-spinner>
                     </div>
-                    <app-items-table *ngIf="plantsList"
+                    <app-items-table *ngIf="seedsList"
                                      [title]="'label.PlantsList' | translate"
-                                     [initialData]="plantsList"
+                                     [initialData]="seedsList"
                                      [displayedColumns]="displayedColumns"
                                      [actionButtons]="actionButtons"
                                      (createClick)="createClick()"
@@ -18,10 +18,10 @@
                     ></app-items-table>
                 </div>
                 <div class="col-md-5 no-padding">
-                    <app-plants-form [formData]="plantsInfo"
-                                     [initialState]="!plantsInfo ? pageStates.CREATE : pageStates.VIEW"
+                    <app-seed-form [formData]="seedInfo"
+                                     [initialState]="!seedInfo ? pageStates.CREATE : pageStates.VIEW"
                                      (formSubmit)="plantsFormSubmit($event)"
-                    ></app-plants-form>
+                    ></app-seed-form>
                 </div>
             </div>
         </mat-card-content>

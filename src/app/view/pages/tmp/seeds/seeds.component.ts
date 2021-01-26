@@ -73,7 +73,7 @@ export class SeedsComponent implements OnInit {
             const {value: {SeedType}} = result;
             this.uiLoaderService.start();
             this.ono
-                .seedPut(SeedType, dirtyValues)
+                .putSeed(SeedType, dirtyValues)
                 .pipe(
                     switchMap(() => {
                       return this.ono.getSeeds();

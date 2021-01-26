@@ -3,7 +3,7 @@
         
         <ng-container *ngIf="loadingData === false">
 
-            <div class="filterbar">
+            <!-- <div class="filterbar">
                 <button (click)="showfilter = !showfilter">filter</button>
                 <div *ngIf="showfilter === true">
                     <div *ngFor="let item of filters | keyvalue">
@@ -12,7 +12,7 @@
                     <button (click)="print()">apply</button>
                 </div>
     
-            </div>
+            </div> -->
     
     
             <!-- SHOW PROCESSES IF PROCESSDATA IS !NULL -->
@@ -57,13 +57,8 @@
             </ng-container>
     
             <!-- SHOW SUGGESTION IF PROCESSDATA IS NULL -->
-            <ng-container *ngIf="processesData == null">
-                <div>
-                    There are no active processes.
-                </div>
-                <div>
-                    Let's go to  <button routerLink="/new-orders">ORDER'S PLANNING</button> to start a process o create a new one
-                </div>
+            <ng-container *ngIf="processesData == null && loadingData !== true">
+                <mat-spinner style="margin-left: 50%; transform: translateX(-50%); margin-top: 30vh"></mat-spinner>
             </ng-container>
 
         </ng-container>
@@ -255,7 +250,7 @@
                         <div class="table">
                             <div class="table-cell">
                                     <div class="icon" id="sampling"></div>
-                                    <div class="square-label">to External</div>
+                                    <div class="square-label">Sampling</div>
                             </div>
                         </div>
                     </div>
@@ -265,7 +260,7 @@
                         <div class="table">
                             <div class="table-cell">
                                     <div class="icon" id="window"></div>
-                                    <div class="square-label">to Window</div>
+                                    <div class="square-label">Window</div>
                             </div>
                         </div>
                     </div>

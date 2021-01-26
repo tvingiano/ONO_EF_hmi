@@ -25,8 +25,6 @@ import { Drawer } from '../model/configuration/drawer';
 import { SlotSimple } from '../model/configuration/slot-simple';
 import { IOrder } from '../model/orders/IOrder';
 import { IOrderInfo } from '../model/orders/orders-info';
-import { IRectangleEvents } from '@amcharts/amcharts4/core';
-import { PictorialStackedSeriesDataItem } from '@amcharts/amcharts4/charts';
 import { ISeed } from '../model/registries/seeds-info';
 
 @Injectable({
@@ -495,10 +493,22 @@ export class OnoApiService {
     /*
     * Modifies the seed
     * */
-    seedPut(SeedType: string, values: any): Observable<IResponse> {
+    putSeed(SeedType: string, values: any): Observable<IResponse> {
         return this.http.put<IResponse>(
             `${environment.server.seeds}/${SeedType}`,
             { ...values },
+            {
+                responseType: 'json'
+            }
+        );
+    }
+
+    /*
+    * DELETE seed
+    * */
+    deleteSeed(id: string): Observable<IResponse> {
+        return this.http.delete<IResponse>(
+            `${environment.server.seeds}/${id}`,
             {
                 responseType: 'json'
             }
@@ -666,6 +676,7 @@ export class OnoApiService {
             }
         );
     }
+
 
     /*
     * GET species

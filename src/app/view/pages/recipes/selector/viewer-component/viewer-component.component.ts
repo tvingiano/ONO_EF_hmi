@@ -39,6 +39,9 @@ export class ViewerComponentComponent implements OnInit {
     });
   }
 
+  /**
+   * used to place new random seeds into DB
+   */
   loadSeeds() {
 
     /**
@@ -65,8 +68,6 @@ export class ViewerComponentComponent implements OnInit {
 
     const adj = ['_stardust', '_ONO', '_Flower', '_of_Italy'];
 
-    this.getSeeds();
-    this.getSpecies();
 
     const newSeeds: ISeed[] = [];
 
@@ -76,10 +77,10 @@ export class ViewerComponentComponent implements OnInit {
           SeedType: ele.Specie + a,
           Specie: ele.Specie,
           NutritionalFact: {
-            Protein: rand(),
-            Fat: rand(),
-            Carbohydrate: rand(),
-            Calories: rand(),
+            Protein: parseFloat((rand() / 10).toFixed(0)),
+            Fat: parseFloat((rand() / 10).toFixed(0)),
+            Carbohydrate: parseFloat((rand() / 10).toFixed(0)),
+            Calories: parseFloat((rand() / 10).toFixed(0)),
           },
           Cost: {
             QuantityForDrawer: rand() * 100,
@@ -116,7 +117,15 @@ export class ViewerComponentComponent implements OnInit {
       });
     });
 
-    console.log('newSeeds => ', newSeeds);
+    console.log(newSeeds)
+
+    newSeeds.forEach(seme => {
+      this.api.postSeed(seme).subscribe(x=>{
+        console.log(seme,' => ## =>', x);
+      });
+    });
+    console.warn('COMPLETED')
+    this.api.getSeeds().subscribe(s=>{console.log('nuovi semi: ', s)});
   }
 
   loadSeed() {

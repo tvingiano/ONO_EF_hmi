@@ -236,6 +236,7 @@ import { StartProcessComponent } from './view/pages/process/start-process/start-
 import { UrlService } from './service/url.service';
 import { StepProgressComponent } from './view/pages/process/components/step-progress/step-progress.component';
 import { PrettyjsonPipe } from './pipes/prettyjson.pipe';
+import { SeedFormComponent } from './view/components/registry/seeds/seed-form/seed-form.component';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -410,6 +411,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         StartProcessComponent,
         StepProgressComponent,
         PrettyjsonPipe,
+        SeedFormComponent,
     ],
     imports: [
         MatRadioModule,
