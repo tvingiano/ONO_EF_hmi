@@ -83,12 +83,7 @@ export class ViewerComponentComponent implements OnInit {
             Calories: parseFloat((rand() / 10).toFixed(0)),
           },
           Cost: {
-            QuantityForDrawer: rand() * 100,
-            SingleSeedWeight: rand() / 100,
             GerminatedPercentage: rand(),
-            WeightForDrawer: rand() / 10,
-            WaterForRefill: 20,
-            EnergyForLightHour: rand() * 10,
             SeedCost: rand() / 100,
           },
           Quality: {

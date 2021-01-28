@@ -3,6 +3,7 @@ import {FarmingsInfo} from '../../../../model/registries/farmings-info';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import {TableItem} from '../../../../model/table-item';
+import { ISeed } from 'src/app/model/registries/seeds-info';
 
 @Component({
     selector: 'app-items-table',
@@ -24,7 +25,7 @@ export class ItemsTableComponent implements OnInit {
     @Output() deleteClick: EventEmitter<any> = new EventEmitter<any>();
 
     /* inner params */
-    private dataSource: MatTableDataSource<FarmingsInfo> = new MatTableDataSource<FarmingsInfo>();
+    private dataSource: MatTableDataSource<ISeed> = new MatTableDataSource<ISeed>();
     @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
     constructor() {

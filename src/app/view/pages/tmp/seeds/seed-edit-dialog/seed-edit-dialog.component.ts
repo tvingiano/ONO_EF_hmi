@@ -29,7 +29,6 @@ export class SeedEditDialogComponent implements OnInit {
                 SeedType: [this.data.seedInfo.SeedType, Validators.required],
                 Specie: [this.data.seedInfo.Specie, Validators.required],
                 GerminatedPercentage: [this.data.seedInfo.Cost.GerminatedPercentage, Validators.required],
-                WeightForDrawer: [this.data.seedInfo.Cost.WeightForDrawer, Validators.required],
                 Contingency: [this.data.seedInfo.Contingency, Validators.required],
                 Owner: [this.data.seedInfo.Owner, Validators.required],
                 Description: [this.data.seedInfo.Description, Validators.required],

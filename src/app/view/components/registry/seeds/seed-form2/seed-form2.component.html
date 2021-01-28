@@ -1,0 +1,20 @@
+<mat-accordion [formGroup]="seedForm">
+    
+    <mat-expansion-panel *ngFor="let item of sections; index as i;" [formGroupName]='sections[i]'>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{sections[i]}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+    
+        <mat-form-field *ngFor="let field of sf[sections[i]]">
+          <mat-label>{{field}}</mat-label>
+          <input matInput [formControlName]="field">
+        </mat-form-field>
+
+
+      </mat-expansion-panel>
+
+</mat-accordion>
+<button class="btn btn-success">SAVE</button>
+<button class="btn btn-warning">CANCEL</button>

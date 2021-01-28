@@ -6,6 +6,8 @@ import {PageState} from '../../../../../model/page-state.enum';
 import {FormGroup} from '@angular/forms';
 import {UtilsService} from '../../../../../service/helper/utils.service';
 import { ISeed } from 'src/app/model/registries/seeds-info';
+import { MatDialog } from '@angular/material';
+import { SeedForm2Component } from 'src/app/view/components/registry/seeds/seed-form2/seed-form2.component';
 
 @Component({
     selector: 'app-plants-info',
@@ -28,7 +30,8 @@ export class PlantsInfoComponent implements OnInit {
 
     constructor(
         private onoApiService: OnoApiService,
-        private utilsService: UtilsService
+        private utilsService: UtilsService,
+        private dialog: MatDialog
     ) {
     }
 
@@ -78,13 +81,17 @@ export class PlantsInfoComponent implements OnInit {
             .deleteSeed(info.SeedType)
             .subscribe(
                 value => {
-                    this.utilsService.hideLoader();
                     this.updateSeedsInfoList();
                 }
             );
     }
 
-    plantsFormSubmit(formGroup: FormGroup) {
+    editClick(event) {
+
+        const dialogRef = this.dialog.open(SeedForm2Component, {data: event});
+    }
+
+    seedsFormSubmit(formGroup: FormGroup) {
         this.seedInfo ? this.onEditFromSubmit(formGroup) : this.onCreateFromSubmit(formGroup);
     }
 

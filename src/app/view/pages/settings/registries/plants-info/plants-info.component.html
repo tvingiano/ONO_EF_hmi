@@ -2,27 +2,15 @@
     <mat-card>
         <mat-card-content>
             <div class="row w-100">
-                <div class="col-md-7">
-                    <!-- show spinner -->
-                    <div class="d-flex justify-content-center mt-5" *ngIf="!seedsList" >
-                        <mat-spinner diameter="50"></mat-spinner>
-                    </div>
-                    <app-items-table *ngIf="seedsList"
-                                     [title]="'label.PlantsList' | translate"
-                                     [initialData]="seedsList"
-                                     [displayedColumns]="displayedColumns"
-                                     [actionButtons]="actionButtons"
-                                     (createClick)="createClick()"
-                                     (editClick)="plantsInfo=$event"
-                                     (deleteClick)="deleteClick($event)"
-                    ></app-items-table>
-                </div>
-                <div class="col-md-5 no-padding">
-                    <app-seed-form [formData]="seedInfo"
-                                     [initialState]="!seedInfo ? pageStates.CREATE : pageStates.VIEW"
-                                     (formSubmit)="plantsFormSubmit($event)"
-                    ></app-seed-form>
-                </div>
+                <app-items-table *ngIf="seedsList"
+                                    [title]="'label.PlantsList' | translate"
+                                    [initialData]="seedsList"
+                                    [displayedColumns]="displayedColumns"
+                                    [actionButtons]="actionButtons"
+                                    (createClick)="createClick()"
+                                    (editClick)="editClick($event)"
+                                    (deleteClick)="deleteClick($event)"
+                ></app-items-table>
             </div>
         </mat-card-content>
     </mat-card>

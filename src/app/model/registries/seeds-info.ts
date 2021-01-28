@@ -1,6 +1,6 @@
 import { BaseInfo } from "../BaseInfo";
 
-export interface ISeed extends BaseInfo {
+export class ISeed extends BaseInfo {
     SeedType: string;
     Specie: string;
     NutritionalFact: ISeedNutritionals;
@@ -10,24 +10,19 @@ export interface ISeed extends BaseInfo {
     Vendor: string;
 }
 
-export interface ISeedNutritionals {
+export class ISeedNutritionals {
     Protein: number;
     Fat: number;
     Carbohydrate: number;
     Calories: number;
 }
 
-export interface ISeedCost {
-    QuantityForDrawer: number;
-    SingleSeedWeight: number;
+export class ISeedCost {
     GerminatedPercentage: number;
-    WeightForDrawer: number;
-    WaterForRefill: number;
-    EnergyForLightHour: number;
     SeedCost: number;
 }
 
-export interface ISeedQuality {
+export class ISeedQuality {
     Taste: number;
     Color: number;
     Fragrance: number;
@@ -40,7 +35,7 @@ export interface ISeedQuality {
     WeightCurve: ICurve[];
 };
 
-export interface ICurve {
+export class ICurve {
     Day: number;
     Value: number;
 }

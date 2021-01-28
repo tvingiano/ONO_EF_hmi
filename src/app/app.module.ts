@@ -237,6 +237,8 @@ import { UrlService } from './service/url.service';
 import { StepProgressComponent } from './view/pages/process/components/step-progress/step-progress.component';
 import { PrettyjsonPipe } from './pipes/prettyjson.pipe';
 import { SeedFormComponent } from './view/components/registry/seeds/seed-form/seed-form.component';
+import { SeedForm2Component } from './view/components/registry/seeds/seed-form2/seed-form2.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -412,6 +414,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         StepProgressComponent,
         PrettyjsonPipe,
         SeedFormComponent,
+        SeedForm2Component,
     ],
     imports: [
         MatRadioModule,
@@ -472,7 +475,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatDialogModule,
         MatSelectModule,
         MatSlideToggleModule,
-        MatButtonToggleModule
+        MatButtonToggleModule,
+        MatExpansionModule,
     ],
     providers: [
         RefillComponent,
@@ -572,6 +576,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         Spray,
         Suction,
         CorrectSolution,
+        SeedForm2Component,
     ],
     bootstrap: [AppComponent]
 })
