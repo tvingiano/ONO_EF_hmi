@@ -74,15 +74,15 @@ export class StartProcessComponent implements OnInit {
 
 
     // check for recipe firstrefill info
-    this.refill = this.api.getFullRecipes().then(res => {
+    this.api.getFullRecipes().then(res => {
       const f = res.find(x => x.Recipename === this.processData.Recipe);
-      return f.FirstRefill;
+      this.refill =  f.FirstRefill;
     });
 
     // get process's tray ID that needs to get moving
-    this.trayList = this.api.getFullDrawers().subscribe(x => {
+    this.api.getFullDrawers().subscribe(x => {
       console.log('full drawers: ', x);
-      return x;
+      this.trayList = x;
     });
 
   }
@@ -100,22 +100,27 @@ export class StartProcessComponent implements OnInit {
     if (!this.refill) {
       switch (this.currentState) {
         case 0: this.toExternal(data.DrawerID); break;
-        case 1: break;
+        case 1: this.increment(); break;
         case 2: this.toHome(); break;
         case 3: this.getNextProcess(); break;
         case 4: break;
       }
     } else {
       switch (this.currentState) {
-        case 0: this.toExternal(data.DrawerID);
+        case 0:
+          this.toExternal(data.DrawerID);
           break;
-        case 1: this.makeRefill()
+        case 1:
+          this.makeRefill();
           break;
-        case 2: this.toHome();
+        case 2:
+          this.toHome();
           break;
         case 3:
+          this.increment();
           break;
-        case 4: this.getNextProcess();
+        case 4:
+          this.getNextProcess();
           break;
       }
     }
@@ -134,7 +139,11 @@ export class StartProcessComponent implements OnInit {
    * @param trayID - Tray ID to move to External
    */
   toExternal(trayID: number) {
-    const val = Math.random() * 10 * 1000;
+
+
+    console.log('moving to external');
+
+    const val = Math.random() * 5  * 1000;
     this.openSnackbar(val, `We\'re taking the tray to you, pls wait ${(val / 1000).toPrecision(2)} seconds`);
     this.movingDrawer = true;
     setTimeout(_ => {
@@ -146,7 +155,10 @@ export class StartProcessComponent implements OnInit {
    * It's used to make firstRefill before seed the tray
    */
   makeRefill(): void {
-    const val = Math.random() * 10 * 1000;
+
+    console.log('going in refill');
+
+    const val = Math.random() * 5  * 1000;
     this.openSnackbar(val, `We\'re moistening the soil, pls wait ${(val / 1000).toPrecision(2)} seconds`);
     this.movingDrawer = true;
     setTimeout(_ => {
@@ -158,7 +170,10 @@ export class StartProcessComponent implements OnInit {
    * It's used to move the newly seed tray in home
    */
   toHome(): void {
-    const val = Math.random() * 10 * 1000;
+
+    console.log('going home');
+
+    const val = Math.random() * 5  * 1000;
     this.openSnackbar(val, `We\'re moving the tray at home, pls wait ${(val / 1000).toPrecision(2)} seconds`);
     this.movingDrawer = true;
     setTimeout(_ => {
@@ -170,7 +185,10 @@ export class StartProcessComponent implements OnInit {
    * used to go to next "to-start" process
    */
   getNextProcess() {
-    const val = Math.random() * 10 * 1000;
+
+    console.log('getting new process');
+
+    const val = Math.random() * 5  * 1000;
     this.openSnackbar(val, `We\'re preparing next process, pls wait ${(val / 1000).toPrecision(2)} seconds`);
     this.movingDrawer = true;
     setTimeout(_ => {
@@ -179,10 +197,19 @@ export class StartProcessComponent implements OnInit {
   }
 
   openSnackbar(time, msg) {
-    this.snack.open(msg, '', { duration: time});
+    this.snack.open(
+      msg,
+      '',
+      {
+        duration: time,
+        verticalPosition: 'bottom',
+        horizontalPosition: 'end',
+      });
     setTimeout(_ => {
       this.snack.open('COMPLETATO', '', {
-        panelClass: 'successSnackBar'
+        panelClass: 'successSnackBar',
+        verticalPosition: 'bottom',
+        horizontalPosition: 'end',
       });
       this.increment();
     }, time + 500);

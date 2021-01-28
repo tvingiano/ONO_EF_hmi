@@ -40,7 +40,7 @@ export class SeedFormComponent extends FormPageComponent implements OnInit, OnCh
 
     ngOnChanges({formData: {currentValue, firstChange}}: SimpleChanges): void {
         if (this.componentState === PageState.CREATE) {
-            this.formGroup ? this.formGroup.reset() : this.createFormGroup(new ISeed());
+            // this.formGroup ? this.formGroup.reset() : this.createFormGroup(new ISeed());
         } else {
             if (!this.formGroup && currentValue) {
                 this.createFormGroup(currentValue);

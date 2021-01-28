@@ -1,6 +1,6 @@
 import { BaseInfo } from "../BaseInfo";
 
-export interface ISeed{
+export interface ISeed extends BaseInfo {
     SeedType: string;
     Specie: string;
     NutritionalFact: ISeedNutritionals;
@@ -8,11 +8,6 @@ export interface ISeed{
     Quality: ISeedQuality;
     Contingency: number;
     Vendor: string;
-    Owner: string;
-    Description: string;
-    Note: string;
-    Tag: string;
-    Timestamp: string;
 }
 
 export interface ISeedNutritionals {

@@ -12,6 +12,9 @@
 
     <div class="footer">
         <div class="state">{{this.currentState}} / {{this.processData.LoadPhases.length}} - refill: {{this.refill ? 'yes' : 'no'}}</div>
-        <button class="btn btn-success" (click)="next()" [disabled]="this.movingDrawer === true">next step</button>
+        
+        <div class="button" [ngClass]="{'loading': movingDrawer === true}" [innerHTML]="this.movingDrawer === false ? 'ciao' : ''">
+            <mat-spinner *ngIf="this.movingDrawer === true"></mat-spinner>
+        </div>
     </div>
 </div>

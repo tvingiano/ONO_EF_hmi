@@ -24,33 +24,35 @@
         (click)="toggleTab(x.id)"
         [ngClass]="isActiveTab(x.id) ? 'activeTab' : ''"
         [ngStyle]="{'border-color': x.color}"
+        *ngIf="canAccessRoute(user.Profiles, x.role)"
         >
-
-        <div class="title-wrapper">
-            <div class="title">{{x.title}}</div>
-            <div class="icon">
-                <mat-icon>{{x.icon}}</mat-icon>
-            </div>
-        </div>
+            <div class="title-wrapper">
+                <div class="title">{{x.title}}</div>
+                <div class="icon">
+                    <mat-icon>{{x.icon}}</mat-icon>
+                </div>
+            </div>       
 
         </div>
 
         <ng-container *ngIf="isActiveTab(x.id)">
             <ng-container *ngFor="let sub of x.sub">
-                <div class="menu-item-secondary"
-                [routerLink]="sub.link !== '' ? [sub.link] : []"
-                (click)="setActiveSub(sub.id)"
-                [ngClass]="isActiveSub(sub.id) ? 'activeSub' : ''"
-                @CollapseAnimation>
-    
-                    <div class="title-wrapper">
-                        <div class="title">{{sub.title}}</div>
-                        <div class="icon">
-                            <mat-icon>{{sub.icon}}</mat-icon>
-                        </div>
+                <ng-container *ngIf="canAccessRoute(user.Profiles, sub.role)">
+                    <div class="menu-item-secondary"
+                    [routerLink]="sub.link !== '' ? [sub.link] : []"
+                    (click)="setActiveSub(sub.id)"
+                    [ngClass]="isActiveSub(sub.id) ? 'activeSub' : ''"
+                    @CollapseAnimation
+                    >
+                        <div class="title-wrapper">
+                            <div class="title">{{sub.title}}</div>
+                            <div class="icon">
+                                <mat-icon>{{sub.icon}}</mat-icon>
+                            </div>
+                        </div>                    
                     </div>
-                    
-                </div>
+                </ng-container>
+                
             </ng-container>
         </ng-container>
         

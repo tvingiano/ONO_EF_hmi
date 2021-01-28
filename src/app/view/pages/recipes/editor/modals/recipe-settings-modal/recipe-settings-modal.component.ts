@@ -36,7 +36,6 @@ export class RecipeSettingsModalComponent implements OnInit {
     }
     this.sortedType.sort();
 
-    // console.log(this.seeds);
 
     this.recipeSettingsForm = new FormGroup({
       Recipename: new FormControl(this.dataService.finalJson.Recipename),
@@ -85,22 +84,21 @@ export class RecipeSettingsModalComponent implements OnInit {
     this.recipeDialogRef.close(false);
   }
 
-  test() {
-    console.log(this.dataService.finalJson.FirstRefill)
-  }
 
-  FirstRefillValid(){
-    console.clear()
-    if(this.recipeSettingsForm.status === 'INVALID') {
-      console.log('INVALID');
+  FirstRefillValid() {
+
+    if (this.recipeSettingsForm.status === 'INVALID') {
+
       return true;
 
     } else {
-      console.log('VALID');
-      console.log(this.recipeSettingsForm.value.FRsolution, this.dataService.finalJson.FirstRefill.Quantity, this.recipeSettingsForm.value.FRtype);
-      
-      if(this.dataService.finalJson.FirstRefill.Active === true) {
-        if(this.recipeSettingsForm.value.FRsolution === null || !this.dataService.finalJson.FirstRefill.Quantity || this.recipeSettingsForm.value.FRtype === null) {
+
+      if (this.dataService.finalJson.FirstRefill.Active === true) {
+        if (
+          this.recipeSettingsForm.value.FRsolution === null ||
+          !this.dataService.finalJson.FirstRefill.Quantity ||
+          this.recipeSettingsForm.value.FRtype === null
+          ) {
           return true;
         } else {
           return false;

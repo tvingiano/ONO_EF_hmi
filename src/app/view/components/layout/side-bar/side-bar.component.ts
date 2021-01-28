@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import {User} from '../../../../model/user';
 import {NgxUiLoaderService} from 'ngx-ui-loader';
 import {CurrentUserService} from 'src/app/service/current-user.service';
@@ -46,33 +46,40 @@ export class SideBarComponent implements OnInit {
             link: '/',
             icon: 'dashboard',
             title: 'Dashboards',
+            role: ['Admin', 'Agronomist'],
             color: '#a434eb',
             sub: [
                 {
                     link:  '/',
                     icon:  'home',
                     title: 'Main',
+                    role: ['Admin', 'Agronomist'],
                 },
                 {
                     link:  '/consumptiondashboard',
                     icon:  'track_changes',
                     title: 'Consumption',
+                    role: ['Admin'],
                 }, {
                     link: '/alarms',
                     icon:  'build',
                     title: 'Maintainance',
+                    role: ['Admin'],
                 }, {
                     link: '/runningprocesses',
                     icon:  'flare',
                     title: 'Processes',
+                    role: ['Admin'],
                 }, {
                     link: '/completeddashboard',
                     icon:  'business',
                     title: 'History',
+                    role: ['Admin', 'Agronomist'],
                 }, {
                     link: '/serverstatus',
                     icon:  'extension',
                     title: 'Server',
+                    role: ['Admin'],
                 }
             ]
         }, {
@@ -80,14 +87,17 @@ export class SideBarComponent implements OnInit {
             icon:  'spa',
             title: 'Processes',
             color: '#eb3446',
+            role: ['Admin', 'Agronomist'],
             sub: [
                 {   link: '/processes/manage',
                     icon:  'track_changes',
                     title: 'Running',
+                    role: ['Admin', 'Agronomist'],
                 }, {
                     link: '/processes/new',
                     icon:  'add_circle_outline',
                     title: 'New',
+                    role: ['Admin'],
                 },
             ]
         }, {
@@ -95,18 +105,22 @@ export class SideBarComponent implements OnInit {
             icon:  'eco',
             title: 'Experiments',
             color: '#eba234',
+            role: ['Admin', 'Agronomist'],
             sub: [
                 {   link: '/processes/survey',
                     icon:  'business',
                     title: 'New',
+                    role: ['Admin', 'Agronomist'],
                 }, {
                     link: '/processes/details',
                     icon:  'extension',
                     title: 'History',
+                    role: ['Admin', 'Agronomist'],
                 }, {
                     link: '/processes/todo',
                     icon:  'calendar_today',
                     title: 'Calendar',
+                    role: ['Admin', 'Agronomist'],
                 }
             ]
 
@@ -115,16 +129,19 @@ export class SideBarComponent implements OnInit {
             icon:  'book',
             title: 'Recipes',
             color: '#ebe834',
+            role: ['Admin', 'Agronomist'],
             sub: [
                 {
                     link: '/recipes/selector',
                     icon:  'book',
                     title: 'List',
+                    role: ['Admin', 'Agronomist'],
                 },
                 {
                     link: '/recipes/editor',
                     icon:  'editor',
                     title: 'Editor',
+                    role: ['Admin', 'Agronomist'],
                 }
             ]
         }, {
@@ -132,35 +149,47 @@ export class SideBarComponent implements OnInit {
             icon:  'filter_frames',
             title: 'Orders',
             color: '#7aeb34',
+            role: ['Admin'],
             sub: [
                 {
                     link: '/new-orders',
                     icon:  'fingerprint',
                     title: 'test new',
-                },
+                    role: ['Admin'],
+                }, {
+                    link: '/',              // <--- needs to be done: easy interface for agronomists
+                    icon: 'fingerprint',
+                    title: 'orders ez',
+                    role: ['Admin', 'Agronomist'],
+                }
             ],
         }, {
             link: '',
             icon:  'settings_applications',
             title: 'Configuration',
             color: '#34ebd0',
+            role: ['Admin'],
             sub: [
                 {
                     link: '/configuration/led',
                     icon:  'highlight',
                     title: 'LEDs',
+                    role: ['Admin'],
                 }, {
                     link: '/configuration/air',
                     icon:  'ac_unit',
                     title: 'Ac',
+                    role: ['Admin'],
                 }, {
                     link: '/configuration/drawers',
                     icon:  'move_to_inbox',
                     title: 'Drawers',
+                    role: ['Admin'],
                 }, {
                     link: '/configuration/shutter',
                     icon:  'line_weight',
                     title: 'Shutters',
+                    role: ['Admin'],
                 }
             ]
         }, {
@@ -168,19 +197,23 @@ export class SideBarComponent implements OnInit {
             icon:  'flare',
             title: 'Test',
             color: '#34b1eb',
+            role: ['Admin'],
             sub: [
                 {
                     link: '/test/stress',
                     icon:  'gavel',
                     title: 'Stress',
+                    role: ['Admin'],
                 }, {
                     link: '/test/refill',
                     icon:  'local_gas_station',
                     title: 'Refill',
+                    role: ['Admin'],
                 }, {
                     link: '/test/simple',
                     icon:  'open_with',
                     title: 'Movements',
+                    role: ['Admin'],
                 }
             ]
         }, {
@@ -188,19 +221,23 @@ export class SideBarComponent implements OnInit {
             icon:  'apps',
             title: 'Settings',
             color: '#3446eb',
+            role: ['Admin', 'Agronomist'],
             sub: [
                 {
                     link: '/settings/system',
                     icon:  'grid_on',
                     title: 'System',
+                    role: ['Admin'],
                 }, {
                     link: '/settings/registries',
                     icon:  'account_tree',
                     title: 'Registries',
+                    role: ['Admin', 'Agronomist'],
                 }, {
                     link: '/settings/users',
                     icon:  'people_alt',
                     title: 'Profiles',
+                    role: ['Admin'],
                 }
             ]
         },
@@ -210,7 +247,7 @@ export class SideBarComponent implements OnInit {
         //     title: 'Demo',
         //     color: '#3C0D0D',
         //     sub: []
-        // }, 
+        // },
     ];
 
 
@@ -220,11 +257,12 @@ export class SideBarComponent implements OnInit {
         private ngxService: NgxUiLoaderService,
         private ono: OnoApiService,
     ) {
+        this.user = this.currentUserService.currentUser;
     }
 
     ngOnInit() {
 
-        this.user = this.currentUserService.currentUser;
+        
 
         let i = 0;
 
@@ -294,4 +332,18 @@ export class SideBarComponent implements OnInit {
         this.ono.images().subscribe(x => {
         });
     }
+
+    canAccessRoute(userProfiles, authorizedProfiles) {
+
+
+        let access = false;
+
+        userProfiles.forEach(p => {
+            if (authorizedProfiles.includes(p)) {
+                access = true;
+            }
+        });
+        return access;
+    }
+
 }
