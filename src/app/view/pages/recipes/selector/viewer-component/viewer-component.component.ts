@@ -122,6 +122,7 @@ export class ViewerComponentComponent implements OnInit {
     console.warn('COMPLETED')
     this.api.getSeeds().subscribe(s=>{console.log('nuovi semi: ', s)});
   }
+  
 
   loadSeed() {
 

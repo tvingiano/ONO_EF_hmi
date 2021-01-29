@@ -1,20 +1,146 @@
 <mat-accordion [formGroup]="seedForm">
     
-    <mat-expansion-panel *ngFor="let item of sections; index as i;" [formGroupName]='sections[i]'>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{sections[i]}}
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-    
-        <mat-form-field *ngFor="let field of sf[sections[i]]">
-          <mat-label>{{field}}</mat-label>
-          <input matInput [formControlName]="field">
-        </mat-form-field>
+  <!-- BASEINFO COLLAPSABLE FORM -->
+  <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title class="title">
+          Base Infos
+        </mat-panel-title>
+      </mat-expansion-panel-header>
 
+      <mat-form-field >
+        <mat-label>Specie</mat-label>
+        <mat-select formControlName="Specie">
+          <mat-option *ngFor="let specie of specieList" [value]="specie.Specie">{{specie.Specie}}</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-      </mat-expansion-panel>
+      <mat-form-field>
+        <mat-label>Seed Type</mat-label>
+        <input matInput list="seedList"  formControlName="SeedType"/>
+        <datalist id="seedList">
+          <option *ngFor="let s of seedList" [value]="s.SeedType">{{s.SeedType}}</option>
+        </datalist>
+      </mat-form-field>
 
+      <mat-form-field >
+        <mat-label>Contingency</mat-label>
+        <input type="number" matInput formControlName="Contingency">
+      </mat-form-field>
+
+      <mat-form-field >
+        <mat-label>Vendor</mat-label>
+        <input matInput formControlName="Vendor">
+      </mat-form-field>
+
+      <mat-form-field >
+        <mat-label>Description</mat-label>
+        <textarea rows="3" matInput formControlName="Description"></textarea>
+      </mat-form-field>
+
+      <mat-form-field >
+        <mat-label>Note</mat-label>
+        <input matInput formControlName="Note">
+      </mat-form-field>
+
+      <mat-form-field >
+        <mat-label>Tag</mat-label>
+        <input matInput formControlName="Tag">
+      </mat-form-field>
+
+    </mat-expansion-panel>
+
+  <!-- NUTRITIONALFACT COLLAPSABLE FORM -->
+  <mat-expansion-panel formGroupName='NutritionalFact'>
+    <mat-expansion-panel-header>
+      <mat-panel-title class="title">
+        Nutritional Fact
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-form-field >
+      <mat-label>Protein</mat-label>
+      <input type="number" matInput formControlName="Protein">
+    </mat-form-field>
+    <mat-form-field >
+      <mat-label>Fat</mat-label>
+      <input type="number" matInput formControlName="Fat">
+    </mat-form-field>
+    <mat-form-field >
+      <mat-label>Carbohydrate</mat-label>
+      <input type="number" matInput formControlName="Carbohydrate">
+    </mat-form-field>
+    <mat-form-field >
+      <mat-label>Calories</mat-label>
+      <input type="number" matInput formControlName="Calories">
+    </mat-form-field>
+
+  </mat-expansion-panel>
+
+  <!-- COST COLLAPSABLE FORM -->
+  <mat-expansion-panel formGroupName='Cost'>
+    <mat-expansion-panel-header>
+      <mat-panel-title class="title">
+        Costs
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-form-field >
+      <mat-label>Germinated Percentage</mat-label>
+      <input type="number" matInput formControlName="GerminatedPercentage">
+    </mat-form-field>
+    <mat-form-field >
+      <mat-label>Seed Cost</mat-label>
+      <input type="number" matInput formControlName="SeedCost">
+    </mat-form-field>
+  </mat-expansion-panel>
+
+  <!-- QUALITY COLLAPSABLE FORM -->
+  <mat-expansion-panel formGroupName='Quality'>
+    <mat-expansion-panel-header>
+      <mat-panel-title class="title">
+        QUALITY
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-form-field >
+      <mat-label>Taste</mat-label>
+      <input type="number" matInput formControlName="Taste">
+    </mat-form-field>
+    <mat-form-field >
+      <mat-label>Color</mat-label>
+      <input type="number" matInput formControlName="Color">
+    </mat-form-field>
+    <mat-form-field >
+      <mat-label>Fragrance</mat-label>
+      <input type="number" matInput formControlName="Fragrance">
+    </mat-form-field>
+    <mat-form-field >
+      <mat-label>Crunchiness</mat-label>
+      <input type="number" matInput formControlName="Crunchiness">
+    </mat-form-field>
+    <mat-form-field >
+      <mat-label>Aesthetics</mat-label>
+      <input type="number" matInput formControlName="Aesthetics">
+    </mat-form-field>
+    <mat-form-field >
+      <mat-label>Mortality</mat-label>
+      <input type="number" matInput formControlName="Mortality">
+    </mat-form-field>
+    <mat-form-field >
+      <mat-label>Growth Level</mat-label>
+      <input type="number" matInput formControlName="GrowthLevel">
+    </mat-form-field>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title class="title">
+        CURVES
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
 </mat-accordion>
-<button class="btn btn-success">SAVE</button>
+<button class="btn btn-success" (click)="submit()" [disabled]="seedForm.status === 'INVALID'">SAVE</button>
 <button class="btn btn-warning">CANCEL</button>
+<button class="btn btn-secondary" (click)="check()">check</button>

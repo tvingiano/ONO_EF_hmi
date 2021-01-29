@@ -73,6 +73,13 @@ export class PlantsInfoComponent implements OnInit {
 
     createClick() {
         this.seedInfo = null;
+        const dialogRef = this.dialog.open(
+            SeedForm2Component,
+            {
+                data: {seed: this.seedInfo, type: 'post'},
+                panelClass: 'custom-dialog-component-400'
+            }
+        );
     }
 
     deleteClick(info: ISeed) {
@@ -88,7 +95,12 @@ export class PlantsInfoComponent implements OnInit {
 
     editClick(event) {
 
-        const dialogRef = this.dialog.open(SeedForm2Component, {data: event});
+        const dialogRef = this.dialog.open(
+            SeedForm2Component,
+            {
+                data: {seed: event, type: 'put'},
+                panelClass: 'custom-dialog-component-400'}
+            );
     }
 
     seedsFormSubmit(formGroup: FormGroup) {

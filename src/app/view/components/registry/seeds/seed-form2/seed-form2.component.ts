@@ -1,7 +1,9 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { ISeed } from 'src/app/model/registries/seeds-info';
+import { SpeciesInfo } from 'src/app/model/registries/species-info';
+import { OnoApiService } from 'src/app/service/ono-api.service';
 
 @Component({
   selector: 'app-seed-form2',
@@ -12,92 +14,117 @@ export class SeedForm2Component implements OnInit {
 
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: ISeed,
+    private api: OnoApiService,
+    private dialogRef: MatDialogRef<SeedForm2Component>,
+    @Inject(MAT_DIALOG_DATA) public importData,
     private fb: FormBuilder,
+    private snack: MatSnackBar
   ) {
+    this.data = importData.seed;
   }
 
-  sections = ['baseInfo', 'NutritionalFact', 'Cost', 'Quality', 'Growth'];
+  data: ISeed;
+  seedForm;
 
-  sf = {
-    baseInfo: [
-      'SeedType',
-      'Specie',
-      'Contingency',
-      'Vendor',
-      'Description',
-      'Note',
-      'Tag',
-    ],
-    NutritionalFact: [
-      'Protein',
-      'Fat',
-      'Carbohydrate',
-      'Calories',
-    ],
-    Cost: [
-      'GerminatedPercentage',
-      'SeedCost',
-    ],
-    Quality: [
-        'Taste',
-        'Color',
-        'Fragrance',
-        'Crunchiness',
-        'Aesthetics',
-        'Mortality',
-        'GrowthLevel',
-    ],
-    Growth: [
-      'HeightCurve',
-      'AreaCurve',
-      'WeightCurve'
-    ]
-  };
+  seedList: ISeed[] = [];
+  specieList: SpeciesInfo[] = [];
 
-seedForm = this.fb.group({
-    baseInfo: this.fb.group({
-      SeedType:     [this.data.SeedType, [Validators.maxLength(14), Validators.required]],
-      Specie:       [this.data.Specie, [Validators.maxLength(14), Validators.required]],
-      Contingency:  [this.data.Contingency, [Validators.min(0), Validators.required]],
-      Vendor:       [this.data.Vendor, [Validators.maxLength(14), Validators.required]],
-      Description:  [this.data.Description],
-      Note:         [this.data.Note],
-      Tag:          [this.data.Tag]
-    }),
-    NutritionalFact: this.fb.group([{
-      Protein :     [this.data.NutritionalFact.Protein, [Validators.min(0), Validators.required]],
-      Fat :         [this.data.NutritionalFact.Fat, [Validators.min(0), Validators.required]],
-      Carbohydrate: [this.data.NutritionalFact.Carbohydrate, [Validators.min(0), Validators.required]],
-      Calories:     [this.data.NutritionalFact.Calories, [Validators.min(0), Validators.required]],
-    }]),
-    Cost: this.fb.group({
-      GerminatedPercentage :  [this.data.Cost.GerminatedPercentage, [Validators.min(0), Validators.max(100), Validators.required]],
-      SeedCost :              [this.data.Cost.SeedCost, [Validators.min(0), Validators.required]],
-    }),
-    Quality: this.fb.group({
-      Taste:        [this.data.Quality.Taste, [Validators.min(0), Validators.max(10), Validators.required]],
-      Color:        [this.data.Quality.Color, [Validators.min(0), Validators.max(10), Validators.required]],
-      Fragrance:    [this.data.Quality.Fragrance, [Validators.min(0), Validators.max(10), Validators.required]],
-      Crunchiness:  [this.data.Quality.Crunchiness, [Validators.min(0), Validators.max(10), Validators.required]],
-      Aesthetics:   [this.data.Quality.Aesthetics, [Validators.min(0), Validators.max(10), Validators.required]],
-      Mortality:    [this.data.Quality.Mortality, [Validators.min(0), Validators.max(10), Validators.required]],
-      GrowthLevel:  [this.data.Quality.GrowthLevel, [Validators.min(0), Validators.max(10), Validators.required]],
-    }),
-    Growth: this.fb.group({
-      HeightCurve: this.fb.group({
-        Value: this.fb.array(['', Validators.min(0)])
+  ngOnInit() {
+    console.log(this.importData);
+    console.log(this.data);
+
+    this.getData();
+
+    this.seedForm = this.fb.group({
+      SeedType:     [this.getFormFieldValue('SeedType'), [Validators.required]],
+      Specie:       [this.getFormFieldValue('Specie'), [Validators.maxLength(14), Validators.required]],
+      Contingency:  [this.getFormFieldValue('Contingency'), [Validators.min(0), Validators.required]],
+      Vendor:       [this.getFormFieldValue('Vendor'), [Validators.maxLength(14), Validators.required]],
+      Description:  [this.getFormFieldValue('Description')],
+      Note:         [this.getFormFieldValue('Note')],
+      Tag:          [this.getFormFieldValue('Tag')],
+      Cost: this.fb.group({
+        GerminatedPercentage :  [
+          this.getFormFieldValue('Cost', 'GerminatedPercentage'),
+          [Validators.min(0), Validators.max(100), Validators.required]
+        ],
+        SeedCost :              [this.getFormFieldValue('Cost', 'SeedCost'), [Validators.min(0), Validators.required]],
       }),
-      AreaCurve: this.fb.group({
-        Value: this.fb.array(['', Validators.min(0)])
+      Quality: this.fb.group({
+        Taste:        [this.getFormFieldValue('Quality', 'Taste'), [Validators.min(0), Validators.max(10), Validators.required]],
+        Color:        [this.getFormFieldValue('Quality', 'Color'), [Validators.min(0), Validators.max(10), Validators.required]],
+        Fragrance:    [this.getFormFieldValue('Quality', 'Fragrance'), [Validators.min(0), Validators.max(10), Validators.required]],
+        Crunchiness:  [this.getFormFieldValue('Quality', 'Crunchiness'), [Validators.min(0), Validators.max(10), Validators.required]],
+        Aesthetics:   [this.getFormFieldValue('Quality', 'Aesthetics'), [Validators.min(0), Validators.max(10), Validators.required]],
+        Mortality:    [this.getFormFieldValue('Quality', 'Mortality'), [Validators.min(0), Validators.max(10), Validators.required]],
+        GrowthLevel:  [this.getFormFieldValue('Quality', 'GrowthLevel'), [Validators.min(0), Validators.max(10), Validators.required]],
       }),
-      WeightCurve: this.fb.group({
-        Value: this.fb.array(['', Validators.min(0)])
-      })
-    }),
-  });
+      NutritionalFact: this.fb.group({
+        Protein :     [this.getFormFieldValue('NutritionalFact', 'Protein'), [Validators.min(0), Validators.required]],
+        Fat :         [this.getFormFieldValue('NutritionalFact', 'Fat'), [Validators.min(0), Validators.required]],
+        Carbohydrate: [this.getFormFieldValue('NutritionalFact', 'Carbohydrate'), [Validators.min(0), Validators.required]],
+        Calories:     [this.getFormFieldValue('NutritionalFact', 'Calories'), [Validators.min(0), Validators.required]],
+      }),
+    });
+  }
 
-ngOnInit() {
+  getFormFieldValue(cat, field?) {
+    let res;
+    if (this.data) {
+      const ginkgo = this.data[cat];
+      
+      if (field) {
+        res = ginkgo[field];
+      } else {
+        res = ginkgo;
+      }
+    } else {
+      res = undefined;
+    }
+
+    console.log(cat + '.' + field + ' = ', res);
+    return res;
+  }
+
+  getData() {
+    this.api.getSeeds().subscribe(x => {
+      this.seedList = x;
+    });
+
+    this.api.getSpecies().subscribe(x => {
+      this.specieList = x;
+    });
+  }
+
+  filterSeedList() {
+
+    const sp = this.seedForm.value.Specie;
+
+    return this.seedList.filter(x => x.Specie === sp);
+  }
+
+  submit() {
+    const newSeed = this.seedForm.value;
+
+    if (this.importData.type === 'post') {
+      this.api.postSeed(newSeed).subscribe(x => {
+        console.log(x);
+        this.snack.open(x.Response, '');
+      });
+    } else if (this.importData.type === 'put') {
+      this.api.putSeed(newSeed.SeedType, newSeed).subscribe(x => {
+        console.log(x);
+        this.snack.open(x.Response, '');
+      });
+    }
+  }
+
+  check() {
+    console.log(this.seedForm);
+  }
+
+  close() {
+    this.dialogRef.close();
   }
 
 }

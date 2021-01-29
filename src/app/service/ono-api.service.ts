@@ -479,6 +479,10 @@ export class OnoApiService {
         );
     }
 
+    /**
+     * Add new seeds
+     * @param data - ISeed object as new seed
+     */
     postSeed(data: ISeed): Observable<IResponse> {
 
         return this.http.post<IResponse>(
@@ -490,9 +494,11 @@ export class OnoApiService {
         );
     }
 
-    /*
-    * Modifies the seed
-    * */
+    /**
+     * Used to modify a seed based on TypeSeed
+     * @param SeedType name of the seed to change (is unique)
+     * @param values new values
+     */
     putSeed(SeedType: string, values: any): Observable<IResponse> {
         return this.http.put<IResponse>(
             `${environment.server.seeds}/${SeedType}`,
